@@ -1,11 +1,16 @@
+import os
 from django.utils.translation import gettext as _
 from django.db import models
 from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
+
+    def image_path(instance, filename):
+        return str(instance.id) + os.path.splitext(filename)[1]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to=image_path)
     postal_code = models.IntegerField()
     country = models.CharField(max_length=256)
     city = models.CharField(max_length=256)

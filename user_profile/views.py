@@ -3,6 +3,9 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 
 
+def wallet(request):
+    return render(request, "user_profile/wallet.html", None)
+
 def get_profile(request, id):
     user = User.objects.get(id=id)
     data = {

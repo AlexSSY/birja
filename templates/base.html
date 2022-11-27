@@ -1,15 +1,126 @@
 {% load static %}
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'monserrat.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Tera | {{title}}</title>
 </head>
+
 <body>
-    <p>{% static 'style.css' %}</p>
+    <div class="wrapper">
+        <div class="content">
+            <header class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="header__container d-flex flex-row justify-content-between">
+                            <div class="header__col d-flex flex-row align-items-center">
+                                <div class="header__logo">
+                                    <a href="/"><img src="{% static 'images/logo.svg' %}"></a>
+                                </div>
+                                <nav class="header__nav">
+                                    <ul class="d-flex flex-row">
+                                        <li class="header__nav-item"><a href="#">Trading</a></li>
+                                        <li class="header__nav-item"><a href="#">Market tools</a></li>
+                                        <li class="header__nav-item"><a href="#">Invest</a></li>
+                                        <li class="header__nav-item"><a href="#">P2P</a></li>
+                                        <li class="header__nav-item"><a href="#">Swap</a></li>
+                                        <li class="header__nav-item"><a href="#">Support</a></li>
+                                        {% url 'user_profile:wallet' as url %}
+                                        <li
+                                            class="header__nav-item text-yellow {% if request.path == url %}active-nav-item{% endif %}">
+                                            <a class="d-flex align-items-center text-yellow" href="{{url}}">
+                                                <img class="header__nav-item-wallet"
+                                                    src="{% static 'images/wallet.svg' %}">{{amount}}&nbsp;USD
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="header__col d-flex align-items-center">
+                                <div class="header__locale">
+                                    <a class="header__locale-active" href="#">EN</a>
+                                    <span class="header__locale-backslash">/</span>
+                                    <a href="#">RU</a>
+                                </div>
+                                <div class="header__profile d-flex align-items-center">
+                                    <div class="header__profile-photo d-flex align-items-center justify-content-center">
+                                        <img src="{% static 'images/default-photo.svg' %}">
+                                    </div>
+                                    <div class="header__profile-arrow">
+                                        <img src="{% static 'images/arrow-down.svg' %}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            {% block content %}{% endblock %}
+        </div>
+        <footer class="footer">
+            <div class="footer__top d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-4">
+                            <div class="footer__top-logo">
+                                <img src="{% static 'images/logo-white.svg' %}">
+                            </div>
+                            <p class="footer__top-offer-text">Cat trade is a simple, elegant, and secure
+                                platform to build your crypto portfolio.</p>
+                        </div>
+                        <div class="col col-8">
+                            <div class="d-flex justify-content-end">
+                                <div class="footer__top-col">
+                                    <p class="footer__top-col-title">Features</p>
+                                    <p class="footer__tp-col-link"><a href="#">Home</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Trading</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Wallet</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Invest</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Support</a></p>
+                                </div>
+                                <div class="footer__top-col">
+                                    <p class="footer__top-col-title">Market tools</p>
+                                    <p class="footer__tp-col-link"><a href="#">Crypto market cap</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Market screener</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Technical analysis</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Cross rates</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Currency heat map</a></p>
+                                </div>
+                                <div class="footer__top-col">
+                                    <p class="footer__top-col-title">Legal</p>
+                                    <p class="footer__tp-col-link"><a href="#">Terms of service</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Privacy notice</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Cookies policy</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">AML & KYC policy</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">Fees</a></p>
+                                </div>
+                                <div class="footer__top-col">
+                                    <p class="footer__top-col-title">Exchange pair</p>
+                                    <p class="footer__tp-col-link"><a href="#">BTC to USDT</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">ETH to USDT</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">LTC to USDT</a></p>
+                                    <p class="footer__tp-col-link"><a href="#">ADA to USDT</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom d-flex align-items-center">
+                <div class="container text-center">
+                    <p>Bitlerdo © Copyright 2022 | Worldwide Distributed Digital Asset Exchange | Trading digitals
+                        assets such as Bitcoin involves significant risks.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
+
 </html>

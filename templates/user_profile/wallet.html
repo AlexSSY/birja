@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="wallet">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="wallet__menu">
+                    <ul class="d-flex">
+                        <li class="wallet__menu-item"><img src="{% static 'images/overview.svg' %}"><a href="#">Overview</a></li>
+                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Deposit</a></li>
+                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Withdraw</a></li>
+                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Transactions</a></li>
+                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Transfer</a></li>
+                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Invest</a></li>
+                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Affiliate</a></li>
+                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">API</a></li>
+                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="wallet__boxes">
+            <div class="row">
+                <div class="col-6">
+                    <div class="wallet__boxes-box1">
+
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="wallet__boxes-box2 d-flex align-items-center">
+                        <img src="{% static 'images/gift.svg' %}">
+                        <div class="wallet_boxes-box2-body">
+                            <p class="wallet_boxes-box2-body-text">Use bonus promo code</p>
+                            <div class="d-flex">
+                                <input class="wallet_boxes-box2-body-input" type="text" name="promo" id="promo">
+                                <button class="wallet_boxes-box2-body-button">Activate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wallet__controls">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <input class="wallet__controls-input" type="text" name="search" id="search">
+                    <input class="wallet__controls-checkbox" type="checkbox" name="hide" id="hide">
+                    <p class="wallet__controls-text">Hide zero balances</p>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <button class="wallet__controls-button">Deposit</button>
+                    <button class="wallet__controls-button">Withdraw</button>
+                    <button class="wallet__controls-button">Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
