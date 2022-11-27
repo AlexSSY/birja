@@ -1,22 +1,37 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
+from django.utils.translation import gettext as _
 
-from user_profile.models import UserProfile, UserVerification
+from user_profile.models import UserProfile, UserVerification, Token, UserToken
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False
-    verbose_name_plural = "User Profile"
+    verbose_name_plural = _("User Profile")
 
 class UserVerificationInline(admin.StackedInline):
     model = UserVerification
     can_delete = False
-    verbose_name = "User Verification"
+    verbose_name = _("User Verification")
 
 class UserAdmin(BaseUserAdmin):
-    inlines = (UserProfileInline, UserVerificationInline,)
-
+    inlines = (UserProfileInline, UserVerificationInline)
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
+class UserTokenInline(admin.StackedInline):
+    model = UserToken
+    can_delete = False
+    verbose_name = _("UserToken")
+
+@admin.register(Token)
+class TokenAdmin(admin.ModelAdmin):
+    inlines = (UserTokenInline,)
+    pass
+
+@admin.register(UserToken)
+class UserTokenAdmin(admin.ModelAdmin):
+    list_filter = ("user", "token")
+    search_fields = ("User",)
