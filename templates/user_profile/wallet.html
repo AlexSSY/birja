@@ -8,15 +8,18 @@
             <div class="col-12">
                 <div class="wallet__menu">
                     <ul class="d-flex">
-                        <li class="wallet__menu-item"><img src="{% static 'images/overview.svg' %}"><a href="#">Overview</a></li>
-                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Deposit</a></li>
-                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Withdraw</a></li>
-                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Transactions</a></li>
-                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Transfer</a></li>
-                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Invest</a></li>
-                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Affiliate</a></li>
-                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">API</a></li>
-                        <li><img src="{% static 'images/overview.svg' %}"><a href="#">Settings</a></li>
+                        {% url 'user_profile:wallet' as url %}
+                        <li><img src="{% static 'images/overview.svg' %}"><a
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}"
+                                href="{{url}}">Overview</a></li>
+                        <li><img src="{% static 'images/deposit.svg' %}"><a href="#">Deposit</a></li>
+                        <li><img src="{% static 'images/withdraw.svg' %}"><a href="#">Withdraw</a></li>
+                        <li><img src="{% static 'images/transactions.svg' %}"><a href="#">Transactions</a></li>
+                        <li><img src="{% static 'images/transfer.svg' %}"><a href="#">Transfer</a></li>
+                        <li><img src="{% static 'images/invest.svg' %}"><a href="#">Invest</a></li>
+                        <li><img src="{% static 'images/affiliate.svg' %}"><a href="#">Affiliate</a></li>
+                        <li><img src="{% static 'images/api.svg' %}"><a href="#">API</a></li>
+                        <li><img src="{% static 'images/settings.svg' %}"><a href="#">Settings</a></li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +28,19 @@
             <div class="row">
                 <div class="col-6">
                     <div class="wallet__boxes-box1">
-
+                        <div class="wallet__boxes-box1-photo">
+                        </div>
+                        <div class="wallet__boxes-box1-body">
+                            <div class="wallet__boxes-box1-info">
+                                <p>UserName</p>
+                                <p>example@mail.com</p>
+                                <p>ID: 32423423423</p>
+                            </div>
+                            <div class="wallet__boxes-box1-balance">
+                                <p class="wallet__boxes-box1-balance-text">Total Balance</p>
+                                <p class="wallet__boxes-box1-balance-amount">0 USD</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
@@ -50,9 +65,37 @@
                     <p class="wallet__controls-text">Hide zero balances</p>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
-                    <button class="wallet__controls-button">Deposit</button>
-                    <button class="wallet__controls-button">Withdraw</button>
-                    <button class="wallet__controls-button">Transfer</button>
+                    <a class="wallet__controls-button" href="">Deposit</a>
+                    <a class="wallet__controls-button" href="">Withdraw</a>
+                    <a class="wallet__controls-button" href="">Transfer</a>
+                </div>
+            </div>
+        </div>
+        <div class="wallet__tokens">
+            <div class="row">
+                <div class="col-12">
+                    <table>
+                        <thead class="wallet__tokens-head">
+                            <tr>
+                                <th>Coint</th>
+                                <th>Balance</th>
+                                <th>Equivalent</th>
+                            </tr>
+                        </thead>
+                        <tbody class="wallet__tokens-body">
+                            {% for item in data %}
+                            <tr class="wallet__tokens-item">
+                                <th>
+                                    <img class="wallet__rokens-body-icon" src="{{item.token.icon.url}}">
+                                    {{item.token.name}}
+                                    <span class="wallet__rokens-body-tag">{{item.token.tag}}</span>
+                                </th>
+                                <td>{{item.amount}}</td>
+                                <td>{{item.amount}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

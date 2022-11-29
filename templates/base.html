@@ -44,18 +44,27 @@
                                 </nav>
                             </div>
                             <div class="header__col d-flex align-items-center">
-                                <div class="header__locale">
+                                <!--div class="header__locale">
                                     <a class="header__locale-active" href="#">EN</a>
                                     <span class="header__locale-backslash">/</span>
                                     <a href="#">RU</a>
-                                </div>
+                                </div-->
                                 <div class="header__profile d-flex align-items-center">
-                                    <div class="header__profile-photo d-flex align-items-center justify-content-center">
-                                        <img src="{% static 'images/default-photo.svg' %}">
-                                    </div>
-                                    <div class="header__profile-arrow">
-                                        <img src="{% static 'images/arrow-down.svg' %}">
-                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <a class="d-flex align-items-center" href="{% url 'user_profile:wallet' %}">
+                                        <div
+                                            class="header__profile-photo d-flex align-items-center justify-content-center">
+                                            <img src="{{ user.userprofile.photo.url }}">
+                                        </div>
+                                        <div class="header__profile-arrow">
+                                            <img src="{% static 'images/arrow-down.svg' %}">
+                                        </div>
+                                    </a>
+                                    {% else %}
+                                    <a class="header__profile-login" href="{% url 'user_profile:login' %}">Login</a>
+                                    <a class="header__profile-register"
+                                        href="{% url 'user_profile:register' %}">Register</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

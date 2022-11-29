@@ -1,46 +1,60 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
+from .utils import DataMixin
+from .forms import RegisterUserForm, LoginUserForm
+from .models import Token, UserToken
 
 
 def wallet(request):
-    return render(request, "user_profile/wallet.html", None)
 
-def get_profile(request, id):
-    user = User.objects.get(id=id)
-    data = {
-        # User data
-        "username": user.username,
-        "last_name": user.last_name,
-        "email": user.email,
-        "date_joined": user.date_joined,
-        "first_name": user.first_name,
-        # User Profile data
-        "photo": user.userprofile.photo.path,
-        "postal_code": user.userprofile.postal_code,
-        "country": user.userprofile.country,
-        "city": user.userprofile.city,
-        "present_address": user.userprofile.present_address,
-        "phone_number": user.userprofile.phone_number,
+    tokens = Token.objects.all()
+
+    result = []
+
+    for token in tokens:
+        amount = 0.0
+        try:
+            user_token = UserToken.objects.get(user=request.user, token=token)
+            amount = user_token.amount
+        except:
+            pass
+        result.append(
+            {
+                'token': token,
+                'amount': amount,
+            }
+        )
+
+    context = {
+        "data": result,
     }
-    return JsonResponse(data)
+
+    return render(request, "user_profile/wallet.html", context)
+
+class RegisterUser(DataMixin, CreateView):
+    form_class = RegisterUserForm
+    template_name = "user_profile/register.html"
+    success_url = reverse_lazy("user_profile:login")
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Register")
+        return dict(list(context.items()) + list(c_def.items()))
 
 
-def edit_profile(request, id):
-    user = User.objects.get(id=id)
-    data = {
-        # User data
-        "username": user.username,
-        "last_name": user.last_name,
-        "email": user.email,
-        "date_joined": user.date_joined,
-        "first_name": user.first_name,
-        # User Profile data
-        "photo": user.userprofile.photo.path,
-        "postal_code": user.userprofile.postal_code,
-        "country": user.userprofile.country,
-        "city": user.userprofile.city,
-        "present_address": user.userprofile.present_address,
-        "phone_number": user.userprofile.phone_number,
-    }
-    return render(request, "user_profile/edit.html", { "data": data })
+class LoginUser(DataMixin, LoginView):
+    form_class = LoginUserForm
+    template_name = "user_profile/login.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Register")
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def get_success_url(self):
+        return reverse_lazy("main:index")

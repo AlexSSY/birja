@@ -48,7 +48,9 @@ class Token(models.Model):
 
 class UserToken(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("User name"))
+    # user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     token = models.ForeignKey(Token, on_delete=models.CASCADE, verbose_name=_("Token name"))
+    # token = models.OneToOneField(to=Token, on_delete=models.CASCADE)
     amount = models.FloatField(default=0, verbose_name=_("Amount"))
 
     def __str__(self):

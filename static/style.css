@@ -154,7 +154,7 @@ body {
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	min-height: 100vh;
 	overflow: hidden;
 }
 
@@ -247,6 +247,11 @@ body {
 .header__profile {
 	margin-left: 58px;
 	cursor: pointer;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 20px;
 }
 
 .header__profile-photo {
@@ -254,18 +259,41 @@ body {
 	height: 48px;
 	border-radius: 50%;
 	background: var(--color4);
+	overflow: hidden;
 }
 
 .header__profile-photo img {
-	width: 34px;
-	height: 34px;
+	width: 48px;
 }
 
 .header__profile-arrow {
 	margin-left: 6px;
 }
 
-.footer {}
+.header__profile-login {}
+
+.header__profile-register {
+	width: 97px;
+	height: 28px;
+	left: 1193px;
+	top: 26px;
+	padding: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 14px;
+
+	background: #00687E;
+	border-radius: 10px;
+}
+
+.header__profile-register:hover {
+	background: #0091B1;
+}
+
+.footer {
+	margin-top: 52px;
+}
 
 .footer__top {
 	min-height: 290px;
@@ -356,11 +384,11 @@ body {
 }
 
 .wallet__menu ul li a:hover {
-	color: var(--color1)!important;
+	color: var(--color1) !important;
 }
 
-.wallet__menu-item .active {
-	color: var(--color1)!important;
+.wallet__menu-item-active {
+	color: var(--color1) !important;
 }
 
 .wallet__boxes {
@@ -371,6 +399,64 @@ body {
 	height: 170px;
 	background: #0D1718 url("./images/back.svg") no-repeat right;
 	border-radius: 15px;
+	display: flex;
+	align-items: center;
+
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	color: var(--color2);
+}
+
+.wallet__boxes-box1-photo {
+	min-width: 74px;
+	height: 74px;
+	background: var(--color4);
+	border-radius: 50%;
+	align-self: center;
+}
+
+.wallet__boxes-box1-body {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 14px;
+	width: 100%;
+}
+
+.wallet__boxes-box1-info {
+	flex: 0 1 50%;
+}
+
+.wallet__boxes-box1-info p {
+	padding: 10px 0;
+}
+
+.wallet__boxes-box1-balance {
+	flex: 0 1 50%;
+	text-align: end;
+}
+
+.wallet__boxes-box1-balance p {
+	padding: 2px 0;
+}
+
+.wallet__boxes-box1-balance-text {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.wallet__boxes-box1-balance-amount {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 39px;
 }
 
 .wallet__boxes-box2 {
@@ -472,7 +558,108 @@ body {
 	background: #1E4060;
 	border-radius: 5px;
 	margin-left: 18px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	color: var(--color2);
+	text-decoration: none;
+}
+
+.wallet__controls-button:first-child {
+	margin-left: 0;
+}
+
+.sign__form {
+	width: 754px;
+	height: 773px;
+	border-radius: 20px;
+	display: flex;
+	background: url("./images/sign-form.jpg");
+	overflow: hidden;
+}
+
+.sign__form-left {
+	width: 50%;
+	height: 100%;
+	background: #111111;
+}
+
+.sign__form-left-body {
+	padding: 73px 48px 0 42px;
+}
+
+.form-label {
+	display: block;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 22px;
+	color: var(--color2);
+	margin-bottom: 14px;
+}
+
+.form-error {
+	display: block;
+}
+
+.form-input {
+	display: block;
+	height: 39px;
+	width: 100%;
+	border: none;
+	margin-bottom: 45px;
+	padding: 5px 20px;
+
+	background: #232323;
+	border-radius: 5px;
+
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 30px;
+	color: var(--color2);
+}
+
+.form-checkbox {
+	display: inline-block;
+	background: #232323;
+	margin: 0;
+	padding: 0;
+	margin-right: 10px;
+}
+
+.form-terms {
+	display: inline-block;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	/* margin-bottom: 30px; */
+	color: var(--color2);
+}
+
+.form-terms a {
+	color: var(--color1);
+}
+
+.form-button {
+	width: 272px;
+	height: 39px;
 	cursor: pointer;
+
+	background: #0A6976;
+	border-radius: 5px;
 	border: none;
 
 	font-family: 'Montserrat';
@@ -481,8 +668,119 @@ body {
 	font-size: 14px;
 	line-height: 17px;
 	color: var(--color2);
+	width: 100%;
 }
 
-.wallet__controls-button:first-child {
-	margin-left: 0;
+.form-button:hover {
+	background: #0091B1;
+}
+
+.form-error {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 30px;
+	color: #ca8e9a;
+}
+
+.form-controls {
+	margin-bottom: 50px;
+}
+
+.wallet__tokens {
+	margin-top: 52px;
+}
+
+.wallet__tokens table {
+	width: 100%;
+	display: block;
+}
+
+.wallet__tokens-head {
+	display: flex;
+	height: 52px;
+	width: 100%;
+	background: #1E4060;
+	border-radius: 10px 10px 0px 0px;
+	align-items: center;
+
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 17px;
+	color: var(--color4);
+}
+
+.wallet__tokens-head tr {
+	width: 100%;
+	display: flex;
+	padding: 0 0 0 10px;
+}
+
+.wallet__tokens-head tr th:first-child {
+	flex: 0 1 50%;
+	display: flex;
+	justify-content: start;
+}
+
+.wallet__tokens-head tr th {
+	flex: 0 1 25%;
+	display: flex;
+	justify-content: center;
+}
+
+.wallet__tokens-body {
+	display: block;
+	background: #0D1718;
+	border-radius: 0 0 10px 10px;
+	min-height: 30px;
+}
+
+.wallet__tokens-body tr {
+	padding: 0 0 0 10px;
+	border-bottom: 1px solid rgb(80, 80, 80);
+}
+
+.wallet__tokens-body tr:last-child {
+	border-bottom: none;
+}
+
+.wallet__tokens-item {
+	display: flex;
+	align-items: center;
+	height: 52px;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 17px;
+	color: var(--color2);
+}
+
+.wallet__tokens-item td {
+	flex: 0 1 25%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-left: 1px solid rgb(80, 80, 80);
+	height: 100%;
+}
+
+.wallet__tokens-item th {
+	flex: 0 1 50%;
+	display: flex;
+	align-items: center;
+}
+
+.wallet__rokens-body-tag {
+	color: rgb(131, 131, 131);
+	margin: 0 0 0 10px;
+}
+
+.wallet__rokens-body-icon {
+	width: 32px;
+	margin: 0 10px 0 0;
 }

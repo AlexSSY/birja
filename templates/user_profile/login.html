@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="margin-bottom: 40px;"></div>
+<div class="container d-flex justify-content-center">
+    <div class="sign__form">
+        <div class="sign__form-left">
+            <div class="sign__form-left-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for f in form %}
+                    <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                    {{ f }}
+                    <div class="form-error">{{ f.errors }}</div>
+                    {% endfor %}
+                    <div class="form-controls d-flex align-items-center">
+                        <input class="form-checkbox" type="checkbox" name="terms" id="terms">
+                        <label class="form-terms" for="terms">Remember me</label>
+                    </div>
+                    <button class="form-button" type="submitt">Log in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-bottom: 150px;"></div>
+
+
+{% endblock %}
