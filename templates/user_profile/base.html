@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="wallet">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="wallet__menu">
+                    <ul class="d-flex">
+                        {% url 'user_profile:wallet' as url %}
+                        <li>
+                            <img src="{% static 'images/overview.svg' %}">
+                            <a class="{% if request.path == url %}wallet__menu-item-active{% endif %}"
+                                href="{{url}}">Overview</a>
+                        </li>
+                        {% url 'user_profile:deposit' as url %}
+                        <li>
+                            <img src="{% static 'images/deposit.svg' %}">
+                            <a href="{{url}}"
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}">Deposit</a>
+                        </li>
+                        {% url 'user_profile:withdraw' as url %}
+                        <li>
+                            <img src="{% static 'images/withdraw.svg' %}">
+                            <a href="{{url}}"
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}">Withdraw</a>
+                        </li>
+                        {% url 'user_profile:transactions' as url %}
+                        <li>
+                            <img src="{% static 'images/transactions.svg' %}">
+                            <a href="{{url}}"
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}">Transactions</a>
+                        </li>
+                        {% url 'user_profile:transfer' as url %}
+                        <li>
+                            <img src="{% static 'images/transfer.svg' %}">
+                            <a href="{{url}}"
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}">Transfer</a>
+                        </li>
+                        {% url 'user_profile:invest' as url %}
+                        <li>
+                            <img src="{% static 'images/invest.svg' %}">
+                            <a href="{{url}}"
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}">Invest</a>
+                        </li>
+                        {% url 'user_profile:affiliate' as url %}
+                        <li>
+                            <img src="{% static 'images/affiliate.svg' %}">
+                            <a href="{{url}}"
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}">Affiliate</a>
+                        </li>
+                        {% url 'user_profile:api' as url %}
+                        <li>
+                            <img src="{% static 'images/api.svg' %}">
+                            <a href="{{url}}"
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}">API</a>
+                        </li>
+                        {% url 'user_profile:settings' as url %}
+                        <li>
+                            <img src="{% static 'images/settings.svg' %}">
+                            <a href="{{url}}"
+                                class="{% if request.path == url %}wallet__menu-item-active{% endif %}">Settings</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% block wallet_content %}
+
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

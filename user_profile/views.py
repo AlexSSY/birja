@@ -10,10 +10,93 @@ from .forms import RegisterUserForm, LoginUserForm
 from .models import Token, UserToken
 
 
-def wallet(request):
-
+def deposit(request):
     tokens = Token.objects.all()
+    result = []
 
+    for token in tokens:
+        amount = 0.0
+        try:
+            user_token = UserToken.objects.get(user=request.user, token=token)
+            amount = user_token.amount
+        except:
+            pass
+        result.append(
+            {
+                'token': token,
+                'amount': amount,
+            }
+        )
+
+    context = {
+        "data": result,
+    }
+
+    return render(
+        request=request,
+        template_name="user_profile/deposit.html",
+        context=context
+    )
+
+
+def withdraw(request):
+    return render(
+        request=request,
+        template_name="user_profile/withdraw.html",
+        context=None
+    )
+
+
+def transactions(request):
+    return render(
+        request=request,
+        template_name="user_profile/transactions.html",
+        context=None
+    )
+
+
+def transfer(request):
+    return render(
+        request=request,
+        template_name="user_profile/transfer.html",
+        context=None
+    )
+
+
+def invest(request):
+    return render(
+        request=request,
+        template_name="user_profile/invest.html",
+        context=None
+    )
+
+
+def affiliate(request):
+    return render(
+        request=request,
+        template_name="user_profile/affiliate.html",
+        context=None
+    )
+
+
+def api(request):
+    return render(
+        request=request,
+        template_name="user_profile/api.html",
+        context=None
+    )
+
+
+def settings(request):
+    return render(
+        request=request,
+        template_name="user_profile/settings.html",
+        context=None
+    )
+
+
+def wallet(request):
+    tokens = Token.objects.all()
     result = []
 
     for token in tokens:
@@ -35,6 +118,7 @@ def wallet(request):
     }
 
     return render(request, "user_profile/wallet.html", context)
+
 
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
