@@ -7,12 +7,13 @@
         <div class="col-6">
             <div class="wallet__boxes-box1">
                 <div class="wallet__boxes-box1-photo">
+                    <img src="{{ user.userprofile.photo.url }}" alt="" class="">
                 </div>
                 <div class="wallet__boxes-box1-body">
                     <div class="wallet__boxes-box1-info">
-                        <p>UserName</p>
-                        <p>example@mail.com</p>
-                        <p>ID: 32423423423</p>
+                        <p><img src="{% static 'images/user.svg' %}">{{user.username}}</p>
+                        <p><img src="{% static 'images/mail.svg' %}">{{user.email}}</p>
+                        <p><img src="{% static 'images/key.svg' %}">ID: {{user.id}}</p>
                     </div>
                     <div class="wallet__boxes-box1-balance">
                         <p class="wallet__boxes-box1-balance-text">Total Balance</p>
@@ -43,9 +44,9 @@
             <p class="wallet__controls-text">Hide zero balances</p>
         </div>
         <div class="col-6 d-flex justify-content-end">
-            <a class="wallet__controls-button" href="">Deposit</a>
-            <a class="wallet__controls-button" href="">Withdraw</a>
-            <a class="wallet__controls-button" href="">Transfer</a>
+            <a class="wallet__controls-button" href="{% url 'user_profile:deposit' %}">Deposit</a>
+            <a class="wallet__controls-button" href="{% url 'user_profile:withdraw' %}">Withdraw</a>
+            <a class="wallet__controls-button" href="{% url 'user_profile:transfer' %}">Transfer</a>
         </div>
     </div>
 </div>
@@ -55,7 +56,7 @@
             <table>
                 <thead class="wallet__tokens-head">
                     <tr>
-                        <th>Coint</th>
+                        <th>Coin</th>
                         <th>Balance</th>
                         <th>Equivalent</th>
                     </tr>
@@ -65,10 +66,10 @@
                     <tr class="wallet__tokens-item">
                         <th>
                             <img class="wallet__rokens-body-icon" src="{{item.token.icon.url}}">
-                            {{item.token.name}}
+                            <span class="wallet_tokens-item-name">{{item.token.name}}</span>
                             <span class="wallet__rokens-body-tag">{{item.token.tag}}</span>
                         </th>
-                        <td>{{item.amount}}</td>
+                        <td class="wallet__tokens-item-amount">{{item.amount}}</td>
                         <td>{{item.amount}}</td>
                     </tr>
                     {% endfor %}

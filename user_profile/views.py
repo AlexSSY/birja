@@ -40,10 +40,31 @@ def deposit(request):
 
 
 def withdraw(request):
+    tokens = Token.objects.all()
+    result = []
+
+    for token in tokens:
+        amount = 0.0
+        try:
+            user_token = UserToken.objects.get(user=request.user, token=token)
+            amount = user_token.amount
+        except:
+            pass
+        result.append(
+            {
+                'token': token,
+                'amount': amount,
+            }
+        )
+
+    context = {
+        "data": result,
+    }
+
     return render(
         request=request,
         template_name="user_profile/withdraw.html",
-        context=None
+        context=context
     )
 
 

@@ -2,4 +2,62 @@
 {% load static %}
 
 {% block wallet_content %}
+<div class="row">
+    <div class="col-4">
+        <div class="deposit__tokens">
+            {% for item in data %}
+            <div class="deposit__token" onclick="switch_tab('tab_{{item.token.tag}}', 'deposit__wallet-body-tab');">
+                <div class="deposit__token-name">
+                    <img class="deposit__token-icon" src="{{ item.token.icon.url }}">
+                    {{ item.token.name }}
+                </div>
+                <div>
+                    <span id="amount">{{ item.amount }}</span>
+                    <span id="tag">{{ item.token.tag }}</span>
+                </div>
+                <input type="hidden" id="qrcode" value="{{item.token.qr_code.url}}">
+                <input type="hidden" id="address" value="{{item.token.address}}">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="deposit__wallet">
+            <div class="deposit__wallet-header">
+                <p>Withdraw</p>
+            </div>
+            <div class="deposit__wallet-body">
+                {% for item in data %}
+                <div id="tab_{{item.token.tag}}" class="deposit__wallet-body-tab inactive">
+                    <div class="widthdraw-form">
+                        <p class="withdraw-form-controls">
+                            <label for="dest_addr">Destination {{item.token.tag}} address</label>
+                            <input type="text" name="dest_addr" placeholder="Please double check this address">
+                        </p>
+                        <p class="withdraw-form-controls">
+                            <label for="dest_amount">Amount {{item.token.tag}}</label>
+                            <input type="text" name="dest_amount"
+                                placeholder="Please enter an amount in {{item.token.tag}}">
+                        </p>
+                        <p class="withdraw-form-controls">
+                            <label>{{item.token.name}} network fee</label>
+                            <label>0.00023 {{item.token.tag}}</label>
+                        </p>
+                        <p class="withdraw-form-controls justify-content-end">
+                            <button>Withdraw</button>
+                        </p>
+                    </div>
+                    <ul class="withdraw-form-desc">
+                        <li>withdraw-form-controlsWe strongly recommend that you copy & paste the address to help avoid
+                            errors. Please note that we are not responsible for coins mistakenly sent to the wrong
+                            address.</li>
+                        <li>Transactions normally take about 30 to 60 minutes to send, on occasion it can take a few
+                            hours if the crypto network is slow.</li>
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
