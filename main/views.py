@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.utils.translation import gettext as _
 
 
@@ -10,4 +10,4 @@ def index(request):
 
 
 def bonus(request, bonus_name):
-    pass
+    return HttpResponse(bonus_name)

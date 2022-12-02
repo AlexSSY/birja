@@ -5,5 +5,5 @@ app_name ="main"
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('bonus/', views.bonus, name="bonus"),
+    path('bonus/<str:bonus_name>', views.bonus, name="bonus"),
 ]

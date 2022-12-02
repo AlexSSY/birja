@@ -245,8 +245,8 @@ body {
 }
 
 .header__profile {
+	position: relative;
 	margin-left: 58px;
-	cursor: pointer;
 	font-family: 'Montserrat';
 	font-style: normal;
 	font-weight: 700;
@@ -1027,4 +1027,241 @@ body {
 	color: gray;
 	display: block;
 	list-style-type: disc;
+}
+
+.header__profile-expanded {
+	right: 0;
+	top: 61px;
+	transform: translateX(50%);
+	width: 200px;
+	height: 400px;
+	background: var(--color0);
+	position: absolute;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.transactions {
+	border-radius: 10px;
+	background: var(--color0);
+	padding: 10px 0 10px 0;
+	margin: 52px 0 0 0;
+
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	color: white;
+}
+
+.transactions__header {
+	padding: 0 10px 10px 10px;
+	border-bottom: 1px solid gray;
+}
+
+.transactions__body {
+	padding: 10px;
+}
+
+.transactions__body table {
+	width: 100%;
+	display: block;
+}
+
+.transactions__table_head {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	color: white;
+	display: flex;
+	width: 100%;
+	margin: 0 0 10px 0;
+}
+
+.transactions__table_head tr {
+	width: 100%;
+	display: flex;
+}
+
+.transactions__table_head tr th {
+	flex: 0 1 16.6666%;
+	display: block;
+}
+
+.transactions__table_body {
+	background: black;
+	width: 100%;
+	display: block;
+}
+
+.transactions__table_item {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	color: white;
+	display: flex;
+	width: 100%;
+	padding: 5px 0 5px 0;
+}
+
+.transactions__table_item td {
+	flex: 0 1 16.6666%;
+	text-align: center;
+}
+
+.invest {
+	margin: 52px 0 0 0;
+}
+
+.window {
+	background: var(--color0);
+	border-radius: 5px;
+	width: 100%;
+}
+
+.window__header {
+	padding: 15px;
+	border-bottom: 1px solid gray;
+
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 17px;
+	color: white;
+}
+
+.window__body {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	color: white;
+	padding: 10px;
+}
+
+.tabs {
+	min-height: 400px;
+}
+
+.tabs__buttons {
+	border-bottom: 1px solid gray;
+}
+
+.tabs__buttons_button {
+	height: 32px;
+	min-width: 120px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	border-radius: 6px 6px 0 0;
+	
+	font-family: "Montserrat";
+	color: white;
+	font-weight: 600;
+}
+
+.tabs__buttons_button.selected {
+	background: var(--color1);
+}
+
+.tabs__body {
+	position: relative;
+}
+
+.tabs__tab {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	visibility: visible;
+	opacity: 1;
+	transition: .5s ease-in-out;
+}
+
+.tabs__tab p {
+	display: flex;
+	justify-content: space-between;
+}
+
+.tabs_tab_transfer-body {
+	padding: 0 100px;
+}
+
+.tabs_tab_transfer-body .nice-select {
+	width: 100%;
+}
+
+.tabs_tab_transfer-body-controls {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 0 30px 0;
+	align-items: center;
+}
+
+.tabs_tab_transfer-body-control1 {
+	flex: 0 1 40%;
+}
+
+.tabs_tab_transfer-body-control2 {
+	flex: 0 1 60%;
+}
+
+.tabs_tab_transfer-body-control2 input {
+	width: 100%;
+}
+
+.stake__head {
+	/* height: 76px; */
+	border-radius: 10px;
+	padding: 4px;
+	position: relative;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.809);
+	display: flex;
+	justify-content: space-between;
+}
+
+.stake__head p {
+	color:gray;
+	margin: 8px 6px;
+}
+
+.stake__head_bg {
+	position: relative;
+	/* height: 84px; */
+	padding: 1px;
+	border-radius: 10px;
+}
+
+.stake__head_bg.c1 {
+	background: linear-gradient(267.38deg, #ADFF00 -4.27%, #0085FF 98.57%, rgba(255, 255, 255, 0) 104.22%);
+}
+
+.stake__head_bg.c2 {
+	background: linear-gradient(267.38deg, #001eff -4.27%, #ff0000 98.57%, rgba(255, 255, 255, 0) 104.22%);
+}
+
+.stake__head_bg.c3 {
+	background: linear-gradient(267.38deg, #ff0000 -4.27%, #00c8ff 98.57%, rgba(255, 255, 255, 0) 104.22%);
+}
+
+.stake__head_bg.c4 {
+	background: linear-gradient(267.38deg, #ffb700 -4.27%, #f700ff 98.57%, rgba(255, 255, 255, 0) 104.22%);
+}
+
+.stake__head_col {}
+
+.stake__head_col-p1 {
+	font-weight: 600;
+	color: white!important;
 }

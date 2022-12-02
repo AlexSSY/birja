@@ -2,4 +2,45 @@
 {% load static %}
 
 {% block wallet_content %}
+<div class="row">
+    <div class="col-12">
+        <div class="transactions">
+            <div class="transactions__header">
+                <p>Transactions history</p>
+            </div>
+            <div class="transactions__body">
+                <table>
+                    <thead class="transactions__table_head">
+                        <th>Transaction ID</th>
+                        <th>Time</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Balance</th>
+                    </thead>
+                    <tbody class="transactions__table_body">
+                        {% if data %}
+                        {% for item in data %}
+                        <tr class="transactions__table_item">
+                            <td>{{item.transaction.id}}</td>
+                            <td>{{item.transaction.date}}</td>
+                            <td>{{item.transaction.type}}</td>
+                            <td>{{item.transaction.amount}}&nbsp;{{item.transaction.token.tag}}</td>
+                            <td>{{item.transaction.status}}</td>
+                            <td>{{item.transaction.balance}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr class="transactions__table_item">
+                            <td colspan="6" style="text-align: center;">
+                                <p >No data</p>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

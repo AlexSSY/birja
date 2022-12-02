@@ -85,6 +85,11 @@ class UserTransaction(models.Model):
         WITHDRAW = "W", _("Withdraw")
         BONUS = "B", _("Bonus")
 
+    class TransactionStatus(models.TextChoices):
+        PROCESS = "P", _("Process")
+        SUCCESS = "S", _("Success")
+        FAILED = "F", _("Failed")
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(
         verbose_name=_("Date & Time"), auto_now_add=True)
@@ -93,6 +98,8 @@ class UserTransaction(models.Model):
     bonus_code = models.CharField(max_length=50, null=True, blank=True)
     token = models.ForeignKey(Token, verbose_name=_(
         "Token"), on_delete=models.CASCADE)
+    status = models.CharField(max_length=1, choices=TransactionStatus.choices,
+                              null=False, blank=False, verbose_name=_("Status"))
     amount = models.FloatField(verbose_name=_("Amount"))
 
     def __str__(self):

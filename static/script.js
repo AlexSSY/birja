@@ -32,10 +32,19 @@ function switch_tab(tab_id, tabs_class_name) {
     $(`#${tab_id}`).removeClass("inactive");
 }
 
+//Buttons
+
 $(".deposit__token").on("click", function () {
     $(".deposit__token.active").toggleClass("active");
     $(this).toggleClass("active");
 });
+
+$(".tabs__buttons_button").on("click", function () {
+    $(".tabs__buttons_button.selected").toggleClass("selected");
+    $(this).toggleClass("selected");
+});
+
+/////////////////
 
 elements = $.find(".deposit__token");
 
@@ -85,3 +94,14 @@ $(".wallet__controls-checkbox").on("click", function () {
 });
 
 ////////////////////////////
+
+//Profile expand
+
+$("#profile_link").on("click", function (event) {
+    $(".header__profile-expanded").toggleClass("hidden");
+    event.preventDefault();
+});
+
+/////////////////////////
+
+$("select").niceSelect();

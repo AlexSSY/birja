@@ -2,4 +2,71 @@
 {% load static %}
 
 {% block wallet_content %}
+<div class="transfer">
+    <div class="row">
+        <div class="col-12">
+            <div class="window">
+                <div class="window__header">
+                    <p>Transfer</p>
+                </div>
+                <div class="window__body">
+                    <div class="tabs">
+                        <div class="tabs__buttons">
+                            <button class="tabs__buttons_button selected"
+                                onclick="switch_tab('tab_1', 'tabs__tab');">New transfer</button>
+                            <button class="tabs__buttons_button"
+                                onclick="switch_tab('tab_2', 'tabs__tab');">History</button>
+                        </div>
+                        <div class="tabs__body">
+                            <div id="tab_1" class="tabs__tab">
+                                <div class="tabs_tab_transfer-body">
+                                    <div class="tabs_tab_transfer-body-controls">
+                                        <div class="tabs_tab_transfer-body-control1">
+                                            <p>Your account ID</p>
+                                        </div>
+                                        <div class="tabs_tab_transfer-body-control2">
+                                            <p>{{user.id}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="tabs_tab_transfer-body-controls">
+                                        <div class="tabs_tab_transfer-body-control1">
+                                            <p>Select currency</p>
+                                        </div>
+                                        <div  class="tabs_tab_transfer-body-control2"">
+                                            <select name="currency" id="currency">
+                                                {% for token in tokens %}
+                                                <option value="{{ token.tag }}">{{ token.name }} - {{ token.tag }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tabs_tab_transfer-body-controls">
+                                        <div class="tabs_tab_transfer-body-control1">
+                                            <p>Destination user ID</p>
+                                        </div>
+                                        <div class="tabs_tab_transfer-body-control2">
+                                            <input type="text" placeholder="Please enter a destination User ID">
+                                        </div>
+                                    </div>
+                                    <div class="tabs_tab_transfer-body-controls">
+                                        <div class="tabs_tab_transfer-body-control1">
+                                            <p>Amount</p>
+                                        </div>
+                                        <div class="tabs_tab_transfer-body-control2">
+                                            <input type="text" placeholder="Please enter an amount">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab_2" class="tabs__tab inactive">
+                                <p>TAB 2 CONTENT</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 
 from .utils import DataMixin
 from .forms import RegisterUserForm, LoginUserForm
-from .models import Token, UserToken
+from .models import Token, UserToken, UserTransaction
 
 
 def deposit(request):
@@ -69,18 +69,53 @@ def withdraw(request):
 
 
 def transactions(request):
+    result = []
+    context = None
+    
+    try:
+        transactions = UserTransaction.objects.filter(user=request.user)
+    
+        for transaction in transactions:
+            data = {
+            'id': transaction.id,
+            'date': transaction.date,
+            'type': transaction.get_type_display(),
+            'amount': transaction.amount,
+            'token': transaction.token,
+            'status': transaction.get_status_display(),
+            'balance': 0.0,
+            }
+
+            result.append(
+                {
+                    'transaction': data,
+                }
+            )
+
+        context = {
+            "data": result,
+        }
+    except Exception as e:
+        pass
+
     return render(
         request=request,
         template_name="user_profile/transactions.html",
-        context=None
+        context=context
     )
 
 
 def transfer(request):
+    tokens = Token.objects.all()
+
+    result = {
+        'tokens': tokens,
+    }
+
     return render(
         request=request,
         template_name="user_profile/transfer.html",
-        context=None
+        context=result
     )
 
 

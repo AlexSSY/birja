@@ -49,5 +49,5 @@ class UserTokenAdmin(admin.ModelAdmin):
 @admin.register(UserTransaction)
 class UserTransactionAdmin(admin.ModelAdmin):
     list_display = ("user", "date", "get_type_display",
-                    "bonus_code", "token", "amount")
+                    "bonus_code", "token", "get_status_display", "amount")
     readonly_fields = ("date",)
