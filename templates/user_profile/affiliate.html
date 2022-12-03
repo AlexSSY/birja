@@ -2,4 +2,80 @@
 {% load static %}
 
 {% block wallet_content %}
+<div class="affiliate affiliate__margin-top">
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="block__head">
+                    <p class="block__title">Affiliate Program</p>
+                </div>
+                <div class="block-content">
+                    <div class="affiliate__content">
+                        <div class="affiliate__content-left">
+                            <p class="block__title">Affiliate Link</p>
+                            <p class="affiliate__text">Copy and paste this link to send to friends
+                                or use in your articles. When users sign up using this link,
+                                your account will be credited with referral bonuses.</p>
+                        </div>
+                        <div class="affiliate__content-right">
+                            <p class="block__title">Share your link</p>
+                            <div class="affiliate__link">
+                                <input class="affiliate__input" type="text" value="https://tera.io/signup?ref=180962992"
+                                    disabled>
+                                <button class="affiliate__button">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block block__margin-top">
+                <div class="block__head">
+                    <p class="block__title">Affiliate Status</p>
+                </div>
+                <div class="block-content">
+                    <table class="affiliate__table">
+                        <thead class="affiliate__table-head">
+                            <tr class="affiliate__table-tr">
+                                <th class="affiliate__table-th">Index</th>
+                                <th class="affiliate__table-th">Total</th>
+                                <th class="affiliate__table-th">Previous Day</th>
+                            </tr>
+                        </thead>
+                        <tbody class="affiliate__table-body">
+                            <tr class="affiliate__table-tr">
+                                <td class="affiliate__table-td">Total Invites</td>
+                                <td class="affiliate__table-td">0 User</td>
+                                <td class="affiliate__table-td">0 User</td>
+                            </tr>
+                            <tr class="affiliate__table-tr">
+                                <td class="affiliate__table-td">Total Turnover</td>
+                                <td class="affiliate__table-td">0.000 BTC</td>
+                                <td class="affiliate__table-td">0.000 BTC</td>
+                            </tr>
+                            <tr class="affiliate__table-tr">
+                                <td class="affiliate__table-td">Free Paid</td>
+                                <td class="affiliate__table-td">0.000 BTC</td>
+                                <td class="affiliate__table-td">0.000 BTC</td>
+                            </tr>
+                            <tr class="affiliate__table-tr">
+                                <td class="affiliate__table-td">Affiliate Level (% of Commisions)</td>
+                                <td class="affiliate__table-td" colspan="2">25%</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="affiliate__table-foot">
+                            <tr class="affiliate__table-tr">
+                                <th class="affiliate__table-foot-th">Affiliate Payouts
+                                    <br>
+                                    <span class="affiliate__small-text">Not listed on affiliate leaderboard</span>
+                                </th>
+                                <th class="affiliate__table-foot-th">0.000 BTC</th>
+                                <th class="affiliate__table-foot-th">0.000 BTC</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

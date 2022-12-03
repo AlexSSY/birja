@@ -2,4 +2,55 @@
 {% load static %}
 
 {% block wallet_content %}
+<div class="api api__margin-top">
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="block__head">
+                    <p class="block__title">Create API Key</p>
+                </div>
+                <div class="block-content">
+                    <div class="api__content">
+                        <div class="api__controls">
+                            <label class="api__label" for="api_read_data"><input class="api__checkbox" type="checkbox"
+                                    name="api_read_data" id="">Read data</label>
+                            <label class="api__label" for="api_spot_trading"><input class="api__checkbox"
+                                    type="checkbox" name="api_spot_trading" id="">Spot trading</label>
+                        </div>
+                        <div class="api__controls">
+                            <label class="api__label" for="api_withdraw_balance"><input class="api__checkbox"
+                                    type="checkbox" name="api_withdraw_balance" id="">Withdraw balance</label>
+                            <label class="api__label" for="api_margin_trading"><input class="api__checkbox"
+                                    type="checkbox" name="api_margin_trading" id="">
+                                Margin trading</label>
+                        </div>
+                    </div>
+                    <button class="api__button">Create API key</button>
+                </div>
+            </div>
+            <div class="block block__margin-top">
+                <div class="block__head">
+                    <p class="block__title">Your API Keys</p>
+                </div>
+                <div class="block-content">
+                    <table class="api__table">
+                        <thead class="api__table-head">
+                            <tr class="api__table-tr">
+                                <th class="api__table-th">Key</th>
+                                <th class="api__table-th">Permissions</th>
+                                <th class="api__table-th">Status</th>
+                                <th class="api__table-th">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="api__table-body">
+                            <tr class="api__table-tr">
+                                <td class="api__table-td" colspan="4">No Data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

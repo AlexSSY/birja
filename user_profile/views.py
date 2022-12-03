@@ -120,10 +120,16 @@ def transfer(request):
 
 
 def invest(request):
+    tokens = Token.objects.all()
+
+    result = {
+        'tokens': tokens,
+    }
+
     return render(
         request=request,
         template_name="user_profile/invest.html",
-        context=None
+        context=result
     )
 
 

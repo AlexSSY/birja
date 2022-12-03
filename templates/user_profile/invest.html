@@ -5,7 +5,7 @@
 <div class="invest">
     <div class="row">
         <div class="col-3">
-            <div class="window">
+            <div id="stake_0" class="window">
                 <div class="window__body">
                     <div class="stake__head_bg c1">
                         <div class="stake__head">
@@ -19,11 +19,47 @@
                             </div>
                         </div>
                     </div>
+                    <div class="window__controls">
+                        <p class="window__controls_label">Select coin</p>
+                        <div id="select_0" class="select">
+                            <span class="select__span btc">{{'BTC - 0'}}</span>
+                            <ul class="select__list">
+                                <li class="select__item btc" onclick="select('stake_0', this, 'btc');">{{'BTC - 0'}}</li>
+                                <li class="select__item ltc" onclick="select('stake_0', this, 'ltc');">{{'LTC - 0'}}</li>
+                                <li class="select__item eth" onclick="select('stake_0', this, 'eth');">{{'ETH - 0'}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="window__controls">
+                        <p class="window__controls_label">Enter an amount to invest</p>
+                        <div class="stake__amount">
+                            <div class="stake__amount_text">
+                                <input type="number" value="0.0">
+                                <span class="stake__amount_crypto">BTC</span>
+                            </div>
+                            <button class="stake__amount_button">MAX</button>
+                        </div>
+                    </div>
+                    <div class="window__controls d-flex justify-content-between">
+                        <p class="window__controls_label">Your profit</p>
+                        <div class="d-flex flex-column align-items-end">
+                            <p>+0.0000 <span class="stake__amount_crypto">BTC</span></p>
+                            <p class="text-green">≈ 0.00$</p>
+                        </div>
+                    </div>
+                    <div class="window__controls d-flex justify-content-between">
+                        <p class="window__controls_label">Total</p>
+                        <div class="d-flex flex-column align-items-end">
+                            <p>+0.0000 <span class="stake__amount_crypto">BTC</span></p>
+                            <p class="text-green">≈ 0.00$</p>
+                        </div>
+                    </div>
+                    <button class="stake__button">+ STAKE</button>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="window">
+            <div id="stake_1" class="window">
                 <div class="window__body">
                     <div class="stake__head_bg c2">
                         <div class="stake__head">
@@ -37,11 +73,47 @@
                             </div>
                         </div>
                     </div>
+                    <div class="window__controls">
+                        <p class="window__controls_label">Select coin</p>
+                        <div id="select_0" class="select">
+                            <span class="select__span ltc">{{'LTC - 0'}}</span>
+                            <ul class="select__list">
+                                <li class="select__item btc" onclick="select('stake_1', this, 'btc');">{{'BTC - 0'}}</li>
+                                <li class="select__item ltc" onclick="select('stake_1', this, 'ltc');">{{'LTC - 0'}}</li>
+                                <li class="select__item eth" onclick="select('stake_1', this, 'eth');">{{'ETH - 0'}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="window__controls">
+                        <p class="window__controls_label">Enter an amount to invest</p>
+                        <div class="stake__amount">
+                            <div class="stake__amount_text">
+                                <input type="number" value="0.0">
+                                <span class="stake__amount_crypto">LTC</span>
+                            </div>
+                            <button class="stake__amount_button">MAX</button>
+                        </div>
+                    </div>
+                    <div class="window__controls d-flex justify-content-between">
+                        <p class="window__controls_label">Your profit</p>
+                        <div class="d-flex flex-column align-items-end">
+                            <p>+0.0000 <span class="stake__amount_crypto">LTC</span></p>
+                            <p class="text-green">≈ 0.00$</p>
+                        </div>
+                    </div>
+                    <div class="window__controls d-flex justify-content-between">
+                        <p class="window__controls_label">Total</p>
+                        <div class="d-flex flex-column align-items-end">
+                            <p>+0.0000 <span class="stake__amount_crypto">LTC</span></p>
+                            <p class="text-green">≈ 0.00$</p>
+                        </div>
+                    </div>
+                    <button class="stake__button">+ STAKE</button>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="window">
+            <div id="stake_2" class="window">
                 <div class="window__body">
                     <div class="stake__head_bg c3">
                         <div class="stake__head">
@@ -55,11 +127,47 @@
                             </div>
                         </div>
                     </div>
+                    <div class="window__controls">
+                        <p class="window__controls_label">Select coin</p>
+                        <div id="select_0" class="select">
+                            <span class="select__span eth">{{'ETH - 0'}}</span>
+                            <ul class="select__list">
+                                <li class="select__item btc" onclick="select('stake_2', this, 'btc');">{{'BTC - 0'}}</li>
+                                <li class="select__item ltc" onclick="select('stake_2', this, 'ltc');">{{'LTC - 0'}}</li>
+                                <li class="select__item eth" onclick="select('stake_2', this, 'eth');">{{'ETH - 0'}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="window__controls">
+                        <p class="window__controls_label">Enter an amount to invest</p>
+                        <div class="stake__amount">
+                            <div class="stake__amount_text">
+                                <input type="number" value="0.0">
+                                <span class="stake__amount_crypto">ETH</span>
+                            </div>
+                            <button class="stake__amount_button">MAX</button>
+                        </div>
+                    </div>
+                    <div class="window__controls d-flex justify-content-between">
+                        <p class="window__controls_label">Your profit</p>
+                        <div class="d-flex flex-column align-items-end">
+                            <p>+0.0000 <span class="stake__amount_crypto">ETH</span></p>
+                            <p class="text-green">≈ 0.00$</p>
+                        </div>
+                    </div>
+                    <div class="window__controls d-flex justify-content-between">
+                        <p class="window__controls_label">Total</p>
+                        <div class="d-flex flex-column align-items-end">
+                            <p>+0.0000 <span class="stake__amount_crypto">ETH</span></p>
+                            <p class="text-green">≈ 0.00$</p>
+                        </div>
+                    </div>
+                    <button class="stake__button">+ STAKE</button>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="window">
+            <div id="stake_3" class="window">
                 <div class="window__body">
                     <div class="stake__head_bg c4">
                         <div class="stake__head">
@@ -73,6 +181,42 @@
                             </div>
                         </div>
                     </div>
+                    <div class="window__controls">
+                        <p class="window__controls_label">Select coin</p>
+                        <div id="select_0" class="select">
+                            <span class="select__span btc">{{'BTC - 0'}}</span>
+                            <ul class="select__list">
+                                <li class="select__item btc" onclick="select('stake_3', this, 'btc');">{{'BTC - 0'}}</li>
+                                <li class="select__item ltc" onclick="select('stake_3', this, 'ltc');">{{'LTC - 0'}}</li>
+                                <li class="select__item eth" onclick="select('stake_3', this, 'eth');">{{'ETH - 0'}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="window__controls">
+                        <p class="window__controls_label">Enter an amount to invest</p>
+                        <div class="stake__amount">
+                            <div class="stake__amount_text">
+                                <input type="number" value="0.0">
+                                <span class="stake__amount_crypto">BTC</span>
+                            </div>
+                            <button class="stake__amount_button">MAX</button>
+                        </div>
+                    </div>
+                    <div class="window__controls d-flex justify-content-between">
+                        <p class="window__controls_label">Your profit</p>
+                        <div class="d-flex flex-column align-items-end">
+                            <p>+0.0000 <span class="stake__amount_crypto">BTC</span></p>
+                            <p class="text-green">≈ 0.00$</p>
+                        </div>
+                    </div>
+                    <div class="window__controls d-flex justify-content-between">
+                        <p class="window__controls_label">Total</p>
+                        <div class="d-flex flex-column align-items-end">
+                            <p>+0.0000 <span class="stake__amount_crypto">BTC</span></p>
+                            <p class="text-green">≈ 0.00$</p>
+                        </div>
+                    </div>
+                    <button class="stake__button">+ STAKE</button>
                 </div>
             </div>
         </div>
