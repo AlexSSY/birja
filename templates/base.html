@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'nice-select-black.css' %}">
     <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
     <script src="{% static 'jquery.nice-select.min.js' %}"></script>
+    {% block js_top %}{% endblock %}
     <title>Tera | {{title}}</title>
 </head>
 
@@ -134,13 +135,14 @@
             </div>
             <div class="footer__bottom d-flex align-items-center">
                 <div class="container text-center">
-                    <p>Bitlerdo © Copyright 2022 | Worldwide Distributed Digital Asset Exchange | Trading digitals
+                    <p>Tera © Copyright 2022 | Worldwide Distributed Digital Asset Exchange | Trading digitals
                         assets such as Bitcoin involves significant risks.</p>
                 </div>
             </div>
         </footer>
     </div>
     <script src="{% static 'script.js' %}"></script>
+    {% block js_bottom %}{% endblock %}
 </body>
 
 </html>

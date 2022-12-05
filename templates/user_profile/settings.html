@@ -2,12 +2,17 @@
 {% load static %}
 
 {% block wallet_content %}
-<section class="settings">
+<section class="settings settings__margin-top">
     <div class="row">
         <div class="col-12">
-            <div class="2fa">
-                <div class="2fa__text"></div>
-                <button class="2fa__button"></button>
+            <div class="twofa">
+                <div class="twofa__body">
+                    <p class="twofa__text">
+                        <span class="twofa__span">Attention</span> Your account is not secure enough,
+                        please enable two-factor authentication
+                    </p>
+                    <button class="twofa__button">Enable</button>
+                </div>
             </div>
         </div>
     </div>
@@ -18,37 +23,119 @@
                     <p class="settings__verif-title">Account Verification</p>
                 </div>
                 <div class="settings__verif-content">
-                    <div class="settings__verif-info">
-                        <p class="settings__verif-text">To increase user limits, you need to pass the verification of a
-                            Intermediate user or a Advanced user, you must provide personal information, a photo of an
-                            identity document, and a photo of your face.
-                        </p>
-                        <button class="settings__verif-button">Confirm now</button>
-                    </div>
-                    <img class="settings__verif-img">
+                    <p class="settings__verif-text">To increase user limits, you need to pass the verification of a
+                        Intermediate user or a Advanced user, you must provide personal information, a photo of an
+                        identity document, and a photo of your face.
+                    </p>
+                    <img class="settings__verif-img" src="{% static 'images/id-card.svg' %}">
                 </div>
+                <button class="settings__verif-button">Confirm now</button>
             </div>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-6">
             <div class="settings-block">
-                <div class="settings-block__head"></div>
-                <div class="settings-block__content"></div>
+                <div class="settings-block__head">
+                    <p class="settings__block-title">Account</p>
+                </div>
+                <div class="settings-block__content">
+                    <form class="settings__form" action="/" method="post">
+                        <div class="settings__form-controls">
+                            <div class="settings__form-control">
+                                <label class="settings__form-label" for="">Your username</label>
+                                <input class="settings__form-text" type="text">
+                            </div>
+                            <div class="settings__form-control">
+                                <label class="settings__form-label" for="">Profile photo</label>
+                                <input class="settings__form-file" type="file">
+                            </div>
+                        </div>
+                        <input class="settings__form-button" type="submit" value="Save">
+                    </form>
+                </div>
             </div>
         </div>
         <div class="col-6">
             <div class="settings-block">
-                <div class="settings-block__head"></div>
-                <div class="settings-block__content"></div>
+                <div class="settings-block__head">
+                    <p class="settings__block-title">Security</p>
+                </div>
+                <div class="settings-block__content">
+                    <form class="settings__form" action="/" method="post">
+                        <div class="settings__form-controls">
+                            <div class="settings__form-control">
+                                <label class="settings__form-label" for="">Phone number</label>
+                                <input class="settings__form-text" type="text">
+                            </div>
+                            <div class="settings__form-control">
+                                <label class="settings__form-label" for="">Old password</label>
+                                <input class="settings__form-text" type="text">
+                            </div>
+                            <div class="settings__form-control">
+                                <label class="settings__form-label" for="">New password</label>
+                                <input class="settings__form-text" type="text">
+                            </div>
+                        </div>
+                        <input class="settings__form-button" type="submit" value="Save">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-12">
             <div class="settings-block">
-                <div class="settings-block__head"></div>
-                <div class="settings-block__content"></div>
+                <div class="settings-block__head">
+                    <p class="settings__block-title">Personal information</p>
+                </div>
+                <div class="settings-block__content">
+                    <form class="settings__form" action="/" method="post">
+                        <div class="settings__container">
+                            <div class="settings__container-col">
+                                <div class="settings__form-controls">
+                                    <div class="settings__form-control">
+                                        <label class="settings__form-label" for="">Your name</label>
+                                        <input class="settings__form-text" type="text">
+                                    </div>
+                                    <div class="settings__form-control">
+                                        <label class="settings__form-label" for="">Date of birth</label>
+                                        <input class="settings__form-text" type="text">
+                                    </div>
+                                    <div class="settings__form-control">
+                                        <label class="settings__form-label" for="">Permanent address</label>
+                                        <input class="settings__form-text" type="text">
+                                    </div>
+                                    <div class="settings__form-control">
+                                        <label class="settings__form-label" for="">Postal code</label>
+                                        <input class="settings__form-text" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="settings__container-col">
+                                <div class="settings__form-controls">
+                                    <div class="settings__form-control">
+                                        <label class="settings__form-label" for="">Current email</label>
+                                        <input class="settings__form-text" type="text">
+                                    </div>
+                                    <div class="settings__form-control">
+                                        <label class="settings__form-label" for="">Present address</label>
+                                        <input class="settings__form-text" type="text">
+                                    </div>
+                                    <div class="settings__form-control">
+                                        <label class="settings__form-label" for="">City</label>
+                                        <input class="settings__form-text" type="text">
+                                    </div>
+                                    <div class="settings__form-control">
+                                        <label class="settings__form-label" for="">Country</label>
+                                        <input class="settings__form-text" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input class="settings__form-button" type="submit" value="Save">
+                    </form>
+                </div>
             </div>
         </div>
     </div>

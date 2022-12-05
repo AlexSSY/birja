@@ -6,7 +6,7 @@ def index(request):
     context = {
         "title": _("Index")
     }
-    return render(request, "base.html", context)
+    return render(request, "main/trading.html", context)
 
 
 def bonus(request, bonus_name):
