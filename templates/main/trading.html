@@ -7,22 +7,135 @@
 {% endblock %}
 
 {% block content %}
-<section class="trading">
-    <div class="container">
-        <div class="row">
-            <div class="col-2">
+<section class="trading trading__margin-top">
+    <div class="trading-container">
+        <!-- Header -->
+        <div class="trading-row">
+            <div class="trading-col-100">
+                <div class="trading__header">
+                    <p class="trading__header-pair">{{ 'BTC/USDT' }}</p>
+                    <div class="trading__header-last-price">
+                        <p class="trading__header-last-price-title">Last price</p>
+                        <p class="trading__header-last-price-data">
+                            <span
+                                class="trading__header-last-price-data-avg trading__header-last-price-data-avg--green">
+                                17754.32
+                            </span>
+                            $18705.88
+                        </p>
+                    </div>
+                    <div class="trading__header-24h-change">
+                        <p class="trading__header-24h-change-title">24h Change</p>
+                        <p class="trading__header-24h-change-percent">1.903%</p>
+                    </div>
+                    <div class="trading__header-24h-high">
+                        <p class="trading__header-24h-high-title">24h High</p>
+                        <p class="trading__header-24h-high-value">19,267.06</p>
+                    </div>
+                    <div class="trading__header-24h-low">
+                        <p class="trading__header-24h-low-title">24h Low</p>
+                        <p class="trading__header-24h-low-value">18,144.70</p>
+                    </div>
+                    <div class="trading__header-24h-volume">
+                        <p class="trading__header-24h-volume-title">24h Volume</p>
+                        <p class="trading__header-24h-volume-value">176,340,330.76 USDT
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="trading-row">
+            <!-- Orders -->
+            <div class="trading-col-sm">
                 <div class="trading__orders">
-                    <table class="trading__table">
-                        <thead class="trading__table-head">
-                            
+                    <div class="trading__orders-head">
+                        <p class="trading__orders-title">Order book</p>
+                    </div>
+                    <div class="trading__orders-body">
+                        <table id="table_red" class="trading__table">
+                            <thead class="trading__table-head">
+                                <tr class="trading__table-tr">
+                                    <th class="trading__table-th">Price {{ 'USDT' }}</th>
+                                    <th class="trading__table-th">Amount {{ 'BTC' }}</th>
+                                    <th class="trading__table-th">Total {{ 'USDT' }}</th>
+                                </tr>
+                            </thead>
+                            <tbody id="red_orders" class="trading__table-body">
+                                <tr class="trading__table-tr">
+                                    <td class="trading__table-td">18,551.27</td>
+                                    <td class="trading__table-td">0.193162</td>
+                                    <td class="trading__table-td">204,551.27</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="trading__currents">
+                            <div class="trading__currents-price">
+                                <p class="trading__currents-major-text trading__currents-major-text--green">18771.61</p>
+                                <p class="trading__currents-garbage-text">18761.87 USD</p>
+                            </div>
+                            <div class="trading__currents-vol">
+                                <p class="trading__currents-minor-text trading__currents-minor-text--border-bottom">
+                                    <span class="trading__currents-garbage-text">Vol:</span>
+                                    9427.00 {{ 'BTC' }}
+                                </p>
+                                <p class="trading__currents-minor-text">
+                                    <span class="trading__currents-garbage-text">Vol:</span>
+                                    175,233,318.15 {{ 'USDT' }}
+                                </p>
+                            </div>
+                        </div>
+                        <table id="table_green" class="trading__table">
+                            <!-- <thead class="trading__table-head">
+                                <tr class="trading__table-tr">
+                                    <th class="trading__table-th">Price {{ 'USDT' }}</th>
+                                    <th class="trading__table-th">Amount {{ 'BTC' }}</th>
+                                    <th class="trading__table-th">Total {{ 'USDT' }}</th>
+                                </tr>
+                            </thead> -->
+                            <tbody id="green_orders" class="trading__table-body">
+                                <tr class="trading__table-tr">
+                                    <td class="trading__table-td">18,551.27</td>
+                                    <td class="trading__table-td">0.193162</td>
+                                    <td class="trading__table-td">204,551.27</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Chart -->
+            <div class="trading-col-xl">
+                <div id="chart" class="trading__chart"></div>
+            </div>
+            <!-- Pairs -->
+            <div class="trading-col-sm">
+                <div class="trading__pairs">
+                    <div class="trading__pairs-head">
+                        <input class="trading__pairs-input" type="text" name="pairs_search" id="pairs_search"
+                            placeholder="Search">
+                        <p class="trading__pairs-currency">
+                            Currency pairs 
+                            <span class="trading__pairs-total">99</span>
+                        </p>
+                    </div>
+                    <table class="trading__pairs-table">
+                        <thead class="trading__pairs-thead">
+                            <tr class="trading__pairs-tr">
+                                <th class="trading__pairs-th">Pair</th>
+                                <th class="trading__pairs-th">Price</th>
+                                <th class="trading__pairs-th">Volume/Change</th>
+                            </tr>
                         </thead>
+                        <tbody class="trading__pairs-tbody">
+                            <tr class="trading__pairs-tr">
+                                <td class="trading__pairs-td">BTC/USDT</td>
+                                <td class="trading__pairs-td">17773.43</td>
+                                <td class="trading__pairs-td">2.031%</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-8">
-                <div id="chart" class="trading__chart"></div>
-            </div>
-            <div class="col-2"></div>
         </div>
     </div>
 </section>

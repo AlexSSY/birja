@@ -1801,13 +1801,9 @@ body {
 	padding: 20px 0 0 0;
 }
 
-.settings__form {
-	
-}
+.settings__form {}
 
-.settings__form-controls {
-
-}
+.settings__form-controls {}
 
 .settings__form-control {
 	margin-bottom: 10px;
@@ -1816,7 +1812,7 @@ body {
 .settings__form-label {
 	display: block;
 	margin-bottom: 20px;
-	
+
 	font-family: 'Montserrat';
 	font-style: normal;
 	font-weight: 600;
@@ -1868,3 +1864,328 @@ body {
 	flex: 0 1 50%;
 	margin: 0 10px;
 }
+
+.trading {
+	font-family: "Montserrat";
+	color: white;
+}
+
+.trading__margin-top {
+	margin-top: 20px;
+}
+
+.trading__orders {
+	background: #001D1F;
+	padding: 15px;
+	font-size: 12px;
+	border-right: 1px solid #003d42;
+}
+
+.trading__orders-head {
+	padding: 0 0 15px 0;
+}
+
+.trading__orders-title {
+	font-size: 14px;
+}
+
+.trading__orders-body {}
+
+.trading__table {
+	color: white;
+	display: block;
+}
+
+.trading__table-head {
+	padding: 0 0 10px 0;
+	display: block;
+}
+
+.trading__table-tr {
+	padding: 3px 0;
+	display: flex;
+}
+
+.trading__table-th {
+	display: block;
+	flex: 0 1 33.33%;
+	text-align: start;
+}
+
+.trading__table-th:last-child {
+	text-align: end;
+}
+
+.trading__table-body {
+	display: block;
+}
+
+.trading__table-td {
+	display: block;
+	flex: 0 1 33.33%;
+}
+
+.trading__table-td:last-child {
+	text-align: end;
+}
+
+.trading__table-td--red {
+	color: red;
+}
+
+.trading__table-td--green {
+	color: green;
+}
+
+.trading-container {
+	max-width: 1720px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+.trading-row {
+	display: flex;
+}
+
+.trading-col-sm {
+	flex: 25.00%;
+}
+
+.trading-col-xl {
+	flex: 50%;
+}
+
+.trading-col-100 {
+	width: 100%;
+}
+
+.trading__currents {
+	background: rgba(0, 0, 0, 0.2);
+	padding: 5px 2px;
+	display: flex;
+}
+
+.trading__currents-price {
+	flex: 1 1 auto;
+}
+
+.trading__currents-major-text {
+	font-size: 18px;
+	font-weight: 600;
+	margin: 0 0 5px 0;
+}
+
+.trading__currents-major-text--red {
+	color: red;
+	position: relative;
+}
+
+.trading__currents-major-text--red::after {
+	content: "";
+	background: url("./images/up-arrow-red.svg") no-repeat;
+	width: 18px;
+	height: 17px;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	transform: rotate(180deg);
+}
+
+.trading__currents-major-text--green {
+	color: green;
+	position: relative;
+}
+
+.trading__currents-major-text--green::after {
+	content: "";
+	background: url("./images/up-arrow-green.svg") no-repeat;
+	width: 18px;
+	height: 17px;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+}
+
+.trading__currents-garbage-text {
+	color: gray;
+}
+
+.trading__currents-vol {
+	text-align: end;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.trading__currents-minor-text {}
+
+.trading__currents-minor-text--border-bottom {
+	border-bottom: 1px solid gray;
+	margin: 0 0 5px 0;
+	padding: 0 0 5px 0;
+}
+
+.trading__chart {}
+
+.trading__header {
+	color: white;
+	display: flex;
+	background: #001D1F;
+	padding: 15px;
+	border-bottom: 1px solid #003d42;
+}
+
+.trading__header-pair {
+	font-size: 20px;
+	font-weight: 700;
+	padding-right: 60px;
+}
+
+.trading__header-last-price {
+	padding-right: 30px;
+	border-right: 1px solid #003d42;
+}
+
+.trading__header-last-price-title {
+	color: gray;
+	font-size: 14px;
+	margin: 0 0 5px 0;
+}
+
+.trading__header-last-price-data {
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+}
+
+.trading__header-last-price-data-avg {
+	font-weight: 600;
+	font-size: 16px;
+	display: block;
+	margin-right: 5px;
+}
+
+.trading__header-last-price-data-avg--red {
+	color: red;
+}
+
+.trading__header-last-price-data-avg--green {
+	color: green;
+}
+
+.trading__header-24h-change {
+	padding-left: 30px;
+	padding-right: 30px;
+	border-right: 1px solid #003d42;
+}
+
+.trading__header-24h-change-title {
+	color: gray;
+	font-size: 14px;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.trading__header-24h-change-percent {
+	color: green;
+	font-weight: 600;
+}
+
+.trading__header-24h-high {
+	padding: 0 30px;
+	border-right: 1px solid #003d42;
+	;
+}
+
+.trading__header-24h-high-title {
+	color: gray;
+	font-size: 14px;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.trading__header-24h-high-value {
+	font-weight: 600;
+}
+
+.trading__header-24h-low {
+	padding: 0 30px;
+	border-right: 1px solid #003d42;
+	;
+}
+
+.trading__header-24h-low-title {
+	color: gray;
+	font-size: 14px;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.trading__header-24h-low-value {
+	font-weight: 600;
+}
+
+.trading__header-24h-volume {
+	padding-left: 30px;
+}
+
+.trading__header-24h-volume-title {
+	color: gray;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.trading__header-24h-volume-value {
+	font-weight: 600;
+}
+
+.trading__pairs {
+	background: #001D1F;
+	border-left: 1px solid #003d42;
+	padding: 15px;
+}
+
+.trading__pairs-head {
+	display: flex;
+	align-items: center;
+}
+
+.trading__pairs-input {
+	border: 1px solid #00828e;
+	background: black;
+	outline: none;
+	color: white;
+	padding: 7px 5px 7px 45px;
+	display: block;
+	border-radius: 5px;
+	width: 160px;
+	min-width: none;
+	flex: 1 1 auto;
+}
+
+.trading__pairs-currency {
+	display: block;
+	font-size: 12px;
+	flex: 1 0 auto;
+	text-align: end;
+	margin-left: 5px;
+	color: gray;
+}
+
+.trading__pairs-total {
+	color: white;
+}
+
+.trading__pairs-table {
+	color: white;
+}
+
+.trading__pairs-thead {}
+
+.trading__pairs-tr {}
+
+.trading__pairs-th {}
+
+.trading__pairs-tbody {}
+
+.trading__pairs-td {}

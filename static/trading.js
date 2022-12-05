@@ -6,7 +6,7 @@ const chart_properties = {
     width: 0,
     height: 400,
     layout: {
-        backgroundColor: '#000000',
+        backgroundColor: '#001D1F',
         textColor: 'rgba(255, 255, 255, 0.9)',
     },
     grid: {
@@ -61,3 +61,46 @@ ws_binance_chart.onmessage = function (onmessage) {
     canlde_series.update(json_result_data);
 }
 /////////////////////////////////
+
+//Fill order book///////////////
+
+$("#red_orders").empty();
+$("#green_orders").empty();
+
+for (let i = 0; i < 20; i++) {
+    const order_table_tr = $('<tr class="trading__table-tr"></tr>');
+
+    $('<td class="trading__table-td trading__table-td--red"></td>')
+    .text("18,551.27")
+    .appendTo(order_table_tr);
+
+    $('<td class="trading__table-td"></td>')
+    .text("0.193162")
+    .appendTo(order_table_tr);
+
+    $('<td class="trading__table-td"></td>')
+    .text("204,551.27")
+    .appendTo(order_table_tr);
+
+    $("#red_orders").append(order_table_tr);
+}
+
+for (let i = 0; i < 20; i++) {
+    const order_table_tr = $('<tr class="trading__table-tr"></tr>');
+
+    $('<td class="trading__table-td trading__table-td--green"></td>')
+    .text("18,551.27")
+    .appendTo(order_table_tr);
+
+    $('<td class="trading__table-td"></td>')
+    .text("0.193162")
+    .appendTo(order_table_tr);
+
+    $('<td class="trading__table-td"></td>')
+    .text("204,551.27")
+    .appendTo(order_table_tr);
+
+    $("#green_orders").append(order_table_tr);
+}
+
+////////////////////////////////
