@@ -1902,8 +1902,32 @@ body {
 }
 
 .trading__table-tr {
-	padding: 3px 0;
+	padding: 5px 0;
 	display: flex;
+	position: relative;
+}
+
+.trading__table-tr:hover {
+	border: 1px dashed rgb(146, 146, 146);
+	padding: 4px 0;
+}
+
+.trading__table-tr-bar {
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 95%;
+	/* right: 100%; */
+	width: 5%;
+	bottom: 1;
+}
+
+.trading__table-tr-bar--red {
+	background: rgba(255, 0, 0, 0.2);
+}
+
+.trading__table-tr-bar--green {
+	background: rgba(0, 255, 0, 0.2);
 }
 
 .trading__table-th {
@@ -1931,9 +1955,11 @@ body {
 
 .trading__table-td--red {
 	color: red;
+	font-weight: 600;
 }
 
 .trading__table-td--green {
+	font-weight: 600;
 	color: green;
 }
 
@@ -2039,6 +2065,8 @@ body {
 	font-size: 20px;
 	font-weight: 700;
 	padding-right: 60px;
+	display: flex;
+	align-items: center;
 }
 
 .trading__header-last-price {
@@ -2168,24 +2196,106 @@ body {
 	font-size: 12px;
 	flex: 1 0 auto;
 	text-align: end;
-	margin-left: 5px;
+	margin: 0 0 0 5px;
 	color: gray;
 }
 
 .trading__pairs-total {
 	color: white;
+	margin: 0 0 0 5px;
 }
 
 .trading__pairs-table {
 	color: white;
+	display: block;
+	margin: 10px 0 0 0;
 }
 
-.trading__pairs-thead {}
+.trading__pairs-thead {
+	display: block;
+	margin: 0 0 10px 0;
+}
 
-.trading__pairs-tr {}
+.trading__pairs-tr {
+	display: flex;
+	padding: 5px 0;
+}
 
-.trading__pairs-th {}
+.trading__pairs-th {
+	flex: 0 1 33.33%;
+	text-align: start;
+	color: gray;
+	font-size: 14px;
+}
 
-.trading__pairs-tbody {}
+.trading__pairs-th:last-child {
+	text-align: end;
+}
 
-.trading__pairs-td {}
+.trading__pairs-tbody {
+	display: block;
+}
+
+.trading__pairs-td {
+	flex: 0 1 33.33%;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.trading__pairs-td:last-child {
+	text-align: end;
+}
+
+.trading__history {
+	background: #001D1F;
+	border-top: 1px solid #003d42 ;
+	border-left: 1px solid #003d42 ;
+}
+
+.trading__history-head {
+	padding: 15px;
+}
+
+.trading__history-title {
+	font-size: 14px;
+	font-family: "Montserrat";
+}
+
+.trading__history-table {
+	color: white;
+	font-size: 14px;
+	display: block;
+	padding: 0 15px;
+}
+
+.trading__history-thead {
+	color: gray;
+	display: block;
+}
+
+.trading__history-tr {
+	display: flex;
+	padding: 5px 0;
+}
+
+.trading__history-th {
+	flex: 0 1 33.33%;
+	text-align: start;
+}
+
+.trading__history-th:last-child {
+	text-align: right;
+}
+
+.trading__history-tbody {
+	display: block;
+}
+
+.trading__history-td {
+	flex: 0 1 33.33%;
+	text-align: start;
+}
+
+.trading__history-td:last-child {
+	text-align: end;
+}
