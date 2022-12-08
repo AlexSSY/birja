@@ -2,6 +2,11 @@
 {% load static %}
 
 {% block js_bottom %}
+<script>
+    const g_symbol_source = "{{symbol_source}}";
+    const g_symbol_dest = "{{symbol_dest}}";
+    const g_pair = "{{symbol_source}}{{symbol_dest}}";
+</script>
 <script src="{% static 'lightweight-charts.standalone.production.js' %}"></script>
 <script src="{% static 'trading.js' %}"></script>
 {% endblock %}
@@ -13,32 +18,34 @@
         <div class="trading-row">
             <div class="trading-col-100">
                 <div class="trading__header">
-                    <p class="trading__header-pair">{{ 'BTC/USDT' }}</p>
+                    <p class="trading__header-pair">{{symbol_source}}/{{symbol_dest}}</p>
                     <div class="trading__header-last-price">
                         <p class="trading__header-last-price-title">Last price</p>
                         <p class="trading__header-last-price-data">
                             <span
                                 class="trading__header-last-price-data-avg trading__header-last-price-data-avg--green">
-                                17754.32
+                                0000.00
                             </span>
-                            $18705.88
+                            <span class="trading__header-last-price-data-eq" id="top_eq">
+                                0000.00
+                            </span>
                         </p>
                     </div>
                     <div class="trading__header-24h-change">
                         <p class="trading__header-24h-change-title">24h Change</p>
-                        <p class="trading__header-24h-change-percent">1.903%</p>
+                        <p class="trading__header-24h-change-percent">+0.00%</p>
                     </div>
                     <div class="trading__header-24h-high">
                         <p class="trading__header-24h-high-title">24h High</p>
-                        <p class="trading__header-24h-high-value">19,267.06</p>
+                        <p class="trading__header-24h-high-value">0000.00</p>
                     </div>
                     <div class="trading__header-24h-low">
                         <p class="trading__header-24h-low-title">24h Low</p>
-                        <p class="trading__header-24h-low-value">18,144.70</p>
+                        <p class="trading__header-24h-low-value">0000.00</p>
                     </div>
                     <div class="trading__header-24h-volume">
                         <p class="trading__header-24h-volume-title">24h Volume</p>
-                        <p class="trading__header-24h-volume-value">176,340,330.76 USDT
+                        <p class="trading__header-24h-volume-value">0000.00 USDT
                         </p>
                     </div>
                 </div>
@@ -55,32 +62,32 @@
                         <table id="table_red" class="trading__table">
                             <thead class="trading__table-head">
                                 <tr class="trading__table-tr">
-                                    <th class="trading__table-th">Price {{ 'USDT' }}</th>
-                                    <th class="trading__table-th">Amount {{ 'BTC' }}</th>
-                                    <th class="trading__table-th">Total {{ 'USDT' }}</th>
+                                    <th class="trading__table-th">Price {{ symbol_dest }}</th>
+                                    <th class="trading__table-th">Amount {{ symbol_source }}</th>
+                                    <th class="trading__table-th">Total {{ sumbol_dest }}</th>
                                 </tr>
                             </thead>
                             <tbody id="red_orders" class="trading__table-body">
                                 <tr class="trading__table-tr">
-                                    <td class="trading__table-td">18,551.27</td>
-                                    <td class="trading__table-td">0.193162</td>
-                                    <td class="trading__table-td">204,551.27</td>
+                                    <td class="trading__table-td">0000.00</td>
+                                    <td class="trading__table-td">0000.00</td>
+                                    <td class="trading__table-td">0000.00</td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="trading__currents">
                             <div class="trading__currents-price">
-                                <p class="trading__currents-major-text trading__currents-major-text--green">18771.61</p>
-                                <p class="trading__currents-garbage-text">18761.87 USD</p>
+                                <p class="trading__currents-major-text trading__currents-major-text--red">18771.61</p>
+                                <p class="trading__currents-garbage-text" id="left_eq">0000.00 USD</p>
                             </div>
                             <div class="trading__currents-vol">
                                 <p class="trading__currents-minor-text trading__currents-minor-text--border-bottom">
                                     <span class="trading__currents-garbage-text">Vol:</span>
-                                    9427.00 {{ 'BTC' }}
+                                    <span class=".trading__currents-minor-value" id="vol_crypto_0">0000.00</span>
                                 </p>
                                 <p class="trading__currents-minor-text">
                                     <span class="trading__currents-garbage-text">Vol:</span>
-                                    175,233,318.15 {{ 'USDT' }}
+                                    <span class=".trading__currents-minor-value" id="vol_crypto_1">0000.00</span>
                                 </p>
                             </div>
                         </div>
@@ -115,8 +122,8 @@
                         <input class="trading__pairs-input" type="text" name="pairs_search" id="pairs_search"
                             placeholder="Search">
                         <p class="trading__pairs-currency">
-                            Currency pairs 
-                            <span class="trading__pairs-total">99</span>
+                            Currency pairs
+                            <span class="trading__pairs-total">{{tokens|length}}</span>
                         </p>
                     </div>
                     <table class="trading__pairs-table">
@@ -128,71 +135,19 @@
                             </tr>
                         </thead>
                         <tbody class="trading__pairs-tbody">
+                            {% for token in tokens %}
                             <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BTC/USDT</td>
+                                <td class="trading__pairs-td">
+                                    <a class="trading__pairs_link"
+                                        href="{% url 'main:trading' symbol_source=token.tag|lower symbol_dest='usdt' %}">
+                                        <img class="trading__pairs-icon" src="{{token.icon.url}}">
+                                        {{token.tag}}/USDT
+                                    </a>
+                                </td>
                                 <td class="trading__pairs-td">17773.43</td>
                                 <td class="trading__pairs-td">2.031%</td>
                             </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
-                            <tr class="trading__pairs-tr">
-                                <td class="trading__pairs-td">BNB/USDT</td>
-                                <td class="trading__pairs-td">13773.43</td>
-                                <td class="trading__pairs-td">0.031%</td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -204,8 +159,8 @@
                     <table class="trading__history-table">
                         <thead class="trading__history-thead">
                             <tr class="trading__history-tr">
-                                <th class="trading__history-th">Price USDT</th>
-                                <th class="trading__history-th">Amount BTC</th>
+                                <th class="trading__history-th">Price {{symbol_dest}}</th>
+                                <th class="trading__history-th">Amount {{symbol_source}}</th>
                                 <th class="trading__history-th">Data/Time</th>
                             </tr>
                         </thead>

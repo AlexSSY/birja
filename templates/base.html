@@ -30,7 +30,10 @@
                                 </div>
                                 <nav class="header__nav">
                                     <ul class="d-flex flex-row">
-                                        <li class="header__nav-item"><a href="#">Trading</a></li>
+                                        {% url 'main:trading' 'btc' 'usdt' as url %}
+                                        <li
+                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                            <a href="{{url}}">Trading</a></li>
                                         <li class="header__nav-item"><a href="#">Market tools</a></li>
                                         <li class="header__nav-item"><a href="#">Invest</a></li>
                                         <li class="header__nav-item"><a href="#">P2P</a></li>
@@ -65,7 +68,8 @@
                                         </div>
                                     </a>
                                     <div class="header__profile-expanded hidden">
-                                        <a class="d-flex align-items-center text-yellow" href="{% url 'user_profile:wallet' %}">wallet&nbsp;
+                                        <a class="d-flex align-items-center text-yellow"
+                                            href="{% url 'user_profile:wallet' %}">wallet&nbsp;
                                             <img class="header__nav-item-wallet"
                                                 src="{% static 'images/wallet.svg' %}">{{amount}}USD
                                         </a>
@@ -101,8 +105,10 @@
                                     <p class="footer__top-col-title">Features</p>
                                     <p class="footer__tp-col-link"><a href="/">Home</a></p>
                                     <p class="footer__tp-col-link"><a href="#">Trading</a></p>
-                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:wallet' %}">Wallet</a></p>
-                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:invest' %}">Invest</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:wallet' %}">Wallet</a>
+                                    </p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:invest' %}">Invest</a>
+                                    </p>
                                     <p class="footer__tp-col-link"><a href="#">Support</a></p>
                                 </div>
                                 <div class="footer__top-col">
