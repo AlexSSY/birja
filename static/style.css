@@ -172,6 +172,10 @@ body {
 	background: var(--color5);
 }
 
+.body--trading {
+	background: black;
+}
+
 .wrapper {
 	display: flex;
 	flex-direction: column;
@@ -188,6 +192,10 @@ body {
 	height: 72px;
 	width: 100vw;
 	color: white;
+}
+
+.header--trading {
+	background: var(--trading-bg);
 }
 
 .header a {
@@ -2261,6 +2269,10 @@ body {
 	background: rgba(255, 255, 255, 0.11);
 }
 
+.trading__pairs-tr--hidden {
+	display: none;
+}
+
 .trading__pairs-th {
 	flex: 0 1 33.33%;
 	text-align: start;
@@ -2284,6 +2296,14 @@ body {
 	align-items: center;
 }
 
+.trading__pairs-td--green {
+	color: var(--trading-green);
+}
+
+.trading__pairs-td--red {
+	color: var(--trading-red);
+}
+
 .trading__pairs-icon {
 	width: 16px;
 	display: block;
@@ -2294,66 +2314,31 @@ body {
 	justify-content: end;
 }
 
-.trading__pairs_link {
+.trading__pairs-link {
 	display: flex;
 	align-items: center;
 	color: white;
 }
 
-.trading__pairs_link:hover {
+.trading__pairs-link:hover {
 	color: var(--color3);
 }
 
-.trading__history {
+.trading__pairs-inactive-text {
+	color: #aaa;
+}
+
+.trading__chat {
 	background: var(--trading-bg);
 	border-top: 1px solid var(--trading-border) ;
 	border-left: 1px solid var(--trading-border) ;
 }
 
-.trading__history-head {
+.trading__chat-head {
 	padding: 15px;
 }
 
-.trading__history-title {
+.trading__chat-title {
 	font-size: 14px;
 	font-family: "Montserrat";
-}
-
-.trading__history-table {
-	color: white;
-	font-size: 14px;
-	display: block;
-	padding: 0 15px;
-}
-
-.trading__history-thead {
-	color: gray;
-	display: block;
-}
-
-.trading__history-tr {
-	display: flex;
-	padding: 5px 0;
-}
-
-.trading__history-th {
-	flex: 0 1 33.33%;
-	text-align: start;
-}
-
-.trading__history-th:last-child {
-	text-align: right;
-}
-
-.trading__history-tbody {
-	display: block;
-}
-
-.trading__history-td {
-	flex: 0 1 33.33%;
-	text-align: start;
-}
-
-.trading__history-td:last-child {
-	text-align: end;
 }

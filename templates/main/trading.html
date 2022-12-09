@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block header_class %}
+header--trading
+{% endblock %}
+
+{% block body_class %}
+body--trading
+{% endblock %}
+
 {% block js_bottom %}
 <script>
     const g_symbol_source = "{{symbol_source}}";
@@ -136,12 +144,12 @@
                         </thead>
                         <tbody class="trading__pairs-tbody">
                             {% for token in tokens %}
-                            <tr class="trading__pairs-tr">
+                            <tr class="trading__pairs-tr" data-symbol="{{token.tag}}{{'USDT'}}">
                                 <td class="trading__pairs-td">
-                                    <a class="trading__pairs_link"
+                                    <a class="trading__pairs-link"
                                         href="{% url 'main:trading' symbol_source=token.tag|lower symbol_dest='usdt' %}">
                                         <img class="trading__pairs-icon" src="{{token.icon.url}}">
-                                        {{token.tag}}/USDT
+                                        {{token.tag}}/<span class="trading__pairs-inactive-text">USDT</span>
                                     </a>
                                 </td>
                                 <td class="trading__pairs-td">17773.43</td>
@@ -152,81 +160,10 @@
                     </table>
                 </div>
                 <!-- Trading history -->
-                <div class="trading__history">
-                    <div class="trading__history-head">
-                        <div class="trading__history-title">Trade history</div>
+                <div class="trading__chat">
+                    <div class="trading__chat-head">
+                        <div class="trading__chat-title">Chat</div>
                     </div>
-                    <table class="trading__history-table">
-                        <thead class="trading__history-thead">
-                            <tr class="trading__history-tr">
-                                <th class="trading__history-th">Price {{symbol_dest}}</th>
-                                <th class="trading__history-th">Amount {{symbol_source}}</th>
-                                <th class="trading__history-th">Data/Time</th>
-                            </tr>
-                        </thead>
-                        <tbody class="trading__history-tbody">
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                            <tr class="trading__history-tr">
-                                <td class="trading__history-td">17342.45</td>
-                                <td class="trading__history-td">0.43</td>
-                                <td class="trading__history-td">6.12 13:10</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

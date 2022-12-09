@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_top %}
+<link rel="stylesheet" href="{% static 'support.css' %}">
+{% endblock %}
+
+{% block js_bottom %}
+<script src="{% static 'support.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="support support__margin-top">
+                <!-- Header -->
+                <div class="support__header">
+                    <img class="support__photo" src="{% static 'images/user.svg' %}">
+                    <p class="support__title">Live Support Service</p>
+                </div>
+                <!-- Body -->
+                <div class="support__body">
+                    <div class="support__top">
+                        <p class="support__title">Chat</p>
+                    </div>
+                    <div class="support__middle">
+                        <!-- Preview (can be hidden) -->
+                        <div class="support__preview support__preview--hidden">
+                            <img class="support__img" src="">
+                            <p class="support__info">Please type a messege</p>
+                        </div>
+                        <!-- Messaging -->
+                        <div class="support__row">
+                            <div class="support__col-12">
+                                <div class="support__date">
+                                    <p class="support__date-text">Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="support__row">
+                            <!-- Submitted -->
+                            <div class="support__col-6"></div>
+                            <div class="support__col-6">
+                                <div class="support__submit">
+                                    <p class="support__message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam repellendus inventore saepe nulla omnis dolor obcaecati aut mollitia, laboriosam quis incidunt rerum debitis dicta illum enim quam, veritatis eveniet iste.</p>
+                                    <div class="support__message-info">
+                                        <p class="support__message-time">15:03</p>
+                                        <div class="support__message-profile">
+                                            <p class="support__message-name">You</p>
+                                            <div class="support__profile-photo-container">
+                                                <img class="support__profile-photo"
+                                                    src="{{ user.userprofile.photo.url }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="support__row">
+                            <!-- Received -->
+                            <div class="support__col-6">
+                                <div class="support__submit">
+                                    <p class="support__message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est animi in esse saepe totam ad quos, at aliquam blanditiis! Similique aliquam voluptates in voluptas repellendus beatae temporibus a culpa repellat!</p>
+                                    <div class="support__message-info support__message-info--reverse">
+                                        <p class="support__message-time">15:03</p>
+                                        <div class="support__message-profile">
+                                            <p class="support__message-name">Support worker</p>
+                                            <div class="support__profile-photo-container">
+                                                <img class="support__profile-photo"
+                                                    src="{{ user.userprofile.photo.url }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="support__col-6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="support__footer">
+                <div class="support__controls">
+                    <textarea class="support__textarea" id="message" type="text" rows="1"
+                        placeholder="Type a message"></textarea>
+                    <button class="support__button-embed"></button>
+                </div>
+                <div class="support__sublit-container">
+                    <button class="support__button-submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

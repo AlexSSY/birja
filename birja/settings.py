@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ["192.168.137.1", 'localhost']
 
 INSTALLED_APPS = [
     'main.apps.MainConfig',
+    'support.apps.SupportConfig',
     'user_profile.apps.UserProfileConfig',
     'jazzmin',
     'django.contrib.admin',

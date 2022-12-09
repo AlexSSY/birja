@@ -33,45 +33,10 @@ function numberWithSpaces(x) {
     return parts.join(".");
 }
 
-//Get history data///////////////
-fetch("https://api.binance.com/api/v3/klines?symbol=" + g_pair + "&interval=1m&limit=1000")
-    .then(res => res.json())
-    .then(data => {
-        const cdata = data.map(d => {
-            return {
-                time: d[0] / 1000,
-                open: parseFloat(d[1]),
-                high: parseFloat(d[2]),
-                low: parseFloat(d[3]),
-                close: parseFloat(d[4]),
-            }
-        });
-        canlde_series.setData(cdata);
-    })
-    .catch(err => log(err));
+last_price = 0.0;
 
-//Stream data directly///////////
-
-ws_binance_chart = new WebSocket('wss://stream.binance.com:9443/ws/' + g_pair.toLowerCase() + '@kline_1m');
-ws_binance_chart.onopen = function () { }
-
-last_price = 0.0
-
-ws_binance_chart.onmessage = function (onmessage) {
-    const json_data = JSON.parse(onmessage.data);
-    const json_data_pair = json_data.k;
-    const json_result_data = {
-        time: json_data_pair.t / 1000,
-        open: parseFloat(json_data_pair.o),
-        high: parseFloat(json_data_pair.h),
-        low: parseFloat(json_data_pair.l),
-        close: parseFloat(json_data_pair.c),
-    }
-    canlde_series.update(json_result_data);
-
-    //update last price
-
-    if (last_price < json_result_data.close) {
+function ui_update_close_price(close_price) {
+    if (last_price < close_price) {
         $(".trading__header-last-price-data-avg")
             .removeClass("trading__header-last-price-data-avg--red")
             .addClass("trading__header-last-price-data-avg--green");
@@ -89,11 +54,52 @@ ws_binance_chart.onmessage = function (onmessage) {
             .addClass("trading__currents-major-text--red");
     }
 
-    last_price = json_result_data.close;
+    last_price = close_price;
 
     $(".trading__header-last-price-data-avg").text(numberWithSpaces(last_price.toFixed(2)));
     $(".trading__currents-major-text").text(numberWithSpaces(last_price.toFixed(2)));
     $(document).prop('title', numberWithSpaces(last_price.toFixed(2)) + " | " + g_pair + " | Tera Trade");
+}
+
+//Get history data///////////////
+fetch("https://api.binance.com/api/v3/klines?symbol=" + g_pair + "&interval=1m&limit=1000")
+    .then(res => res.json())
+    .then(data => {
+        const cdata = data.map(d => {
+            return {
+                time: d[0] / 1000,
+                open: parseFloat(d[1]),
+                high: parseFloat(d[2]),
+                low: parseFloat(d[3]),
+                close: parseFloat(d[4]),
+            }
+        });
+
+        const last_candle = cdata[cdata.length - 1];
+        ui_update_close_price(last_candle.close);
+        canlde_series.setData(cdata);
+    })
+    .catch(err => log(err));
+
+//Stream data directly///////////
+
+ws_binance_chart = new WebSocket('wss://stream.binance.com:9443/ws/' + g_pair.toLowerCase() + '@kline_1m');
+ws_binance_chart.onopen = function () { }
+
+ws_binance_chart.onmessage = function (onmessage) {
+    const json_data = JSON.parse(onmessage.data);
+    const json_data_pair = json_data.k;
+    const json_result_data = {
+        time: json_data_pair.t / 1000,
+        open: parseFloat(json_data_pair.o),
+        high: parseFloat(json_data_pair.h),
+        low: parseFloat(json_data_pair.l),
+        close: parseFloat(json_data_pair.c),
+    }
+    canlde_series.update(json_result_data);
+
+    //update last price
+    ui_update_close_price(json_result_data.close);
 }
 
 //Update order book///////////////
@@ -198,9 +204,10 @@ function ui_order_book_update() {
 
 }
 
+ui_order_book_update();
 setInterval(ui_order_book_update, 1000);
 
-//Update dat afor last 24 hourd////
+//Update data for last 24 hours////
 
 function ui_last24h_update() {
 
@@ -259,4 +266,66 @@ function ui_last24h_update() {
 
 }
 
+ui_last24h_update();
 setInterval(ui_last24h_update, 1000);
+
+//Update data for pairs
+
+function ui_pairs_update() {
+    const pair_node_list = $(".trading__pairs-tbody").find(".trading__pairs-tr");
+
+    $(pair_node_list).each(function (index) {
+        const pair_symbol = $(this).attr("data-symbol");
+        const pairs_td_list = $(this).find("td");
+        fetch("https://api.binance.com/api/v1/ticker/24hr?symbol=" + pair_symbol)
+            .then(res => res.json())
+            .then(data => {
+                // last 24 hours in percent price change
+                const last24h_percent = parseFloat(data.priceChangePercent)
+                    .toFixed(2);
+                let l24hp = last24h_percent.toString();
+
+                if (last24h_percent < 0) {
+                    $(pairs_td_list[2])
+                        .addClass("trading__pairs-td--red")
+                        .removeClass("trading__pairs-td--green");
+                } else {
+                    $(pairs_td_list[2])
+                        .removeClass("trading__pairs-td--red")
+                        .addClass("trading__pairs-td--green");
+                    l24hp = "+" + l24hp;
+                }
+
+                $(pairs_td_list[2]).text(l24hp + " %");
+
+                // last 24 hours price
+                const last24h_high = parseFloat(data.lastPrice)
+                    .toFixed(2);
+                const l24hh = numberWithSpaces(last24h_high);
+
+                $(pairs_td_list[1]).text(l24hh);
+            }).catch(error => {
+                log(error);
+            })
+    });
+}
+
+ui_pairs_update();
+setInterval(ui_pairs_update, 5000);
+
+//Pairs ui filtering
+
+$("#pairs_search").on("input", function () {
+    const text = $(this).val();
+
+    $(".trading__pairs-tbody>.trading__pairs-tr").each(function (index) {
+        let query = text.toLowerCase();
+        let source = $(this).find(".trading__pairs-td").text().toLowerCase();
+        if (!source.includes(query)) {
+            $(this).addClass("trading__pairs-tr--hidden");
+        } else {
+            $(this).removeClass("trading__pairs-tr--hidden");
+
+        }
+    });
+});

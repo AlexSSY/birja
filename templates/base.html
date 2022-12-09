@@ -11,16 +11,17 @@
     <link rel="stylesheet" href="{% static 'bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'nice-select-black.css' %}">
+    {% block css_top %}{% endblock %}
     <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
     <script src="{% static 'jquery.nice-select.min.js' %}"></script>
     {% block js_top %}{% endblock %}
     <title>Tera | {{title}}</title>
 </head>
 
-<body>
+<body class="{% block body_class %}{% endblock %}">
     <div class="wrapper">
         <div class="content">
-            <header class="header">
+            <header class="header {% block header_class %}{% endblock %}">
                 <div class="container">
                     <div class="row">
                         <div class="header__container d-flex flex-row justify-content-between">
@@ -33,12 +34,20 @@
                                         {% url 'main:trading' 'btc' 'usdt' as url %}
                                         <li
                                             class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a href="{{url}}">Trading</a></li>
+                                            <a href="{{url}}">Trading</a>
+                                        </li>
                                         <li class="header__nav-item"><a href="#">Market tools</a></li>
-                                        <li class="header__nav-item"><a href="#">Invest</a></li>
+                                        {% url 'user_profile:invest' as url %}
+                                        <li
+                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                            <a href="{{ url }}">Invest</a></li>
                                         <li class="header__nav-item"><a href="#">P2P</a></li>
                                         <li class="header__nav-item"><a href="#">Swap</a></li>
-                                        <li class="header__nav-item"><a href="#">Support</a></li>
+                                        {% url 'support:lobby' as url %}
+                                        <li
+                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                            <a href="{{url}}">Support</a>
+                                        </li>
                                         {% url 'user_profile:wallet' as url %}
                                         <li
                                             class="header__nav-item text-yellow {% if request.path == url %}active-nav-item{% endif %}">
