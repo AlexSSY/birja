@@ -1,11 +1,15 @@
 import os
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
 import qrcode
+
+
+class CustomUser(AbstractUser):
+    email = models.EmailField(_("Email"), unique=True)
 
 
 class UserProfile(models.Model):
@@ -13,7 +17,7 @@ class UserProfile(models.Model):
     def image_path(instance, filename):
         return str(instance.id) + os.path.splitext(filename)[1]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to=image_path)
     postal_code = models.IntegerField()
     country = models.CharField(max_length=256)
@@ -30,7 +34,7 @@ class UserVerification(models.Model):
         ID_CARD = "IC", _("ID Card")
         PASSPORT = "PS", _("Passport")
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     document_photo = models.ImageField()
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -68,7 +72,7 @@ class Token(models.Model):
 
 class UserToken(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name=_("User name"))
+        CustomUser, on_delete=models.CASCADE, verbose_name=_("User name"))
     # user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     token = models.ForeignKey(
         Token, on_delete=models.CASCADE, verbose_name=_("Token name"))
@@ -90,7 +94,7 @@ class UserTransaction(models.Model):
         SUCCESS = "S", _("Success")
         FAILED = "F", _("Failed")
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date = models.DateTimeField(
         verbose_name=_("Date & Time"), auto_now_add=True)
     type = models.CharField(max_length=1, choices=TransactionType.choices,

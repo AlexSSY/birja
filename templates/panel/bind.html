@@ -1,0 +1,21 @@
+{% extends 'panel/base.html' %}
+{% load static %}
+
+{% block nav_items %}
+<!-- Email -->
+{% url 'panel:bind_email' as url %}
+<li class="nav-item">
+    <a class="nav-link {% if url in request.path %}active{% endif %}" aria-current="page" href="{{ url }}">Emial
+        binding</a>
+</li>
+<!-- Promo -->
+{% url 'panel:bind_promo' as url %}
+<li class="nav-item">
+    <a class="nav-link {% if url in request.path %}active{% endif %}" href="{{ url }}">Promo
+        binding</a>
+</li>
+{% endblock %}
+
+{% block main_content %}
+
+{% endblock %}

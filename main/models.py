@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from user_profile.models import Token
 
 
@@ -8,7 +8,7 @@ class BonusModel(models.Model):
         verbose_name = "Bonus"
         verbose_name_plural = "Bonuses"
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="User")
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True, verbose_name="User")
     token = models.OneToOneField(Token, on_delete=models.CASCADE, verbose_name="Token")
     name = models.CharField(max_length=50, unique=True, null=False, blank=False)
     amount = models.FloatField(verbose_name="Amount")

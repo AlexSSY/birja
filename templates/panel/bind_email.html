@@ -1,0 +1,44 @@
+{% extends 'panel/bind.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="" style="max-width: 500px; margin: 0 auto;">
+            {% if founded_user %}
+            <div class="alert alert-success text-center" role="alert">
+                <p class="fw-bold fs-5">Congratulations!</p>
+                <p>User:&nbsp;<span class="fst-italic fw-bold">{{founded_user.username}}</span> has
+                    succesfully binded to your accaunt</p>
+            </div>
+            {% endif %}
+            {% if error_list|length > 0 %}
+            <div class="alert alert-danger text-center" role="alert">
+                <p class="fw-bold fs-5">Unfortunately!</p>
+                {% for error in error_list %}
+                <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <form action="{% url 'panel:bind_email' %}" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group row">
+                    {{ field.errors }}
+                    <label class="col-sm-2 col-form-label fw-normal" for="{{ field.auto_id }}">
+                        {{ field.label }}:
+                    </label>
+                    <div class="col-sm-10">
+                        {{ field }}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="d-flex w-100 mt-4 justify-content-end">
+                    <input class="btn btn-success w-100" type="submit" value="Bind">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

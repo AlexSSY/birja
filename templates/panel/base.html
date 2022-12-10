@@ -1,0 +1,119 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.username}} - Worker's Panel | Tera trade</title>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel.css' %}">
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+    <!-- <script src="{% static 'bootstrap.min.js' %}"></script> -->
+    <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="d-flex flex-column flex-shrink-0 bg-light sidebar" style="width: 4.5rem;">
+        <!-- Home Link -->
+        <a href="{% url 'main:index' %}" class="d-block p-3 link-dark text-decoration-none" title=""
+            data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+            <img class="bi" width="40" height="32" src="{% static 'images/logo-mini.svg' %}">
+            <span class="visually-hidden">Icon-only</span>
+        </a>
+        <!-- Side Menu Items -->
+        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+            <!-- Bind Page -->
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Binds">
+                {% url 'panel:bind' as url %}
+                <a href="{{ url }}" class="nav-link {% if url in request.path %}active{% endif %} py-3 border-bottom"
+                    aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    data-bs-original-title="Home">
+                    <img class="bi" width="24" height="24" role="img" aria-label="Home"
+                        src="{% static 'images/link.svg' %}"
+                        style="{% if url in request.path %}filter: invert(100%);{% endif %}">
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-original-title="Dashboard">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard">
+                        <use xlink:href="#speedometer2"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-original-title="Orders">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Orders">
+                        <use xlink:href="#table"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-original-title="Products">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Products">
+                        <use xlink:href="#grid"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-original-title="Customers">
+                    <svg class="bi" width="24" height="24" role="img" aria-label="Customers">
+                        <use xlink:href="#people-circle"></use>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+        <div class="dropdown border-top">
+            <a href="#"
+                class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle"
+                id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ user.userprofile.photo.url }}" alt="mdo" width="24" height="24" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+                <li><a class="dropdown-item" href="{% url 'main:index' %}">Main Page</a></li>
+                <li><a class="dropdown-item" href="{% url 'user_profile:settings' %}">Settings</a></li>
+                <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin Panel</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'admin:logout' %}">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand d-block text-decoration-none" href="{% url 'panel:index' %}">
+                    <img class="bi" width="40" height="32" src="{% static 'images/home.svg' %}" style="filter:invert(100%);opacity: 1;">
+                    <span class="visually-hidden">Icon-only</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        {% block nav_items %}
+                        {% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% block main_content %}
+        {% endblock %}
+    </div>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+
+</html>

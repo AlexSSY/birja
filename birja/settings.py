@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.forms.renderers import TemplatesSetting
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +32,6 @@ ALLOWED_HOSTS = ["192.168.137.1", 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'main.apps.MainConfig',
-    'support.apps.SupportConfig',
-    'user_profile.apps.UserProfileConfig',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'panel.apps.PanelConfig',
+    'main.apps.MainConfig',
+    'support.apps.SupportConfig',
+    'user_profile.apps.UserProfileConfig',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'birja.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates',],
+        'DIRS': [BASE_DIR / 'templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +72,15 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = "user_profile.CustomUser"
+AUTHENTICATION_BACKENDS = ['user_profile.backends.EmailBackend']
+
+# FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+# class CustomFormRenderer(TemplatesSetting):
+#     form_template_name = "default_form_template.html"
+
+# FORM_RENDERER = "birja.settings.CustomFormRenderer"
 
 WSGI_APPLICATION = 'birja.wsgi.application'
 
