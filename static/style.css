@@ -652,16 +652,11 @@ body {
 	margin-bottom: 14px;
 }
 
-.form-error {
-	display: block;
-}
-
 .form-input {
 	display: block;
 	height: 39px;
 	width: 100%;
 	border: none;
-	margin-bottom: 45px;
 	padding: 5px 20px;
 
 	background: #232323;
@@ -672,7 +667,6 @@ body {
 	font-weight: 700;
 	font-size: 14px;
 	line-height: 17px;
-	margin-bottom: 30px;
 	color: var(--color2);
 }
 
@@ -722,17 +716,18 @@ body {
 }
 
 .form-error {
+	display: block;
 	font-family: 'Montserrat';
 	font-style: normal;
 	font-weight: 700;
 	font-size: 14px;
 	line-height: 17px;
-	margin-bottom: 30px;
+	margin-bottom: 5px;
 	color: #ca8e9a;
 }
 
 .form-controls {
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 .wallet__tokens {
@@ -2330,8 +2325,8 @@ body {
 
 .trading__chat {
 	background: var(--trading-bg);
-	border-top: 1px solid var(--trading-border) ;
-	border-left: 1px solid var(--trading-border) ;
+	border-top: 1px solid var(--trading-border);
+	border-left: 1px solid var(--trading-border);
 }
 
 .trading__chat-head {
@@ -2341,4 +2336,25 @@ body {
 .trading__chat-title {
 	font-size: 14px;
 	font-family: "Montserrat";
+}
+
+.errorlist.nonfield {
+	list-style: none;
+	display: block;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 5px;
+	color: #ca8e9a;
+}
+
+.errorlist.nonfield li {
+	margin-bottom: 5px;
+}
+
+.card-body {
+	color: white;
+	line-height: 1.2;
 }

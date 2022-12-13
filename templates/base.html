@@ -70,7 +70,7 @@
                                     <a id="profile_link" class="d-flex align-items-center" href="">
                                         <div
                                             class="header__profile-photo d-flex align-items-center justify-content-center">
-                                            <img src="{{ user.userprofile.photo.url }}">
+                                            <img src="{{ user.photo.url }}">
                                         </div>
                                         <div class="header__profile-arrow">
                                             <img src="{% static 'images/arrow-down.svg' %}">
@@ -82,7 +82,8 @@
                                             <img class="header__nav-item-wallet"
                                                 src="{% static 'images/wallet.svg' %}">{{amount}}USD
                                         </a>
-                                        <a href="{% url 'admin:logout' %}">Log out</a>
+                                        <a class="d-block" href="{% url 'panel:index' %}">Panel</a>
+                                        <a class="d-block" href="{% url 'user_profile:logout' %}">Log out</a>
                                     </div>
                                     {% else %}
                                     <a class="header__profile-login" href="{% url 'user_profile:login' %}">Login</a>
@@ -105,7 +106,7 @@
                             <div class="footer__top-logo">
                                 <img src="{% static 'images/logo-white.svg' %}">
                             </div>
-                            <p class="footer__top-offer-text">Cat trade is a simple, elegant, and secure
+                            <p class="footer__top-offer-text">Tera trade is a simple, elegant, and secure
                                 platform to build your crypto portfolio.</p>
                         </div>
                         <div class="col col-8">
@@ -150,7 +151,7 @@
             </div>
             <div class="footer__bottom d-flex align-items-center">
                 <div class="container text-center">
-                    <p>Tera © Copyright 2022 | Worldwide Distributed Digital Asset Exchange | Trading digitals
+                    <p>Tera © Copyright {% now "Y" %} | Worldwide Distributed Digital Asset Exchange | Trading digitals
                         assets such as Bitcoin involves significant risks.</p>
                 </div>
             </div>

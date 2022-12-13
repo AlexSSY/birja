@@ -9,10 +9,13 @@
             <div class="sign__form-left-body">
                 <form method="post">
                     {% csrf_token %}
+                    {{ form.non_field_errors }}
                     {% for f in form %}
-                    <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
-                    {{ f }}
-                    <div class="form-error">{{ f.errors }}</div>
+                    <div class="form-controls">
+                        <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                        <div class="form-error">{{ f.errors }}</div>
+                        {{ f }}
+                    </div>
                     {% endfor %}
                     <div class="form-controls d-flex align-items-center">
                         <input class="form-checkbox" type="checkbox" name="terms" id="terms">

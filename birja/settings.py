@@ -76,6 +76,12 @@ TEMPLATES = [
 AUTH_USER_MODEL = "user_profile.CustomUser"
 AUTHENTICATION_BACKENDS = ['user_profile.backends.EmailBackend']
 
+from django.urls import reverse_lazy
+
+LOGIN_REDIRECT_URL = reverse_lazy("main:index")
+LOGOUT_REDIRECT_URL = reverse_lazy("user_profile:login")
+LOGIN_URL = reverse_lazy("user_profile:login")
+
 # FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 # class CustomFormRenderer(TemplatesSetting):
 #     form_template_name = "default_form_template.html"

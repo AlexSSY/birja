@@ -1,6 +1,40 @@
 .sidebar {
     position: fixed;
     left: 0;
-    top: 0;
+    top: 58px;
     bottom: 1;
+    z-index: 1;
+}
+
+.errorlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.errorlist li {
+    margin: 0 0 10px 0;
+}
+
+.page-title {
+    letter-spacing: 1.5;
+    font-weight: 800;
+}
+
+.ultra-shadow {
+    -webkit-box-shadow: 0px 0px 17px 5px rgba(153, 153, 153, 1);
+    -moz-box-shadow: 0px 0px 17px 5px rgba(153, 153, 153, 1);
+    box-shadow: 0px 0px 17px 5px rgba(153, 153, 153, 1);
+}
+
+.ultra-nav-link:hover {
+    background-color: rgb(103, 69, 49)!important;
+}
+
+.ultra-active {
+    background-color: rgb(103, 69, 49)!important;
+}
+
+.panel-content {
+    margin-top: 100px;
 }

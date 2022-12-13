@@ -9,22 +9,69 @@ import qrcode
 
 
 class CustomUser(AbstractUser):
-    email = models.EmailField(_("Email"), unique=True)
-
-
-class UserProfile(models.Model):
-
     def image_path(instance, filename):
         return str(instance.id) + os.path.splitext(filename)[1]
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to=image_path)
-    postal_code = models.IntegerField()
-    country = models.CharField(max_length=256)
-    city = models.CharField(max_length=256)
-    present_address = models.CharField(max_length=256)
-    permanent = models.CharField(max_length=256)
-    phone_number = models.CharField(max_length=128)
+    # Core
+    email = models.EmailField(_("Email"), unique=True)
+
+    # UserProfile
+    photo = models.ImageField(upload_to=image_path,
+                              default="icon-gf02a4d118_640.png")
+    postal_code = models.IntegerField(null=True, blank=True)
+    country = models.CharField(max_length=256, null=True, blank=True)
+    city = models.CharField(max_length=256, null=True, blank=True)
+    present_address = models.CharField(max_length=256, null=True, blank=True)
+    permanent = models.CharField(max_length=256, null=True, blank=True)
+    phone_number = models.CharField(max_length=128, null=True, blank=True)
+
+    # Bans
+    global_ban = models.BooleanField(_("Global BAN"), default=False)
+    trading_ban = models.BooleanField(_("Trading BAN"), default=False)
+    chat_ban = models.BooleanField(_("Chat BAN"), default=False)
+    support_ban = models.BooleanField(_("Support BAN"), default=False)
+
+    def save(self, *args, **kwargs):
+        super().save()
+        img = Image.open(self.photo.path)
+        width, height = img.size  # Get dimensions
+
+        if width > 300 and height > 300:
+            # keep ratio but shrink down
+            img.thumbnail((width, height))
+
+        # check which one is smaller
+        if height < width:
+            # make square by cutting off equal amounts left and right
+            left = (width - height) / 2
+            right = (width + height) / 2
+            top = 0
+            bottom = height
+            img = img.crop((left, top, right, bottom))
+
+        elif width < height:
+            # make square by cutting off bottom
+            left = 0
+            right = width
+            top = 0
+            bottom = width
+            img = img.crop((left, top, right, bottom))
+
+        if width > 300 and height > 300:
+            img.thumbnail((300, 300))
+
+        img.save(self.photo.path)
+
+
+class UserReferer(models.Model):
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, related_name="user")
+    worker = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="worker")
+    data = models.CharField(max_length=255, default=_("Hand Binding"))
+
+    class Meta:
+        unique_together = (("user", "worker"),)
 
 
 class UserVerification(models.Model):

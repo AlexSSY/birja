@@ -1,3 +1,82 @@
 {% extends 'panel/bind.html' %}
 {% load static %}
+{% load panel_extras %}
 
+{% block bind_title %}
+Promo binding
+{% endblock %}
+
+{% block bind_content %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="" style="max-width: 800px; margin: 0 auto;">
+            {% if success_msg %}
+            <div class="alert alert-success text-center" role="alert">
+                <p class="fw-bold fs-5">Congratulations!</p>
+                <p>{{ success_msg }}</p>
+            </div>
+            {% endif %}
+            {% if error_list|length > 0 or form.errors|length > 0 %}
+            <div class="alert alert-danger text-center" role="alert">
+                <p class="fw-bold fs-5">Unfortunately!</p>
+                {% for error in error_list %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                {% for field in form %}
+                <p>{{ field.errors }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <form action="{% url 'panel:bind_promo' %}" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group row mb-2">
+                    <label class="col-sm-4 col-form-label fw-normal" for="{{ field.auto_id }}">
+                        {{ field.label }}:
+                    </label>
+                    <div class="col-sm-8">
+                        {% if field.errors %}
+                        {{ field|add_attr:'is-invalid' }}
+                        {% else %}
+                        {{ field }}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="d-flex w-100 mt-4 justify-content-end">
+                    <input class="btn btn-success" type="submit" value="Create Promo">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-12 mt-5">
+        {% if promo_codes %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Deposit Bonus</th>
+                    <th scope="col">Token</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for promo in promo_codes %}
+                <tr>
+                    <th scope="row">{{promo.id}}</th>
+                    <td>{{promo.name}}</td>
+                    <td>{{promo.amount}}</td>
+                    <td>{{promo.first_deposit_bonus}} %</td>
+                    <td>{{promo.token.name}} {{promo.token.tag}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-center">No promo codes</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

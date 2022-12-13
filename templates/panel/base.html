@@ -16,9 +16,9 @@
 
 <body>
     <!-- Sidebar -->
-    <div class="d-flex flex-column flex-shrink-0 bg-light sidebar" style="width: 4.5rem;">
+    <div class="d-flex flex-column flex-shrink-0 bg-dark sidebar" style="width: 4.5rem;">
         <!-- Home Link -->
-        <a href="{% url 'main:index' %}" class="d-block p-3 link-dark text-decoration-none" title=""
+        <a href="{% url 'panel:index' %}" class="d-block p-3 link-dark text-decoration-none" title=""
             data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
             <img class="bi" width="40" height="32" src="{% static 'images/logo-mini.svg' %}">
             <span class="visually-hidden">Icon-only</span>
@@ -28,16 +28,16 @@
             <!-- Bind Page -->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Binds">
                 {% url 'panel:bind' as url %}
-                <a href="{{ url }}" class="nav-link {% if url in request.path %}active{% endif %} py-3 border-bottom"
+                <a href="{{ url }}"
+                    class="nav-link ultra-nav-link {% if url in request.path %}ultra-active{% endif %} py-3 "
                     aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right"
                     data-bs-original-title="Home">
                     <img class="bi" width="24" height="24" role="img" aria-label="Home"
-                        src="{% static 'images/link.svg' %}"
-                        style="{% if url in request.path %}filter: invert(100%);{% endif %}">
+                        src="{% static 'images/link.svg' %}" style="filter: invert(100%);">
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                <a href="#" class="nav-link py-3 ultra-nav-link" title="" data-bs-toggle="tooltip"
                     data-bs-placement="right" data-bs-original-title="Dashboard">
                     <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard">
                         <use xlink:href="#speedometer2"></use>
@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                <a href="#" class="nav-link py-3 ultra-nav-link" title="" data-bs-toggle="tooltip"
                     data-bs-placement="right" data-bs-original-title="Orders">
                     <svg class="bi" width="24" height="24" role="img" aria-label="Orders">
                         <use xlink:href="#table"></use>
@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                <a href="#" class="nav-link py-3 ultra-nav-link" title="" data-bs-toggle="tooltip"
                     data-bs-placement="right" data-bs-original-title="Products">
                     <svg class="bi" width="24" height="24" role="img" aria-label="Products">
                         <use xlink:href="#grid"></use>
@@ -61,7 +61,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                <a href="#" class="nav-link py-3 ultra-nav-link" title="" data-bs-toggle="tooltip"
                     data-bs-placement="right" data-bs-original-title="Customers">
                     <svg class="bi" width="24" height="24" role="img" aria-label="Customers">
                         <use xlink:href="#people-circle"></use>
@@ -69,11 +69,11 @@
                 </a>
             </li>
         </ul>
-        <div class="dropdown border-top">
+        <div class="dropdown border-top border-secondary">
             <a href="#"
                 class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle"
                 id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ user.userprofile.photo.url }}" alt="mdo" width="24" height="24" class="rounded-circle">
+                <img src="{{ user.photo.url }}" alt="mdo" width="24" height="24" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
                 <li><a class="dropdown-item" href="{% url 'main:index' %}">Main Page</a></li>
@@ -82,36 +82,37 @@
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="{% url 'admin:logout' %}">Sign out</a></li>
+                <li><a class="dropdown-item" href="{% url 'user_profile:logout' %}">Sign out</a></li>
             </ul>
         </div>
     </div>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand d-block text-decoration-none" href="{% url 'panel:index' %}">
-                    <img class="bi" width="40" height="32" src="{% static 'images/home.svg' %}" style="filter:invert(100%);opacity: 1;">
-                    <span class="visually-hidden">Icon-only</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        {% block nav_items %}
-                        {% endblock %}
-                    </ul>
-                </div>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand d-block text-decoration-none" href="{% block home_href %}{% url 'panel:index' %}{% endblock %}">
+                <img class="bi" width="40" height="32" src="{% static 'images/home.svg' %}"
+                    style="filter:invert(100%);opacity: 1;">
+                <span class="visually-hidden">Icon-only</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    {% block nav_items %}
+                    {% endblock %}
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+    <div class="container panel-content ultra-shadow p-3 rounded">
         {% block main_content %}
         {% endblock %}
     </div>
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
+            $('[data-bs-toggle="tooltip"]').tooltip()
         })
     </script>
 </body>

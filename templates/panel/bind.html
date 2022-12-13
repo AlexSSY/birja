@@ -1,21 +1,64 @@
 {% extends 'panel/base.html' %}
 {% load static %}
 
+{% block home_href %}
+
+{% url 'panel:bind' %}
+
+{% endblock %}
+
 {% block nav_items %}
+
 <!-- Email -->
+
 {% url 'panel:bind_email' as url %}
+
 <li class="nav-item">
-    <a class="nav-link {% if url in request.path %}active{% endif %}" aria-current="page" href="{{ url }}">Emial
-        binding</a>
+    <a class="nav-link {% if url in request.path %}active{% endif %}" aria-current="page" href="{{ url }}">Email</a>
 </li>
 <!-- Promo -->
+
 {% url 'panel:bind_promo' as url %}
+
 <li class="nav-item">
-    <a class="nav-link {% if url in request.path %}active{% endif %}" href="{{ url }}">Promo
-        binding</a>
+    <a class="nav-link {% if url in request.path %}active{% endif %}" href="{{ url }}">Promo</a>
 </li>
+
 {% endblock %}
 
 {% block main_content %}
+
+<h2 class="text-center mb-5 page-title text-success">{% block bind_title %}Binding{% endblock %}</h2>
+
+{% block bind_content %}
+
+{% if referals %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Photo URL</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ref in referals %}
+        <tr>
+            <th scope="row">{{ref.user.id}}</th>
+            <td><a href="#">{{ref.user.username}}</a></td>
+            <td>{{ref.user.email}}</td>
+            <td>{{ref.user.userprofile.photo.url}}</td>
+            <td>Offline</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="text-center">No Users ...</p>
+{% endif %}
+
+{% endblock %}
 
 {% endblock %}

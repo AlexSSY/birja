@@ -1,15 +1,9 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext as _
 
-from user_profile.models import UserProfile, UserVerification, Token, UserToken, UserTransaction
-
-
-class UserProfileInline(admin.StackedInline):
-    model = UserProfile
-    can_delete = False
-    verbose_name_plural = _("User Profile")
+from .models import UserVerification, Token, UserToken, UserTransaction, UserReferer, CustomUser
+from .forms import CustomUserChangeForm
 
 
 class UserVerificationInline(admin.StackedInline):
@@ -18,13 +12,17 @@ class UserVerificationInline(admin.StackedInline):
     verbose_name = _("User Verification")
 
 
-class UserAdmin(BaseUserAdmin):
-    inlines = (UserProfileInline, UserVerificationInline)
+class UserAdmin(admin.ModelAdmin):
+    model = CustomUser
+    # form = CustomUserChangeForm
+    inlines = (UserVerificationInline, )
 
 
-# admin.site.unregister(get_user_model())
-admin.site.register(get_user_model(), UserAdmin)
+admin.site.register(CustomUser, UserAdmin)
 
+@admin.register(UserReferer)
+class UserRefererAdmin(admin.ModelAdmin):
+    pass
 
 class UserTokenInline(admin.StackedInline):
     model = UserToken
@@ -36,7 +34,6 @@ class UserTokenInline(admin.StackedInline):
 class TokenAdmin(admin.ModelAdmin):
     list_display = ("name", "tag", "address")
     inlines = (UserTokenInline,)
-    pass
 
 
 @admin.register(UserToken)

@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -10,6 +12,7 @@ from .forms import RegisterUserForm, LoginUserForm
 from .models import Token, UserToken, UserTransaction
 
 
+@login_required
 def deposit(request):
     tokens = Token.objects.all()
     result = []
@@ -39,6 +42,7 @@ def deposit(request):
     )
 
 
+@login_required
 def withdraw(request):
     tokens = Token.objects.all()
     result = []
@@ -68,22 +72,23 @@ def withdraw(request):
     )
 
 
+@login_required
 def transactions(request):
     result = []
     context = None
-    
+
     try:
         transactions = UserTransaction.objects.filter(user=request.user)
-    
+
         for transaction in transactions:
             data = {
-            'id': transaction.id,
-            'date': transaction.date,
-            'type': transaction.get_type_display(),
-            'amount': transaction.amount,
-            'token': transaction.token,
-            'status': transaction.get_status_display(),
-            'balance': 0.0,
+                'id': transaction.id,
+                'date': transaction.date,
+                'type': transaction.get_type_display(),
+                'amount': transaction.amount,
+                'token': transaction.token,
+                'status': transaction.get_status_display(),
+                'balance': 0.0,
             }
 
             result.append(
@@ -105,6 +110,7 @@ def transactions(request):
     )
 
 
+@login_required
 def transfer(request):
     tokens = Token.objects.all()
 
@@ -119,6 +125,7 @@ def transfer(request):
     )
 
 
+@login_required
 def invest(request):
     tokens = Token.objects.all()
 
@@ -133,6 +140,7 @@ def invest(request):
     )
 
 
+@login_required
 def affiliate(request):
     return render(
         request=request,
@@ -141,6 +149,7 @@ def affiliate(request):
     )
 
 
+@login_required
 def api(request):
     return render(
         request=request,
@@ -149,6 +158,7 @@ def api(request):
     )
 
 
+@login_required
 def settings(request):
     return render(
         request=request,
@@ -157,6 +167,7 @@ def settings(request):
     )
 
 
+@login_required
 def wallet(request):
     tokens = Token.objects.all()
     result = []
@@ -199,8 +210,14 @@ class LoginUser(DataMixin, LoginView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Register")
+        c_def = self.get_user_context(title="Login")
         return dict(list(context.items()) + list(c_def.items()))
 
-    def get_success_url(self):
-        return reverse_lazy("main:index")
+
+@login_required
+def custom_logout(request):
+    logout(request)
+    return redirect(reverse_lazy("main:index"))
+
+def terms(request):
+    return render(request, "user_profile/terms.html", None)
