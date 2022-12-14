@@ -36,12 +36,24 @@
                                             class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
                                             <a href="{{url}}">Trading</a>
                                         </li>
-                                        <li class="header__nav-item"><a href="#">Market tools</a></li>
+                                        <li class="header__nav-item">
+                                            <a href="#">Market tools</a>
+                                            <ul class="header__nav-sub-item d-flex flex-column">
+                                                <li class="header__nav-item">Cap</li>
+                                                <li class="header__nav-item">Cap</li>
+                                                <li class="header__nav-item">Cap</li>
+                                                <li class="header__nav-item">Cap</li>
+                                            </ul>
+                                        </li>
                                         {% url 'user_profile:invest' as url %}
                                         <li
                                             class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a href="{{ url }}">Invest</a></li>
-                                        <li class="header__nav-item"><a href="#">P2P</a></li>
+                                            <a href="{{ url }}">Invest</a>
+                                        </li>
+                                        {% url 'main:p2p' as url %}
+                                        <li
+                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                            <a href="{{ url }}">P2P</a></li>
                                         <li class="header__nav-item"><a href="#">Swap</a></li>
                                         {% url 'support:lobby' as url %}
                                         <li

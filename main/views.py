@@ -25,3 +25,7 @@ def trading(request, symbol_source : str, symbol_dest : str):
 
 def bonus(request, bonus_name):
     return HttpResponse(bonus_name)
+
+
+def p2p(request):
+    return render(request, "main/p2p.html")

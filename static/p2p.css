@@ -1,0 +1,416 @@
+.switch {
+    display: block;
+    position: relative;
+    justify-content: start;
+    width: 45px;
+    height: 20px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: just;
+}
+
+.switch--checked {
+    border-color: rgb(0, 253, 211);
+    background: rgba(0, 253, 211, 0.3);
+}
+
+.switch__circle {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    transition: left ease-in-out .3s;
+}
+
+.switch__circle--checked {
+    right: -1px;
+    top: -1px;
+    left: auto;
+    background: rgb(0, 253, 211);
+}
+
+.p2p {
+    display: block;
+}
+
+.p2p-margin-top {
+    margin-top: 52px;
+}
+
+.p2p__left {
+    background: #001d1f;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.p2p__2buttons {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.p2p2_2buttons-left {
+    display: block;
+    background: transparent;
+    border: 1px solid rgb(184, 184, 184);
+    border-right: none;
+    border-radius: 15px 0 0 15px;
+    flex: 1 1 auto;
+    cursor: pointer;
+
+    font-family: "Montserrat";
+    font-size: 16px;
+    color: white;
+}
+
+.p2p2_2buttons-left--active {
+    background: rgb(0, 73, 122);
+    border: 1px solid rgb(0, 73, 122);
+}
+
+.p2p2_2buttons-right {
+    display: block;
+    background: transparent;
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 0 15px 15px 0;
+    border-left: none;
+    flex: 1 1 auto;
+    cursor: pointer;
+
+    font-family: "Montserrat";
+    font-size: 16px;
+    color: white;
+}
+
+.p2p2_2buttons-right--active {
+    border: 1px solid rgb(0, 73, 122);
+    background: rgb(0, 73, 122);
+}
+
+.p2p__select {
+    display: flex;
+    background: black;
+    height: 38px;
+    padding: 5px 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    position: relative;
+
+    font-family: "Montserrat";
+    font-size: 14px;
+}
+
+.p2p__select--pointer {
+    cursor: pointer;
+    padding-right: 35px;
+}
+
+.p2p__input-container {
+    flex: 1 1 auto;
+}
+
+.p2p__input {
+    height: 100%;
+    width: 100%;
+    background: #000;
+    border: none;
+
+    font-family: "Montserrat";
+    color: #fff;
+}
+
+.p2p__select-btn {
+    display: block;
+    min-width: 50px;
+    position: relative;
+    background: rgb(59, 59, 59);
+    border-radius: 10px;
+    padding: 0 40px 0 10px;
+    cursor: pointer;
+
+    font-family: "Montserrat";
+    color: #fff;
+}
+
+.p2p__select-btn::after {
+    content: '';
+    display: block;
+    background-image: url("./images/select-array.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    right: 10px;
+    top: 13px;
+    /* transition: all ease-in-out .3s; */
+}
+
+.p2p__select-btn--open::after {
+    transform: rotate(180deg);
+    top: 10px;
+}
+
+.p2p__select-items {
+    position: absolute;
+    background: #000;
+    z-index: 1;
+    left: 0;
+    right: 1;
+    top: 58px;
+    height: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+    transition: all ease-in-out .1s;
+
+    font-family: "Montserrat";
+    color: #fff;
+}
+
+.p2p__select-items--open {
+    height: 120px;
+}
+
+.p2p__select-list {
+    list-style-type: none;
+}
+
+.p2p__select-item {
+    padding: 15px 15px;
+    cursor: pointer;
+    display: block;
+}
+
+.p2p__select-item:hover {
+    background: rgb(34, 34, 34);
+}
+
+.p2p__select-text {
+    font-family: "Montserrat";
+    color: white;
+    line-height: 2.7;
+}
+
+.p2p__select-arrow {
+    display: block;
+    background-image: url("./images/select-array.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    right: 16px;
+    top: 18px;
+    /* transition: all ease-in-out .3s; */
+}
+
+.p2p__select-arrow--open {
+    transform: rotate(180deg);
+    top: 14px;
+}
+
+.p2p__controls {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.p2p__controls-left {
+    flex: 1 1 auto;
+}
+
+.p2p__controls-left-caption {
+    color: #fff;
+    margin-bottom: 5px;
+
+    font-family: "Montserrat";
+
+}
+
+.p2p__controls-left-description {
+    color: #aaa;
+
+    font-family: "Montserrat";
+    font-size: 14px;
+}
+
+.p2p__controls-right {
+    display: block;
+}
+
+.p2p__switch {
+    display: block;
+}
+
+.p2p__search {
+    display: block;
+    width: 100%;
+    height: 56px;
+    margin: 0;
+    border: none;
+    background: blueviolet;
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-family: "Montserrat";
+    color:#fff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.2;
+}
+
+.p2p__search:hover {
+    background: rgb(161, 88, 230);
+}
+
+.p2p__main {
+    background: #001d1f;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.p2p__table {
+    display: block;
+
+    font-family: "Montserrat";
+    color:#fff;
+    font-size: 14px;
+}
+
+.p2p__thead {
+    display: block;
+}
+
+.p2p__tr {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(170, 170, 170, 0.4);
+}
+
+.p2p__th {
+    display: block;
+    flex: 1 1 20%;
+    text-align: start;
+
+    color:rgb(151, 151, 151);
+}
+
+.p2p__th:last-child {
+    flex: 1 1 40%;
+}
+
+.p2p__tbody {
+    display: block;
+}
+
+.p2p__td {
+    display: block;
+    flex: 1 1 20%;
+    text-align: start;
+}
+
+.p2p__td--price {
+    color: #98ffa0;
+}
+
+.p2p__td:last-child {
+    flex: 1 1 40%;
+}
+
+.p2p__td-container {
+    display: flex;
+}
+
+.p2p__td-container-left {
+    flex: 0 1 auto;
+    width: 52px;
+}
+
+.p2p__td-img {
+    width: 52px;
+    display: block;
+    border-radius: 50%;
+}
+
+.p2p__td-container-right {
+    flex: 1 1 auto;
+    padding-left: 14px;
+}
+
+.p2p__td-caption {
+    color: rgb(107, 96, 255);
+    margin-bottom: 4px;
+}
+
+.p2p__td-description {
+    color: #aaa;
+    margin-bottom: 4px;
+}
+
+.p2p__td-status {
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+    position: relative;
+    margin-left: 20px;
+}
+
+.p2p__td-status::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #98ffa0;
+    position: absolute;
+    left: -20px;
+}
+
+.p2p__td-status--offline::before {
+    background: #ff8c8c;
+}
+
+.p2p__td--flex {
+    display: flex;
+    align-items: center;
+}
+
+.p2p__td-limit {
+    flex: 1 1 auto;
+}
+
+.p2p__sell-btn {
+    background: transparent;
+    border-radius: 5px;
+    border: 1px solid pink;
+    padding: 12px 15px;
+    cursor: pointer;
+
+    font-family: "Montserrat";
+    color: pink;
+}
+
+.p2p__tr--last {
+    border-bottom: none;
+    margin-top: 20px;
+}
+
+.p2p__more {
+    background: #402547;
+    border: none;
+    border-radius: 10px;
+    padding: 20px 30px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+
+    font-family: "Montserrat";
+    color: #fff;
+}
