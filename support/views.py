@@ -1,7 +1,94 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+
+from .forms import MessageSendForm
+from .models import SupportMessage
+from user_profile.models import UserReferer
 
 
 @login_required
 def lobby(request):
-    return render(request, "support/lobby.html")
+    worker = None
+    try:
+        worker = UserReferer.objects.filter(worker_id__iexact=request.user.id)
+    except Exception as e:
+        pass
+
+    worker_id = worker.id if worker else 0
+
+    form = MessageSendForm(initial={
+        "sender": request.user.id,
+        "receiver": worker_id,
+    })
+
+    context = {
+        'form': form,
+    }
+    return render(request, "support/lobby.html", context)
+
+
+@require_http_methods(["POST", ])
+def send_message(request):
+
+    if not request.user.is_authenticated:
+        return JsonResponse({
+            "error": "Not authenticated",
+        })
+
+    current_user = request.user
+    worker = None
+
+    try:
+        user_referer = UserReferer.objects.get(user=current_user)
+        worker = user_referer.worker
+    except Exception as e:
+        pass
+
+    form = MessageSendForm(request.POST)
+
+    if form.is_valid():
+        message = form.save(commit=False)
+        message.sender = get_user_model().objects.get(id=current_user.id)
+        message.receiver = worker if worker else get_user_model().objects.get(id=1)
+        message.save()
+
+    data = {
+        "user": current_user.email,
+        "worker": worker.email,
+    }
+    return JsonResponse(data)
+
+
+@login_required
+def get_message_list(request):
+    result = None
+
+    try:
+        result = SupportMessage.objects.filter(sender_id=request.user.id)
+        result1 = SupportMessage.objects.filter(receiver_id=request.user.id)
+        result = result + result1
+    except:
+        pass
+
+    data = {
+        "messages": []
+    }
+
+    for msg in result:
+        type = "recv"
+        
+        if msg.sender.id == request.user.id:
+            type = "send"
+
+        data["messages"].append(
+            {
+                "time": msg.time,
+                "message": msg.message,
+                "type": type,
+            }
+        )
+
+    return JsonResponse(data)

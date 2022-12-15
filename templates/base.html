@@ -32,37 +32,53 @@
                                 <nav class="header__nav">
                                     <ul class="d-flex flex-row">
                                         {% url 'main:trading' 'btc' 'usdt' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                        <li class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
                                             <a href="{{url}}">Trading</a>
                                         </li>
-                                        <li class="header__nav-item">
-                                            <a href="#">Market tools</a>
-                                            <ul class="header__nav-sub-item d-flex flex-column">
-                                                <li class="header__nav-item">Cap</li>
-                                                <li class="header__nav-item">Cap</li>
-                                                <li class="header__nav-item">Cap</li>
-                                                <li class="header__nav-item">Cap</li>
+                                        {% url 'main:market_tools' as url %}
+                                        <li class="header__nav-item {% if url in request.path %}active-nav-item{% endif %} header__nav-item--mark">
+                                            <a href="{{url}}">Market tools</a>
+                                            <ul class="header__nav-sub-menu">
+                                                {% url 'main:market_cap' as url %}
+                                                <li class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                    <a href="{{url}}">Crypto market cap</a>
+                                                </li>
+                                                {% url 'main:market_screener' as url %}
+                                                <li class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                    <a href="{{url}}">Market screener</a>
+                                                </li>
+                                                {% url 'main:market_tech' as url %}
+                                                <li class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                    <a href="{{url}}">Technical analysis</a>
+                                                </li>
+                                                {% url 'main:market_cross' as url %}
+                                                <li class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                    <a href="{{url}}">Cross rates</a>
+                                                </li>
+                                                {% url 'main:market_heat' as url %}
+                                                <li class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                    <a href="{{url}}">Currency heat map</a>
+                                                </li>
                                             </ul>
                                         </li>
                                         {% url 'user_profile:invest' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                        <li class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
                                             <a href="{{ url }}">Invest</a>
                                         </li>
                                         {% url 'main:p2p' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a href="{{ url }}">P2P</a></li>
-                                        <li class="header__nav-item"><a href="#">Swap</a></li>
+                                        <li class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                            <a href="{{ url }}">P2P</a>
+                                        </li>
+                                        {% url 'main:swap' as url %}
+                                        <li class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                            <a href="{{url}}">Swap</a>
+                                        </li>
                                         {% url 'support:lobby' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                        <li class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
                                             <a href="{{url}}">Support</a>
                                         </li>
                                         {% url 'user_profile:wallet' as url %}
-                                        <li
-                                            class="header__nav-item text-yellow {% if request.path == url %}active-nav-item{% endif %}">
+                                        <li class="header__nav-item text-yellow {% if request.path == url %}active-nav-item{% endif %}">
                                             <a class="d-flex align-items-center text-yellow" href="{{url}}">
                                                 <img class="header__nav-item-wallet"
                                                     src="{% static 'images/wallet.svg' %}">{{amount}}&nbsp;USD

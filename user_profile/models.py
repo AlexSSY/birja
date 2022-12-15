@@ -65,7 +65,7 @@ class CustomUser(AbstractUser):
 
 class UserReferer(models.Model):
     user = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, related_name="user")
+        CustomUser, on_delete=models.CASCADE, unique=True, related_name="user")
     worker = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name="worker")
     data = models.CharField(max_length=255, default=_("Hand Binding"))

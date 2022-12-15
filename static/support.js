@@ -1,4 +1,4 @@
-$("#message").on("input", function () {
+$(".support__textarea").on("input", function () {
     this.style.height = "";
     this.style.height = this.scrollHeight + "px";
 

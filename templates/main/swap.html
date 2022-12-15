@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_top %}
+<link rel="stylesheet" href="{% static 'swap.css' %}">
+{% endblock %}
+
+{% block js_bottom %}
+<script src="{% static 'swap.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="swap swap-margin-top mx-auto">
+                <div class="swap__head">
+                    <div class="swap__title">
+                        <div class="swap__title-p">Fast swap</div>
+                    </div>
+                    <div class="swap__info">
+                        <p class="swap_info-zero">Zero free</p>
+                        <p class="swap_info-price">Guaranteed price</p>
+                        <p class="swap_info-pairs">Any pairs</p>
+                    </div>
+                </div>
+                <div class="swap__body">
+                    <!-- Select 1 -->
+                    <div class="swap__controls">
+                        <label class="swap__label" for="">You send</label>
+                        <div class="swap__select" id="select_1">
+                            <div class="swap__input-container">
+                                <input class="swap__input" type="number" placeholder="Amount">
+                            </div>
+                            <button class="swap__select-btn">BTC</button>
+                            <div class="swap__select-items">
+                                <ul class="swap__select-list">
+                                    <li class="swap__select-item">LTC</li>
+                                    <li class="swap__select-item">USDT</li>
+                                    <li class="swap__select-item">DASH</li>
+                                    <li class="swap__select-item">NFT</li>
+                                    <li class="swap__select-item">XXL</li>
+                                    <li class="swap__select-item">XXX</li>
+                                    <li class="swap__select-item">XXXL</li>
+                                    <li class="swap__select-item">BTC</li>
+                                    <li class="swap__select-item">ITL</li>
+                                    <li class="swap__select-item">TERA</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="swap__awailable">
+                            Available: 
+                            <a class="swap__fullmoney" href="#">0.00 BTC</a>
+                        </p>
+                    </div>
+                    <!-- Select 2 -->
+                    <div class="swap__controls">
+                        <label class="swap__label" for="">You get</label>
+                        <div class="swap__select" id="select_2">
+                            <div class="swap__input-container">
+                                <input class="swap__input" type="number" placeholder="Amount">
+                            </div>
+                            <button class="swap__select-btn">BTC</button>
+                            <div class="swap__select-items">
+                                <ul class="swap__select-list">
+                                    <li class="swap__select-item">LTC</li>
+                                    <li class="swap__select-item">USDT</li>
+                                    <li class="swap__select-item">DASH</li>
+                                    <li class="swap__select-item">NFT</li>
+                                    <li class="swap__select-item">XXL</li>
+                                    <li class="swap__select-item">XXX</li>
+                                    <li class="swap__select-item">XXXL</li>
+                                    <li class="swap__select-item">BTC</li>
+                                    <li class="swap__select-item">ITL</li>
+                                    <li class="swap__select-item">TERA</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="swap__submit">Swap</button>
+                    <p class="swap__course">Exchange rate: 1 LTC ~ 0.00420910 BTC</p>
+                </div>
+                <div class="swap__foot">
+                    <p class="swap__offer">Exchange rate: 1 LTC ~ 0.00420910 BTC
+                        You can simply and instantly convert any crypto or fiat assets anytime with a live price based
+                        on current market conditions with zero fees.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
