@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'support.apps.SupportConfig',
     'user_profile.apps.UserProfileConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

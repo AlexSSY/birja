@@ -1,0 +1,65 @@
+{% extends 'panel/user.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block home_href %}
+
+{% url 'panel:user' %}
+
+{% endblock %}
+
+{% block nav_items %}
+
+<!-- Support -->
+
+{% url 'panel:user_support' '2' as url %}
+
+<li class="nav-item">
+    <a class="nav-link {% if url in request.path %}active{% endif %}" aria-current="page" href="{{ url }}">Support</a>
+</li>
+
+{% endblock %}
+
+{% block main_content %}
+
+<h2 class="text-center mb-5 page-title text-success">{% block bind_title %}User: {{user.email}}{% endblock %}</h2>
+
+{% block bind_content %}
+<div class="user">
+    <div class="user__photo">
+        <img class="user__img" src="{{user.photo.url}}" alt="{{user.email}}">
+    </div>
+    <div class="user__info">
+        <div class="user__line">
+            <p class="user__label">Email:</p>
+            <p class="user__email">{{user.email}}</p>
+        </div>
+        <div class="user__line">
+            <p class="user__label">Reg. Date:</p>
+            <p class="user__data">{{user.date_joined|timesince}} ago</p>
+        </div>
+        <div class="user__line">
+            <p class="user__label">Last Login:</p>
+            <p class="user__data">{{user.last_login|timesince}} ago</p>
+        </div>
+        <div class="user__line text-danger">
+            <p class="user__label">Global Ban:</p>
+            <p class="user__data"><input type="checkbox" disabled readonly checked="{{user.global_ban}}"></p>
+        </div>
+        <div class="user__line text-primary">
+            <p class="user__label">Trading Ban:</p>
+            <p class="user__data"><input type="checkbox" disabled readonly checked="{{user.trading_ban}}"></p>
+        </div>
+        <div class="user__line text-primary">
+            <p class="user__label">Chat Ban:</p>
+            <p class="user__data"><input type="checkbox" disabled readonly checked="{{user.chat_ban}}"></p>
+        </div>
+        <div class="user__line text-primary">
+            <p class="user__label">Support Ban:</p>
+            <p class="user__data"><input type="checkbox" disabled readonly checked="{{user.support_ban}}"></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_top %}
+<link rel="stylesheet" href="{% static 'verif.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="verif verif__margin-top-auto">
+                <div class="verif__header">
+                    <p class="verif__title">Verification</p>
+                </div>
+                <div class="verif__body">
+                    <form class="verif__form" action="{% url 'user_profile:verif' %}" method="post"  enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="verif__controls">
+                            {{ field.errors }}
+                            <label class="verif__label" for="{{ field.auto_id }}">{{ field.label }}:</label>
+                            <div class="verif__control">
+                                {{ field }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="verif__controls d-flex justify-content-center">
+                            <button class="verif__button">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

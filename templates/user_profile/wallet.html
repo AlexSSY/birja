@@ -27,10 +27,11 @@
                 <img src="{% static 'images/gift.svg' %}">
                 <div class="wallet_boxes-box2-body">
                     <p class="wallet_boxes-box2-body-text">Use bonus promo code</p>
-                    <div class="d-flex">
+                    <form class="d-flex" action="{% url 'user_profile:wallet' %}">
+                        {% csrf_token %}
                         <input class="wallet_boxes-box2-body-input" type="text" name="promo" id="promo">
                         <button class="wallet_boxes-box2-body-button">Activate</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

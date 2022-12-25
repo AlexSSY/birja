@@ -23,8 +23,3 @@ class BonusModel(models.Model):
 
     def __str__(self):
         return f"{self.user} created bonus ({self.amount} {self.token.name})"
-
-
-class ExtendenBonusModel(BonusModel):
-    class Meta:
-        proxy = True

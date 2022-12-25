@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.db.models import Q
+from django.urls import reverse_lazy
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 from .forms import MessageSendForm
 from .models import SupportMessage
@@ -59,17 +62,18 @@ def send_message(request):
         "user": current_user.email,
         "worker": worker.email,
     }
-    return JsonResponse(data)
+    # return JsonResponse(data)
+    return redirect(reverse_lazy("support:lobby"))
 
 
 @login_required
 def get_message_list(request):
     result = None
+    # result1 = None
 
     try:
-        result = SupportMessage.objects.filter(sender_id=request.user.id)
-        result1 = SupportMessage.objects.filter(receiver_id=request.user.id)
-        result = result + result1
+        result = SupportMessage.objects.filter(Q(sender_id=request.user.id) | Q(receiver_id=request.user.id)).order_by("time")
+        # result1 = SupportMessage.objects.filter(receiver_id=request.user.id)
     except:
         pass
 
@@ -79,16 +83,30 @@ def get_message_list(request):
 
     for msg in result:
         type = "recv"
-        
+
         if msg.sender.id == request.user.id:
             type = "send"
 
         data["messages"].append(
             {
-                "time": msg.time,
+                "time": naturaltime(msg.time),
                 "message": msg.message,
                 "type": type,
             }
         )
+
+    # for msg in result1:
+    #     type = "recv"
+
+    #     if msg.sender.id == request.user.id:
+    #         type = "send"
+
+    #     data["messages"].append(
+    #         {
+    #             "time": msg.time,
+    #             "message": msg.message,
+    #             "type": type,
+    #         }
+    #     )
 
     return JsonResponse(data)

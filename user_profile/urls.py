@@ -13,6 +13,7 @@ urlpatterns = [
     path('affiliate/', views.affiliate, name="affiliate"),
     path('api/', views.api, name="api"),
     path('settings/', views.settings, name="settings"),
+    path('verif/', views.verif, name="verif"),
     path('register/', views.RegisterUser.as_view(), name="register"),
     path('login/', views.LoginUser.as_view(), name="login"),
     path('logout/', views.custom_logout, name="logout"),

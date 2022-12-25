@@ -1,0 +1,105 @@
+.verif {
+    background: rgb(0, 82, 107);
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 640px;
+}
+
+.verif__margin-top-auto {
+    margin: 52px auto 0 auto;
+}
+
+.verif__header {
+    border-bottom: 1px solid gray;
+    padding: 0 0 12px 10px;
+}
+
+.verif__title {
+    color: white;
+    font-weight: 600;
+}
+
+.verif__body {
+    padding: 10px 10px 10px 10px;
+}
+
+.verif__form {
+    display: block;
+}
+
+.verif__controls {
+    margin: 0 0 30px 0;
+    width: 100%;
+}
+
+.verif__label {
+    color: white;
+    margin: 0 0 10px 0;
+    display: block;
+
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.verif__control {
+    
+}
+
+.verif__input {
+    width: 100%;
+    height: 42px;
+    background: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 20px;
+
+    font-family: "Montserrat";
+    color: #fff;
+    font-weight: 600;
+}
+
+.verif__select {
+    float: none;
+    background: #000;
+
+    color: #fff;;
+}
+
+.verif__file {
+    font-family: "Montserrat";
+    color: #fff;
+    font-weight: 600;
+}
+
+.verif__date {
+    width: 100%;
+    height: 42px;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 20px;
+
+    font-family: "Montserrat";
+    color: #000000;
+    font-weight: 600;
+}
+
+.verif__button {
+    display: block;
+    height: 42px;
+    cursor: pointer;
+    background: #4e326b;
+    border-radius: 5px;
+    border: none;
+    min-width: 200px;
+
+    font-family: "Montserrat";
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.errorlist {
+    color: #ff436c;
+    margin: 0 0 10px 0;
+    font-family: "Montserrat";
+    font-weight: 600;
+}

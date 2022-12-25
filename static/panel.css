@@ -28,13 +28,123 @@
 }
 
 .ultra-nav-link:hover {
-    background-color: rgb(103, 69, 49)!important;
+    background-color: rgb(103, 69, 49) !important;
 }
 
 .ultra-active {
-    background-color: rgb(103, 69, 49)!important;
+    background-color: rgb(103, 69, 49) !important;
 }
 
 .panel-content {
     margin-top: 100px;
+}
+
+.user {
+    display: flex;
+}
+
+.user__photo {
+    flex: 1 1 auto;
+    width: 320px;
+}
+
+.user__img {
+    width: 320px;
+}
+
+.user__info {
+    flex: 1 1 auto;
+}
+
+.user__line {
+    display: flex;
+    align-items: center;
+}
+
+.user__label {
+    display: block;
+    font-weight: bold;
+    flex: 0 1 auto;
+    width: 130px;
+}
+
+.user__email {
+    flex: 1 1 auto;
+    display: block;
+}
+
+.user__data {
+    display: block;
+    flex: 1 1 auto;
+}
+
+.support__messages {
+    border: 2px solid red;
+    height: 580px;
+    overflow: hidden;
+    overflow-y: auto;
+    background: #000;
+}
+
+.support {
+    color: white;
+}
+
+.support__row {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+.support__col-12 {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.support__submit {
+    background: #103042;
+    border-radius: 10px;
+    display: inline-block;
+    max-width: 600px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.support__submit--send {
+    background: #423f10;
+}
+
+.support__message-info {
+    display: flex;
+}
+
+.support__message-profile {
+    display: flex;
+}
+
+.support__profile-photo-container {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.support__profile-photo {
+    width: 32px;
+    display: block;
+}
+
+.support__message-name {
+    margin-right: 20px;
+}
+
+.support__message-time {
+    font-style: italic;
+}
+
+.support__message {
+    font-weight: 600;
 }

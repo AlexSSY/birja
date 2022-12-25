@@ -39,12 +39,15 @@
 
 .support__middle {
     padding: 15px 0 15px 0;
-    min-height: 425px;
+    height: 425px;
+    overflow-y: auto;
 }
 
 .support__preview {}
 
-.support__preview--hidden {}
+.support__preview--hidden {
+    display: none;
+}
 
 .support__img {}
 

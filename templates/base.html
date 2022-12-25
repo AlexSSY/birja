@@ -95,6 +95,7 @@
                                 </div-->
                                 <div class="header__profile d-flex align-items-center">
                                     {% if user.is_authenticated %}
+                                    <a href="{% url 'user_profile:settings' %}" style="font-size:13px;display: block;margin-right: 10px;text-decoration: underline;">{{ user.email }}</a>
                                     <a id="profile_link" class="d-flex align-items-center" href="">
                                         <div
                                             class="header__profile-photo d-flex align-items-center justify-content-center">
@@ -108,7 +109,7 @@
                                         <a class="d-flex align-items-center text-yellow"
                                             href="{% url 'user_profile:wallet' %}">wallet&nbsp;
                                             <img class="header__nav-item-wallet"
-                                                src="{% static 'images/wallet.svg' %}">{{amount}}USD
+                                                src="{% static 'images/wallet.svg' %}">{{amount}} USD
                                         </a>
                                         <a class="d-block" href="{% url 'panel:index' %}">Panel</a>
                                         <a class="d-block" href="{% url 'user_profile:logout' %}">Log out</a>

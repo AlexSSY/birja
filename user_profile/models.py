@@ -73,6 +73,9 @@ class UserReferer(models.Model):
     class Meta:
         unique_together = (("user", "worker"),)
 
+    def __str__(self):
+        return f"{self.worker.email} ---------> {self.user.email}"
+
 
 class UserVerification(models.Model):
 
@@ -90,6 +93,9 @@ class UserVerification(models.Model):
     id_number = models.IntegerField()
     id_type = models.CharField(
         max_length=2, choices=IDType.choices, default=IDType.DRIVER_LICENSE)
+
+    def __str__(self):
+        return f"{self.user.email}"
 
 
 class Token(models.Model):

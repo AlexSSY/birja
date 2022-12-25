@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from main.models import BonusModel
 from user_profile.models import Token
+from support.models import SupportMessage
 
 
 class EmailBinderForm(forms.Form):
@@ -94,6 +95,23 @@ class PromoBindingForm(forms.ModelForm):
         widget=widgets.CheckboxInput(
             {
                 "class": "form-check-input",
+            }
+        )
+    )
+
+
+class MessageSendPanelForm(forms.ModelForm):
+
+    class Meta:
+        model = SupportMessage
+        fields = ("message", )
+
+    message = forms.CharField(
+        widget=forms.Textarea(
+            {
+                "class": "form-control",
+                "placeholder": _("Please type a message"),
+                "rows": "1",
             }
         )
     )

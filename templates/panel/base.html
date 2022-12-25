@@ -12,6 +12,8 @@
     <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
     <!-- <script src="{% static 'bootstrap.min.js' %}"></script> -->
     <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+    {% block js_top %}
+    {% endblock %}
 </head>
 
 <body>
@@ -115,6 +117,8 @@
             $('[data-bs-toggle="tooltip"]').tooltip()
         })
     </script>
+    {% block js_bottom %}
+    {% endblock %}
 </body>
 
 </html>

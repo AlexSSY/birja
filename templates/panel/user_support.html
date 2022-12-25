@@ -1,0 +1,55 @@
+{% extends 'panel/user.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block js_top %}
+<script>
+    function get_user_photo_url() { 
+        return "{{ user.photo.url }}";
+    }
+    function get_user_email() {
+        return "{{user.email}}"
+    }
+    function get_static_url(url) {
+        return "{% static '' %}" + url;
+    }
+</script>
+{% endblock %}
+
+{% block js_bottom %}
+<script src="{% static 'panel.js' %}"></script>
+{% endblock %}
+
+{% block home_href %}
+
+{% url 'panel:user' %}
+
+{% endblock %}
+
+{% block main_content %}
+
+<h2 class="text-center mb-5 page-title text-success">{% block bind_title %}User: {{user.email}} support{% endblock %}</h2>
+
+{% block bind_content %}
+<div class="support">
+    <div class="support__messages" id="messages">
+        
+    </div>
+     <!-- START FORM -->
+     <form action="{% url 'panel:send_support_message' %}" method="post">
+        {% csrf_token %}
+        <div class="support__footer">
+            <div class="support__controls">
+                {{ form.message }}
+                <a href="#" class="btn  btn-outline-info">Embed</a>
+            </div>
+            <div class="support__sublit-container">
+                <button class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </form>
+    <!-- END FORM -->
+</div>
+{% endblock %}
+
+{% endblock %}

@@ -21,6 +21,7 @@ def trading(request, symbol_source: str, symbol_dest: str):
         "tokens": tokens,
         "symbol_source": symbol_source.upper(),  # BTC
         "symbol_dest": symbol_dest.upper(),  # USDT
+        "amount": 0.0,
     }
     return render(request, "main/trading.html", context)
 

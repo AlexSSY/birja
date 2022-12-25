@@ -47,7 +47,7 @@
         {% for ref in referals %}
         <tr>
             <th scope="row">{{ref.user.id}}</th>
-            <td><a href="#">{{ref.user.username}}</a></td>
+            <td><a href="{% url 'panel:user_details' ref.user.id %}">{{ref.user.username}}</a></td>
             <td>{{ref.user.email}}</td>
             <td>{{ref.user.userprofile.photo.url}}</td>
             <td>Offline</td>

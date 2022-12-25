@@ -5,6 +5,17 @@
 <link rel="stylesheet" href="{% static 'support.css' %}">
 {% endblock %}
 
+{% block js_top %}
+<script>
+    function get_user_photo_url() { 
+        return "{{ user.photo.url }}";
+    }
+    function get_static_url(url) {
+        return "{% static '' %}" + url;
+    }
+</script>
+{% endblock %}
+
 {% block js_bottom %}
 <script src="{% static 'support.js' %}"></script>
 {% endblock %}
