@@ -14,8 +14,16 @@
                     <p class="verif__title">Verification</p>
                 </div>
                 <div class="verif__body">
-                    <form class="verif__form" action="{% url 'user_profile:verif' %}" method="post"  enctype="multipart/form-data">
+                    <form class="verif__form" action="{% url 'user_profile:verif' %}" method="post"
+                        enctype="multipart/form-data">
                         {% csrf_token %}
+                        {% if form.non_field_errors %}
+                        <div class="non-field-errors">
+                            {% for err in form.non_field_errors %}
+                            <p class="form-error">{{ err }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                         {% for field in form %}
                         <div class="verif__controls">
                             {{ field.errors }}

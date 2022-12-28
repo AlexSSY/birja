@@ -24,3 +24,6 @@ class SupportMessage(models.Model):
     message = models.TextField(
         verbose_name=_("Message")
     )
+
+    def __str__(self):
+        return f"{self.message}"

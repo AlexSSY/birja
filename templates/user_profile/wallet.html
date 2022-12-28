@@ -17,7 +17,7 @@
                     </div>
                     <div class="wallet__boxes-box1-balance">
                         <p class="wallet__boxes-box1-balance-text">Total Balance</p>
-                        <p class="wallet__boxes-box1-balance-amount">0 USD</p>
+                        <p class="wallet__boxes-box1-balance-amount" id="wallet_page">0 USD</p>
                     </div>
                 </div>
             </div>
@@ -70,8 +70,8 @@
                             <span class="wallet_tokens-item-name">{{item.token.name}}</span>
                             <span class="wallet__rokens-body-tag">{{item.token.tag}}</span>
                         </th>
-                        <td class="wallet__tokens-item-amount">{{item.amount}}</td>
-                        <td>{{item.amount}}</td>
+                        <td class="wallet__tokens-item-amount" id="amount_{{item.token.tag}}">{{item.amount}}</td>
+                        <td id="eq_{{item.token.tag}}">{{item.amount}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

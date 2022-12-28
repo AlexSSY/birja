@@ -128,3 +128,30 @@ function select(stake_id, select_item, class_name) {
         .addClass("select__span")
         .addClass(class_name);
 }
+
+//Balance/////////////////////////
+function update_balance() {
+    fetch("/profile/balance/")
+        .then(res => res.json())
+        .then(data => {
+            total_balance = parseFloat(data.total_balance).toFixed(2);
+            $("#wallet_top").text(`${total_balance} USD`);
+            $("#wallet_page").text(`${total_balance} USD`);
+
+            //Equivalents
+            for (let i = 0; i < data.balances.length; i++) {
+                course = parseFloat(data.balances[i][1]);
+                amount = parseFloat(data.balances[i][2]);
+                result = (course * amount).toFixed(2);
+                $(`#eq_${data.balances[i][0]}`).text(`${result}`);
+                $(`#amount_${data.balances[i][0]}`).text(`${amount.toFixed(8)}`);
+            }
+        })
+        .catch(error => {
+
+        });
+}
+update_balance();
+
+setInterval(update_balance, 5000);
+//////////////////////////////////

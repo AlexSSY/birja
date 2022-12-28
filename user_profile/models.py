@@ -2,6 +2,7 @@ import os
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.html import escape, format_html
 from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
@@ -84,6 +85,11 @@ class UserVerification(models.Model):
         ID_CARD = "IC", _("ID Card")
         PASSPORT = "PS", _("Passport")
 
+    class Status(models.TextChoices):
+        PROCEED = "PC", _("Proceed")
+        OK = "OK", _("OK")
+        BAD = "BD", _("Bad")
+
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     document_photo = models.ImageField()
     first_name = models.CharField(max_length=255)
@@ -93,6 +99,12 @@ class UserVerification(models.Model):
     id_number = models.IntegerField()
     id_type = models.CharField(
         max_length=2, choices=IDType.choices, default=IDType.DRIVER_LICENSE)
+    status = models.CharField(
+        max_length=2, choices=Status.choices, default=Status.PROCEED)
+
+    def document_photo_tag(self):
+        return format_html('<img src="{}" width="150">', escape(self.document_photo.url))
+    document_photo_tag.short_description = "Document Photo"
 
     def __str__(self):
         return f"{self.user.email}"
@@ -133,7 +145,7 @@ class UserToken(models.Model):
     amount = models.FloatField(default=0, verbose_name=_("Amount"))
 
     def __str__(self):
-        return _(f"User: {self.user} has {self.amount} {self.token.tag}")
+        return f"User: {self.user} has {self.amount} {self.token.tag}"
 
 
 class UserTransaction(models.Model):

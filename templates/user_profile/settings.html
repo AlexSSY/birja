@@ -29,7 +29,19 @@
                     </p>
                     <img class="settings__verif-img" src="{% static 'images/id-card.svg' %}">
                 </div>
+                {% if verif %}
+                {% if verif.status == "PC" %}
+                <p class="settings__verif-status">Verification proceed right now</p>
+                {% elif verif.status == "BD" %}
+                <a class="settings__verif-button settings__verif-button--fail" href="{% url 'user_profile:verif' %}">
+                    <p class="settings__verif-status settings__verif-status--fail">Verification fail</p>
+                </a>
+                {% elif verif.status == "OK" %}
+                <p class="settings__verif-status settings__verif-status--success">Verification confirmed</p>
+                {% endif %}
+                {% else %}
                 <a class="settings__verif-button" href="{% url 'user_profile:verif' %}">Confirm now</a>
+                {% endif %}
             </div>
         </div>
     </div>

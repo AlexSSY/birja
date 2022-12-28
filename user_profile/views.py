@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
+from django.views.decorators.http import require_POST
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -8,6 +9,7 @@ from django.views.generic import CreateView
 from django.utils.translation import gettext_lazy as _
 from django.forms import ValidationError
 from django.db.models import Q
+import requests
 from .utils import DataMixin
 from .forms import RegisterUserForm, LoginUserForm, UserVerifForm
 from .models import Token, UserToken, UserTransaction, UserVerification, CustomUser
@@ -162,17 +164,42 @@ def api(request):
 
 @login_required
 def settings(request):
+    
+    try:
+        verif = UserVerification.objects.get(user=request.user.id)
+    except UserVerification.MultipleObjectsReturned:
+        verif = UserVerification.objects.last()
+    except UserVerification.DoesNotExist:
+        verif = None
+
+    context = {
+        "verif": verif,
+    }
+
     return render(
         request=request,
         template_name="user_profile/settings.html",
-        context=None
+        context=context
     )
 
 
 @login_required
 def verif(request):
     if request.method == "POST":
+
         form = UserVerifForm(request.POST, request.FILES)
+
+        try:
+            last_verif = UserVerification.objects.get(user=request.user)
+            if last_verif.status == UserVerification.Status.BAD:
+                last_verif.delete()
+            else:
+                form.add_error(None, "Verif is already exists")
+        except UserVerification.DoesNotExist:
+            pass
+        except:
+            pass
+
         if form.is_valid():
             verif = form.save(commit=False)
             verif.user = CustomUser.objects.get(id=request.user.id)
@@ -213,9 +240,11 @@ def wallet(request):
             try:
                 bonus = BonusModel.objects.get(Q(code=form.cleaned_data.code))
             except BonusModel.DoesNotExist:
-                form.add_error("code", ValidationError(_("This code does not exist"), code="invalid"))
+                form.add_error("code", ValidationError(
+                    _("This code does not exist"), code="invalid"))
             except BonusModel.MultipleObjectsReturned:
-                bonus = BonusModel.objects.filter(Q(code=form.cleaned_data.code)).order_by("code").first()
+                bonus = BonusModel.objects.filter(
+                    Q(code=form.cleaned_data.code)).order_by("code").first()
 
             # add/update token
 
@@ -223,7 +252,6 @@ def wallet(request):
 
     else:
         form = BonusActivationForm()
-                
 
     context = {
         "data": result,
@@ -259,5 +287,32 @@ def custom_logout(request):
     logout(request)
     return redirect(reverse_lazy("main:index"))
 
+
 def terms(request):
     return render(request, "user_profile/terms.html", None)
+
+
+def get_balance(request):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden(None)
+
+    total_balance = 0.0
+    balances = []
+
+    try:
+        tokens = UserToken.objects.filter(user=request.user)
+        for token in tokens:
+            symbol = token.token.tag
+            response = requests.get(f"https://api.binance.com/api/v1/ticker/24hr?symbol={symbol}USDT")
+            json_data = response.json()
+            balances.append([symbol, json_data["lastPrice"], str(token.amount)])
+            total_balance += float(token.amount) * float(json_data["lastPrice"])
+    except UserToken.DoesNotExist:
+        pass
+
+    context = {
+        "total_balance": total_balance,
+        "balances": balances,
+    }
+
+    return JsonResponse(context)

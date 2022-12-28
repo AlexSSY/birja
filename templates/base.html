@@ -79,7 +79,7 @@
                                         </li>
                                         {% url 'user_profile:wallet' as url %}
                                         <li class="header__nav-item text-yellow {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a class="d-flex align-items-center text-yellow" href="{{url}}">
+                                            <a class="d-flex align-items-center text-yellow" id="wallet_top" href="{{url}}">
                                                 <img class="header__nav-item-wallet"
                                                     src="{% static 'images/wallet.svg' %}">{{amount}}&nbsp;USD
                                             </a>
@@ -111,7 +111,9 @@
                                             <img class="header__nav-item-wallet"
                                                 src="{% static 'images/wallet.svg' %}">{{amount}} USD
                                         </a>
+                                        {% if perms.panel.can_acces_panel %}
                                         <a class="d-block" href="{% url 'panel:index' %}">Panel</a>
+                                        {% endif %}
                                         <a class="d-block" href="{% url 'user_profile:logout' %}">Log out</a>
                                     </div>
                                     {% else %}
@@ -143,7 +145,7 @@
                                 <div class="footer__top-col">
                                     <p class="footer__top-col-title">Features</p>
                                     <p class="footer__tp-col-link"><a href="/">Home</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">Trading</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url user_profile">Trading</a></p>
                                     <p class="footer__tp-col-link"><a href="{% url 'user_profile:wallet' %}">Wallet</a>
                                     </p>
                                     <p class="footer__tp-col-link"><a href="{% url 'user_profile:invest' %}">Invest</a>

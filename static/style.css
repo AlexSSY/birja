@@ -167,6 +167,14 @@ input[type=number] {
 	--trading-border: rgb(58, 58, 58);
 }
 
+.dark {
+
+}
+
+.light {
+	
+}
+
 body {
 	font-family: "Montserrat";
 	background: var(--color5);
@@ -1102,7 +1110,7 @@ body {
 .header__profile-expanded {
 	right: 0;
 	top: 61px;
-	transform: translateX(50%);
+	transform: translateX(0%);
 	width: 200px;
 	height: 400px;
 	background: var(--color0);
@@ -1812,6 +1820,18 @@ body {
 	color: #FFB951;
 }
 
+.settings__verif-status {
+	color: #d58f51;
+}
+
+.settings__verif-status--fail {
+	color: #d55151;
+}
+
+.settings__verif-status--success {
+	color: #a0d551;
+}
+
 .settings__verif-button {
 	display: flex;
 	width: 170px;
@@ -1832,6 +1852,11 @@ body {
 	text-decoration: none;
 
 	color: #FFFFFF;
+}
+
+.settings__verif-button--fail {
+	background: transparent;
+	border: 1px solid red;
 }
 
 .settings__verif-img {

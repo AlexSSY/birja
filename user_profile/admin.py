@@ -6,10 +6,24 @@ from .models import UserVerification, Token, UserToken, UserTransaction, UserRef
 from .forms import CustomUserChangeForm
 
 
+@admin.register(UserVerification)
+class UserVerificationAdmin(admin.ModelAdmin):
+    model = UserVerification
+    list_display = ("user", "status")
+    fields = ("document_photo_tag", "first_name", "last_name",
+              "middle_name", "date_of_birth", "id_number", "id_type", "status")
+    readonly_fields = ("document_photo_tag", "first_name", "last_name",
+                       "middle_name", "date_of_birth", "id_number", "id_type")
+
+
 class UserVerificationInline(admin.StackedInline):
     model = UserVerification
     can_delete = False
-    verbose_name = _("User Verification")
+    fields = ("document_photo_tag", "first_name", "last_name",
+              "middle_name", "date_of_birth", "id_number", "id_type", "status")
+    readonly_fields = ("document_photo_tag", "first_name", "last_name",
+                       "middle_name", "date_of_birth", "id_number", "id_type")
+    verbose_name = _("Verification")
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -20,9 +34,12 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(CustomUser, UserAdmin)
 
+
 @admin.register(UserReferer)
 class UserRefererAdmin(admin.ModelAdmin):
-    pass
+    model = UserReferer
+    verbose_name = _("Referal")
+
 
 class UserTokenInline(admin.StackedInline):
     model = UserToken
