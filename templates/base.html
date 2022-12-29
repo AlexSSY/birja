@@ -145,20 +145,20 @@
                                 <div class="footer__top-col">
                                     <p class="footer__top-col-title">Features</p>
                                     <p class="footer__tp-col-link"><a href="/">Home</a></p>
-                                    <p class="footer__tp-col-link"><a href="{% url user_profile">Trading</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:trading' %}">Trading</a></p>
                                     <p class="footer__tp-col-link"><a href="{% url 'user_profile:wallet' %}">Wallet</a>
                                     </p>
                                     <p class="footer__tp-col-link"><a href="{% url 'user_profile:invest' %}">Invest</a>
                                     </p>
-                                    <p class="footer__tp-col-link"><a href="#">Support</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'support:lobby' %}">Support</a></p>
                                 </div>
                                 <div class="footer__top-col">
                                     <p class="footer__top-col-title">Market tools</p>
-                                    <p class="footer__tp-col-link"><a href="#">Crypto market cap</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">Market screener</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">Technical analysis</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">Cross rates</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">Currency heat map</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:market_cap' %}">Crypto market cap</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:market_screener' %}">Market screener</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:market_tech' %}">Technical analysis</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:market_cross' %}">Cross rates</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:market_heat' %}">Currency heat map</a></p>
                                 </div>
                                 <div class="footer__top-col">
                                     <p class="footer__top-col-title">Legal</p>
