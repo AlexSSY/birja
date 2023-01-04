@@ -145,7 +145,7 @@
                                 <div class="footer__top-col">
                                     <p class="footer__top-col-title">Features</p>
                                     <p class="footer__tp-col-link"><a href="/">Home</a></p>
-                                    <p class="footer__tp-col-link"><a href="{% url 'main:trading' %}">Trading</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:index' %}">Trading</a></p>
                                     <p class="footer__tp-col-link"><a href="{% url 'user_profile:wallet' %}">Wallet</a>
                                     </p>
                                     <p class="footer__tp-col-link"><a href="{% url 'user_profile:invest' %}">Invest</a>
@@ -162,18 +162,18 @@
                                 </div>
                                 <div class="footer__top-col">
                                     <p class="footer__top-col-title">Legal</p>
-                                    <p class="footer__tp-col-link"><a href="#">Terms of service</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">Privacy notice</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">Cookies policy</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">AML & KYC policy</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">Fees</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:terms' %}">Terms of service</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:privacy_notice' %}">Privacy notice</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:cookies_policy' %}">Cookies policy</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:amlkyc_policy' %}">AML & KYC policy</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'user_profile:fees' %}">Fees</a></p>
                                 </div>
                                 <div class="footer__top-col">
                                     <p class="footer__top-col-title">Exchange pair</p>
-                                    <p class="footer__tp-col-link"><a href="#">BTC to USDT</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">ETH to USDT</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">LTC to USDT</a></p>
-                                    <p class="footer__tp-col-link"><a href="#">ADA to USDT</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:trading' 'btc' 'usdt' %}">BTC to USDT</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:trading' 'eth' 'usdt' %}">ETH to USDT</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:trading' 'ltc' 'usdt' %}">LTC to USDT</a></p>
+                                    <p class="footer__tp-col-link"><a href="{% url 'main:trading' 'ada' 'usdt' %}">ADA to USDT</a></p>
                                 </div>
                             </div>
                         </div>

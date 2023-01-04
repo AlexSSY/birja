@@ -134,6 +134,10 @@ table {
 	border-spacing: 0;
 }
 
+b {
+	font-weight: bold;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -167,13 +171,9 @@ input[type=number] {
 	--trading-border: rgb(58, 58, 58);
 }
 
-.dark {
+.dark {}
 
-}
-
-.light {
-	
-}
+.light {}
 
 body {
 	font-family: "Montserrat";
@@ -277,14 +277,14 @@ body {
 }
 
 .header__nav-item:hover a {
-	color: var(--color1) ;
+	color: var(--color1);
 }
 
 .header__nav-item:last-child {
 	margin-right: 0;
 }
 
-.active-nav-item > a {
+.active-nav-item>a {
 	color: var(--color1);
 }
 
@@ -2404,6 +2404,10 @@ body {
 	border-left: 1px solid var(--trading-border);
 }
 
+.trading__chat-full-height {
+	height: 565px;
+}
+
 .trading__chat-head {
 	padding: 15px;
 }
@@ -2411,6 +2415,220 @@ body {
 .trading__chat-title {
 	font-size: 14px;
 	font-family: "Montserrat";
+}
+
+.trading__chat-body {
+	height: 300px;
+}
+
+.trading__chat-controls {
+	display: flex;
+}
+
+.orders {
+	background: var(--trading-bg);
+	border-top: 1px solid var(--trading-border);
+}
+
+.orders__full-height {
+	height: 565px;
+}
+
+.orders__tabs {
+	
+}
+
+.orders__tabs-buttons {
+	display: flex;
+	border-bottom: 1px solid var(--trading-border);
+	padding: 10px;
+}
+
+.orders__tab-button {
+	margin-right: 22px;
+	cursor: pointer;
+
+	font-size: 14px;
+}
+
+.orders__tab-button--active {
+	color:#4881dc;
+	position: relative;
+}
+
+.orders__tab-button--active::after {
+	content: '';
+	left: 0;
+	bottom: -10px;
+	right: 1;
+	height: 3px;
+	background: #4881dc;
+	position: absolute;
+}
+
+.orders__tab {
+	padding: 10px 0;
+	display: none;
+}
+
+.orders__tab--active {
+	display: block;
+}
+
+.orders__buy-sell {
+	display: flex;
+}
+
+.orders__buy {
+	flex: 0 1 50%;
+
+	padding: 0 10px;
+}
+
+.orders__primary-text {
+	font-weight: 600;
+	margin-bottom: 15px;
+	font-size: 15px;
+}
+
+.orders__balance {
+	display: flex;
+	margin-bottom: 15px;
+}
+
+.orders__wallet {
+	background: transparent;
+	background-image: url("./images/wallet.svg");
+	width: 16px;
+	margin-right: 5px;
+	filter: grayscale(100%);
+}
+
+.orders__balance-value {
+	color: #c7c7c7;
+	font-size: 15px;
+}
+
+.orders__controls {
+	margin-bottom: 8px;	
+}
+
+.orders__label {
+	font-size: 12px;
+	color: #a8a8a8;
+	margin-bottom: 2px;
+	display: block;
+}
+
+.orders__label-lnk {
+	color: #4881dc;
+}
+
+.orders__percents {
+	color: white;
+	background: #474747;
+	padding: 4px;
+	border-radius: 3px;
+	cursor: pointer;
+	border: none;
+	margin-right: 5px;
+}
+
+.orders__buy-btn {
+	width: 100%;
+	height: 33px;
+
+	cursor: pointer;
+	border-radius: 3px;
+	border: none;
+
+	color: white;
+	font-size: 16px;
+
+	background: #2d6f4b;
+}
+
+.orders__sell-btn {
+	width: 100%;
+	height: 33px;
+
+	cursor: pointer;
+	border-radius: 3px;
+	border: none;
+
+	color: white;
+	font-size: 16px;
+
+	background: #6f2d2d;
+}
+
+.orders__tab-no-data {}
+
+.numeric {
+	display: flex;
+	position: relative;
+}
+
+.numeric__prefix {
+	margin-right: 5px;
+	color: #797979;
+	position: absolute;
+	left: 10px;
+}
+
+.numeric__hcontainer {
+	display: flex;
+	padding: 5px 10px 5px 22px;
+	border: 1px solid gray;
+	border-radius: 4px;
+	flex: 1 1 auto;
+
+	background: #000000;
+}
+
+.numeric__input {
+	background: #000;
+	border: none;
+
+	color: #fff;
+	flex: 1 1 auto;
+}
+
+.numeric__tag {
+	font-size: 13px;
+	text-align: center;
+	line-height: 1.27;
+}
+
+.numeric__vcontainer {
+	display: flex;
+	flex-direction: column;
+	margin-left: 3px;
+}
+
+.numeric__up {
+	width: 13px;
+	height: 50%;
+	background: #3e3e3e;
+	cursor: pointer;
+	border-radius: 3px 3px 0 0;
+
+	background-image: url("./images/select-array-up.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.numeric__down {
+	width: 13px;
+	background: #3e3e3e;
+
+	height: 50%;
+	cursor: pointer;
+	border-radius: 0 0 3px 3px;
+
+	background-image: url("./images/select-array.svg");
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .errorlist.nonfield {

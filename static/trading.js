@@ -329,3 +329,29 @@ $("#pairs_search").on("input", function () {
         }
     });
 });
+
+//tabs
+
+$("#trading_tabs>.orders__tabs-buttons>.orders__tab-button").on("click", function () {
+    var data_target = $(this).attr("data-target");
+
+    //update active class for buttons
+    $("#trading_tabs>.orders__tabs-buttons>.orders__tab-button").removeClass("orders__tab-button--active");
+    $(this).addClass("orders__tab-button--active");
+
+    //update active class for tabs
+    $("#trading_tabs>.orders__tab").removeClass("orders__tab--active");
+    $(`#${data_target}`).addClass("orders__tab--active");
+});
+
+$("#history_tabs>.orders__tabs-buttons>.orders__tab-button").on("click", function () {
+    var data_target = $(this).attr("data-target");
+
+    //update active class for buttons
+    $("#history_tabs>.orders__tabs-buttons>.orders__tab-button").removeClass("orders__tab-button--active");
+    $(this).addClass("orders__tab-button--active");
+
+    //update active class for tabs
+    $("#history_tabs>.orders__tab").removeClass("orders__tab--active");
+    $(`#${data_target}`).addClass("orders__tab--active");
+});

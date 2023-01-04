@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_top %}
+<link rel="stylesheet" href="{% static 'notices.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="window window__margin">
+                <div class="window__header">
+                    <p>Fees</p>
+                </div>
+                <div class="window__body window__body-margin">
+                    <h2 class="notice-h2">Cryptocurrency</h2>
+                    <table class="cc-table">
+                        <thead class="cc-table__thead">
+                            <tr class="cc-table__tr">
+                                <th class="cc-table__th">Payment Method</th>
+                                <th class="cc-table__th">Min deposit</th>
+                                <th class="cc-table__th">Deposit Fee</th>
+                                <th class="cc-table__th">Withdrawal Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody class="cc-table__body">
+                            {% for token in tokens %}
+                            <tr class="cc-table__tr">
+                                <td class="cc-table__td">
+                                    <div class="cc-table__coin">
+                                        <img class="cc-table__icon" src="{{ token.icon.url }}">
+                                        <div class="cc-table__coindesc">
+                                            <p class="cc-table__cointag">{{ token.tag }}</p>
+                                            <p class="cc-table__coinname">{{ token.name }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="cc-table__td">{{ token.min }}</td>
+                                <td class="cc-table__td">{{ '1%' }}</td>
+                                <td class="cc-table__td">{{ token.fee }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <h2 class="notice-h2">Trading Fees</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

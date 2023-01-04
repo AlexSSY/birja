@@ -131,7 +131,7 @@ function select(stake_id, select_item, class_name) {
 
 //Balance/////////////////////////
 function update_balance() {
-    fetch("/profile/balance/")
+    fetch("/profile/balance")
         .then(res => res.json())
         .then(data => {
             total_balance = parseFloat(data.total_balance).toFixed(2);

@@ -1,0 +1,28 @@
+.window__margin {
+    max-width: 1100px;
+    margin: 0 auto;
+    margin-top: 52px;
+}
+
+.window__body-margin {
+    margin: 22px 50px 0 50px;
+}
+
+.window__p {
+	margin-bottom: 10px;
+
+    font-family: "Montserrat";
+}
+
+
+.window__ul {
+    margin: 10px 0;
+}
+
+.notice-h2 {
+    display: block;
+    font-size: 26px;
+    height: 28px;
+    font-weight: 800;
+    font-family: "Montserrat";
+}

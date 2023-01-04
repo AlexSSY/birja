@@ -164,7 +164,7 @@ def api(request):
 
 @login_required
 def settings(request):
-    
+
     try:
         verif = UserVerification.objects.get(user=request.user.id)
     except UserVerification.MultipleObjectsReturned:
@@ -291,6 +291,20 @@ def custom_logout(request):
 def terms(request):
     return render(request, "user_profile/terms.html", None)
 
+def privacy_notice(request):
+    return render(request, "user_profile/privacy_notice.html", None)
+
+def cookies_policy(request):
+    return render(request, "user_profile/cookies_policy.html", None)
+
+def amlkyc_policy(request):
+    return render(request, "user_profile/amlkyc_policy.html", None)
+
+def fee(request):
+    context = {
+        "tokens": Token.objects.all()[:3],
+    }
+    return render(request, "user_profile/fee.html", context)
 
 def get_balance(request):
     if not request.user.is_authenticated:
@@ -303,10 +317,13 @@ def get_balance(request):
         tokens = UserToken.objects.filter(user=request.user)
         for token in tokens:
             symbol = token.token.tag
-            response = requests.get(f"https://api.binance.com/api/v1/ticker/24hr?symbol={symbol}USDT")
+            response = requests.get(
+                f"https://api.binance.com/api/v1/ticker/24hr?symbol={symbol}USDT")
             json_data = response.json()
-            balances.append([symbol, json_data["lastPrice"], str(token.amount)])
-            total_balance += float(token.amount) * float(json_data["lastPrice"])
+            balances.append(
+                [symbol, json_data["lastPrice"], str(token.amount)])
+            total_balance += float(token.amount) * \
+                float(json_data["lastPrice"])
     except UserToken.DoesNotExist:
         pass
 
