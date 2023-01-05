@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static humanize main_extras %}
 
 {% block css_top %}
 <link rel="stylesheet" href="{% static 'p2p.css' %}">
@@ -26,18 +26,11 @@
                         <input class="p2p__input" type="number" placeholder="Amount">
                     </div>
                     <button class="p2p__select-btn">BTC</button>
-                    <div class="p2p__select-items">
+                    <div class="p2p__select-items ultrascroll">
                         <ul class="p2p__select-list">
-                            <li class="p2p__select-item">LTC</li>
-                            <li class="p2p__select-item">USDT</li>
-                            <li class="p2p__select-item">DASH</li>
-                            <li class="p2p__select-item">NFT</li>
-                            <li class="p2p__select-item">XXL</li>
-                            <li class="p2p__select-item">XXX</li>
-                            <li class="p2p__select-item">XXXL</li>
-                            <li class="p2p__select-item">BTC</li>
-                            <li class="p2p__select-item">ITL</li>
-                            <li class="p2p__select-item">TERA</li>
+                            {% for token in token_list %}
+                            <li class="p2p__select-item"><img class="p2p__select-item-icon" src="{{ token.icon.url }}"><span class="p2p__select-item-tag">{{ token.tag }}</span> ({{ token.name }})</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -46,10 +39,12 @@
                     <div class="p2p__input-container">
                         <input class="p2p__input" type="number" placeholder="Amount">
                     </div>
-                    <button class="p2p__select-btn">BTC</button>
-                    <div class="p2p__select-items">
+                    <button class="p2p__select-btn">USD</button>
+                    <div class="p2p__select-items ultrascroll">
                         <ul class="p2p__select-list">
-                            <li class="p2p__select-item"></li>
+                            {% for fiat in fiat_list %}
+                            <li class="p2p__select-item"><span class="p2p__select-item-tag">{{ fiat.tag }}</span> ({{ fiat.name }})</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -58,16 +53,12 @@
                     <p class="p2p__select-text">All payments methods</p>
                     <div class="p2p__select-arrow">
                     </div>
-                    <div class="p2p__select-items">
+                    <div class="p2p__select-items ultrascroll">
                         <ul class="p2p__select-list">
                             <li class="p2p__select-item">All payments methods</li>
-                            <li class="p2p__select-item">Payer</li>
-                            <li class="p2p__select-item">Advcash</li>
-                            <li class="p2p__select-item">Webmoney</li>
-                            <li class="p2p__select-item">Perfect Money</li>
-                            <li class="p2p__select-item">Card to Card</li>
-                            <li class="p2p__select-item">PayPal</li>
-                            <li class="p2p__select-item">Western Union</li>
+                            {% for pm in payment_methods %}
+                            <li class="p2p__select-item">{{ pm.1 }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -86,8 +77,8 @@
                 <!-- Active users -->
                 <div class="p2p__controls">
                     <div class="p2p__controls-left">
-                        <p class="p2p__controls-left-caption">Verified users</p>
-                        <p class="p2p__controls-left-description">Show ads of verified traders only</p>
+                        <p class="p2p__controls-left-caption">Active users</p>
+                        <p class="p2p__controls-left-description">Show ads of traders who are online only</p>
                     </div>
                     <div class="p2p__controls-right">
                         <div class="p2p__switch">
@@ -110,166 +101,32 @@
                         </tr>
                     </thead>
                     <tbody class="p2p__tbody" id="p2p-table">
+                        {% for p2p in p2p_list %}
                         <tr class="p2p__tr">
                             <td class="p2p__td">
                                 <div class="p2p__td-container">
                                     <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="/media/icon-gf02a4d118_640.png">
+                                        <img class="p2p__td-img" src="{{ p2p.photo.url }}">
                                     </div>
                                     <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">CambiosP</p>
-                                        <p class="p2p__td-description">628 orders, 97%</p>
+                                        <p class="p2p__td-caption">{{ p2p.username }}</p>
+                                        <p class="p2p__td-description">{{ p2p.orders }} orders, {{ p2p.orders_percent }}%</p>
+                                        {% if p2p.status == "ON" %}
                                         <p class="p2p__td-status">Online</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="p2p__td">MasterCard</td>
-                            <td class="p2p__td p2p__td--price">17564.4 USD</td>
-                            <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">50 - 28 200,00 USD</p>
-                                <button class="p2p__sell-btn">Sell BTC</button>
-                            </td>
-                        </tr>
-                        <tr class="p2p__tr">
-                            <td class="p2p__td">
-                                <div class="p2p__td-container">
-                                    <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="/media/icon-gf02a4d118_640.png">
-                                    </div>
-                                    <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">CambiosP</p>
-                                        <p class="p2p__td-description">628 orders, 97%</p>
-                                        <p class="p2p__td-status">Online</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="p2p__td">MasterCard</td>
-                            <td class="p2p__td p2p__td--price">17564.4 USD</td>
-                            <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">50 - 28 200,00 USD</p>
-                                <button class="p2p__sell-btn">Sell BTC</button>
-                            </td>
-                        </tr>
-                        <tr class="p2p__tr">
-                            <td class="p2p__td">
-                                <div class="p2p__td-container">
-                                    <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="/media/icon-gf02a4d118_640.png">
-                                    </div>
-                                    <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">CambiosP</p>
-                                        <p class="p2p__td-description">628 orders, 97%</p>
-                                        <p class="p2p__td-status">Online</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="p2p__td">MasterCard</td>
-                            <td class="p2p__td p2p__td--price">17564.4 USD</td>
-                            <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">50 - 28 200,00 USD</p>
-                                <button class="p2p__sell-btn">Sell BTC</button>
-                            </td>
-                        </tr>
-                        <tr class="p2p__tr">
-                            <td class="p2p__td">
-                                <div class="p2p__td-container">
-                                    <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="/media/icon-gf02a4d118_640.png">
-                                    </div>
-                                    <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">CambiosP</p>
-                                        <p class="p2p__td-description">628 orders, 97%</p>
-                                        <p class="p2p__td-status">Online</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="p2p__td">MasterCard</td>
-                            <td class="p2p__td p2p__td--price">17564.4 USD</td>
-                            <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">50 - 28 200,00 USD</p>
-                                <button class="p2p__sell-btn">Sell BTC</button>
-                            </td>
-                        </tr>
-                        <tr class="p2p__tr">
-                            <td class="p2p__td">
-                                <div class="p2p__td-container">
-                                    <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="/media/icon-gf02a4d118_640.png">
-                                    </div>
-                                    <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">CambiosP</p>
-                                        <p class="p2p__td-description">628 orders, 97%</p>
-                                        <p class="p2p__td-status">Online</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="p2p__td">MasterCard</td>
-                            <td class="p2p__td p2p__td--price">17564.4 USD</td>
-                            <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">50 - 28 200,00 USD</p>
-                                <button class="p2p__sell-btn">Sell BTC</button>
-                            </td>
-                        </tr>
-                        <tr class="p2p__tr">
-                            <td class="p2p__td">
-                                <div class="p2p__td-container">
-                                    <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="/media/icon-gf02a4d118_640.png">
-                                    </div>
-                                    <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">CambiosP</p>
-                                        <p class="p2p__td-description">628 orders, 97%</p>
-                                        <p class="p2p__td-status">Online</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="p2p__td">MasterCard</td>
-                            <td class="p2p__td p2p__td--price">17564.4 USD</td>
-                            <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">50 - 28 200,00 USD</p>
-                                <button class="p2p__sell-btn">Sell BTC</button>
-                            </td>
-                        </tr>
-                        <tr class="p2p__tr">
-                            <td class="p2p__td">
-                                <div class="p2p__td-container">
-                                    <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="/media/icon-gf02a4d118_640.png">
-                                    </div>
-                                    <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">CambiosP</p>
-                                        <p class="p2p__td-description">628 orders, 97%</p>
-                                        <p class="p2p__td-status">Online</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="p2p__td">MasterCard</td>
-                            <td class="p2p__td p2p__td--price">17564.4 USD</td>
-                            <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">50 - 28 200,00 USD</p>
-                                <button class="p2p__sell-btn">Sell BTC</button>
-                            </td>
-                        </tr>
-                        <tr class="p2p__tr">
-                            <td class="p2p__td">
-                                <div class="p2p__td-container">
-                                    <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="/media/icon-gf02a4d118_640.png">
-                                    </div>
-                                    <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">CambiosP</p>
-                                        <p class="p2p__td-description">628 orders, 97%</p>
+                                        {% else %}
                                         <p class="p2p__td-status p2p__td-status--offline">Offline</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </td>
-                            <td class="p2p__td">MasterCard</td>
-                            <td class="p2p__td p2p__td--price">17564.4 USD</td>
+                            <td class="p2p__td">{{ p2p.get_method_display }}</td>
+                            <td class="p2p__td p2p__td--price">{{ p2p.price }} {{ p2p.fiat.tag }}</td>
                             <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">50 - 28 200,00 USD</p>
+                                <p class="p2p__td-limit">{{ p2p.limit_start|floatformat:"-3"|intcomma|comma_to_whitespace }} - {{ p2p.limit_end|floatformat:"-3"|intcomma|comma_to_whitespace }} {{ p2p.fiat.tag }}</p>
                                 <button class="p2p__sell-btn">Sell BTC</button>
                             </td>
                         </tr>
+                        {% endfor %}
                         <tr class="p2p__tr p2p__tr--last">
                             <td class="p2p__td" colspan="4">
                                 <button class="p2p__more">load 15 more traders</button>

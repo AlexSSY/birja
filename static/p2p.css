@@ -176,7 +176,7 @@
 }
 
 .p2p__select-items--open {
-    height: 120px;
+    height: 220px;
 }
 
 .p2p__select-list {
@@ -186,11 +186,25 @@
 .p2p__select-item {
     padding: 15px 15px;
     cursor: pointer;
-    display: block;
+    display: flex;
+    align-items: center;
+
+    color: #808080;
 }
 
 .p2p__select-item:hover {
     background: rgb(34, 34, 34);
+}
+
+.p2p__select-item-tag {
+    color: white;
+    display: block;
+    margin-right: 5px;
+}
+
+.p2p__select-item-icon {
+    width: 22px;
+    margin-right: 10px;
 }
 
 .p2p__select-text {

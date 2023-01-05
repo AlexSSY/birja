@@ -57,7 +57,7 @@ body--trading
                     </div>
                     <div class="trading__header-24h-volume">
                         <p class="trading__header-24h-volume-title">24h Volume</p>
-                        <p class="trading__header-24h-volume-value">0000.00 USDT
+                        <p class="trading__header-24h-volume-value">0000.00 {{ symbol_dest }}
                         </p>
                     </div>
                 </div>
@@ -106,9 +106,9 @@ body--trading
                         <table id="table_green" class="trading__table">
                             <!-- <thead class="trading__table-head">
                                 <tr class="trading__table-tr">
-                                    <th class="trading__table-th">Price {{ 'USDT' }}</th>
+                                    <th class="trading__table-th">Price {{ symbol_dest }}</th>
                                     <th class="trading__table-th">Amount {{ 'BTC' }}</th>
-                                    <th class="trading__table-th">Total {{ 'USDT' }}</th>
+                                    <th class="trading__table-th">Total {{ symbol_dest }}</th>
                                 </tr>
                             </thead> -->
                             <tbody id="green_orders" class="trading__table-body">
@@ -137,11 +137,11 @@ body--trading
                             <div class="orders__buy-sell">
                                 <!-- Buy -->
                                 <div class="orders__buy">
-                                    <div class="orders__primary-text">Buy BTC</div>
+                                    <div class="orders__primary-text">Buy {{ symbol_source }}</div>
                                     <div class="orders__balance">
                                         <img class="orders__wallet">
                                         <p class="orders__balance-value">
-                                            0.00 - USDT
+                                            0.00 - {{ symbol_dest }}
                                         </p>
                                     </div>
                                     <div class="orders__controls">
@@ -151,7 +151,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">BTC</div>
+                                                <div class="numeric__tag">{{ symbol_source }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -166,7 +166,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -181,7 +181,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -198,11 +198,11 @@ body--trading
                                 </div>
                                 <!-- Sell -->
                                 <div class="orders__buy">
-                                    <div class="orders__primary-text">Sell BTC</div>
+                                    <div class="orders__primary-text">Sell {{ symbol_source }}</div>
                                     <div class="orders__balance">
                                         <img class="orders__wallet">
                                         <p class="orders__balance-value">
-                                            0.00000000 - BTC
+                                            0.00000000 - {{ symbol_source }}
                                         </p>
                                     </div>
                                     <div class="orders__controls">
@@ -212,7 +212,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">BTC</div>
+                                                <div class="numeric__tag">{{ symbol_source }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -227,7 +227,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -242,7 +242,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -263,11 +263,11 @@ body--trading
                             <div class="orders__buy-sell">
                                 <!-- Buy -->
                                 <div class="orders__buy">
-                                    <div class="orders__primary-text">Buy BTC</div>
+                                    <div class="orders__primary-text">Buy {{ symbol_source }}</div>
                                     <div class="orders__balance">
                                         <img class="orders__wallet">
                                         <p class="orders__balance-value">
-                                            0.00 - USDT
+                                            0.00 - {{ symbol_dest }}
                                         </p>
                                     </div>
                                     <div class="orders__controls">
@@ -280,7 +280,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">BTC</div>
+                                                <div class="numeric__tag">{{ symbol_source }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -295,7 +295,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -313,11 +313,11 @@ body--trading
                                 </div>
                                 <!-- Sell -->
                                 <div class="orders__buy">
-                                    <div class="orders__primary-text">Sell BTC</div>
+                                    <div class="orders__primary-text">Sell {{ symbol_source }}</div>
                                     <div class="orders__balance">
                                         <img class="orders__wallet">
                                         <p class="orders__balance-value">
-                                            0.00000000 - BTC
+                                            0.00000000 - {{ symbol_source }}
                                         </p>
                                     </div>
                                     <div class="orders__controls">
@@ -330,7 +330,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">BTC</div>
+                                                <div class="numeric__tag">{{ symbol_source }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -345,7 +345,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -367,11 +367,11 @@ body--trading
                             <div class="orders__buy-sell">
                                 <!-- Buy -->
                                 <div class="orders__buy">
-                                    <div class="orders__primary-text">Buy BTC</div>
+                                    <div class="orders__primary-text">Buy {{ symbol_source }}</div>
                                     <div class="orders__balance">
                                         <img class="orders__wallet">
                                         <p class="orders__balance-value">
-                                            0.00 - USDT
+                                            0.00 - {{ symbol_dest }}
                                         </p>
                                     </div>
                                     <div class="orders__controls">
@@ -382,7 +382,7 @@ body--trading
                                             <div class="numeric__hcontainer">
                                                 <div class="numeric__prefix">≈</div>
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">BTC</div>
+                                                <div class="numeric__tag">{{ symbol_source }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -397,7 +397,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -412,7 +412,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -424,11 +424,11 @@ body--trading
                                 </div>
                                 <!-- Sell -->
                                 <div class="orders__buy">
-                                    <div class="orders__primary-text">Sell BTC</div>
+                                    <div class="orders__primary-text">Sell {{ symbol_source }}</div>
                                     <div class="orders__balance">
                                         <img class="orders__wallet">
                                         <p class="orders__balance-value">
-                                            0.00000000 - BTC
+                                            0.00000000 - {{ symbol_source }}
                                         </p>
                                     </div>
                                     <div class="orders__controls">
@@ -438,7 +438,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">BTC</div>
+                                                <div class="numeric__tag">{{ symbol_source }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -453,7 +453,7 @@ body--trading
                                         <div class="numeric">
                                             <div class="numeric__hcontainer">
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -469,7 +469,7 @@ body--trading
                                             <div class="numeric__hcontainer">
                                                 <div class="numeric__prefix">≈</div>
                                                 <input class="numeric__input" placeholder="0" type="number">
-                                                <div class="numeric__tag">USDT</div>
+                                                <div class="numeric__tag">{{ symbol_dest }}</div>
                                             </div>
                                             <div class="numeric__vcontainer">
                                                 <div class="numeric__up"></div>
@@ -521,9 +521,11 @@ body--trading
                                 <th class="trading__pairs-th">Volume/Change</th>
                             </tr>
                         </thead>
-                        <tbody class="trading__pairs-tbody">
+                        <tbody class="trading__pairs-tbody ultrascroll">
+                            {% with 'USDT USDC' as exclude_list %}
                             {% for token in tokens %}
-                            <tr class="trading__pairs-tr" data-symbol="{{token.tag}}{{'USDT'}}">
+                            {% if not token.tag in exclude_list.split %}
+                            <tr class="trading__pairs-tr" data-symbol="{{token.tag}}USDT">
                                 <td class="trading__pairs-td">
                                     <a class="trading__pairs-link"
                                         href="{% url 'main:trading' symbol_source=token.tag|lower symbol_dest='usdt' %}">
@@ -534,7 +536,9 @@ body--trading
                                 <td class="trading__pairs-td">17773.43</td>
                                 <td class="trading__pairs-td">2.031%</td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
+                            {% endwith %}
                         </tbody>
                     </table>
                 </div>
@@ -542,13 +546,18 @@ body--trading
                 <div class="trading__chat trading__chat-full-height">
                     <div class="trading__chat-head">
                         <div class="trading__chat-title">Chat</div>
-                        <div class="trading__chat-body"></div>
-                        <div class="trading__chat-controls">
+                    </div>
+                    <div class="trading__chat-body ultrascroll">
+
+                    </div>
+                    <div class="trading__chat-controls">
+                        <form class="trading__chat-form" action="{% url 'main:chat_message' %}" method="post">
+                            {% csrf_token %}
                             <div class="trading__chat-container">
-                                <textarea class="trading__chat-input"></textarea>
+                                {{ form.message }}
                             </div>
-                            <button class="trading__chat-button">M</button>
-                        </div>
+                            <button class="trading__chat-button">Send</button>
+                        </form>
                     </div>
                 </div>
             </div>

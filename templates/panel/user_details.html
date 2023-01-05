@@ -44,19 +44,19 @@
         </div>
         <div class="user__line text-danger">
             <p class="user__label">Global Ban:</p>
-            <p class="user__data"><input type="checkbox" disabled readonly checked="{{user.global_ban}}"></p>
+            <p class="user__data">{% if user.global_ban %}Banned{% else %}-{% endif %}</p>
         </div>
         <div class="user__line text-primary">
             <p class="user__label">Trading Ban:</p>
-            <p class="user__data"><input type="checkbox" disabled readonly checked="{{user.trading_ban}}"></p>
+            <p class="user__data">{% if user.trading_ban %}Banned{% else %}-{% endif %}</p>
         </div>
         <div class="user__line text-primary">
             <p class="user__label">Chat Ban:</p>
-            <p class="user__data"><input type="checkbox" disabled readonly checked="{{user.chat_ban}}"></p>
+            <p class="user__data">{% if user.chat_ban %}Banned{% else %}-{% endif %}</p>
         </div>
         <div class="user__line text-primary">
             <p class="user__label">Support Ban:</p>
-            <p class="user__data"><input type="checkbox" disabled readonly checked="{{user.support_ban}}"></p>
+            <p class="user__data">{% if user.support_ban %}Banned{% else %}-{% endif %}</p>
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 import os
 from django.utils.translation import gettext_lazy as _
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import AbstractUser
 from django.utils.html import escape, format_html
 from io import BytesIO
@@ -177,6 +178,13 @@ class UserTransaction(models.Model):
         return f"{self.user} - {self.type}: {self.token} {self.amount}"
 
 
+class Fiat(models.Model):
+    name = models.CharField(max_length=255, verbose_name=_("Name"), unique=True)
+    tag = models.CharField(max_length=25, verbose_name=_("Tag"), unique=True)
+
+    def __str__(self):
+        return f"{self.tag} ({self.name})"
+
 class P2P(models.Model):
     class PaymentMethod(models.TextChoices):
         WEBMONEY        = "WEB", _("Webmoney")
@@ -234,3 +242,60 @@ class P2P(models.Model):
         FORBANK         = "FOR", _("ForBank")
         BINANCE         = "BNP", _("BinancePay")
         KORONA          = "KOR", _("KoronaPay (Zolotaya korona)")
+        EXODUS          = "EXS", _("Exodus")
+
+    class Status(models.TextChoices):
+        ONLINE = "ON", _("Online")
+        OFFLINE = "OF", _("Offline")
+    
+    def image_path(instance, filename):
+        return "p2p_" + str(instance.id) + os.path.splitext(filename)[1]
+
+    username = models.CharField(max_length=255, verbose_name=_("User Name"), unique=True)
+    photo = models.ImageField(upload_to=image_path, default="icon-gf02a4d118_640.png", verbose_name=_("Photo"))
+    orders = models.PositiveIntegerField(verbose_name=_("Orders (count)"))
+    orders_percent = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)], verbose_name=_("Orders (percent)"))
+    price = models.FloatField(default=0, validators=[MinValueValidator(0)], verbose_name=_("Price"))
+    status = models.CharField(max_length=2, choices=Status.choices, default=Status.ONLINE, verbose_name=_("Status"))
+    method = models.CharField(max_length=3, choices=PaymentMethod.choices, default=PaymentMethod.VISA, verbose_name=_("Payment Method"))
+    limit_start = models.FloatField(default=50, validators=[MinValueValidator(0)], verbose_name=_("Limit (start)"))
+    limit_end = models.FloatField(default=5000, validators=[MinValueValidator(0)], verbose_name=_("Limit (end)"))
+    fiat = models.ForeignKey(Fiat, verbose_name=_("Fiat"), on_delete=models.CASCADE)
+
+    def photo_tag(self):
+        return format_html('<img src="{}" width="150">', escape(self.photo.url))
+    photo_tag.short_description = "Document Photo"
+
+    def save(self, *args, **kwargs):
+        super().save()
+        img = Image.open(self.photo.path)
+        width, height = img.size  # Get dimensions
+
+        if width > 300 and height > 300:
+            # keep ratio but shrink down
+            img.thumbnail((width, height))
+
+        # check which one is smaller
+        if height < width:
+            # make square by cutting off equal amounts left and right
+            left = (width - height) / 2
+            right = (width + height) / 2
+            top = 0
+            bottom = height
+            img = img.crop((left, top, right, bottom))
+
+        elif width < height:
+            # make square by cutting off bottom
+            left = 0
+            right = width
+            top = 0
+            bottom = width
+            img = img.crop((left, top, right, bottom))
+
+        if width > 300 and height > 300:
+            img.thumbnail((300, 300))
+
+        img.save(self.photo.path)
+
+    def __str__(self):
+        return f"{self.username} ({self.price})"

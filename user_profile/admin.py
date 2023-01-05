@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext as _
 
-from .models import UserVerification, Token, UserToken, UserTransaction, UserReferer, CustomUser
+from .models import *
 from .forms import CustomUserChangeForm
 
 
@@ -50,6 +50,7 @@ class UserTokenInline(admin.StackedInline):
 @admin.register(Token)
 class TokenAdmin(admin.ModelAdmin):
     list_display = ("name", "tag", "address")
+    fields = ("name", "tag", "address", "icon", "fee", "min")
     inlines = (UserTokenInline,)
 
 
@@ -65,3 +66,15 @@ class UserTransactionAdmin(admin.ModelAdmin):
     list_display = ("user", "date", "get_type_display",
                     "bonus_code", "token", "get_status_display", "amount")
     readonly_fields = ("date",)
+
+
+@admin.register(Fiat)
+class FiatAdmin(admin.ModelAdmin):
+    list_display = ("name", "tag")
+
+
+@admin.register(P2P)
+class P2PAdmin(admin.ModelAdmin):
+    fields = ("username", "photo", "orders", "orders_percent", "price", "status", "method",
+                "limit_start", "limit_end", "fiat")
+    list_display = ("username", "price", "method", "limit_start", "limit_end")

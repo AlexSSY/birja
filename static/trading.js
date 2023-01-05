@@ -355,3 +355,18 @@ $("#history_tabs>.orders__tabs-buttons>.orders__tab-button").on("click", functio
     $("#history_tabs>.orders__tab").removeClass("orders__tab--active");
     $(`#${data_target}`).addClass("orders__tab--active");
 });
+
+//Chat
+
+updateChat = function() {
+    fetch("/chat")
+        .then(data => data.text())
+        .then(data => {
+            $(".trading__chat-body").html(data);
+            $(".trading__chat-body").get(0).scrollTo(0, $(".trading__chat-body").get(0).scrollHeight);
+        });
+}
+
+updateChat();
+
+setInterval(updateChat, 15000);

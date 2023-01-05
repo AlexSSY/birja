@@ -15,4 +15,6 @@ urlpatterns = [
     path('market/cross', views.market_cross, name="market_cross"),
     path('market/heat', views.market_heat, name="market_heat"),
     path('swap', views.swap, name="swap"),
+    path('chat', views.chat, name="chat"),
+    path('chat_message', views.chat_message, name="chat_message"),
 ]

@@ -171,9 +171,22 @@ input[type=number] {
 	--trading-border: rgb(58, 58, 58);
 }
 
-.dark {}
+.ultrascroll::-webkit-scrollbar {
+	width: 4px;
+}
 
-.light {}
+.ultrascroll::-webkit-scrollbar-track {
+	background: transparent
+}
+
+.ultrascroll::-webkit-scrollbar-thumb {
+	background: #32343b;
+	border-radius: 2px;
+}
+
+.ultrascroll::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
 
 body {
 	font-family: "Montserrat";
@@ -233,7 +246,8 @@ body {
 	display: block;
 	position: relative;
 	margin-right: 23px;
-	color: var(--color2)
+	color: var(--color2);
+	cursor: pointer;
 }
 
 .header__nav-item--mark {
@@ -255,12 +269,13 @@ body {
 .header__nav-sub-menu {
 	display: none;
 	position: absolute;
-	z-index: 1;
+	z-index: 211;
 	overflow: auto;
 	left: 0;
 	width: 200px;
 	background: #131313;
 	color: #fff;
+	padding: 20px;
 }
 
 .header__nav-sub-item {
@@ -272,11 +287,15 @@ body {
 	color: #fff;
 }
 
+.header__nav-item:hover {
+	color: var(--color1);
+}
+
 .header__nav-item:hover>.header__nav-sub-menu {
 	display: block;
 }
 
-.header__nav-item:hover a {
+.header__nav-item:hover>a {
 	color: var(--color1);
 }
 
@@ -284,12 +303,16 @@ body {
 	margin-right: 0;
 }
 
+.active-nav-item {
+	color: var(--color1);
+}
+
 .active-nav-item>a {
 	color: var(--color1);
 }
 
 .header__nav-sub-item:hover a {
-	color: var(--color1) !important;
+	color: var(--color1);
 }
 
 .text-active {}
@@ -1115,9 +1138,19 @@ body {
 	height: 400px;
 	background: var(--color0);
 	position: absolute;
-	padding: 10px;
+	padding: 30px;
 	border-radius: 10px;
 	z-index: 10;
+}
+
+.header__profile-expanded-link {
+	display: flex;
+	margin-bottom: 10px;
+	justify-content: center	;
+}
+
+.header__profile-expanded-img {
+	width: 120px;
 }
 
 .transactions {
@@ -2356,6 +2389,10 @@ body {
 
 .trading__pairs-tbody {
 	display: block;
+
+	overflow: hidden;
+	overflow-y: auto;
+	height: 360px;
 }
 
 .trading__pairs-td {
@@ -2418,11 +2455,62 @@ body {
 }
 
 .trading__chat-body {
-	height: 300px;
+	height: 420px;
+	overflow: hidden;
+	padding: 15px;
+	overflow-y: auto;
 }
 
 .trading__chat-controls {
+	padding: 15px;
 	display: flex;
+}
+
+.chat__message {
+	font-size: 14px;
+	padding: 10px 0;
+	border-bottom: 1px solid #4b6158;
+}
+
+.chat__message-text {
+	display: inline-block;
+	line-height: 1.3;
+}
+
+.chat__message-author {
+	display: inline-block;
+	color: #58af75;
+}
+
+.trading__chat-form {
+	display: flex;
+	width: 100%;
+}
+
+.trading__chat-input {
+	background: #000;
+	color: white;
+	width: 100%;
+	height: 32px;
+	border: none;
+	border-radius: 5px;
+	padding: 0 10px;
+}
+
+.trading__chat-container {
+	flex: 1 1 auto;
+	margin-right: 10px;
+}
+
+.trading__chat-button {
+	background: #003b73;
+	color:white;
+	height: 32px;
+	cursor: pointer;
+	padding: 0 30px;
+	display: block;
+	border: none;
+	border-radius: 5px;
 }
 
 .orders {
@@ -2434,9 +2522,7 @@ body {
 	height: 565px;
 }
 
-.orders__tabs {
-	
-}
+.orders__tabs {}
 
 .orders__tabs-buttons {
 	display: flex;
@@ -2452,7 +2538,7 @@ body {
 }
 
 .orders__tab-button--active {
-	color:#4881dc;
+	color: #4881dc;
 	position: relative;
 }
 
@@ -2510,7 +2596,7 @@ body {
 }
 
 .orders__controls {
-	margin-bottom: 8px;	
+	margin-bottom: 8px;
 }
 
 .orders__label {
@@ -2548,6 +2634,10 @@ body {
 	background: #2d6f4b;
 }
 
+.orders__buy-btn:hover {
+	background: #48b177;
+}
+
 .orders__sell-btn {
 	width: 100%;
 	height: 33px;
@@ -2562,7 +2652,14 @@ body {
 	background: #6f2d2d;
 }
 
-.orders__tab-no-data {}
+.orders__sell-btn:hover {
+	background: #aa4545;
+}
+
+.orders__tab-no-data {
+	text-align: center;
+	margin-top: 10px;
+}
 
 .numeric {
 	display: flex;

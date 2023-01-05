@@ -47,7 +47,7 @@ function setup_p2p_select(select_id) {
     });
 
     $(select_item).on("click", function () {
-        select_tag.text($(this).text());
+        select_tag.text($(this).find(".p2p__select-item-tag").text());
         select_btn.toggleClass("p2p__select-btn--open");
         select_items.toggleClass("p2p__select-items--open");
     });

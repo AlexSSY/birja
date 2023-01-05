@@ -18,7 +18,7 @@
     <title>Tera | {{title}}</title>
 </head>
 
-<body class="{% block body_class %}{% endblock %}">
+<body class="{% block body_class %}{% endblock %} ultrascroll">
     <div class="wrapper">
         <div class="content">
             <header class="header {% block header_class %}{% endblock %}">
@@ -37,7 +37,8 @@
                                         </li>
                                         {% url 'main:market_tools' as url %}
                                         <li class="header__nav-item {% if url in request.path %}active-nav-item{% endif %} header__nav-item--mark">
-                                            <a href="{{url}}">Market tools</a>
+                                            <!-- <a href="{{url}}">Market tools</a> -->
+                                            Market tools
                                             <ul class="header__nav-sub-menu">
                                                 {% url 'main:market_cap' as url %}
                                                 <li class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
@@ -96,7 +97,7 @@
                                 <div class="header__profile d-flex align-items-center">
                                     {% if user.is_authenticated %}
                                     <a href="{% url 'user_profile:settings' %}" style="font-size:13px;display: block;margin-right: 10px;text-decoration: underline;">{{ user.email }}</a>
-                                    <a id="profile_link" class="d-flex align-items-center" href="">
+                                    <a id="profile_link" class="d-flex align-items-center" href="#">
                                         <div
                                             class="header__profile-photo d-flex align-items-center justify-content-center">
                                             <img src="{{ user.photo.url }}">
@@ -106,15 +107,18 @@
                                         </div>
                                     </a>
                                     <div class="header__profile-expanded hidden">
-                                        <a class="d-flex align-items-center text-yellow"
+                                        <a class="header__profile-expanded-link" href="{% url 'user_profile:settings' %}">
+                                            <img class="header__profile-expanded-img" src="{{ user.photo.url }}">
+                                        </a>
+                                        <a class="text-yellow header__profile-expanded-link"
                                             href="{% url 'user_profile:wallet' %}">wallet&nbsp;
                                             <img class="header__nav-item-wallet"
                                                 src="{% static 'images/wallet.svg' %}">{{amount}} USD
                                         </a>
                                         {% if perms.panel.can_acces_panel %}
-                                        <a class="d-block" href="{% url 'panel:index' %}">Panel</a>
+                                        <a class="header__profile-expanded-link" href="{% url 'panel:index' %}">Panel</a>
                                         {% endif %}
-                                        <a class="d-block" href="{% url 'user_profile:logout' %}">Log out</a>
+                                        <a class="header__profile-expanded-link" href="{% url 'user_profile:logout' %}">Log out</a>
                                     </div>
                                     {% else %}
                                     <a class="header__profile-login" href="{% url 'user_profile:login' %}">Login</a>

@@ -131,10 +131,25 @@ def transfer(request):
 
 @login_required
 def invest(request):
-    tokens = Token.objects.all()
+    btc = 0.0
+    ltc = 0.0
+    eth = 0.0
+    try:
+        tokens = UserToken.objects.filter(user=request.user)
+        for token in tokens:
+            if token.token.tag.lower() == "btc":
+                btc = token.amount
+            if token.token.tag.lower() == "ltc":
+                ltc = token.amount
+            if token.token.tag.lower() == "eth":
+                eth = token.amount
+    except UserToken.DoesNotExist:
+        pass
 
     result = {
-        'tokens': tokens,
+        'btc': btc,
+        'ltc': ltc,
+        'eth': eth,
     }
 
     return render(
@@ -291,20 +306,25 @@ def custom_logout(request):
 def terms(request):
     return render(request, "user_profile/terms.html", None)
 
+
 def privacy_notice(request):
     return render(request, "user_profile/privacy_notice.html", None)
+
 
 def cookies_policy(request):
     return render(request, "user_profile/cookies_policy.html", None)
 
+
 def amlkyc_policy(request):
     return render(request, "user_profile/amlkyc_policy.html", None)
+
 
 def fee(request):
     context = {
         "tokens": Token.objects.all()[:3],
     }
     return render(request, "user_profile/fee.html", context)
+
 
 def get_balance(request):
     if not request.user.is_authenticated:
