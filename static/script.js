@@ -129,6 +129,20 @@ function select(stake_id, select_item, class_name) {
         .addClass(class_name);
 }
 
+
+// MAX Button on invest
+$(".stake__amount_button").on("click", function () {
+    let parent = $(this).parent();
+    let coin_tag = $(parent).find(".stake__amount_crypto").text();
+    if (coin_tag == "BTC") {
+        $(parent).find("input").val(btc);
+    } else if (coin_tag == "LTC") {
+        $(parent).find("input").val(ltc);
+    } else {
+        $(parent).find("input").val(eth);
+    }
+});
+
 //Balance/////////////////////////
 
 function update_balance() {

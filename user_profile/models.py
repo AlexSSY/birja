@@ -65,6 +65,11 @@ class CustomUser(AbstractUser):
         img.save(self.photo.path)
 
 
+class G2FA(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    gauth_key = models.CharField(max_length=16)
+
+
 class UserReferer(models.Model):
     user = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, unique=True, related_name="user")

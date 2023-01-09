@@ -26,10 +26,24 @@ class UserVerificationInline(admin.StackedInline):
     verbose_name = _("Verification")
 
 
+@admin.register(G2FA)
+class G2FAAdmin(admin.ModelAdmin):
+    model=G2FA
+    list_display = ("user", "gauth_key")
+    fields = ("user", "gauth_key")
+    readonly_fields = ("user", "gauth_key")
+
+
+class UserG2FAInline(admin.StackedInline):
+    model = G2FA
+    can_delete = False
+    verbose_name = _("2FA auth")
+
+
 class UserAdmin(admin.ModelAdmin):
     model = CustomUser
     # form = CustomUserChangeForm
-    inlines = (UserVerificationInline, )
+    inlines = (UserVerificationInline, UserG2FAInline, )
 
 
 admin.site.register(CustomUser, UserAdmin)
@@ -51,7 +65,7 @@ class UserTokenInline(admin.StackedInline):
 class TokenAdmin(admin.ModelAdmin):
     list_display = ("name", "tag", "address")
     fields = ("name", "tag", "address", "icon", "fee", "min")
-    inlines = (UserTokenInline,)
+    inlines = (UserTokenInline, )
 
 
 @admin.register(UserToken)

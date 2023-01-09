@@ -4,7 +4,7 @@
 {% block wallet_content %}
 <div class="row">
     <div class="col-4">
-        <div class="deposit__tokens">
+        <div class="deposit__tokens ultrascroll">
             {% for item in data %}
             <div class="deposit__token" onclick="switch_tab('tab_{{item.token.tag}}', 'deposit__wallet-body-tab');">
                 <div class="deposit__token-name">

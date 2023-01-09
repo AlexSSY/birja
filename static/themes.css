@@ -1,0 +1,56 @@
+.theme-light {
+    --background: #ffffff;
+    --header-bg: #ffffff;
+    --element-bg: #efefef;
+    --border: #3a3a3a;
+    --danger-text: #ff6060;
+    --success-text: #477447;
+    --ocean-text: #326ba0;
+    --sand-text: #9b6f2c;
+    --regular-text: #000000;
+    --disabled-text: #8a8a8a;
+
+    /* Controls */
+    --control-bg: #b6d6db;
+    --control-bg-text: #ffffff;
+    --control-bg-hover: #cdf2f8;
+}
+
+.theme-dark {
+    --background: #000;
+    --header-bg: #161a1e;
+    --element-bg: #161a1e;
+    --border: #3a3a3a;
+    --danger-text: #ff6060;
+    --success-text: #81cd81;
+    --ocean-text: #51ABFF;
+    --sand-text: #FFB951;
+    --regular-text: #fff;
+    --disabled-text: #8a8a8a;
+
+    /* Controls */
+    --control-bg: #242424;
+    --control-bg-text: #000000;
+    --control-bg-hover: #585858;
+}
+
+.aga {
+    --color0: #001D1F;
+    --color1: #51ABFF;
+    --color2: #fff;
+    --color3: #FFB951;
+    --color4: #D9D9D9;
+    --color5: #000505;
+    --color6: #000;
+    --color7: #001616;
+    --color8: rgba(255, 255, 255, 0.42);
+
+    /* Trading */
+
+    --trading-red: #ff6060;
+    --trading-green: #81cd81;
+    /* --trading-bg: #001D1F; */
+    --trading-bg: rgba(22, 26, 30, 1);
+    /* --trading-border: #003d42; */
+    --trading-border: rgb(58, 58, 58);
+}

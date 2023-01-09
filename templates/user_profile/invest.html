@@ -1,6 +1,14 @@
 {% extends 'user_profile/base.html' %}
 {% load static %}
 
+{% block js_bottom %}
+<script>
+    var btc = "{{btc}}";
+    var ltc = "{{ltc}}";
+    var eth = "{{eth}}";
+</script>
+{% endblock %}
+
 {% block wallet_content %}
 <div class="invest">
     <div class="row">
