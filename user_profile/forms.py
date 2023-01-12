@@ -53,10 +53,10 @@ class UserVerifForm(forms.ModelForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
-
     class Meta:
         model = CustomUser
-        fields = ('photo', 'email')
+        fields = ('photo', 'email', )
+
 
 
 class RegisterUserForm(UserCreationForm):

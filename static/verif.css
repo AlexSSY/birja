@@ -1,5 +1,5 @@
 .verif {
-    background: rgb(0, 82, 107);
+    background: var(--element-bg);
     padding: 15px;
     border-radius: 10px;
     max-width: 640px;
@@ -10,12 +10,12 @@
 }
 
 .verif__header {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--border);
     padding: 0 0 12px 10px;
 }
 
 .verif__title {
-    color: white;
+    color: var(--regular-text);
     font-weight: 600;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .verif__label {
-    color: white;
+    color: var(--regular-text);
     margin: 0 0 10px 0;
     display: block;
 
@@ -48,26 +48,26 @@
 .verif__input {
     width: 100%;
     height: 42px;
-    background: #000;
+    background: var(--control-bg-text);
     border: none;
     border-radius: 5px;
     padding: 3px 20px;
 
     font-family: "Montserrat";
-    color: #fff;
+    color: var(--regular-text);
     font-weight: 600;
 }
 
 .verif__select {
     float: none;
-    background: #000;
+    background: var(--control-bg-text);
 
-    color: #fff;;
+    color: var(--regular-text);
 }
 
 .verif__file {
     font-family: "Montserrat";
-    color: #fff;
+    color: var(--regular-text);
     font-weight: 600;
 }
 
@@ -77,9 +77,10 @@
     border: none;
     border-radius: 5px;
     padding: 3px 20px;
+    background: var(--control-bg-text);
 
     font-family: "Montserrat";
-    color: #000000;
+    color: var(--regular-text);
     font-weight: 600;
 }
 
@@ -87,18 +88,18 @@
     display: block;
     height: 42px;
     cursor: pointer;
-    background: #4e326b;
+    background: var(--control-bg);
     border-radius: 5px;
     border: none;
     min-width: 200px;
 
     font-family: "Montserrat";
-    color: #ffffff;
+    color: var(--regular-text);
     font-weight: 600;
 }
 
 .errorlist {
-    color: #ff436c;
+    color: var(--danger-text);
     margin: 0 0 10px 0;
     font-family: "Montserrat";
     font-weight: 600;

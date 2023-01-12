@@ -3,7 +3,7 @@ const chart_DOM_element = $("#chart")[0];
 const charts = LightweightCharts;
 
 
-const chart_properties = {
+let chart_properties = {
     width: 0,
     height: 450,
     layout: {
@@ -24,8 +24,32 @@ const chart_properties = {
     },
 }
 
-const chart = charts.createChart(chart_DOM_element, chart_properties);
-const canlde_series = chart.addCandlestickSeries();
+let chart = charts.createChart(chart_DOM_element, chart_properties);
+let canlde_series = chart.addCandlestickSeries();
+
+function changeTheme(theme) {
+    if (theme === "light") {
+        chart.applyOptions(
+            {
+                layout: {
+                    backgroundColor: "#efefef",
+                    textColor: "#000",
+                }
+            }
+        );
+    } else if (theme === "dark") {
+        chart.applyOptions(
+            {
+                layout: {
+                    backgroundColor: "#161a1e",
+                    textColor: "#fff",
+                }
+            }
+        );
+    }
+}
+
+g_ThemeSwitchQueue.push(changeTheme);
 
 function numberWithSpaces(x) {
     var parts = x.toString().split(".");
@@ -62,25 +86,27 @@ function ui_update_close_price(close_price) {
 }
 
 //Get history data///////////////
-fetch("https://api.binance.com/api/v3/klines?symbol=" + g_pair + "&interval=1m&limit=1000")
-    .then(res => res.json())
-    .then(data => {
-        const cdata = data.map(d => {
-            return {
-                time: d[0] / 1000,
-                open: parseFloat(d[1]),
-                high: parseFloat(d[2]),
-                low: parseFloat(d[3]),
-                close: parseFloat(d[4]),
-            }
-        });
+function get_history_data() {
+    fetch("https://api.binance.com/api/v3/klines?symbol=" + g_pair + "&interval=1m&limit=1000")
+        .then(res => res.json())
+        .then(data => {
+            const cdata = data.map(d => {
+                return {
+                    time: d[0] / 1000,
+                    open: parseFloat(d[1]),
+                    high: parseFloat(d[2]),
+                    low: parseFloat(d[3]),
+                    close: parseFloat(d[4]),
+                }
+            });
 
-        const last_candle = cdata[cdata.length - 1];
-        ui_update_close_price(last_candle.close);
-        canlde_series.setData(cdata);
-    })
-    .catch(err => log(err));
-
+            const last_candle = cdata[cdata.length - 1];
+            ui_update_close_price(last_candle.close);
+            canlde_series.setData(cdata);
+        })
+        .catch(err => log(err));
+}
+get_history_data();
 //Stream data directly///////////
 
 ws_binance_chart = new WebSocket('wss://stream.binance.com:9443/ws/' + g_pair.toLowerCase() + '@kline_1m');
@@ -358,7 +384,7 @@ $("#history_tabs>.orders__tabs-buttons>.orders__tab-button").on("click", functio
 
 //Chat
 
-updateChat = function() {
+updateChat = function () {
     fetch("/chat")
         .then(data => data.text())
         .then(data => {

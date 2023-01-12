@@ -6,7 +6,7 @@
     height: 20px;
     border-radius: 20px;
     background: transparent;
-    border: 2px solid #fff;
+    border: 2px solid var(--regular-text);
     cursor: pointer;
     transition: just;
 }
@@ -24,7 +24,7 @@
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: #fff;
+    background: var(--regular-text);
     transition: left ease-in-out .3s;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .p2p__left {
-    background: #001d1f;
+    background: var(--element-bg);
     border-radius: 10px;
     padding: 25px;
 }
@@ -59,7 +59,7 @@
 .p2p2_2buttons-left {
     display: block;
     background: transparent;
-    border: 1px solid rgb(184, 184, 184);
+    border: 1px solid var(--border);
     border-right: none;
     border-radius: 15px 0 0 15px;
     flex: 1 1 auto;
@@ -67,18 +67,18 @@
 
     font-family: "Montserrat";
     font-size: 16px;
-    color: white;
+    color: var(--regular-text);
 }
 
 .p2p2_2buttons-left--active {
-    background: rgb(0, 73, 122);
-    border: 1px solid rgb(0, 73, 122);
+    background: var(--control-bg);
+    border: 1px solid var(--control-bg);
 }
 
 .p2p2_2buttons-right {
     display: block;
     background: transparent;
-    border: 1px solid rgb(184, 184, 184);
+    border: 1px solid var(--border);
     border-radius: 0 15px 15px 0;
     border-left: none;
     flex: 1 1 auto;
@@ -86,17 +86,18 @@
 
     font-family: "Montserrat";
     font-size: 16px;
-    color: white;
+    color: var(--regular-text);
 }
 
 .p2p2_2buttons-right--active {
-    border: 1px solid rgb(0, 73, 122);
-    background: rgb(0, 73, 122);
+    border: 1px solid var(--control-bg);
+    background: var(--control-bg);
 }
 
 .p2p__select {
     display: flex;
-    background: black;
+    background: var(--control-bg-text);
+    border: 1px solid var(--border);
     height: 38px;
     padding: 5px 20px;
     margin-bottom: 20px;
@@ -119,24 +120,25 @@
 .p2p__input {
     height: 100%;
     width: 100%;
-    background: #000;
+    background: transparent;
     border: none;
 
     font-family: "Montserrat";
-    color: #fff;
+    color: var(--regular-text);
 }
 
 .p2p__select-btn {
     display: block;
     min-width: 50px;
     position: relative;
-    background: rgb(59, 59, 59);
+    background: var(--control-bg);
     border-radius: 10px;
+    border: none;
     padding: 0 40px 0 10px;
     cursor: pointer;
 
     font-family: "Montserrat";
-    color: #fff;
+    color: var(--regular-text);
 }
 
 .p2p__select-btn::after {
@@ -149,8 +151,12 @@
     width: 12px;
     height: 12px;
     right: 10px;
-    top: 13px;
+    top: 15px;
     /* transition: all ease-in-out .3s; */
+}
+
+.theme-light .p2p__select-btn::after {
+    filter: invert(100%);
 }
 
 .p2p__select-btn--open::after {
@@ -160,7 +166,7 @@
 
 .p2p__select-items {
     position: absolute;
-    background: #000;
+    background: var(--element-bg);
     z-index: 1;
     left: 0;
     right: 1;
@@ -189,15 +195,15 @@
     display: flex;
     align-items: center;
 
-    color: #808080;
+    color: var(--disabled-text);
 }
 
 .p2p__select-item:hover {
-    background: rgb(34, 34, 34);
+    background: var(--control-bg-hover);
 }
 
 .p2p__select-item-tag {
-    color: white;
+    color: var(--regular-text);
     display: block;
     margin-right: 5px;
 }
@@ -209,7 +215,7 @@
 
 .p2p__select-text {
     font-family: "Montserrat";
-    color: white;
+    color: var(--regular-text);
     line-height: 2.7;
 }
 
@@ -224,6 +230,10 @@
     right: 16px;
     top: 18px;
     /* transition: all ease-in-out .3s; */
+}
+
+.theme-light .p2p__select-arrow {
+    filter: invert(100%);
 }
 
 .p2p__select-arrow--open {
@@ -285,7 +295,7 @@
 }
 
 .p2p__main {
-    background: #001d1f;
+    background: var(--element-bg);
     border-radius: 10px;
     padding: 25px;
 }
@@ -294,7 +304,7 @@
     display: block;
 
     font-family: "Montserrat";
-    color:#fff;
+    color: var(--regular-text);
     font-size: 14px;
 }
 
@@ -332,7 +342,7 @@
 }
 
 .p2p__td--price {
-    color: #98ffa0;
+    color: var(--success-text);
 }
 
 .p2p__td:last-child {
@@ -382,13 +392,13 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #98ffa0;
+    background: var(--success-text);
     position: absolute;
     left: -20px;
 }
 
 .p2p__td-status--offline::before {
-    background: #ff8c8c;
+    background: var(--danger-text);
 }
 
 .p2p__td--flex {
@@ -408,7 +418,7 @@
     cursor: pointer;
 
     font-family: "Montserrat";
-    color: pink;
+    color: #ff506d;
 }
 
 .p2p__tr--last {

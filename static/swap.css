@@ -8,7 +8,7 @@
 
 .swap__head {
     height: 88px;
-    background: #004074;
+    background: var(--control-bg);
 
     display: flex;
     align-items: center;
@@ -26,7 +26,7 @@
     width: 300px;
     height: 700px;
     transform: rotate(30deg);
-    background: #460074;
+    background: var(--control-bg-hover);
     position: absolute;
     z-index: 1;
     left: -110px;
@@ -38,7 +38,7 @@
 
 .swap__title-p {
     font-family: "Montserrat";
-    color: white;
+    color: var(--regular-text);
     font-size: 22px;
     font-weight: 700;
 }
@@ -50,26 +50,26 @@
 
 .swap_info-zero {
     font-family: "Montserrat";
-    color: white;
+    color: var(--regular-text);
     font-size: 14px;
 }
 
 .swap_info-price {
     font-family: "Montserrat";
-    color: white;
+    color: var(--regular-text);
     margin-left: 10px;
     font-size: 14px;
 }
 
 .swap_info-pairs {
     font-family: "Montserrat";
-    color: white;
+    color: var(--regular-text);
     margin-left: 10px;
     font-size: 14px;
 }
 
 .swap__body {
-    background: #2f053b;
+    background: var(--element-bg);
     padding: 70px 160px 0 160px;
 }
 
@@ -79,19 +79,20 @@
 
 .swap__label {
     font-family: "Montserrat";
-    color: white;
+    color: var(--regular-text);
     margin-bottom: 5px;
     display: block;
 }
 
 .swap__select {
     display: flex;
-    background: black;
+    background: var(--control-bg-text);
     height: 38px;
     padding: 5px 20px;
     margin-bottom: 20px;
     border-radius: 10px;
     position: relative;
+    border: 1px solid var(--border);
 
     font-family: "Montserrat";
     font-size: 14px;
@@ -104,24 +105,25 @@
 .swap__input {
     height: 100%;
     width: 100%;
-    background: #000;
+    background: var(--control-bg-text);
     border: none;
 
     font-family: "Montserrat";
-    color: #fff;
+    color: var(--regular-text);
 }
 
 .swap__select-btn {
     display: block;
     min-width: 50px;
     position: relative;
-    background: rgb(59, 59, 59);
+    background: var(--control-bg);
     border-radius: 10px;
     padding: 0 40px 0 10px;
     cursor: pointer;
+    border: none;
 
     font-family: "Montserrat";
-    color: #fff;
+    color: var(--regular-text);
 }
 
 .swap__select-btn::after {
@@ -134,8 +136,12 @@
     width: 12px;
     height: 12px;
     right: 10px;
-    top: 13px;
+    top: 15px;
     /* transition: all ease-in-out .3s; */
+}
+
+.theme-light .swap__select-btn::after {
+    filter: invert(100%);
 }
 
 .swap__select-btn--open::after {
@@ -145,7 +151,7 @@
 
 .swap__select-items {
     position: absolute;
-    background: #000;
+    background: var(--control-bg);
     z-index: 1;
     left: 0;
     right: 1;
@@ -157,7 +163,7 @@
     transition: all ease-in-out .1s;
 
     font-family: "Montserrat";
-    color: #fff;
+    color: var(--regular-text);
 }
 
 .swap__select-items--open {
@@ -175,34 +181,36 @@
 }
 
 .swap__select-item:hover {
-    background: rgb(34, 34, 34);
+    background: var(--control-bg-hover);
 }
 
 .swap__awailable {
     font-family: "Montserrat";
-    color: white;
+    color: var(--regular-text);
 }
 
-.swap__fullmoney {}
+.swap__fullmoney {
+    color: var(--ocean-text);
+}
 
 .swap__submit {
     display: block;
     width: 280px;
     margin: 0 auto 0 auto;
     height: 52px;
-    background: rgb(0, 59, 99);
+    background: var(--control-bg);
     border: none;
     border-radius: 10px;
     cursor: pointer;
 
     font-family: "Montserrat";
-    color: white;
+    color: var(--regular-text);
     font-size: 18px;
     font-weight: 600;
 }
 
 .swap__submit:hover {
-    background: rgb(28, 69, 97);
+    background: var(--control-bg-hover);
 }
 
 .swap__course {}

@@ -6,7 +6,7 @@
 
 .support__header {
     padding: 15px;
-    background: #001d1f;
+    background: var(--element-bg);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -15,19 +15,19 @@
 .support__title {
     font-size: 16px;
     font-weight: 600;
-    color: #fff;
+    color: var(--regular-text);
 }
 
 .support__photo {
     width: 28px;
-    border: 3px solid rgb(0, 106, 155);
+    border: 3px solid var(--ocean-text);
     border-radius: 50%;
     margin-right: 10px;
 }
 
 .support__body {
     padding: 15px;
-    background: #001d1f;
+    background: var(--element-bg);
     border-radius: 10px;
     margin: 15px 0 0 0;
 }
@@ -83,7 +83,7 @@
 .support__submit {}
 
 .support__message {
-    background: rgb(58, 139, 85);
+    background: #528563;
     padding: 20px 20px 20px 50px;
     border-radius: 5px;
 
@@ -95,7 +95,7 @@
     justify-content: space-between;
     padding: 10px 0 0 0;
 
-    color: #fff;
+    color: var(--regular-text);
 }
 
 .support__message-info--reverse {
@@ -114,7 +114,7 @@
 .support__profile-photo-container {
     width: 32px;
     height: 32px;
-    border: 3px solid rgb(0, 106, 148);
+    border: 3px solid var(--ocean-text);
     border-radius: 50%;
     margin: 0 0 0 10px;
     overflow: hidden;
@@ -126,7 +126,7 @@
 
 .support__footer {
     padding: 15px;
-    background: #001d1f;
+    background: var(--element-bg);
     border-radius: 10px;
     margin: 15px 0 0 0;
     display: flex;
@@ -134,7 +134,7 @@
 
 .support__controls {
     display: flex;
-    background: #000;
+    background: var(--control-bg-text);
     padding: 20px 20px;
     align-items: center;
     flex: 1 1 auto;
@@ -142,14 +142,14 @@
 }
 
 .support__textarea {
-    background: #000;
+    background: transparent;
     padding: 0 20px;
     border: none;
     resize: none;
     width: 100%;
 
     font-family: "Montserrat";
-    color: #fff;
+    color: var(--regular-text);
     line-height: 1.2;
 }
 
@@ -173,12 +173,12 @@
 .support__button-submit {
     width: 120px;
     height: 40px;
-    background: rgb(0, 68, 57);
+    background: var(--control-bg);
     border: none;
     border-radius: 10px;
     padding: 12px;
     cursor: pointer;
     margin: 0 0 0 40px;
 
-    color: #fff;
+    color: var(--regular-text);
 }
