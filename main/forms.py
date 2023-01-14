@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from .models import BonusModel
+from user_profile.models import BonusModel
 
 
 class CustomModelForm(forms.ModelForm):
@@ -9,7 +9,7 @@ class CustomModelForm(forms.ModelForm):
 
 class BonusActivationForm(forms.Form):
     code = forms.CharField(max_length=255, required=True, widget=forms.TextInput({
-        "class": "form-control",
+        "class": "wallet_boxes-box2-body-input",
     }))
 
 

@@ -42,9 +42,25 @@
                 <img src="{% static 'images/gift.svg' %}">
                 <div class="wallet_boxes-box2-body">
                     <p class="wallet_boxes-box2-body-text">Use bonus promo code</p>
-                    <form class="d-flex" action="{% url 'user_profile:wallet' %}">
+                    {{ form.code.errors }}
+                    {% if success %}
+                    <style>
+                        .success {
+                            margin-bottom: 5px;
+                        }
+
+                        .success li {
+                            color: var(--success-text);
+                        }
+                    </style>
+                    <ul class="success">
+                        <li>Bonus code activated!</li>
+                    </ul>
+                    {% endif %}
+                    <form class="d-flex" action="{% url 'user_profile:wallet' %}" method="post">
                         {% csrf_token %}
-                        <input class="wallet_boxes-box2-body-input" type="text" name="promo" id="promo">
+                        <!-- <input class="wallet_boxes-box2-body-input" type="text" name="promo" id="promo"> -->
+                        {{ form.code }}
                         <button class="wallet_boxes-box2-body-button">Activate</button>
                     </form>
                 </div>

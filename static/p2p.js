@@ -82,3 +82,7 @@ setup_p2p_select("select_2");
 
 $("#payment_methods").select();
 //
+
+$(".p2p__more").on("click", function () {
+    showAlert("you must deposit over 1 000 USD");
+});

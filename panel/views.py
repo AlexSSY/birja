@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 from .forms import EmailBinderForm, PromoBindingForm, MessageSendPanelForm
 from user_profile.models import UserReferer
-from main.models import BonusModel
+from user_profile.models import BonusModel
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_http_methods
 from django.db.models import Q

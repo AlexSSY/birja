@@ -20,6 +20,18 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %} ultrascroll">
+    <div class="alert-bg alert-bg--hidden"></div>
+    <div class="alert alert--hidden">
+        <div class="alert__image"></div>
+        <div class="alert__header">
+            <p class="alert__title">Title</p>
+        </div>
+        <div class="alert__close">X</div>
+        <div class="alert__message">
+            <p class="alert__text"></p>
+        </div>
+        <button class="alert__button">OK</button>
+    </div>
     <div class="wrapper">
         <div class="content">
             <header class="header {% block header_class %}{% endblock %}">
@@ -45,6 +57,7 @@
                                     </a>
                                 </div>
                                 <nav class="header__nav">
+                                    <div class="header__nav-tablet"></div>
                                     <ul class="d-flex flex-row">
                                         {% url 'main:trading' 'btc' 'usdt' as url %}
                                         <li
@@ -174,7 +187,7 @@
             <div class="footer__top d-flex align-items-center">
                 <div class="container">
                     <div class="row">
-                        <div class="col col-4">
+                        <div class="col-lg-4">
                             <div class="footer__top-logo">
                                 <svg width="132" height="47" viewBox="0 0 132 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M66.598 31V19.626H62.088V15.6H76.3V19.626H71.79V31H66.598ZM84.1605 21.32H91.0245V25.06H84.1605V21.32ZM84.5125 27.084H92.2125V31H79.4085V15.6H91.9265V19.516H84.5125V27.084ZM95.9713 31V15.6H103.385C104.823 15.6 106.062 15.8347 107.103 16.304C108.159 16.7733 108.973 17.448 109.545 18.328C110.117 19.1933 110.403 20.22 110.403 21.408C110.403 22.596 110.117 23.6227 109.545 24.488C108.973 25.3387 108.159 25.9913 107.103 26.446C106.062 26.9007 104.823 27.128 103.385 27.128H98.8533L101.163 24.994V31H95.9713ZM105.189 31L101.405 25.39H106.905L110.733 31H105.189ZM101.163 25.566L98.8533 23.212H103.055C103.774 23.212 104.302 23.0507 104.639 22.728C104.991 22.4053 105.167 21.9653 105.167 21.408C105.167 20.8507 104.991 20.4107 104.639 20.088C104.302 19.7653 103.774 19.604 103.055 19.604H98.8533L101.163 17.25V25.566ZM112.452 31L119.184 15.6H124.288L131.02 31H125.652L120.68 18.064H122.704L117.732 31H112.452ZM116.456 28.316L117.776 24.576H124.86L126.18 28.316H116.456Z" fill="currentcolor"/>
@@ -185,7 +198,7 @@
                             <p class="footer__top-offer-text">Tera trade is a simple, elegant, and secure
                                 platform to build your crypto portfolio.</p>
                         </div>
-                        <div class="col col-8">
+                        <div class="col-lg-8">
                             <div class="d-flex justify-content-end">
                                 <div class="footer__top-col">
                                     <p class="footer__top-col-title">Features</p>

@@ -20,7 +20,7 @@
                         <div class="affiliate__content-right">
                             <p class="block__title">Share your link</p>
                             <div class="affiliate__link">
-                                <input class="affiliate__input" type="text" value="http://{{ request.get_host }}{% url 'user_profile:login' %}?ref={{user.id}}"
+                                <input class="affiliate__input" type="text" value="http://{{ request.get_host }}{% url 'user_profile:register' %}?ref={{user.id}}"
                                     disabled>
                                 <button class="affiliate__button">Copy</button>
                             </div>

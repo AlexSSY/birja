@@ -2,7 +2,7 @@ from django import forms
 from django.forms import widgets
 from django.utils.translation import gettext_lazy as _
 
-from main.models import BonusModel
+from user_profile.models import BonusModel
 from user_profile.models import Token
 from support.models import SupportMessage
 

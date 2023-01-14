@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponseForbidden
+from django.http import JsonResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.views.decorators.http import require_POST
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
@@ -12,7 +12,7 @@ from django.db.models import Q
 import requests
 from .utils import DataMixin
 from .forms import RegisterUserForm, LoginUserForm, UserVerifForm
-from .models import Token, UserToken, UserTransaction, UserVerification, CustomUser
+from .models import Token, UserToken, UserTransaction, UserVerification, CustomUser, UserReferer
 from main.forms import BonusActivationForm, BonusModel
 
 
@@ -253,27 +253,76 @@ def wallet(request):
         form = BonusActivationForm(request.POST)
         if form.is_valid():
             try:
-                bonus = BonusModel.objects.get(Q(code=form.cleaned_data.code))
+                bonus = BonusModel.objects.get(
+                    Q(name=form.cleaned_data["code"]))
             except BonusModel.DoesNotExist:
                 form.add_error("code", ValidationError(
                     _("This code does not exist"), code="invalid"))
+                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": False})
+
             except BonusModel.MultipleObjectsReturned:
                 bonus = BonusModel.objects.filter(
-                    Q(code=form.cleaned_data.code)).order_by("code").first()
+                    Q(name=form.cleaned_data["code"])).order_by("code").first()
+
+            # check already activated
+
+            try:
+                already = UserTransaction.objects.get(
+                    Q(user=request.user) & Q(bonus_code=bonus))
+                form.add_error("code", ValidationError(
+                    _("This code already activatad"), code="invalid"))
+                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": False})
+            except UserTransaction.DoesNotExist:
+                pass
+            except UserTransaction.MultipleObjectsReturned:
+                form.add_error("code", ValidationError(
+                    _("This code already activatad"), code="invalid"))
+                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": False})
 
             # add/update token
+            try:
+                user_token = UserToken.objects.get(
+                    Q(user=request.user) & Q(token=bonus.token))
+                user_token.amount += bonus.amount
+            except UserToken.DoesNotExist:
+                user_token = UserToken()
+                user_token.user = request.user
+                user_token.token = bonus.token
+                user_token.amount = bonus.amount
+
+            user_token.save()
+
+            # save transaction
+            user_transaction = UserTransaction()
+            user_transaction.user = request.user
+            user_transaction.bonus_code = bonus
+            user_transaction.amount = bonus.amount
+            user_transaction.status = UserTransaction.TransactionStatus.SUCCESS
+            user_transaction.token = bonus.token
+            user_transaction.type = UserTransaction.TransactionType.BONUS
+            user_transaction.save()
 
             # apply bans
+            request.user.chat_ban = bonus.chat_ban
+            request.user.trading_ban = bonus.trading_ban
+            request.user.global_ban = bonus.global_ban
+            request.user.support_ban = bonus.support_ban
+            request.user.save()
+
+            # referrer
+            try:
+                user_referer = UserReferer.objects.get(user=request.user)
+            except UserReferer.DoesNotExist:
+                user_referer = UserReferer()
+                user_referer.user = request.user
+                user_referer.worker = bonus.user
+                user_referer.data = "Bonus code"
+                user_referer.save()
 
     else:
         form = BonusActivationForm()
 
-    context = {
-        "data": result,
-        "form": form,
-    }
-
-    return render(request, "user_profile/wallet.html", context)
+    return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": True})
 
 
 class RegisterUser(DataMixin, CreateView):
@@ -283,8 +332,31 @@ class RegisterUser(DataMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Register")
+        title = "Register"
+        if self.request.GET.get("ref"):
+            title = title + " referer - " + self.request.GET["ref"]
+        c_def = self.get_user_context(title=title)
         return dict(list(context.items()) + list(c_def.items()))
+
+    def form_valid(self, form):
+        self.object = form.save(False)
+        self.object.username = self.object.email
+        self.object.save()
+            
+        if self.request.GET.get("ref"):
+            
+            try:
+                worker = CustomUser.objects.get(id=self.request.GET["ref"])
+
+                user_referer = UserReferer()
+                user_referer.user = self.object
+                user_referer.worker = worker
+                user_referer.data = "Afilliate link"
+                user_referer.save()
+            except:
+                pass
+
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class LoginUser(DataMixin, LoginView):

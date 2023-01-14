@@ -30,6 +30,7 @@ def trading(request, symbol_source: str, symbol_dest: str):
     return render(request, "main/trading.html", context)
 
 
+@require_POST
 def bonus(request, bonus_name):
     return HttpResponse(bonus_name)
 

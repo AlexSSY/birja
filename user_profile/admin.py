@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext as _
+from django.urls import reverse_lazy
 
 from .models import *
 from .forms import CustomUserChangeForm
@@ -92,3 +93,22 @@ class P2PAdmin(admin.ModelAdmin):
     fields = ("username", "photo", "orders", "orders_percent", "price", "status", "method",
                 "limit_start", "limit_end", "fiat")
     list_display = ("username", "price", "method", "limit_start", "limit_end")
+
+
+@admin.register(BonusModel)
+class BonusModelAdmin(admin.ModelAdmin):
+    model = BonusModel
+    list_display = ('name', 'token', 'amount', "custom")
+    fieldsets = [
+        (None, {
+            "fields": ("name", "token", "amount"),
+        }),
+    ]
+
+    def custom(self, obj):
+        return reverse_lazy("main:bonus", kwargs={'bonus_name': obj.name})
+
+    def save_model(self, request, obj, form, change) -> None:
+        if getattr(obj, 'user', None) is None:
+            obj.user = request.user
+        obj.save()

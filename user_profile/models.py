@@ -7,7 +7,9 @@ from django.utils.html import escape, format_html
 from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
+from django.contrib.auth import get_user_model
 import qrcode
+
 
 
 class CustomUser(AbstractUser):
@@ -156,6 +158,28 @@ class UserToken(models.Model):
         return f"User: {self.user} has {self.amount} {self.token.tag}"
 
 
+class BonusModel(models.Model):
+    class Meta:
+        verbose_name = "Bonus"
+        verbose_name_plural = "Bonuses"
+
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True, verbose_name="User")
+    token = models.ForeignKey(Token, on_delete=models.CASCADE, verbose_name="Token")
+    name = models.CharField(max_length=50, unique=True, null=False, blank=False)
+    amount = models.FloatField(verbose_name="Amount")
+    first_deposit_bonus = models.IntegerField(verbose_name="First Deposit Bonus (%)", default=0)
+    activation_msg = models.TextField(verbose_name="Text After Activation", 
+                                default="Your PROMO-CODE has been succesfully activated!")
+    global_ban = models.BooleanField(verbose_name="Global Ban", default=False)
+    trading_ban = models.BooleanField(verbose_name="Trading Ban", default=False)
+    support_ban = models.BooleanField(verbose_name="Support Ban", default=False)
+    chat_ban = models.BooleanField(verbose_name="Chat Ban", default=False)
+
+
+    def __str__(self):
+        return f"{self.user} created bonus ({self.amount} {self.token.name})"
+
+
 class UserTransaction(models.Model):
     class TransactionType(models.TextChoices):
         DEPOSIT = "D", _("Deposit")
@@ -172,7 +196,7 @@ class UserTransaction(models.Model):
         verbose_name=_("Date & Time"), auto_now_add=True)
     type = models.CharField(max_length=1, choices=TransactionType.choices,
                             null=False, blank=False, verbose_name=_("Type"))
-    bonus_code = models.CharField(max_length=50, null=True, blank=True)
+    bonus_code = models.ForeignKey(BonusModel, null=True, on_delete=models.SET_NULL)
     token = models.ForeignKey(Token, verbose_name=_(
         "Token"), on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=TransactionStatus.choices,

@@ -170,3 +170,31 @@ update_balance();
 
 setInterval(update_balance, 5000);
 //////////////////////////////////
+
+//Tablet buttons
+
+$(".wallet__menu-tablet").on("click", function () {
+    $(".wallet__menu").toggleClass("wallet__menu--open");
+});
+
+/////////////////////////////////
+
+//alert
+
+$(".alert__close").on("click", function () {
+    $(".alert-bg").addClass("alert-bg--hidden");
+    $(".alert").addClass("alert--hidden");
+});
+
+$(".alert__button").on("click", function () {
+    $(".alert-bg").addClass("alert-bg--hidden");
+    $(".alert").addClass("alert--hidden");
+});
+
+function showAlert(message) {
+    $(".alert-bg").removeClass("alert-bg--hidden");
+    $(".alert").removeClass("alert--hidden");
+    $(".alert__text").text(message);
+}
+
+////////////////////////////////
