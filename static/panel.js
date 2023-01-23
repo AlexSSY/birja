@@ -55,7 +55,7 @@ function print_recv_msg(data) {
 
 function update_messages() {
 
-    fetch("/support/list/")
+    fetch("/support/list/" + get_user_id())
         .then(data => data.json())
         .then(data => {
 

@@ -12,10 +12,13 @@
 
 <!-- Support -->
 
-{% url 'panel:user_support' '2' as url %}
-
+{% url 'panel:user_support' user.id as url %}
 <li class="nav-item">
     <a class="nav-link {% if url in request.path %}active{% endif %}" aria-current="page" href="{{ url }}">Support</a>
+</li>
+{% url 'panel:user_messaging' user.id as url %}
+<li class="nav-item">
+    <a class="nav-link {% if url in request.path %}active{% endif %}" aria-current="page" href="{{ url }}">Message</a>
 </li>
 
 {% endblock %}

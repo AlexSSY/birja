@@ -54,6 +54,7 @@ admin.site.register(CustomUser, UserAdmin)
 class UserRefererAdmin(admin.ModelAdmin):
     model = UserReferer
     verbose_name = _("Referal")
+    list_display = ("worker", "user", "data")
 
 
 class UserTokenInline(admin.StackedInline):
@@ -112,3 +113,9 @@ class BonusModelAdmin(admin.ModelAdmin):
         if getattr(obj, 'user', None) is None:
             obj.user = request.user
         obj.save()
+
+
+@admin.register(SiteParameter)
+class SiteParameterAdmin(admin.ModelAdmin):
+    model = SiteParameter
+    list_display = ("key", "val")

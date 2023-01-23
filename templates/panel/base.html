@@ -41,33 +41,15 @@
             <li>
                 <a href="#" class="nav-link py-3 ultra-nav-link" title="" data-bs-toggle="tooltip"
                     data-bs-placement="right" data-bs-original-title="Dashboard">
-                    <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard">
-                        <use xlink:href="#speedometer2"></use>
-                    </svg>
+                    <img class="bi" width="24" height="24" role="img" aria-label="Home"
+                        src="{% static 'images/user.svg' %}" style="filter: invert(0%);">
                 </a>
             </li>
             <li>
                 <a href="#" class="nav-link py-3 ultra-nav-link" title="" data-bs-toggle="tooltip"
                     data-bs-placement="right" data-bs-original-title="Orders">
-                    <svg class="bi" width="24" height="24" role="img" aria-label="Orders">
-                        <use xlink:href="#table"></use>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link py-3 ultra-nav-link" title="" data-bs-toggle="tooltip"
-                    data-bs-placement="right" data-bs-original-title="Products">
-                    <svg class="bi" width="24" height="24" role="img" aria-label="Products">
-                        <use xlink:href="#grid"></use>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link py-3 ultra-nav-link" title="" data-bs-toggle="tooltip"
-                    data-bs-placement="right" data-bs-original-title="Customers">
-                    <svg class="bi" width="24" height="24" role="img" aria-label="Customers">
-                        <use xlink:href="#people-circle"></use>
-                    </svg>
+                    <img class="bi" width="24" height="24" role="img" aria-label="Home"
+                        src="{% static 'images/chat.svg' %}" style="filter: invert(100%);">
                 </a>
             </li>
         </ul>
@@ -109,6 +91,7 @@
     </nav>
     <div class="container panel-content ultra-shadow p-3 rounded">
         {% block main_content %}
+        <h2 class="text-center">Добро пожаловать в спаммерскую панель</h2>
         {% endblock %}
     </div>
     <script>

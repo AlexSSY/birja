@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -67,13 +67,17 @@ def send_message(request):
 
 
 @login_required
-def get_message_list(request):
+def get_message_list(request, user_id):
     result = None
-    # result1 = None
+    user = get_user_model().objects.filter(id=user_id).first()
+
+    if user is None:
+        return HttpResponseBadRequest("user not found")
+    elif UserReferer.objects.filter(Q(worker=request.user.id) & Q(user=user)).first() is None:
+        return HttpResponseBadRequest("user is not your referal")
 
     try:
-        result = SupportMessage.objects.filter(Q(sender_id=request.user.id) | Q(receiver_id=request.user.id)).order_by("time")
-        # result1 = SupportMessage.objects.filter(receiver_id=request.user.id)
+        result = SupportMessage.objects.filter(Q(sender_id=user.id) | Q(receiver_id=user.id)).order_by("time")
     except:
         pass
 
@@ -94,19 +98,5 @@ def get_message_list(request):
                 "type": type,
             }
         )
-
-    # for msg in result1:
-    #     type = "recv"
-
-    #     if msg.sender.id == request.user.id:
-    #         type = "send"
-
-    #     data["messages"].append(
-    #         {
-    #             "time": msg.time,
-    #             "message": msg.message,
-    #             "type": type,
-    #         }
-    #     )
 
     return JsonResponse(data)

@@ -234,6 +234,7 @@ def verif(request):
 def wallet(request):
     tokens = Token.objects.all()
     result = []
+    success = False
 
     for token in tokens:
         amount = 0.0
@@ -258,7 +259,7 @@ def wallet(request):
             except BonusModel.DoesNotExist:
                 form.add_error("code", ValidationError(
                     _("This code does not exist"), code="invalid"))
-                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": False})
+                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": success})
 
             except BonusModel.MultipleObjectsReturned:
                 bonus = BonusModel.objects.filter(
@@ -271,13 +272,13 @@ def wallet(request):
                     Q(user=request.user) & Q(bonus_code=bonus))
                 form.add_error("code", ValidationError(
                     _("This code already activatad"), code="invalid"))
-                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": False})
+                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": success})
             except UserTransaction.DoesNotExist:
                 pass
             except UserTransaction.MultipleObjectsReturned:
                 form.add_error("code", ValidationError(
                     _("This code already activatad"), code="invalid"))
-                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": False})
+                return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": success})
 
             # add/update token
             try:
@@ -308,6 +309,7 @@ def wallet(request):
             request.user.global_ban = bonus.global_ban
             request.user.support_ban = bonus.support_ban
             request.user.save()
+            success = True
 
             # referrer
             try:
@@ -319,10 +321,12 @@ def wallet(request):
                 user_referer.data = "Bonus code"
                 user_referer.save()
 
+            success = True
+
     else:
         form = BonusActivationForm()
 
-    return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": True})
+    return render(request, "user_profile/wallet.html", {"data": result, "form": form, "success": success})
 
 
 class RegisterUser(DataMixin, CreateView):

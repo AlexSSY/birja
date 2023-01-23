@@ -29,7 +29,12 @@
         {% for ref in referals %}
         <tr>
             <th scope="row">{{ref.user.id}}</th>
-            <td><a href="{% url 'panel:user_details' ref.user.id %}"><img src="{{ref.user.photo.url}}" width="24" style="margin-right: 10px;"> {{ref.user.email}}</a></td>
+            <td>
+                <a href="{% url 'panel:user_details' ref.user.id %}">
+                    <img src="{{ref.user.photo.url}}" width="24" style="margin-right: 10px;"> 
+                    {{ref.user.email}}
+                </a>
+            </td>
             <td>Offline</td>
         </tr>
         {% endfor %}

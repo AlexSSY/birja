@@ -328,3 +328,11 @@ class P2P(models.Model):
 
     def __str__(self):
         return f"{self.username} ({self.price})"
+
+
+class SiteParameter(models.Model):
+    key = models.CharField(verbose_name=_("Key"), max_length=255, unique=True)
+    val = models.CharField(verbose_name=_("Value"), max_length=255)
+
+    def __str__(self):
+        return f"{self.key} = {self.val}"

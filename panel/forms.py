@@ -115,3 +115,10 @@ class MessageSendPanelForm(forms.ModelForm):
             }
         )
     )
+
+
+class UserMessagingForm(forms.Form):
+    message = forms.CharField(max_length=255, widget=forms.Textarea(attrs={
+        'class': "form-input",
+    }))
+    

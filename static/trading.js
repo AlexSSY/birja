@@ -51,6 +51,17 @@ function changeTheme(theme) {
 
 g_ThemeSwitchQueue.push(changeTheme);
 
+var oldRect = null;
+
+new ResizeObserver(entries => {
+    if (entries.length === 0 || entries[0].target !== $(".orders").get(0)) { return; }
+    const newRect = entries[0].contentRect;
+    //if (oldRect && oldRect.width > newRect.width) {
+    //    chart.applyOptions({ width: newRect.width });
+    //}
+    oldRect = newRect;
+}).observe($(".orders").get(0));
+
 function numberWithSpaces(x) {
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ", ");

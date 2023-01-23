@@ -46,7 +46,7 @@
 }
 
 .verif__input {
-    width: 100%;
+    width: 93%;
     height: 42px;
     background: var(--control-bg-text);
     border: none;
@@ -72,7 +72,7 @@
 }
 
 .verif__date {
-    width: 100%;
+    width: 93%;
     height: 42px;
     border: none;
     border-radius: 5px;

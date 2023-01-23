@@ -4,7 +4,7 @@
 {% block wallet_content %}
 <div class="wallet__boxes">
     <div class="row">
-        <div class="col-6">
+        <div class="col-lg-6">
             <div class="wallet__boxes-box1">
                 <div class="wallet__boxes-box1-photo">
                     <img src="{{ user.photo.url }}" alt="" class="">
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6">
             <div class="wallet__boxes-box2 d-flex align-items-center">
                 <img src="{% static 'images/gift.svg' %}">
                 <div class="wallet_boxes-box2-body">
@@ -70,7 +70,7 @@
 </div>
 <div class="wallet__controls">
     <div class="row">
-        <div class="col-6 d-flex align-items-center">
+        <div class="col-lg-6 d-flex align-items-center">
             <div class="wallet__controls-search">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="wallet__controls-search-icon">
                     <g clip-path="url(#clip0_1_194)">
@@ -87,7 +87,7 @@
             <input class="wallet__controls-checkbox" type="checkbox" name="hide" id="hide">
             <p class="wallet__controls-text">Hide zero balances</p>
         </div>
-        <div class="col-6 d-flex justify-content-end">
+        <div class="col-lg-6 d-flex justify-content-end wallet__buttons">
             <a class="wallet__controls-button" href="{% url 'user_profile:deposit' %}">Deposit</a>
             <a class="wallet__controls-button" href="{% url 'user_profile:withdraw' %}">Withdraw</a>
             <a class="wallet__controls-button" href="{% url 'user_profile:transfer' %}">Transfer</a>

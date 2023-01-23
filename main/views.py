@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 import requests
 
-from user_profile.models import Token, P2P, Fiat
+from user_profile.models import Token, P2P, Fiat, SiteParameter
 from .forms import ChatForm
 
 
@@ -107,7 +107,15 @@ def swap(request):
 
 
 def chat(request):
-    return HttpResponse(requests.get("https://bitlewro.com/ajax/ajax_chat?a=view").content)
+    url = SiteParameter.objects.filter(key="bitlerdo_chat").first()
+    if url is None:
+        return HttpResponse(f'<p>No chat url</p>')
+    try:
+        data = requests.get(url.val).content
+    except Exception as e:
+        return HttpResponse(f"<p>{e}</p>")
+
+    return HttpResponse(data)
 
 @require_POST
 def chat_message(request):

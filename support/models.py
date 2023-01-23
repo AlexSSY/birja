@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils.html import escape, format_html
 from django.utils.translation import gettext_lazy as _
 
 
@@ -24,6 +25,10 @@ class SupportMessage(models.Model):
     message = models.TextField(
         verbose_name=_("Message")
     )
+
+    def get_receiver_tag(self):
+        return format_html('<span style="color: red;">{}</span>', escape(self.receiver))
+    get_receiver_tag.short_description = "Receiver"
 
     def __str__(self):
         return f"{self.message}"

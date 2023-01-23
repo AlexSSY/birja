@@ -37,144 +37,258 @@
             <header class="header {% block header_class %}{% endblock %}">
                 <div class="container">
                     <div class="row">
-                        <div class="header__container d-flex flex-row justify-content-between">
-                            <div class="header__col d-flex flex-row align-items-center">
-                                <div class="header__logo">
-                                    <a href="/">
-                                        <!-- <img src="{% static 'images/logo.svg' %}"> -->
-                                        <svg width="132" height="47" viewBox="0 0 132 47" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M66.598 31V19.626H62.088V15.6H76.3V19.626H71.79V31H66.598ZM84.1605 21.32H91.0245V25.06H84.1605V21.32ZM84.5125 27.084H92.2125V31H79.4085V15.6H91.9265V19.516H84.5125V27.084ZM95.9713 31V15.6H103.385C104.823 15.6 106.062 15.8347 107.103 16.304C108.159 16.7733 108.973 17.448 109.545 18.328C110.117 19.1933 110.403 20.22 110.403 21.408C110.403 22.596 110.117 23.6227 109.545 24.488C108.973 25.3387 108.159 25.9913 107.103 26.446C106.062 26.9007 104.823 27.128 103.385 27.128H98.8533L101.163 24.994V31H95.9713ZM105.189 31L101.405 25.39H106.905L110.733 31H105.189ZM101.163 25.566L98.8533 23.212H103.055C103.774 23.212 104.302 23.0507 104.639 22.728C104.991 22.4053 105.167 21.9653 105.167 21.408C105.167 20.8507 104.991 20.4107 104.639 20.088C104.302 19.7653 103.774 19.604 103.055 19.604H98.8533L101.163 17.25V25.566ZM112.452 31L119.184 15.6H124.288L131.02 31H125.652L120.68 18.064H122.704L117.732 31H112.452ZM116.456 28.316L117.776 24.576H124.86L126.18 28.316H116.456Z"
-                                                fill="currentcolor" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M36.9282 28.4132C38.6792 31.7894 37.8197 35.9311 34.8697 38.3316C31.9198 40.7321 27.6899 40.7321 24.74 38.3316C21.7901 35.9311 20.9305 31.7894 22.6815 28.4132L16.9269 22.6586C14.7302 23.2441 12.3879 22.8597 10.4936 21.6028L3.43902 28.6586L0 25.2195L7.42485 17.7947C6.0147 14.1564 7.42617 10.0311 10.7695 8.0192C14.1129 6.00732 18.4189 6.69213 20.9731 9.64194C23.5274 12.5918 23.5895 16.9514 21.1202 19.9727L26.1217 24.9742C28.4311 23.773 31.181 23.773 33.4904 24.9742L43.561 14.9025L47 18.3415L36.9282 28.4132Z"
-                                                fill="#FFC033" />
-                                            <!-- <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M14.9024 11.4634C16.8018 11.4634 18.3415 13.0031 18.3415 14.9024C18.3415 16.8017 16.8018 18.3414 14.9024 18.3414C13.0031 18.3414 11.4634 16.8017 11.4634 14.9024C11.4634 13.0031 13.0031 11.4634 14.9024 11.4634ZM29.8049 28.6585C31.7042 28.6585 33.2439 30.1982 33.2439 32.0975C33.2439 33.9968 31.7042 35.5366 29.8049 35.5366C27.9056 35.5366 26.3659 33.9968 26.3659 32.0975C26.3659 30.1982 27.9056 28.6585 29.8049 28.6585Z"
-                                                fill-opacity="0" /> -->
-                                        </svg>
-                                    </a>
+                        <div class="col-12">
+                            <div class="header__container">
+                                <div class="header__col">
+                                    <!-- Logo -->
+                                    <div class="header__logo">
+                                        <a href="/">
+                                            <!-- <img src="{% static 'images/logo.svg' %}"> -->
+                                            <svg width="132" height="47" viewBox="0 0 132 47" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M66.598 31V19.626H62.088V15.6H76.3V19.626H71.79V31H66.598ZM84.1605 21.32H91.0245V25.06H84.1605V21.32ZM84.5125 27.084H92.2125V31H79.4085V15.6H91.9265V19.516H84.5125V27.084ZM95.9713 31V15.6H103.385C104.823 15.6 106.062 15.8347 107.103 16.304C108.159 16.7733 108.973 17.448 109.545 18.328C110.117 19.1933 110.403 20.22 110.403 21.408C110.403 22.596 110.117 23.6227 109.545 24.488C108.973 25.3387 108.159 25.9913 107.103 26.446C106.062 26.9007 104.823 27.128 103.385 27.128H98.8533L101.163 24.994V31H95.9713ZM105.189 31L101.405 25.39H106.905L110.733 31H105.189ZM101.163 25.566L98.8533 23.212H103.055C103.774 23.212 104.302 23.0507 104.639 22.728C104.991 22.4053 105.167 21.9653 105.167 21.408C105.167 20.8507 104.991 20.4107 104.639 20.088C104.302 19.7653 103.774 19.604 103.055 19.604H98.8533L101.163 17.25V25.566ZM112.452 31L119.184 15.6H124.288L131.02 31H125.652L120.68 18.064H122.704L117.732 31H112.452ZM116.456 28.316L117.776 24.576H124.86L126.18 28.316H116.456Z"
+                                                    fill="currentcolor" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M36.9282 28.4132C38.6792 31.7894 37.8197 35.9311 34.8697 38.3316C31.9198 40.7321 27.6899 40.7321 24.74 38.3316C21.7901 35.9311 20.9305 31.7894 22.6815 28.4132L16.9269 22.6586C14.7302 23.2441 12.3879 22.8597 10.4936 21.6028L3.43902 28.6586L0 25.2195L7.42485 17.7947C6.0147 14.1564 7.42617 10.0311 10.7695 8.0192C14.1129 6.00732 18.4189 6.69213 20.9731 9.64194C23.5274 12.5918 23.5895 16.9514 21.1202 19.9727L26.1217 24.9742C28.4311 23.773 31.181 23.773 33.4904 24.9742L43.561 14.9025L47 18.3415L36.9282 28.4132Z"
+                                                    fill="#FFC033" />
+                                                <!-- <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M14.9024 11.4634C16.8018 11.4634 18.3415 13.0031 18.3415 14.9024C18.3415 16.8017 16.8018 18.3414 14.9024 18.3414C13.0031 18.3414 11.4634 16.8017 11.4634 14.9024C11.4634 13.0031 13.0031 11.4634 14.9024 11.4634ZM29.8049 28.6585C31.7042 28.6585 33.2439 30.1982 33.2439 32.0975C33.2439 33.9968 31.7042 35.5366 29.8049 35.5366C27.9056 35.5366 26.3659 33.9968 26.3659 32.0975C26.3659 30.1982 27.9056 28.6585 29.8049 28.6585Z"
+                                                    fill-opacity="0" /> -->
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <!-- End Logo -->
+                                    <!-- Nav -->
+                                    <nav class="header__nav">
+                                        <ul class="">
+                                            {% url 'main:trading' 'btc' 'usdt' as url %}
+                                            <li
+                                                class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                <a href="{{url}}">Trading</a>
+                                            </li>
+                                            {% url 'main:market_tools' as url %}
+                                            <li
+                                                class="header__nav-item {% if url in request.path %}active-nav-item{% endif %} header__nav-item--mark">
+                                                <!-- <a href="{{url}}">Market tools</a> -->
+                                                Market tools
+                                                <ul class="header__nav-sub-menu">
+                                                    {% url 'main:market_cap' as url %}
+                                                    <li
+                                                        class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                        <a href="{{url}}">Crypto market cap</a>
+                                                    </li>
+                                                    {% url 'main:market_screener' as url %}
+                                                    <li
+                                                        class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                        <a href="{{url}}">Market screener</a>
+                                                    </li>
+                                                    {% url 'main:market_tech' as url %}
+                                                    <li
+                                                        class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                        <a href="{{url}}">Technical analysis</a>
+                                                    </li>
+                                                    {% url 'main:market_cross' as url %}
+                                                    <li
+                                                        class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                        <a href="{{url}}">Cross rates</a>
+                                                    </li>
+                                                    {% url 'main:market_heat' as url %}
+                                                    <li
+                                                        class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                        <a href="{{url}}">Currency heat map</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            {% url 'user_profile:invest' as url %}
+                                            <li
+                                                class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                <a href="{{ url }}">Invest</a>
+                                            </li>
+                                            {% url 'main:p2p' as url %}
+                                            <li
+                                                class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                <a href="{{ url }}">P2P</a>
+                                            </li>
+                                            {% url 'main:swap' as url %}
+                                            <li
+                                                class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                <a href="{{url}}">Swap</a>
+                                            </li>
+                                            {% url 'support:lobby' as url %}
+                                            <li
+                                                class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                <a href="{{url}}">Support</a>
+                                            </li>
+                                            {% url 'user_profile:wallet' as url %}
+                                            <li
+                                                class="header__nav-item text-yellow {% if request.path == url %}active-nav-item{% endif %}">
+                                                <a class="d-flex align-items-center text-yellow" id="wallet_top"
+                                                    href="{{url}}">
+                                                    <img class="header__nav-item-wallet"
+                                                        src="{% static 'images/wallet.svg' %}">{{amount}}&nbsp;USD
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <!-- End Nav -->
                                 </div>
-                                <nav class="header__nav">
-                                    <div class="header__nav-tablet"></div>
-                                    <ul class="d-flex flex-row">
-                                        {% url 'main:trading' 'btc' 'usdt' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a href="{{url}}">Trading</a>
-                                        </li>
-                                        {% url 'main:market_tools' as url %}
-                                        <li
-                                            class="header__nav-item {% if url in request.path %}active-nav-item{% endif %} header__nav-item--mark">
-                                            <!-- <a href="{{url}}">Market tools</a> -->
-                                            Market tools
-                                            <ul class="header__nav-sub-menu">
-                                                {% url 'main:market_cap' as url %}
-                                                <li
-                                                    class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
-                                                    <a href="{{url}}">Crypto market cap</a>
-                                                </li>
-                                                {% url 'main:market_screener' as url %}
-                                                <li
-                                                    class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
-                                                    <a href="{{url}}">Market screener</a>
-                                                </li>
-                                                {% url 'main:market_tech' as url %}
-                                                <li
-                                                    class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
-                                                    <a href="{{url}}">Technical analysis</a>
-                                                </li>
-                                                {% url 'main:market_cross' as url %}
-                                                <li
-                                                    class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
-                                                    <a href="{{url}}">Cross rates</a>
-                                                </li>
-                                                {% url 'main:market_heat' as url %}
-                                                <li
-                                                    class="header__nav-sub-item {% if request.path == url %}active-nav-item{% endif %}">
-                                                    <a href="{{url}}">Currency heat map</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        {% url 'user_profile:invest' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a href="{{ url }}">Invest</a>
-                                        </li>
-                                        {% url 'main:p2p' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a href="{{ url }}">P2P</a>
-                                        </li>
-                                        {% url 'main:swap' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a href="{{url}}">Swap</a>
-                                        </li>
-                                        {% url 'support:lobby' as url %}
-                                        <li
-                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a href="{{url}}">Support</a>
-                                        </li>
-                                        {% url 'user_profile:wallet' as url %}
-                                        <li
-                                            class="header__nav-item text-yellow {% if request.path == url %}active-nav-item{% endif %}">
-                                            <a class="d-flex align-items-center text-yellow" id="wallet_top"
-                                                href="{{url}}">
-                                                <img class="header__nav-item-wallet"
-                                                    src="{% static 'images/wallet.svg' %}">{{amount}}&nbsp;USD
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="header__col d-flex align-items-center">
-                                <!--div class="header__locale">
-                                    <a class="header__locale-active" href="#">EN</a>
-                                    <span class="header__locale-backslash">/</span>
-                                    <a href="#">RU</a>
-                                </div-->
-                                <div class="header__profile d-flex align-items-center">
-                                    <div class="theme-switcher">
-                                        <div class="theme-switcher__button theme-switcher__button--sun"></div>
-                                    </div>
-                                    {% if user.is_authenticated %}
-                                    <a href="{% url 'user_profile:settings' %}"
-                                        style="font-size:13px;display: block;margin-right: 10px;text-decoration: underline;">{{ user.email }}</a>
-                                    <a id="profile_link" class="d-flex align-items-center" href="#">
-                                        <div
-                                            class="header__profile-photo d-flex align-items-center justify-content-center">
-                                            <img src="{{ user.photo.url }}">
+                                <div class="header__col">
+                                    <div class="header__profile">
+                                        <div class="theme-switcher">
+                                            <div class="theme-switcher__button theme-switcher__button--sun"></div>
                                         </div>
-                                        <div class="header__profile-arrow">
-                                            <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7 11L0.937822 0.5L13.0622 0.5L7 11Z" fill="currentcolor"/>
-                                            </svg>                                                
+                                        <div class="header__nav-tablet"></div>
+                                        <div class="header__profile-expanded hidden">
+                                            <div class="header__top">
+                                                {% if user.is_authenticated %}
+                                                <img class="header__profile-expanded-img" src="{{ user.photo.url }}">
+                                                <div class="header__top-info">
+                                                    <p class="header__top-p">{{ user.username }}</p>
+                                                    <p class="header__top-p">{{ user.email }}</p>
+                                                </div>
+                                                {% else %}
+                                                <p style="text-align: center; font-weight: 600;">Tera Trade</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="header__middle">
+                                                <nav class="header__nav-exp">
+                                                    <ul class="header__ul">
+                                                        {% url 'main:trading' 'btc' 'usdt' as url %}
+                                                        <li
+                                                            class="header__ul-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                            <a href="{{url}}">Trading</a>
+                                                        </li>
+                                                        {% url 'main:market_tools' as url %}
+                                                        <li
+                                                            class="header__ul-item {% if url in request.path %}active-nav-item{% endif %} header__ul-item--mark">
+                                                            <!-- <a href="{{url}}">Market tools</a> -->
+                                                            Market tools
+                                                            <ul class="header__ul-sub-menu">
+                                                                {% url 'main:market_cap' as url %}
+                                                                <li
+                                                                    class="header__ul-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                                    <a href="{{url}}">Crypto market cap</a>
+                                                                </li>
+                                                                {% url 'main:market_screener' as url %}
+                                                                <li
+                                                                    class="header__ul-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                                    <a href="{{url}}">Market screener</a>
+                                                                </li>
+                                                                {% url 'main:market_tech' as url %}
+                                                                <li
+                                                                    class="header__ul-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                                    <a href="{{url}}">Technical analysis</a>
+                                                                </li>
+                                                                {% url 'main:market_cross' as url %}
+                                                                <li
+                                                                    class="header__ul-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                                    <a href="{{url}}">Cross rates</a>
+                                                                </li>
+                                                                {% url 'main:market_heat' as url %}
+                                                                <li
+                                                                    class="header__ul-sub-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                                    <a href="{{url}}">Currency heat map</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        {% url 'user_profile:invest' as url %}
+                                                        <li
+                                                            class="header__ul-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                            <a href="{{ url }}">Invest</a>
+                                                        </li>
+                                                        {% url 'main:p2p' as url %}
+                                                        <li
+                                                            class="header__ul-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                            <a href="{{ url }}">P2P</a>
+                                                        </li>
+                                                        {% url 'main:swap' as url %}
+                                                        <li
+                                                            class="header__ul-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                            <a href="{{url}}">Swap</a>
+                                                        </li>
+                                                        {% url 'support:lobby' as url %}
+                                                        <li
+                                                            class="header__ul-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                            <a href="{{url}}">Support</a>
+                                                        </li>
+                                                        {% url 'user_profile:wallet' as url %}
+                                                        <li
+                                                            class="header__ul-item text-yellow {% if request.path == url %}active-nav-item{% endif %}">
+                                                            <a class="d-flex align-items-center text-yellow" id="wallet_middle"
+                                                                href="{{url}}">
+                                                                <img class="header__nav-item-wallet"
+                                                                    src="{% static 'images/wallet.svg' %}">{{amount}}&nbsp;USD
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="header__bot">
+                                                {% if user.is_authenticated %}
+                                                {% if perms.panel.can_acces_panel %}
+                                                <a class="header__profile-expanded-link" href="{% url 'panel:index' %}"
+                                                    style="color: #c55769; text-decoration: underline;">Panel</a>
+                                                {% endif %}
+                                                {% if user.is_superuser %}
+                                                <a class="header__profile-expanded-link"
+                                                    href="{% url 'admin:index' %}">Admin panel</a>
+                                                {% endif %}
+                                                <a class="header__profile-expanded-link"
+                                                    href="{% url 'user_profile:logout' %}"
+                                                    style="color: var(--danger-text);">
+                                                    <svg class="header__profile-expanded-svg" style="margin-left: -3px;" fill="currentcolor" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M12 21c4.411 0 8-3.589 8-8 0-3.35-2.072-6.221-5-7.411v2.223A6 6 0 0 1 18 13c0 3.309-2.691 6-6 6s-6-2.691-6-6a5.999 5.999 0 0 1 3-5.188V5.589C6.072 6.779 4 9.65 4 13c0 4.411 3.589 8 8 8z"/>
+                                                        <path d="M11 2h2v10h-2z"/>
+                                                    </svg>
+                                                    Log out
+                                                </a>
+                                                {% else %}
+                                                <a class="header__profile-expanded-link" href="{% url 'user_profile:login' %}">
+                                                    <svg class="header__profile-expanded-svg" width="800px" height="800px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentcolor" class="bi bi-key-fill">
+                                                        <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                      </svg>
+                                                    Login
+                                                </a>
+                                                <a class="header__profile-expanded-link"
+                                                    href="{% url 'user_profile:register' %}">
+                                                    <svg class="header__profile-expanded-svg" fill="currentcolor" xmlns="http://www.w3.org/2000/svg" 
+                                                        width="800px" height="800px" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
+                                                    <path d="M45.5,17l-3.4,3.5c-0.6,0.6-0.9,1.3-0.9,2.1V40c0,0.8-0.7,1.5-1.5,1.5h-27c-0.8,0-1.5-0.7-1.5-1.5V13
+                                                        c0-0.8,0.7-1.5,1.5-1.5h17.5c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H9.2c-2.2,0-4,1.8-4,4v34c0,2.2,1.8,4,4,4h34
+                                                        c2.2,0,4-1.8,4-4V17.7C47.2,16.8,46.1,16.4,45.5,17z"/>
+                                                    <path d="M18.9,30.7l3.7,3.7c0.2,0.2,0.4,0.2,0.6,0l19.4-19.9c0.2-0.2,0.2-0.4,0-0.6L39,10.3c-0.2-0.2-0.4-0.2-0.6,0
+                                                        L18.9,30.1C18.7,30.3,18.7,30.5,18.9,30.7z"/>
+                                                    <path d="M40.1,8.6c-0.2,0.2-0.2,0.4,0,0.6l3.6,3.6c0.2,0.2,0.4,0.2,0.6,0l2.5-2.5c0.7-0.6,0.7-1.6,0-2.3l-1.8-1.8
+                                                        c-0.7-0.7-1.7-0.7-2.4,0C42.5,6.2,40.1,8.6,40.1,8.6z"/>
+                                                    <path d="M15.6,36.9c-0.1,0.4,0.3,0.8,0.7,0.7c0.6-0.2,1.3-0.3,1.9-0.5c0.5-0.1,1-0.2,1.5-0.4c0.5-0.1,1-0.2,1.4-0.4
+                                                        c0.2-0.1,0.6-0.5,0.3-0.8c0,0-3.8-3.8-3.8-3.8c-0.3-0.3-0.6,0-0.7,0.2c-0.3,0.4-0.4,1-0.5,1.4c-0.1,0.5-0.3,1-0.4,1.5
+                                                        C15.9,35.7,15.8,36.3,15.6,36.9z"/>
+                                                    </svg>
+                                                    Register
+                                                </a>
+                                                {% endif %}
+                                            </div>
                                         </div>
-                                    </a>
-                                    <div class="header__profile-expanded hidden">
-                                        <a class="header__profile-expanded-link"
-                                            href="{% url 'user_profile:settings' %}">
-                                            <img class="header__profile-expanded-img" src="{{ user.photo.url }}">
+                                        {% if user.is_authenticated %}
+                                        <a id="profile_link" class="" href="#">
+                                            <div
+                                                class="header__profile-photo d-flex align-items-center justify-content-center">
+                                                <img src="{{ user.photo.url }}">
+                                            </div>
+                                            <div class="header__profile-arrow">
+                                                <svg width="14" height="11" viewBox="0 0 14 11" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 11L0.937822 0.5L13.0622 0.5L7 11Z" fill="currentcolor" />
+                                                </svg>
+                                            </div>
                                         </a>
-                                        <a class="text-yellow header__profile-expanded-link"
-                                            href="{% url 'user_profile:wallet' %}">
-                                            <img class="header__nav-item-wallet" src="{% static 'images/wallet.svg' %}">
-                                            wallet&nbsp;
-                                        </a>
-                                        {% if perms.panel.can_acces_panel %}
-                                        <a class="header__profile-expanded-link" href="{% url 'panel:index' %}"
-                                            style="color: pink; text-decoration: underline;">Panel</a>
+                                        {% else %}
+                                        <a class="header__profile-login" href="{% url 'user_profile:login' %}">Login</a>
+                                        <a class="header__profile-register"
+                                            href="{% url 'user_profile:register' %}">Register</a>
                                         {% endif %}
-                                        <a class="header__profile-expanded-link"
-                                            href="{% url 'user_profile:logout' %}">Log out</a>
                                     </div>
-                                    {% else %}
-                                    <a class="header__profile-login" href="{% url 'user_profile:login' %}">Login</a>
-                                    <a class="header__profile-register"
-                                        href="{% url 'user_profile:register' %}">Register</a>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -189,11 +303,18 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="footer__top-logo">
-                                <svg width="132" height="47" viewBox="0 0 132 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M66.598 31V19.626H62.088V15.6H76.3V19.626H71.79V31H66.598ZM84.1605 21.32H91.0245V25.06H84.1605V21.32ZM84.5125 27.084H92.2125V31H79.4085V15.6H91.9265V19.516H84.5125V27.084ZM95.9713 31V15.6H103.385C104.823 15.6 106.062 15.8347 107.103 16.304C108.159 16.7733 108.973 17.448 109.545 18.328C110.117 19.1933 110.403 20.22 110.403 21.408C110.403 22.596 110.117 23.6227 109.545 24.488C108.973 25.3387 108.159 25.9913 107.103 26.446C106.062 26.9007 104.823 27.128 103.385 27.128H98.8533L101.163 24.994V31H95.9713ZM105.189 31L101.405 25.39H106.905L110.733 31H105.189ZM101.163 25.566L98.8533 23.212H103.055C103.774 23.212 104.302 23.0507 104.639 22.728C104.991 22.4053 105.167 21.9653 105.167 21.408C105.167 20.8507 104.991 20.4107 104.639 20.088C104.302 19.7653 103.774 19.604 103.055 19.604H98.8533L101.163 17.25V25.566ZM112.452 31L119.184 15.6H124.288L131.02 31H125.652L120.68 18.064H122.704L117.732 31H112.452ZM116.456 28.316L117.776 24.576H124.86L126.18 28.316H116.456Z" fill="currentcolor"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M36.9282 28.4132C38.6792 31.7894 37.8197 35.9311 34.8697 38.3316C31.9198 40.7321 27.6899 40.7321 24.74 38.3316C21.7901 35.9311 20.9305 31.7894 22.6815 28.4132L16.9269 22.6586C14.7302 23.2441 12.3879 22.8597 10.4936 21.6028L3.43902 28.6586L0 25.2195L7.42485 17.7947C6.0147 14.1564 7.42617 10.0311 10.7695 8.0192C14.1129 6.00732 18.4189 6.69213 20.9731 9.64194C23.5274 12.5918 23.5895 16.9514 21.1202 19.9727L26.1217 24.9742C28.4311 23.773 31.181 23.773 33.4904 24.9742L43.561 14.9025L47 18.3415L36.9282 28.4132Z" fill="currentcolor"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.9024 11.4634C16.8018 11.4634 18.3415 13.0031 18.3415 14.9024C18.3415 16.8017 16.8018 18.3414 14.9024 18.3414C13.0031 18.3414 11.4634 16.8017 11.4634 14.9024C11.4634 13.0031 13.0031 11.4634 14.9024 11.4634ZM29.8049 28.6585C31.7042 28.6585 33.2439 30.1982 33.2439 32.0975C33.2439 33.9968 31.7042 35.5366 29.8049 35.5366C27.9056 35.5366 26.3659 33.9968 26.3659 32.0975C26.3659 30.1982 27.9056 28.6585 29.8049 28.6585Z" fill="transparent"/>
-                                </svg>                                    
+                                <svg width="132" height="47" viewBox="0 0 132 47" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M66.598 31V19.626H62.088V15.6H76.3V19.626H71.79V31H66.598ZM84.1605 21.32H91.0245V25.06H84.1605V21.32ZM84.5125 27.084H92.2125V31H79.4085V15.6H91.9265V19.516H84.5125V27.084ZM95.9713 31V15.6H103.385C104.823 15.6 106.062 15.8347 107.103 16.304C108.159 16.7733 108.973 17.448 109.545 18.328C110.117 19.1933 110.403 20.22 110.403 21.408C110.403 22.596 110.117 23.6227 109.545 24.488C108.973 25.3387 108.159 25.9913 107.103 26.446C106.062 26.9007 104.823 27.128 103.385 27.128H98.8533L101.163 24.994V31H95.9713ZM105.189 31L101.405 25.39H106.905L110.733 31H105.189ZM101.163 25.566L98.8533 23.212H103.055C103.774 23.212 104.302 23.0507 104.639 22.728C104.991 22.4053 105.167 21.9653 105.167 21.408C105.167 20.8507 104.991 20.4107 104.639 20.088C104.302 19.7653 103.774 19.604 103.055 19.604H98.8533L101.163 17.25V25.566ZM112.452 31L119.184 15.6H124.288L131.02 31H125.652L120.68 18.064H122.704L117.732 31H112.452ZM116.456 28.316L117.776 24.576H124.86L126.18 28.316H116.456Z"
+                                        fill="currentcolor" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M36.9282 28.4132C38.6792 31.7894 37.8197 35.9311 34.8697 38.3316C31.9198 40.7321 27.6899 40.7321 24.74 38.3316C21.7901 35.9311 20.9305 31.7894 22.6815 28.4132L16.9269 22.6586C14.7302 23.2441 12.3879 22.8597 10.4936 21.6028L3.43902 28.6586L0 25.2195L7.42485 17.7947C6.0147 14.1564 7.42617 10.0311 10.7695 8.0192C14.1129 6.00732 18.4189 6.69213 20.9731 9.64194C23.5274 12.5918 23.5895 16.9514 21.1202 19.9727L26.1217 24.9742C28.4311 23.773 31.181 23.773 33.4904 24.9742L43.561 14.9025L47 18.3415L36.9282 28.4132Z"
+                                        fill="currentcolor" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M14.9024 11.4634C16.8018 11.4634 18.3415 13.0031 18.3415 14.9024C18.3415 16.8017 16.8018 18.3414 14.9024 18.3414C13.0031 18.3414 11.4634 16.8017 11.4634 14.9024C11.4634 13.0031 13.0031 11.4634 14.9024 11.4634ZM29.8049 28.6585C31.7042 28.6585 33.2439 30.1982 33.2439 32.0975C33.2439 33.9968 31.7042 35.5366 29.8049 35.5366C27.9056 35.5366 26.3659 33.9968 26.3659 32.0975C26.3659 30.1982 27.9056 28.6585 29.8049 28.6585Z"
+                                        fill="transparent" />
+                                </svg>
                             </div>
                             <p class="footer__top-offer-text">Tera trade is a simple, elegant, and secure
                                 platform to build your crypto portfolio.</p>

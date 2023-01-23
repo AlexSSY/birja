@@ -194,7 +194,15 @@ body--trading
                                         <input type="checkbox" name="fok" id="fok">
                                         <input type="checkbox" name="ioc" id="ioc">
                                     </div>
-                                    <button class="orders__buy-btn">Buy</button>
+                                    {% if user.is_authenticated %}
+                                    <button class="orders__buy-btn">Sell</button>
+                                    {% else %}
+                                    <div class="orders__auth">
+                                        <a href="{% url 'user_profile:login' %}">Log In</a>
+                                        or
+                                        <a href="{% url 'user_profile:register' %}">Register Now</a>
+                                    </div>
+                                    {% endif %}
                                 </div>
                                 <!-- Sell -->
                                 <div class="orders__buy">
@@ -255,7 +263,15 @@ body--trading
                                         <input type="checkbox" name="fok" id="fok">
                                         <input type="checkbox" name="ioc" id="ioc">
                                     </div>
+                                    {% if user.is_authenticated %}
                                     <button class="orders__sell-btn">Sell</button>
+                                    {% else %}
+                                    <div class="orders__auth">
+                                        <a href="{% url 'user_profile:login' %}">Log In</a>
+                                        or
+                                        <a href="{% url 'user_profile:register' %}">Register Now</a>
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -309,7 +325,15 @@ body--trading
                                         <button class="orders__percents">75%</button>
                                         <button class="orders__percents">100%</button>
                                     </div>
-                                    <button class="orders__buy-btn">Buy</button>
+                                    {% if user.is_authenticated %}
+                                    <button class="orders__buy-btn">Sell</button>
+                                    {% else %}
+                                    <div class="orders__auth">
+                                        <a href="{% url 'user_profile:login' %}">Log In</a>
+                                        or
+                                        <a href="{% url 'user_profile:register' %}">Register Now</a>
+                                    </div>
+                                    {% endif %}
                                 </div>
                                 <!-- Sell -->
                                 <div class="orders__buy">
@@ -359,7 +383,15 @@ body--trading
                                         <button class="orders__percents">75%</button>
                                         <button class="orders__percents">100%</button>
                                     </div>
+                                    {% if user.is_authenticated %}
                                     <button class="orders__sell-btn">Sell</button>
+                                    {% else %}
+                                    <div class="orders__auth">
+                                        <a href="{% url 'user_profile:login' %}">Log In</a>
+                                        or
+                                        <a href="{% url 'user_profile:register' %}">Register Now</a>
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -420,7 +452,15 @@ body--trading
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="orders__buy-btn">Buy</button>
+                                    {% if user.is_authenticated %}
+                                    <button class="orders__buy-btn">Sell</button>
+                                    {% else %}
+                                    <div class="orders__auth">
+                                        <a href="{% url 'user_profile:login' %}">Log In</a>
+                                        or
+                                        <a href="{% url 'user_profile:register' %}">Register Now</a>
+                                    </div>
+                                    {% endif %}
                                 </div>
                                 <!-- Sell -->
                                 <div class="orders__buy">
@@ -477,7 +517,15 @@ body--trading
                                             </div>
                                         </div>
                                     </div>
+                                    {% if user.is_authenticated %}
                                     <button class="orders__sell-btn">Sell</button>
+                                    {% else %}
+                                    <div class="orders__auth">
+                                        <a href="{% url 'user_profile:login' %}">Log In</a>
+                                        or
+                                        <a href="{% url 'user_profile:register' %}">Register Now</a>
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

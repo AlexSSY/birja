@@ -141,6 +141,24 @@ def user_detail(request, user_id):
     return render(request, "panel/user_details.html", context)
 
 
+@login_required(login_url="/accounts/login/")
+@permission_required("can_acces_panel")
+def user_messaging(request, user_id):
+    user = get_user_model().objects.get(id=user_id)
+
+    try:
+        referal = UserReferer.objects.get(user=user)
+        if referal.worker != request.user:
+            return redirect(reverse_lazy("panel:user"))
+    except:
+        return redirect(reverse_lazy("panel:user"))
+
+    context = {
+        "user": user,
+    }
+
+    return render(request, "panel/user_messaging.html", context)
+
 @login_required(login_url='/accounts/login/')
 @permission_required("can_acces_panel")
 def user_support(request, user_id):

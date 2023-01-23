@@ -111,6 +111,10 @@ body {
 	line-height: 1;
 }
 
+.container {
+	box-sizing: border-box;
+}
+
 ol,
 ul {
 	list-style: none;
@@ -190,8 +194,13 @@ body {
 .header {
 	background: var(--header-bg);
 	height: 72px;
-	width: 100vw;
 	color: var(--regular-text);
+}
+
+@media (max-width: 576px) {
+	.header {
+		/* padding: 0 18px 0 0; */
+	}
 }
 
 .header--trading {
@@ -205,9 +214,14 @@ body {
 
 .header__container {
 	height: 72px;
+	display: flex;
+	justify-content: space-between;
 }
 
-.header__col {}
+.header__col {
+	display: flex;
+	align-items: center;
+}
 
 .header__logo {
 	margin-right: 47px;
@@ -217,8 +231,13 @@ body {
 	font-family: 'Montserrat';
 	font-style: normal;
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 20px;
+}
+
+.header__nav>ul {
+	display: flex;
+	flex-direction: row;
 }
 
 .header__nav-tablet {
@@ -229,6 +248,11 @@ body {
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
+	flex: 0 0 auto;
+}
+
+.theme-light .header__nav-tablet {
+	filter: none;
 }
 
 .header__nav-item {
@@ -316,7 +340,11 @@ body {
 
 @media (max-width: 992px) {
 	.header__nav ul {
-		display: none !important;
+		display: none;
+	}
+
+	.header__nav--show {
+		display: block !important;
 	}
 
 	.header__nav-tablet {
@@ -355,8 +383,10 @@ body {
 	font-family: 'Montserrat';
 	font-style: normal;
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 20px;
+	display: flex;
+	align-items: center;
 }
 
 .header__profile-photo {
@@ -376,7 +406,9 @@ body {
 	color: var(--regular-text);
 }
 
-.header__profile-login {}
+.header__profile-login {
+	text-decoration: underline !important;
+}
 
 .header__profile-register {
 	width: 97px;
@@ -388,13 +420,22 @@ body {
 	align-items: center;
 	justify-content: center;
 	margin-left: 14px;
-
-	background: #00687E;
 	border-radius: 10px;
+	border: 1px solid #006075;
+}
+
+@media (max-width: 992px) {
+	.header__profile-login {
+		display: none;
+	}
+
+	.header__profile-register {
+		display: none;
+	}
 }
 
 .header__profile-register:hover {
-	background: #0091B1;
+	border: 1px solid #0091B1;
 }
 
 .footer {
@@ -643,6 +684,12 @@ body {
 	border-radius: 15px;
 }
 
+@media (max-width: 992px) {
+	.wallet__boxes-box2 {
+		margin-top: 52px;
+	}
+}
+
 .wallet__boxes-box2 img {
 	margin-left: 39px;
 }
@@ -668,7 +715,7 @@ body {
 	height: 19px;
 	background: var(--control-bg-text);
 	border-radius: 5px;
-	border: none;
+	border: 1px solid var(--border);
 	padding: 10px;
 
 	font-family: 'Montserrat';
@@ -776,10 +823,13 @@ body {
 	display: flex;
 	background: url("./images/sign-form.jpg");
 	overflow: hidden;
+	padding: 0;
 }
 
 .theme-light .sign__form {
-	background: url("./images/sign-form-light.jpg");
+	/* background: url("./images/sign-form-light.jpg"); */
+	background: none;
+	background-color: var(--control-bg);
 }
 
 .sign__form-left {
@@ -788,8 +838,23 @@ body {
 	background: var(--element-bg);
 }
 
+.theme-light .sign__form {
+	border: 2px solid var(--control-bg);
+}
+
 .sign__form-left-body {
 	padding: 73px 48px 0 42px;
+}
+
+@media (max-width: 768px) {
+	.sign__form {
+		background: none;
+		width: 100%;
+	}
+
+	.sign__form-left {
+		width: 100%;
+	}
 }
 
 .form-label {
@@ -807,7 +872,7 @@ body {
 	display: block;
 	height: 39px;
 	width: 100%;
-	border: none;
+	border: 1px solid var(--border);
 	padding: 5px 20px;
 
 	background: var(--control-bg-text);
@@ -885,6 +950,12 @@ body {
 	margin-top: 52px;
 }
 
+@media (max-width: 992px) {
+	.wallet__buttons {
+		margin-top: 52px;
+	}
+}
+
 .wallet__tokens table {
 	width: 100%;
 	display: block;
@@ -901,7 +972,7 @@ body {
 	font-family: 'Montserrat';
 	font-style: normal;
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 17px;
 	color: var(--regular-text);
 }
@@ -1088,6 +1159,16 @@ body {
 	color: (--disabled-text);
 }
 
+@media (max-width: 768px) {
+	.deposit__wallet {
+		height: 700px;
+	}
+
+	.deposit__wallet-body-middle {
+		flex-direction: column;
+	}
+}
+
 .deposit__wallet-body-middle ul {
 	list-style-type: disc;
 }
@@ -1124,8 +1205,7 @@ body {
 }
 
 .deposit__wallet-body-bottom-conainer p {
-	display: block;
-	width: 100%;
+	display: inline-block;
 	margin-right: 15px;
 	background: transparent;
 	border: none;
@@ -1146,6 +1226,18 @@ body {
 	font-size: 14px;
 	line-height: 17px;
 	color: var(--regular-text);
+}
+
+@media (max-width: 768px) {
+	.deposit__wallet-body-bottom-conainer {
+		flex-direction: column;
+		height: 80px;
+	}
+
+	.deposit__wallet-body-bottom-conainer-button {
+		margin: 10px 0;
+		padding: 10px 0;
+	}
 }
 
 .inactive {
@@ -1208,23 +1300,100 @@ body {
 	right: 0;
 	top: 61px;
 	transform: translateX(0%);
-	width: 200px;
-	height: 400px;
-	background: var(--background);
+	min-width: 200px;
+	height: auto;
+	background: var(--element-bg);
 	position: absolute;
-	padding: 30px;
+	padding: 10px 0;
 	border-radius: 10px;
 	z-index: 10;
+	border: 1px solid var(--border);
+	font-weight: normal;
+}
+
+.header__top {
+	border-bottom: 1px solid var(--border);
+	padding: 0 30px 10px 30px;
+	display: flex;
+}
+
+.header__top-info {
+	margin: 0 0 0 14px;
+	padding: 12px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.header__middle {
+	padding: 5px 30px 0 30px;
+}
+
+.header__bot {
+	border-top: 1px solid var(--border);
+	padding: 5px 30px 0 30px;
 }
 
 .header__profile-expanded-link {
 	display: flex;
-	margin-bottom: 10px;
-	justify-content: center;
+	margin-bottom: 5px;
+	justify-content: start;
+	align-items: center;
 }
 
 .header__profile-expanded-img {
-	width: 120px;
+	width: 70px;
+}
+
+.header__profile-expanded-svg {
+	width: 15px;
+	height: 15px;
+	display: block;
+	margin: 0 5px 0 0;
+}
+
+#profile_link {
+	display: flex;
+	align-items: center;
+}
+
+.header__nav-exp {}
+
+.header__ul {
+	display: flex;
+	flex-direction: column;
+}
+
+.header__ul-item {
+	margin-bottom: 7px;
+}
+
+.header__ul-item--mark {
+	/* margin-right: 29px; */
+}
+
+.header__ul-item--mark::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid var(--regular-text);
+	top: 7px;
+	right: -16px;
+}
+
+.header__ul-sub-menu {
+	display: none;
+}
+
+.header__ul-sub-item {}
+
+@media (max-width: 992px) {
+	#profile_link {
+		display: none;
+	}
 }
 
 .transactions {
@@ -2179,12 +2348,23 @@ body {
 
 .trading-container {
 	max-width: 1720px;
-	padding: 0 15px;
 	margin: 0 auto;
+}
+
+@media (max-width: 800px) {
+	.trading-container {
+		padding: 0;
+	}
 }
 
 .trading-row {
 	display: flex;
+}
+
+@media (max-width:1493px) {
+	.trading-row {
+		flex-direction: column;
+	}
 }
 
 .trading-col-sm {
@@ -2232,7 +2412,7 @@ body {
 }
 
 .trading__currents-major-text--green {
-	color: var(--trading-green);
+	color: var(--success-text);
 	position: relative;
 }
 
@@ -2274,6 +2454,18 @@ body {
 	padding: 15px;
 	border-bottom: 1px solid var(--border);
 	border-top: 1px solid var(--border);
+}
+
+@media (max-width: 962px) {
+	.trading__header {
+		flex-direction: column;
+	}
+
+	.trading__header>* {
+		padding: 0 !important;
+		border: none !important;
+		margin-top: 20px;
+	}
 }
 
 .trading__header-pair {
@@ -2671,6 +2863,16 @@ body {
 	padding: 0 10px;
 }
 
+@media (max-width: 567px) {
+	.orders__buy-sell {
+		flex-direction: column;
+	}
+
+	.orders__buy:last-child {
+		margin-top: 10px;
+	}
+}
+
 .orders__primary-text {
 	font-weight: 600;
 	margin-bottom: 15px;
@@ -2729,7 +2931,7 @@ body {
 	border: none;
 
 	color: white;
-	font-size: 16px;
+	font-size: 14px;
 
 	background: #2d6f4b;
 }
@@ -2747,7 +2949,7 @@ body {
 	border: none;
 
 	color: white;
-	font-size: 16px;
+	font-size: 14px;
 
 	background: #6f2d2d;
 }
@@ -2759,6 +2961,22 @@ body {
 .orders__tab-no-data {
 	text-align: center;
 	margin-top: 10px;
+}
+
+.orders__auth {
+	width: 100%;
+	height: 33px;
+	border-radius: 3px;
+	color: var(--regular-text);
+	background: var(--control-bg);
+	font-size: 14px;
+	text-align: center;
+	line-height: 2.1;
+}
+
+.orders__auth a {
+	text-decoration: underline;
+	color: var(--sand-text);
 }
 
 .numeric {

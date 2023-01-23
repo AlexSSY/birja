@@ -1,5 +1,5 @@
 .swap {
-    width: 680px;
+    max-width: 680px;
 }
 
 .swap-margin-top {
@@ -71,6 +71,18 @@
 .swap__body {
     background: var(--element-bg);
     padding: 70px 160px 0 160px;
+}
+
+@media (max-width: 768px) {
+    .swap__body {
+        padding: 70px 20px 0 20px;
+    }
+}
+
+@media (max-width: 540px) {
+    .swap__info {
+        display: none;
+    }
 }
 
 .swap__controls {
@@ -209,6 +221,12 @@
     font-weight: 600;
 }
 
+@media (max-width: 346px) {
+    .swap__submit {
+        width: 100%;
+    }
+}
+
 .swap__submit:hover {
     background: var(--control-bg-hover);
 }
@@ -217,4 +235,7 @@
 
 .swap__foot {}
 
-.swap__offer {}
+.swap__offer {
+    display: none;
+    visibility: hidden;
+}

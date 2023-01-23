@@ -151,6 +151,7 @@ function update_balance() {
         .then(data => {
             total_balance = parseFloat(data.total_balance).toFixed(2);
             $("#wallet_top").text(`${total_balance} USD`);
+            $("#wallet_middle").text(`${total_balance} USD`);
             $("#wallet_page").text(`${total_balance} USD`);
 
             //Equivalents
@@ -198,3 +199,10 @@ function showAlert(message) {
 }
 
 ////////////////////////////////
+
+//header menu
+$(".header__nav-tablet").on("click", function () {
+    // $(".header__nav>ul").toggleClass("header__nav--show");
+    $(".header__profile-expanded").toggleClass("hidden");
+});
+/////////////
