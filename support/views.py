@@ -67,6 +67,36 @@ def send_message(request):
 
 
 @login_required
+def get_message_list_user(request):
+    result = None
+
+    try:
+        result = SupportMessage.objects.filter(Q(sender_id=request.user.id) | Q(receiver_id=request.user.id)).order_by("time")
+    except:
+        pass
+
+    data = {
+        "messages": []
+    }
+
+    for msg in result:
+        type = "recv"
+
+        if msg.sender.id == request.user.id:
+            type = "send"
+
+        data["messages"].append(
+            {
+                "time": naturaltime(msg.time),
+                "message": msg.message,
+                "type": type,
+            }
+        )
+
+    return JsonResponse(data)
+
+
+@login_required
 def get_message_list(request, user_id):
     result = None
     user = get_user_model().objects.filter(id=user_id).first()

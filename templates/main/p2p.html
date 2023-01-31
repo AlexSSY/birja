@@ -5,27 +5,47 @@
 <link rel="stylesheet" href="{% static 'p2p.css' %}">
 {% endblock %}
 
+{% block js_top %}
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+</script>
+{% endblock %}
+
 {% block js_bottom %}
-<script src="{% static 'p2p.js' %}"></script>
+<script>
+    p2p_state = {
+        fiat: 'USD',
+        token: 'USDT',
+        trade_type: 'SELL',
+        get_part_url: function() {
+            return `${this.fiat}/${this.token}/${this.trade_type}`;
+        },
+    }
+</script>
+<script src="{% static 'p2p.js' %}" type="module"></script>
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid" style="box-sizing: border-box;">
     <div class="row">
         <div class="p2p p2p-margin-top"></div>
         <div class="col-xl-3">
             <div class="p2p__left">
                 <!-- Buttons -->
                 <div class="p2p__2buttons">
-                    <button class="p2p2_2buttons-left p2p2_2buttons-left--active">BUY</button>
-                    <button class="p2p2_2buttons-right">SELL</button>
+                    <button class="p2p2_2buttons-left">BUY</button>
+                    <button class="p2p2_2buttons-right p2p2_2buttons-right--active">SELL</button>
                 </div>
                 <!-- Amount 1 select -->
                 <div class="p2p__select" id="select_1">
                     <div class="p2p__input-container">
                         <input class="p2p__input" type="number" placeholder="Amount">
                     </div>
-                    <button class="p2p__select-btn">BTC</button>
+                    <button class="p2p__select-btn">USDT</button>
                     <div class="p2p__select-items ultrascroll">
                         <ul class="p2p__select-list">
                             {% for token in token_list %}
@@ -63,7 +83,7 @@
                     </div>
                 </div>
                 <!-- Verified users -->
-                <div class="p2p__controls">
+                <!-- <div class="p2p__controls">
                     <div class="p2p__controls-left">
                         <p class="p2p__controls-left-caption">Verified users</p>
                         <p class="p2p__controls-left-description">Show ads of verified traders only</p>
@@ -73,9 +93,9 @@
                             <input type="checkbox" name="verified" id="verified">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Active users -->
-                <div class="p2p__controls">
+                <!-- <div class="p2p__controls">
                     <div class="p2p__controls-left">
                         <p class="p2p__controls-left-caption">Active users</p>
                         <p class="p2p__controls-left-description">Show ads of traders who are online only</p>
@@ -85,56 +105,130 @@
                             <input type="checkbox" name="active" id="active">
                         </div>
                     </div>
-                </div>
-                <button class="p2p__search">Search</button>
+                </div> -->
+                <!-- <button class="p2p__search">Search</button> -->
             </div>
         </div>
         <div class="col-xl-9">
-            <div class="p2p__main">
-                <table class="p2p__table">
+            {% verbatim %}
+            <div class="p2p__main" id="app">
+                <div class="p2p__loading" :class="{ 'p2p__loading--hidden': !loading }">
+                    <div class="p2p__loading-img"></div>
+                </div>
+                <table class="p2p__table" :class="{'p2p__table--show': initialized}">
                     <thead class="p2p__thead">
                         <tr class="p2p__tr">
                             <th class="p2p__th">Trader</th>
-                            <th class="p2p__th">Payment method</th>
                             <th class="p2p__th">Price</th>
                             <th class="p2p__th">Limits</th>
+                            <th class="p2p__th">method</th>
                         </tr>
                     </thead>
                     <tbody class="p2p__tbody" id="p2p-table">
-                        {% for p2p in p2p_list %}
-                        <tr class="p2p__tr">
+                        <tr class="p2p__tr" v-for="p2p in p2ps">
                             <td class="p2p__td">
                                 <div class="p2p__td-container">
                                     <div class="p2p__td-container-left">
-                                        <img class="p2p__td-img" src="{{ p2p.photo.url }}">
+                                        <span class="p2p__td-img">{{p2p.first_letter}}</span>
                                     </div>
                                     <div class="p2p__td-container-right">
-                                        <p class="p2p__td-caption">{{ p2p.username }}</p>
-                                        <p class="p2p__td-description">{{ p2p.orders }} orders, {{ p2p.orders_percent }}%</p>
-                                        {% if p2p.status == "ON" %}
-                                        <p class="p2p__td-status">Online</p>
-                                        {% else %}
-                                        <p class="p2p__td-status p2p__td-status--offline">Offline</p>
-                                        {% endif %}
+                                        <p class="p2p__td-caption">
+                                            <a class="p2p__td-caption-link" href="">
+                                                {{p2p.advertiser.nickName}}
+                                            </a>
+                                        </p>
+                                        <p class="p2p__td-description">
+                                            {{p2p.advertiser.monthOrderCount}} orders
+                                            <span style="display:inline-block; width: 4px;"></span>
+                                            {{p2p.advertiser.monthFinishRate}}% completion
+                                        </p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="p2p__td">{{ p2p.get_method_display }}</td>
-                            <td class="p2p__td p2p__td--price">{{ p2p.price }} {{ p2p.fiat.tag }}</td>
+                            <td class="p2p__td">
+                                <b class="p2p__td-price">{{p2p.adv.price}}</b> 
+                                <small class="p2p__td-fiat">{{p2p.adv.fiatUnit}}</small>
+                            </td>
+                            <td class="p2p__td">
+                                <p class="p2p__td-limit">
+                                    {{p2p.adv.fiatSymbol}}
+                                    {{ p2p.adv.minSingleTransAmount }} - 
+                                    {{ p2p.adv.fiatSymbol }}
+                                    {{ p2p.adv.dynamicMaxSingleTransAmount }}
+
+                                </p>
+                            </td>
                             <td class="p2p__td p2p__td--flex">
-                                <p class="p2p__td-limit">{{ p2p.limit_start|floatformat:"-3"|intcomma|comma_to_whitespace }} - {{ p2p.limit_end|floatformat:"-3"|intcomma|comma_to_whitespace }} {{ p2p.fiat.tag }}</p>
-                                <button class="p2p__sell-btn">Sell BTC</button>
+                                <p class="p2p__td-method" :style="{color: p2p.adv.tradeMethods[0].tradeMethodBgColor,}">
+                                    {{ p2p.adv.tradeMethods[0].identifier }}
+                                </p>
+                                <button v-if="trade_type === 'SELL'" class="p2p__sell-btn">
+                                    Sell {{p2p.adv.asset}}
+                                </button>
+                                <button v-else="trade_type === 'BUY'" class="p2p__buy-btn">
+                                    Buy {{p2p.adv.asset}}
+                                </button>
                             </td>
                         </tr>
-                        {% endfor %}
                         <tr class="p2p__tr p2p__tr--last">
-                            <td class="p2p__td" colspan="4">
-                                <button class="p2p__more">load 15 more traders</button>
+                            <td class="p2p__td p2p_td-jc-center" colspan="4">
+                                <div class="p2p__pagination">
+                                    <a class="p2p__pagelink" href="#" v-if="page > 1" @click="(event) => toPage(page - 1, event)">
+                                        <svg fill="currentcolor" width="14px" height="14px" viewBox="-4.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg">
+                                            <path d="M8.4 17.269a1.026 1.026 0 0 1-.727-.302l-6.801-6.8a1.03 1.03 0 0 1 0-1.456l6.8-6.8a1.03 1.03 0 0 1 1.456 1.455L3.055 9.439l6.073 6.073A1.03 1.03 0 0 1 8.4 17.27z"/>
+                                        </svg>
+                                    </a>
+                                    <a class="p2p__pagelink" :class="{'p2p__pagelink--active': page == 1}" href="#" @click="(event) => toPage(1, event)">1</a>
+                                   
+                                    <span v-if="page >= 5" style="align-self: flex-end; margin-bottom: 6px;">...</span>
+                                    
+                                    <a  class="p2p__pagelink" 
+                                        href="#" 
+                                        v-if="page - 2 > 1"
+                                        @click="(event) => toPage(page - 2, event)">
+                                        {{page - 2}}
+                                    </a>
+                                    <a  class="p2p__pagelink" 
+                                        href="#" 
+                                        v-if="page - 1 > 1"
+                                        @click="(event) => toPage(page - 1, event)">
+                                        {{page - 1}}
+                                    </a>
+                                    <a  class="p2p__pagelink p2p__pagelink--active" 
+                                        href="#" 
+                                        v-if="page > 1 && page < maxPages"
+                                        @click="(event) => toPage(page, event)">
+                                        {{page}}
+                                    </a>
+                                    <a  class="p2p__pagelink" 
+                                        href="#" 
+                                        v-if="page + 1 < maxPages"
+                                        @click="(event) => toPage(page + 1, event)">
+                                        {{page + 1}}
+                                    </a>
+                                    <a  class="p2p__pagelink" 
+                                        href="#" 
+                                        v-if="page + 2 < maxPages"
+                                        @click="(event) => toPage(page + 2, event)">
+                                        {{page + 2}}
+                                    </a>
+                                    
+                                    <span v-if="page < maxPages - 3" style="align-self: flex-end; margin-bottom: 6px;">...</span>
+
+                                    <a class="p2p__pagelink" :class="{'p2p__pagelink--active': page == maxPages}" href="#" @click="(event) => toPage(maxPages, event)">{{ maxPages }}</a>
+                                    
+                                    <a class="p2p__pagelink" href="#" v-if="page < maxPages" @click="(event) => toPage(page + 1, event)">
+                                        <svg fill="currentcolor" width="14px" height="14px" viewBox="-4.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg">
+                                            <path d="M1.6 17.262a1.03 1.03 0 0 1-.728-1.757l6.073-6.073L.872 3.36a1.03 1.03 0 0 1 1.455-1.455l6.8 6.8a1.03 1.03 0 0 1 0 1.456l-6.8 6.8a1.025 1.025 0 0 1-.727.302z"/>
+                                        </svg>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            {% endverbatim %}
         </div>
     </div>
 </div>

@@ -43,15 +43,25 @@
     overflow-y: auto;
 }
 
-.support__preview {}
+.support__preview {
+    width: 200px;
+    margin: 0 auto;
+}
 
 .support__preview--hidden {
     display: none;
 }
 
-.support__img {}
+.support__img {
+    width: 200px;
+}
 
-.support__info {}
+.support__info {
+    color: var(--regular-text);
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+}
 
 .support__row {
     display: flex;
@@ -78,6 +88,12 @@
 .support__col-6 {
     flex: 0 1 50%;
     padding: 0 15px;
+}
+
+@media (max-width: 992px) {
+    .support__col-6 {
+        flex: 1 1 auto;
+    }
 }
 
 .support__submit {}

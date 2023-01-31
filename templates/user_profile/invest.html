@@ -1,18 +1,34 @@
 {% extends 'user_profile/base.html' %}
 {% load static %}
 
+{% block js_top %}
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+</script>
+{% endblock %}
+
 {% block js_bottom %}
 <script>
-    var btc = "{{btc}}";
-    var ltc = "{{ltc}}";
-    var eth = "{{eth}}";
+    var btc = parseFloat("{{btc}}");
+    var ltc = parseFloat("{{ltc}}");
+    var eth = parseFloat("{{eth}}");
+    var csrftoken = '{{ csrf_token }}';
 </script>
+<script src="{% static 'invest.js' %}" type="module"></script>
 {% endblock %}
 
 {% block wallet_content %}
 <div class="invest">
+    <input type="hidden" id="price_BTC">
+    <input type="hidden" id="price_LTC">
+    <input type="hidden" id="price_ETH">
     <div class="row">
         <div class="col-lg-3">
+            {% verbatim %}
             <div id="stake_0" class="window">
                 <div class="window__body">
                     <div class="stake__head_bg c1">
@@ -28,15 +44,15 @@
                         </div>
                     </div>
                     <div class="window__controls">
-                        <p class="window__controls_label">Select coin</p>
-                        <div id="select_0" class="select">
+                        <p class="window__controls_label" v-if="!stake">Select coin</p>
+                        <div id="select_0" class="select" @click="uiToggleSelect()" v-if="!stake">
                             <span class="select__span btc">BTC - {{btc}}</span>
                             <ul class="select__list">
-                                <li class="select__item btc" onclick="select('stake_0', this, 'btc');">BTC - {{btc}}
+                                <li class="select__item btc" @click="selectItemClick('btc')">BTC - {{btc}}
                                 </li>
-                                <li class="select__item ltc" onclick="select('stake_0', this, 'ltc');">LTC - {{ltc}}
+                                <li class="select__item ltc" @click="selectItemClick('ltc')">LTC - {{ltc}}
                                 </li>
-                                <li class="select__item eth" onclick="select('stake_0', this, 'eth');">ETH - {{eth}}
+                                <li class="select__item eth" @click="selectItemClick('eth')">ETH - {{eth}}
                                 </li>
                             </ul>
                         </div>
@@ -46,28 +62,33 @@
                         <div class="stake__amount">
                             <div class="stake__amount_text">
                                 <input type="number" value="0.0">
-                                <span class="stake__amount_crypto">BTC</span>
+                                <span class="stake__amount_crypto">{{coin}}</span>
                             </div>
-                            <button class="stake__amount_button">MAX</button>
+                            <button class="stake__amount_button" @click="uiMaxButton()">MAX</button>
                         </div>
                     </div>
                     <div class="window__controls d-flex justify-content-between">
                         <p class="window__controls_label">Your profit</p>
                         <div class="d-flex flex-column align-items-end">
-                            <p>+0.0000 <span class="stake__amount_crypto">BTC</span></p>
-                            <p class="text-green">≈ 0.00$</p>
+                            <p>+{{profit}} <span class="stake__amount_crypto">{{coin}}</span></p>
+                            <p class="text-green">≈ {{profit_usd}}$</p>
                         </div>
                     </div>
                     <div class="window__controls d-flex justify-content-between">
                         <p class="window__controls_label">Total</p>
                         <div class="d-flex flex-column align-items-end">
-                            <p>+0.0000 <span class="stake__amount_crypto">BTC</span></p>
-                            <p class="text-green">≈ 0.00$</p>
+                            <p>+{{amount}} <span class="stake__amount_crypto">{{coin}}</span></p>
+                            <p class="text-green">≈ {{amount_usd}}$</p>
                         </div>
                     </div>
-                    <button class="stake__button">+ STAKE</button>
+                </div>
+                <div class="window__buttons">
+                    <button class="stake__button" :class="{hidden: stake}" @click="uiStakeButton()">+ STAKE</button>
+                    <button class="restake__button" :class="{hidden: !stake}" @click="uiRestakeButton()">RESTAKE</button>
+                    <button class="unstake__button" :class="{hidden: !stake}" @click="uiUnstakeButton()">UNSTAKE</button>
                 </div>
             </div>
+            {% endverbatim %}
         </div>
         <div class="col-lg-3">
             <div id="stake_1" class="window">
@@ -86,7 +107,7 @@
                     </div>
                     <div class="window__controls">
                         <p class="window__controls_label">Select coin</p>
-                        <div id="select_0" class="select">
+                        <div id="select_1" class="select">
                             <span class="select__span ltc">LTC - {{ltc}}</span>
                             <ul class="select__list">
                                 <li class="select__item btc" onclick="select('stake_1', this, 'btc');">BTC - {{btc}}
@@ -143,7 +164,7 @@
                     </div>
                     <div class="window__controls">
                         <p class="window__controls_label">Select coin</p>
-                        <div id="select_0" class="select">
+                        <div id="select_2" class="select">
                             <span class="select__span eth">{ETH - {{eth}}</span>
                             <ul class="select__list">
                                 <li class="select__item btc" onclick="select('stake_2', this, 'btc');">BTC - {{btc}}
@@ -200,7 +221,7 @@
                     </div>
                     <div class="window__controls">
                         <p class="window__controls_label">Select coin</p>
-                        <div id="select_0" class="select">
+                        <div id="select_3" class="select">
                             <span class="select__span btc">BTC - {{btc}}</span>
                             <ul class="select__list">
                                 <li class="select__item btc" onclick="select('stake_3', this, 'btc');">BTC - {{btc}}

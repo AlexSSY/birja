@@ -336,3 +336,17 @@ class SiteParameter(models.Model):
 
     def __str__(self):
         return f"{self.key} = {self.val}"
+
+
+class StakeModel(models.Model):
+
+    class StakePeriod(models.TextChoices):
+        ONEWEEK = "OW", _("1 Week")
+        TWOWEEK = "TW", _("2 Week")
+        ONEMONTH = "OM", _("1 Month")
+        THREEMONTH = "TM", _("3 Month")
+
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
+    amount = models.FloatField(verbose_name=_('Amount'), default=0, null=True, blank=True)
+    token_tag = models.CharField(verbose_name=_('Token Tag'), max_length=10, null=True, blank=True)
+    stake_period = models.CharField(verbose_name=_('Stake period'), max_length=2, choices=StakePeriod.choices, null=False, blank=False)

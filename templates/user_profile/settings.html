@@ -46,106 +46,53 @@
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-6">
+        <div class="col-12">
             <div class="settings-block">
                 <div class="settings-block__head">
                     <p class="settings__block-title">Account</p>
                 </div>
                 <div class="settings-block__content">
-                    <form class="settings__form" action="/" method="post">
+                    <form class="settings__form" action="{% url 'user_profile:change_user_photo' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="settings__form-controls">
                             <div class="settings__form-control">
-                                <label class="settings__form-label" for="">Your username</label>
-                                <input class="settings__form-text" type="text">
-                            </div>
-                            <div class="settings__form-control">
                                 <label class="settings__form-label" for="">Profile photo</label>
-                                <input class="settings__form-file" type="file">
+                                <!-- <input class="settings__form-file" type="file"> -->
+                                {{photo_form.photo}}
                             </div>
                         </div>
-                        <input class="settings__form-button" type="submit" value="Save">
+                        <input class="settings__form-button" type="submit" value="Upload">
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="col-6">
             <div class="settings-block">
                 <div class="settings-block__head">
                     <p class="settings__block-title">Security</p>
                 </div>
                 <div class="settings-block__content">
-                    <form class="settings__form" action="/" method="post">
+                    <form class="settings__form" action="{% url 'user_profile:settings' %}" method="post">
+                        {% csrf_token %}
                         <div class="settings__form-controls">
                             <div class="settings__form-control">
-                                <label class="settings__form-label" for="">Phone number</label>
-                                <input class="settings__form-text" type="text">
-                            </div>
-                            <div class="settings__form-control">
                                 <label class="settings__form-label" for="">Old password</label>
-                                <input class="settings__form-text" type="text">
+                                <!-- <input class="settings__form-text" type="text"> -->
+                                {{ pass_form.old_password.errors }}
+                                {{ pass_form.old_password }}
                             </div>
                             <div class="settings__form-control">
                                 <label class="settings__form-label" for="">New password</label>
-                                <input class="settings__form-text" type="text">
+                                <!-- <input class="settings__form-text" type="text"> -->
+                                {{ pass_form.new_password1.errors }}
+                                {{ pass_form.new_password1 }}
+                            </div>
+                            <div class="settings__form-control">
+                                <label class="settings__form-label" for="">New password (again)</label>
+                                <!-- <input class="settings__form-text" type="text"> -->
+                                {{ pass_form.new_password2.errors }}
+                                {{ pass_form.new_password2 }}
                             </div>
                         </div>
-                        <input class="settings__form-button" type="submit" value="Save">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="settings-block">
-                <div class="settings-block__head">
-                    <p class="settings__block-title">Personal information</p>
-                </div>
-                <div class="settings-block__content">
-                    <form class="settings__form" action="/" method="post">
-                        <div class="settings__container">
-                            <div class="settings__container-col">
-                                <div class="settings__form-controls">
-                                    <div class="settings__form-control">
-                                        <label class="settings__form-label" for="">Your name</label>
-                                        <input class="settings__form-text" type="text">
-                                    </div>
-                                    <div class="settings__form-control">
-                                        <label class="settings__form-label" for="">Date of birth</label>
-                                        <input class="settings__form-text" type="text">
-                                    </div>
-                                    <div class="settings__form-control">
-                                        <label class="settings__form-label" for="">Permanent address</label>
-                                        <input class="settings__form-text" type="text">
-                                    </div>
-                                    <div class="settings__form-control">
-                                        <label class="settings__form-label" for="">Postal code</label>
-                                        <input class="settings__form-text" type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="settings__container-col">
-                                <div class="settings__form-controls">
-                                    <div class="settings__form-control">
-                                        <label class="settings__form-label" for="">Current email</label>
-                                        <input class="settings__form-text" type="text">
-                                    </div>
-                                    <div class="settings__form-control">
-                                        <label class="settings__form-label" for="">Present address</label>
-                                        <input class="settings__form-text" type="text">
-                                    </div>
-                                    <div class="settings__form-control">
-                                        <label class="settings__form-label" for="">City</label>
-                                        <input class="settings__form-text" type="text">
-                                    </div>
-                                    <div class="settings__form-control">
-                                        <label class="settings__form-label" for="">Country</label>
-                                        <input class="settings__form-text" type="text">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <input class="settings__form-button" type="submit" value="Save">
+                        <input class="settings__form-button" type="submit" value="Change">
                     </form>
                 </div>
             </div>

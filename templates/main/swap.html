@@ -13,79 +13,91 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="swap swap-margin-top mx-auto">
-                <div class="swap__head">
-                    <div class="swap__title">
-                        <div class="swap__title-p">Fast swap</div>
-                    </div>
-                    <div class="swap__info">
-                        <p class="swap_info-zero">Zero free</p>
-                        <p class="swap_info-price">Guaranteed price</p>
-                        <p class="swap_info-pairs">Any pairs</p>
-                    </div>
-                </div>
-                <div class="swap__body">
-                    <!-- Select 1 -->
-                    <div class="swap__controls">
-                        <label class="swap__label" for="">You send</label>
-                        <div class="swap__select" id="select_1">
-                            <div class="swap__input-container">
-                                <input class="swap__input" type="number" placeholder="Amount">
-                            </div>
-                            <button class="swap__select-btn">BTC</button>
-                            <div class="swap__select-items ultrascroll">
-                                <ul class="swap__select-list">
-                                    <li class="swap__select-item">LTC</li>
-                                    <li class="swap__select-item">USDT</li>
-                                    <li class="swap__select-item">DASH</li>
-                                    <li class="swap__select-item">NFT</li>
-                                    <li class="swap__select-item">XXL</li>
-                                    <li class="swap__select-item">XXX</li>
-                                    <li class="swap__select-item">XXXL</li>
-                                    <li class="swap__select-item">BTC</li>
-                                    <li class="swap__select-item">ITL</li>
-                                    <li class="swap__select-item">TERA</li>
-                                </ul>
-                            </div>
+            <form action="{% url 'main:swap' %}" method="post">
+                {% csrf_token %}
+                {{ form.from_ }}
+                {{ form.to }}
+                <div class="swap swap-margin-top mx-auto">
+                    <div class="swap__head">
+                        <div class="swap__title">
+                            <div class="swap__title-p">Fast swap</div>
                         </div>
-                        <p class="swap__awailable">
-                            Available: 
-                            <a class="swap__fullmoney" href="#">0.00 BTC</a>
-                        </p>
-                    </div>
-                    <!-- Select 2 -->
-                    <div class="swap__controls">
-                        <label class="swap__label" for="">You get</label>
-                        <div class="swap__select" id="select_2">
-                            <div class="swap__input-container">
-                                <input class="swap__input" type="number" placeholder="Amount">
-                            </div>
-                            <button class="swap__select-btn">BTC</button>
-                            <div class="swap__select-items ultrascroll">
-                                <ul class="swap__select-list">
-                                    <li class="swap__select-item">LTC</li>
-                                    <li class="swap__select-item">USDT</li>
-                                    <li class="swap__select-item">DASH</li>
-                                    <li class="swap__select-item">NFT</li>
-                                    <li class="swap__select-item">XXL</li>
-                                    <li class="swap__select-item">XXX</li>
-                                    <li class="swap__select-item">XXXL</li>
-                                    <li class="swap__select-item">BTC</li>
-                                    <li class="swap__select-item">ITL</li>
-                                    <li class="swap__select-item">TERA</li>
-                                </ul>
-                            </div>
+                        <div class="swap__info">
+                            <p class="swap_info-zero">Zero free</p>
+                            <p class="swap_info-price">Guaranteed price</p>
+                            <p class="swap_info-pairs">Any pairs</p>
                         </div>
                     </div>
-                    <button class="swap__submit">Swap</button>
-                    <p class="swap__course">Exchange rate: 1 LTC ~ 0.00420910 BTC</p>
+                    <div class="swap__body">
+                        <!-- Select 1 -->
+                        <div class="swap__controls">
+                            {{ form.non_field_errors }}
+                            <label class="swap__label" for="">From</label>
+                            {{ form.from_.errors }}
+                            {{ form.amount.errors }}
+                            <div class="swap__select" id="select_1" {% if form.amount.errors or form.from_.errors %}style="border-color: var(--danger-text);"{% endif %}>
+                                <div class="swap__input-container">
+                                    <!-- <input class="swap__input" type="number" placeholder="Amount"> -->
+                                    {{ form.amount }}
+                                </div>
+                                <button class="swap__select-btn" type="button">{{ form.from_.value }}</button>
+                                <div class="swap__select-items ultrascroll">
+                                    <ul class="swap__select-list">
+                                        {% with 'USDT' as d_tags %}
+                                        {% if tokens %}
+                                            {% for t in tokens %}
+                                                {% if t.tag not in d_tags.split %}
+                                                <li class="swap__select-item">
+                                                    <img class="swap__selcet-icon" src="{{ t.icon.url }}">
+                                                    {{ t.name }}
+                                                    <span class="swap__select-tag">{{ t.tag }}</span>
+                                                </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% endwith %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="swap__awailable">
+                                Available: 
+                                <a class="swap__fullmoney" href="#">0.00 BTC</a>
+                            </p>
+                        </div>
+                        <!-- Select 2 -->
+                        <div class="swap__controls">
+                            <label class="swap__label" for="">To</label>
+                            {{ form.to.errors }}
+                            <div class="swap__select" id="select_2" {% if form.to.errors %}style="border-color: var(--danger-text);"{% endif %}>
+                                <div class="swap__input-container">
+                                    <input class="swap__input" type="number" placeholder="Amount" min="0" step="any">
+                                </div>
+                                <button class="swap__select-btn" type="button">{{ form.to.value }}</button>
+                                <div class="swap__select-items ultrascroll">
+                                    <ul class="swap__select-list">
+                                        {% if tokens %}
+                                            {% for t in tokens %}
+                                                <li class="swap__select-item">
+                                                    <img class="swap__selcet-icon" src="{{ t.icon.url }}">
+                                                    {{ t.name }}
+                                                    <span class="swap__select-tag">{{ t.tag }}</span>
+                                                </li>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="swap__submit">Swap</button>
+                        <p class="swap__course">...</p>
+                    </div>
+                    <div class="swap__foot">
+                        <!-- <p class="swap__offer">Exchange rate: 1 LTC ~ 0.00420910 BTC
+                            You can simply and instantly convert any crypto or fiat assets anytime with a live price based
+                            on current market conditions with zero fees.</p> -->
+                    </div>
                 </div>
-                <div class="swap__foot">
-                    <!-- <p class="swap__offer">Exchange rate: 1 LTC ~ 0.00420910 BTC
-                        You can simply and instantly convert any crypto or fiat assets anytime with a live price based
-                        on current market conditions with zero fees.</p> -->
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

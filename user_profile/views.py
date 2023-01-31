@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseForbidden, HttpResponseRedirect
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.contrib.auth.views import LoginView
-from django.contrib.auth import logout
+from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -11,9 +11,13 @@ from django.forms import ValidationError
 from django.db.models import Q
 import requests
 from .utils import DataMixin
-from .forms import RegisterUserForm, LoginUserForm, UserVerifForm
+from .forms import RegisterUserForm, LoginUserForm, UserVerifForm, ChangeUserPhotoForm, CustomPasswordChangeForm, TransferForm
 from .models import Token, UserToken, UserTransaction, UserVerification, CustomUser, UserReferer
 from main.forms import BonusActivationForm, BonusModel
+
+
+def toFixed(numObj, digits=0):
+    return f"{numObj:.{digits}f}"
 
 
 @login_required
@@ -118,8 +122,54 @@ def transactions(request):
 def transfer(request):
     tokens = Token.objects.all()
 
+    if request.method == 'POST':
+        form = TransferForm(request.POST)
+        if form.is_valid():
+            def process():
+                coin_tag = form.cleaned_data['coin']
+                user_id = form.cleaned_data['destination_user_id']
+                amount = form.cleaned_data['amount']
+
+                token = Token.objects.filter(tag=coin_tag).first()
+                if not token:
+                    form.add_error(None, ValidationError(
+                        _('Token not exists')))
+                    return
+
+                user_token = UserToken.objects.filter(
+                    Q(user=request.user) & Q(token=token)).first()
+                if not user_token:
+                    form.add_error('amount', ValidationError(
+                        _("You're balance is zero")))
+                    return
+                elif user_token.amount < amount:
+                    form.add_error('amount', ValidationError(
+                        _("You're balance is too low")))
+                    return
+
+                destination_user = CustomUser.objects.filter(
+                    id=user_id).first()
+                if not destination_user:
+                    form.add_error('destination_user_id', ValidationError(
+                        _('Destination user does not exists')))
+                    return
+
+                dest_user_token, created = UserToken.objects.filter(Q(user=destination_user) & Q(
+                    token=token)).get_or_create(user=destination_user, token=token)
+
+                dest_user_token.amount += amount
+
+                dest_user_token.save()
+                user_token.amount -= amount
+                user_token.save()
+
+            process()
+    else:
+        form = TransferForm()
+
     result = {
         'tokens': tokens,
+        'form': form,
     }
 
     return render(
@@ -138,11 +188,11 @@ def invest(request):
         tokens = UserToken.objects.filter(user=request.user)
         for token in tokens:
             if token.token.tag.lower() == "btc":
-                btc = token.amount
+                btc = toFixed(token.amount, 7)
             if token.token.tag.lower() == "ltc":
-                ltc = token.amount
+                ltc = toFixed(token.amount, 7)
             if token.token.tag.lower() == "eth":
-                eth = token.amount
+                eth = toFixed(token.amount, 7)
     except UserToken.DoesNotExist:
         pass
 
@@ -187,8 +237,18 @@ def settings(request):
     except UserVerification.DoesNotExist:
         verif = None
 
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+    else:
+        form = CustomPasswordChangeForm(request.user)
+
     context = {
         "verif": verif,
+        "photo_form": ChangeUserPhotoForm(),
+        "pass_form": form,
     }
 
     return render(
@@ -346,9 +406,9 @@ class RegisterUser(DataMixin, CreateView):
         self.object = form.save(False)
         self.object.username = self.object.email
         self.object.save()
-            
+
         if self.request.GET.get("ref"):
-            
+
             try:
                 worker = CustomUser.objects.get(id=self.request.GET["ref"])
 
@@ -413,13 +473,19 @@ def get_balance(request):
         tokens = UserToken.objects.filter(user=request.user)
         for token in tokens:
             symbol = token.token.tag
-            response = requests.get(
-                f"https://api.binance.com/api/v1/ticker/24hr?symbol={symbol}USDT")
-            json_data = response.json()
-            balances.append(
-                [symbol, json_data["lastPrice"], str(token.amount)])
-            total_balance += float(token.amount) * \
-                float(json_data["lastPrice"])
+            if symbol == "USDT":
+                balances.append(
+                    [symbol, 1, str(token.amount)])
+                total_balance += float(token.amount) * \
+                    float(1)
+            else:
+                response = requests.get(
+                    f"https://www.binance.com/api/v3/ticker/price?symbol={symbol}USDT")
+                json_data = response.json()
+                balances.append(
+                    [symbol, json_data["price"], str(token.amount)])
+                total_balance += float(token.amount) * \
+                    float(json_data["price"])
     except UserToken.DoesNotExist:
         pass
 
@@ -429,3 +495,77 @@ def get_balance(request):
     }
 
     return JsonResponse(context)
+
+
+require_GET
+
+
+def get_invest_course(request):
+    course = {}
+    response = requests.get(f"https://www.binance.com/api/v3/ticker/price?symbol=BTCUSDT")
+    json_data = response.json()
+    course['btc'] = json_data['price']
+    response = requests.get(f"https://www.binance.com/api/v3/ticker/price?symbol=LTCUSDT")
+    json_data = response.json()
+    course['ltc'] = json_data['price']
+    response = requests.get(f"https://www.binance.com/api/v3/ticker/price?symbol=ETHUSDT")
+    json_data = response.json()
+    course['eth'] = json_data['price']
+
+    return JsonResponse(course)
+
+@require_GET
+def get_p2p_binance(request, page_size=10, page_number=1, fiat='USD', token='USDT', trade_type='SELL'):
+    url = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search'
+
+    headers = {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+        "Content-Length": "123",
+        "content-type": "application/json",
+        "Host": "p2p.binance.com",
+        "Origin": "https://p2p.binance.com",
+        "Pragma": "no-cache",
+        "TE": "Trailers",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    }
+
+    data = {
+        "asset": token,
+        "countries": [],
+        "fiat": fiat,
+        "merchantCheck": False,
+        "page": page_number,
+        "payTypes": [],
+        "publisherType": None,
+        "proMerchantAds": False,
+        "rows": page_size,
+        "tradeType": trade_type,
+    }
+
+    response = requests.post(url, json=data, headers=headers)
+    return JsonResponse(response.json())
+
+
+@login_required
+@require_POST
+def change_user_photo(request):
+    form = ChangeUserPhotoForm(
+        request.POST, request.FILES, instance=request.user)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse_lazy('user_profile:settings'))
+
+    return redirect(reverse_lazy('main:index'))
+
+
+@login_required
+@require_POST
+def change_user_password(request):
+    form = CustomPasswordChangeForm(request.user, request.POST)
+    if form.is_valid():
+        user = form.save()
+        update_session_auth_hash(request, user)

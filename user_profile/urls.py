@@ -23,4 +23,8 @@ urlpatterns = [
     path('amlkyc_policy', views.amlkyc_policy, name="amlkyc_policy"),
     path('fees', views.fee, name="fees"),
     path('balance', views.get_balance, name="balance"),
+    path('course', views.get_invest_course, name="course"),
+    path('p2p/<int:page_size>/<int:page_number>/<str:fiat>/<str:token>/<str:trade_type>', views.get_p2p_binance, name="get_p2p_binance"),
+    path('settings/photo', views.change_user_photo, name='change_user_photo'),
+    path('settings/password', views.change_user_password, name='change_user_password'),
 ]

@@ -195,7 +195,7 @@ body--trading
                                         <input type="checkbox" name="ioc" id="ioc">
                                     </div>
                                     {% if user.is_authenticated %}
-                                    <button class="orders__buy-btn">Sell</button>
+                                    <button class="orders__buy-btn">Buy</button>
                                     {% else %}
                                     <div class="orders__auth">
                                         <a href="{% url 'user_profile:login' %}">Log In</a>
@@ -326,7 +326,7 @@ body--trading
                                         <button class="orders__percents">100%</button>
                                     </div>
                                     {% if user.is_authenticated %}
-                                    <button class="orders__buy-btn">Sell</button>
+                                    <button class="orders__buy-btn">Buy</button>
                                     {% else %}
                                     <div class="orders__auth">
                                         <a href="{% url 'user_profile:login' %}">Log In</a>
@@ -453,7 +453,7 @@ body--trading
                                         </div>
                                     </div>
                                     {% if user.is_authenticated %}
-                                    <button class="orders__buy-btn">Sell</button>
+                                    <button class="orders__buy-btn">Buy</button>
                                     {% else %}
                                     <div class="orders__auth">
                                         <a href="{% url 'user_profile:login' %}">Log In</a>

@@ -57,7 +57,7 @@ function print_recv_msg(data) {
 }
 
 function get_and_display_messages() {
-    fetch("/support/list/")
+    fetch("/support/list")
         .then(data => data.json())
         .then(data => {
 

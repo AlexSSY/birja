@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required, permission_required
 
-from .forms import EmailBinderForm, PromoBindingForm, MessageSendPanelForm
+from .forms import EmailBinderForm, PromoBindingForm, MessageSendPanelForm, UserMessagingForm
 from user_profile.models import UserReferer
 from user_profile.models import BonusModel
 from django.urls import reverse_lazy
@@ -155,6 +155,7 @@ def user_messaging(request, user_id):
 
     context = {
         "user": user,
+        "form": UserMessagingForm(),
     }
 
     return render(request, "panel/user_messaging.html", context)

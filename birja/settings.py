@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'support.apps.SupportConfig',
     'user_profile.apps.UserProfileConfig',
     'django.contrib.humanize',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,16 @@ TEMPLATES = [
 AUTH_USER_MODEL = "user_profile.CustomUser"
 AUTHENTICATION_BACKENDS = ['user_profile.backends.EmailBackend']
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}
+
 from django.urls import reverse_lazy
 
 LOGIN_REDIRECT_URL = reverse_lazy("main:index")
@@ -91,6 +102,8 @@ LOGIN_URL = reverse_lazy("user_profile:login")
 
 WSGI_APPLICATION = 'birja.wsgi.application'
 
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

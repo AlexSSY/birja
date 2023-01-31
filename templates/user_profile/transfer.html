@@ -1,11 +1,27 @@
 {% extends 'user_profile/base.html' %}
 {% load static %}
 
+{% block js_bottom %}
+<script>
+    function updateCoinInput(data) {
+        data = data.split('-')[1].trim();
+        $('#id_coin').val(data);
+    }
+
+    updateCoinInput($('.current').text());
+
+    $(".option").on('click', function () {
+        let data = $(this).text();
+        updateCoinInput(data);
+    });
+</script>
+{% endblock %}
+
 {% block wallet_content %}
 <div class="transfer">
     <div class="row">
         <div class="col-12">
-            <div class="window">
+            <div class="window mt-4">
                 <div class="window__header">
                     <p>Transfer</p>
                 </div>
@@ -20,51 +36,59 @@
                         <div class="tabs__body">
                             <div id="tab_1" class="tabs__tab">
                                 <div class="tabs_tab_transfer-body">
-                                    <div class="tabs_tab_transfer-body-controls">
-                                        <div class="tabs_tab_transfer-body-control1">
-                                            <p>Your account ID</p>
+                                    <form action="{% url 'user_profile:transfer' %}" method="post">
+                                        {% csrf_token %}
+                                        <div class="tabs_tab_transfer-body-controls">
+                                            <div class="tabs_tab_transfer-body-control1">
+                                                <p>Your account ID</p>
+                                            </div>
+                                            <div class="tabs_tab_transfer-body-control2">
+                                                <p>{{user.id}}</p>
+                                            </div>
                                         </div>
-                                        <div class="tabs_tab_transfer-body-control2">
-                                            <p>{{user.id}}</p>
+                                        <div class="tabs_tab_transfer-body-controls">
+                                            <div class="tabs_tab_transfer-body-control1">
+                                                <p>Select currency</p>
+                                            </div>
+                                            <div  class="tabs_tab_transfer-body-control2"">
+                                                <select name="currency" id="currency">
+                                                    {% for token in tokens %}
+                                                    <option value="{{ token.tag }}">{{ token.name }} - {{ token.tag }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+                                                {{ form.coin }}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="tabs_tab_transfer-body-controls">
-                                        <div class="tabs_tab_transfer-body-control1">
-                                            <p>Select currency</p>
+                                        <div class="tabs_tab_transfer-body-controls">
+                                            <div class="tabs_tab_transfer-body-control1">
+                                                <p>Destination user ID</p>
+                                            </div>
+                                            <div class="tabs_tab_transfer-body-control2">
+                                                <!-- <input type="text" placeholder="Please enter a destination User ID"> -->
+                                                {{ form.destination_user_id.errors }}
+                                                {{ form.destination_user_id }}
+                                            </div>
                                         </div>
-                                        <div  class="tabs_tab_transfer-body-control2"">
-                                            <select name="currency" id="currency">
-                                                {% for token in tokens %}
-                                                <option value="{{ token.tag }}">{{ token.name }} - {{ token.tag }}
-                                                </option>
-                                                {% endfor %}
-                                            </select>
+                                        <div class="tabs_tab_transfer-body-controls">
+                                            <div class="tabs_tab_transfer-body-control1">
+                                                <p>Amount</p>
+                                            </div>
+                                            <div class="tabs_tab_transfer-body-control2">
+                                                <!-- <input type="text" placeholder="Please enter an amount"> -->
+                                                {{ form.amount.errors }}
+                                                {{ form.amount }}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="tabs_tab_transfer-body-controls">
-                                        <div class="tabs_tab_transfer-body-control1">
-                                            <p>Destination user ID</p>
+                                        <div class="tabs_tab_transfer-body-controls">
+                                            <div class="tabs_tab_transfer-body-control1">
+                                                
+                                            </div>
+                                            <div class="tabs_tab_transfer-body-control2 d-flex justify-content-end">
+                                                <button class="transfer_button">Transfer Now</button>
+                                            </div>
                                         </div>
-                                        <div class="tabs_tab_transfer-body-control2">
-                                            <input type="text" placeholder="Please enter a destination User ID">
-                                        </div>
-                                    </div>
-                                    <div class="tabs_tab_transfer-body-controls">
-                                        <div class="tabs_tab_transfer-body-control1">
-                                            <p>Amount</p>
-                                        </div>
-                                        <div class="tabs_tab_transfer-body-control2">
-                                            <input type="text" placeholder="Please enter an amount">
-                                        </div>
-                                    </div>
-                                    <div class="tabs_tab_transfer-body-controls">
-                                        <div class="tabs_tab_transfer-body-control1">
-                                            
-                                        </div>
-                                        <div class="tabs_tab_transfer-body-control2 d-flex justify-content-end">
-                                            <button class="transfer_button">Transfer Now</button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <div id="tab_2" class="tabs__tab inactive">

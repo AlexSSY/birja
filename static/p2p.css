@@ -298,14 +298,20 @@
     background: var(--element-bg);
     border-radius: 10px;
     padding: 25px;
+    position: relative;
+    min-height: 200px;
 }
 
 .p2p__table {
-    display: block;
+    display: none;
 
     font-family: "Montserrat";
     color: var(--regular-text);
     font-size: 14px;
+}
+
+.p2p__table--show {
+    display: block;
 }
 
 .p2p__thead {
@@ -314,21 +320,16 @@
 
 .p2p__tr {
     display: flex;
-    align-items: center;
-    padding: 15px 0;
+    min-height: 65px;
     border-bottom: 1px solid rgba(170, 170, 170, 0.4);
 }
 
 .p2p__th {
     display: block;
-    flex: 1 1 20%;
+    flex: 1 1 25%;
     text-align: start;
 
     color:rgb(151, 151, 151);
-}
-
-.p2p__th:last-child {
-    flex: 1 1 40%;
 }
 
 .p2p__tbody {
@@ -336,17 +337,21 @@
 }
 
 .p2p__td {
-    display: block;
-    flex: 1 1 20%;
+    display: flex;
+    flex: 1 1 25%;
     text-align: start;
+    align-items: center;
 }
 
-.p2p__td--price {
-    color: var(--success-text);
+.p2p__td-price {
+    color: var(--regular-text);
+    margin-right: 5px;
 }
 
-.p2p__td:last-child {
-    flex: 1 1 40%;
+.p2p__td-fiat {
+    color: var(--regular-text);
+    margin-bottom: -3px;
+    font-size: 11px;
 }
 
 .p2p__td-container {
@@ -355,28 +360,39 @@
 
 .p2p__td-container-left {
     flex: 0 1 auto;
-    width: 52px;
+    margin-right: 5px;
 }
 
 .p2p__td-img {
-    width: 52px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
+    background: #2b6780;
+    color: white;
 }
 
 .p2p__td-container-right {
     flex: 1 1 auto;
-    padding-left: 14px;
+    padding-left: 5px;
 }
 
 .p2p__td-caption {
-    color: rgb(107, 96, 255);
     margin-bottom: 4px;
 }
 
+.p2p__td-caption-link {
+    color: var(--ocean-text);
+    text-decoration: none;
+}
+
 .p2p__td-description {
-    color: #aaa;
+    color: var(--regular-text);
     margin-bottom: 4px;
+    font-size: 12px;
 }
 
 .p2p__td-status {
@@ -404,21 +420,50 @@
 .p2p__td--flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
 }
 
 .p2p__td-limit {
     flex: 1 1 auto;
+    font-weight: 600;
+    font-size: 12px;
 }
 
 .p2p__sell-btn {
-    background: transparent;
     border-radius: 5px;
-    border: 1px solid pink;
-    padding: 12px 15px;
+    /* border: 1px solid pink; */
+    border: none    ;
+    background:var(--danger-text);
+    padding: 7px 15px;
     cursor: pointer;
 
     font-family: "Montserrat";
-    color: #ff506d;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.p2p__sell-btn:hover {
+    background: var(--danger-light);
+}
+
+.p2p__buy-btn {
+    border-radius: 5px;
+    /* border: 1px solid pink; */
+    border: none    ;
+    background:var(--success-text);
+    padding: 7px 15px;
+    cursor: pointer;
+
+    font-family: "Montserrat";
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.p2p__buy-btn:hover {
+    background: var(--success-light);
 }
 
 .p2p__tr--last {
@@ -437,4 +482,61 @@
 
     font-family: "Montserrat";
     color: #fff;
+}
+
+.p2p__loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #00000028;
+    display: flex;
+    align-items: center;
+}
+
+.p2p__loading--hidden {
+    display: none;
+}
+
+.p2p__loading-img {
+    background-image: url('./images/loading.gif');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+}
+
+.p2p__td-method {
+    color:var(--ocean-text); 
+}
+
+.p2p_td-jc-center {
+    display: flex;
+    justify-content: center;
+}
+
+.p2p__pagination {
+    display: flex;
+}
+
+.p2p__pagelink {
+    display: block;
+    padding: 7px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--regular-text);
+    margin: 0 5px;
+}
+
+.p2p__pagelink:hover {
+    background: #00000018;
+}
+
+.p2p__pagelink--active {
+    background: #00000018;
+    font-weight: bold;
 }

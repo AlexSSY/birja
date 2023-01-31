@@ -1,6 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm
+from django.contrib.auth import get_user_model, password_validation
 from django import forms
+from django.forms import ValidationError
 from .models import CustomUser, UserVerification
 from django.utils.translation import gettext_lazy as _
 
@@ -79,3 +80,72 @@ class LoginUserForm(AuthenticationForm):
         label="Email", widget=forms.TextInput(attrs={"class": "form-input"}))
     password = forms.CharField(
         label="Password", widget=forms.PasswordInput(attrs={"class": "form-input"}))
+
+
+class SwapForm(forms.Form):
+    from_ = forms.CharField(widget=forms.HiddenInput())
+    to = forms.CharField(widget=forms.HiddenInput())
+    amount = forms.FloatField(min_value=0, label="Amount", widget=forms.NumberInput(attrs={
+        "class": "swap__input",
+        "placeholder": _("Amount"),
+        }
+    ))
+
+    def clean_amount(self):
+       amount = self.cleaned_data["amount"]
+       if amount <= 0:
+            raise ValidationError(_("Amount must be higher then zero"))
+       return amount
+
+
+class ChangeUserPhotoForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ('photo', )
+    
+    photo = forms.ImageField(allow_empty_file=False, required=True, widget=forms.FileInput(attrs={
+        'class': 'settings__form-file',
+    }))
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(user, *args, **kwargs)
+
+    old_password = forms.CharField(
+        label=_("Old password"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={"autocomplete": "current-password", "autofocus": True, "class": "settings__form-text"}
+        ),
+    )
+
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password", "class": "settings__form-text"}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    new_password2 = forms.CharField(
+        label=_("New password confirmation"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password", "class": "settings__form-text"}),
+    )
+
+
+class TransferForm(forms.Form):
+    coin = forms.CharField(max_length=50, required=True, widget=forms.HiddenInput())
+    destination_user_id = forms.IntegerField(min_value=1, required=True, widget=forms.NumberInput(attrs={
+        'placeholder': _('Please enter a destination User ID'),
+    }))
+    amount = forms.FloatField(min_value=0, required=True, widget=forms.NumberInput(attrs={
+        'placeholder': _('Please enter an amount'),
+        'step': 'any',
+    }))
+
+    def clean_amount(self):
+        data = self.cleaned_data['amount']
+        if data == 0:
+            raise ValidationError(_('Amount must be higher than zero'))
+        return data

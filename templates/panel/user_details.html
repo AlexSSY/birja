@@ -16,6 +16,9 @@
 <li class="nav-item">
     <a class="nav-link {% if url in request.path %}active{% endif %}" aria-current="page" href="{{ url }}">Support</a>
 </li>
+
+<!-- Messaging -->
+
 {% url 'panel:user_messaging' user.id as url %}
 <li class="nav-item">
     <a class="nav-link {% if url in request.path %}active{% endif %}" aria-current="page" href="{{ url }}">Message</a>

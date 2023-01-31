@@ -37,11 +37,16 @@ function switch_tab(tab_id, tabs_class_name) {
 $(".deposit__token").on("click", function () {
     $(".deposit__token.active").toggleClass("active");
     $(this).toggleClass("active");
+    $(".deposit__tokens").removeClass("deposit__tokens--show");
 });
 
 $(".tabs__buttons_button").on("click", function () {
     $(".tabs__buttons_button.selected").toggleClass("selected");
     $(this).toggleClass("selected");
+});
+
+$(".deposit__wallet-button-show").on("click", function () {
+    $(".deposit__tokens").toggleClass("deposit__tokens--show");
 });
 
 /////////////////
@@ -146,6 +151,9 @@ $(".stake__amount_button").on("click", function () {
 //Balance/////////////////////////
 
 function update_balance() {
+    if (!isAuthenticated)
+        return;
+        
     fetch("/profile/balance")
         .then(res => res.json())
         .then(data => {
@@ -161,6 +169,7 @@ function update_balance() {
                 result = (course * amount).toFixed(2);
                 $(`#eq_${data.balances[i][0]}`).text(`${result}`);
                 $(`#amount_${data.balances[i][0]}`).text(`${amount.toFixed(8)}`);
+                $(`#price_${data.balances[i][0]}`).val(course);
             }
         })
         .catch(error => {

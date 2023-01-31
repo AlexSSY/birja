@@ -1,5 +1,6 @@
 .swap {
     max-width: 680px;
+    min-width: 236px;
 }
 
 .swap-margin-top {
@@ -70,12 +71,12 @@
 
 .swap__body {
     background: var(--element-bg);
-    padding: 70px 160px 0 160px;
+    padding: 70px 160px 20px 160px;
 }
 
 @media (max-width: 768px) {
     .swap__body {
-        padding: 70px 20px 0 20px;
+        padding: 70px 20px 20px 20px;
     }
 }
 
@@ -100,7 +101,7 @@
     display: flex;
     background: var(--control-bg-text);
     height: 38px;
-    padding: 5px 20px;
+    padding: 0 0 0 20px;
     margin-bottom: 20px;
     border-radius: 10px;
     position: relative;
@@ -112,6 +113,7 @@
 
 .swap__input-container {
     flex: 1 1 auto;
+    margin: 5px 0;
 }
 
 .swap__input {
@@ -129,7 +131,7 @@
     min-width: 50px;
     position: relative;
     background: var(--control-bg);
-    border-radius: 10px;
+    border-radius: 0 10px 10px 0;
     padding: 0 40px 0 10px;
     cursor: pointer;
     border: none;
@@ -169,7 +171,8 @@
     right: 1;
     top: 58px;
     height: 0;
-    border-radius: 10px;
+    width: 100%;
+    /* border-radius: 10px; */
     overflow: hidden;
     overflow-y: scroll;
     transition: all ease-in-out .1s;
@@ -179,7 +182,7 @@
 }
 
 .swap__select-items--open {
-    height: 120px;
+    height: 220px;
 }
 
 .swap__select-list {
@@ -187,18 +190,24 @@
 }
 
 .swap__select-item {
-    padding: 15px 15px;
+    padding: 8px 8px;
     cursor: pointer;
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .swap__select-item:hover {
     background: var(--control-bg-hover);
 }
 
+.swap__select-item--hidden {
+    display: none;
+}
+
 .swap__awailable {
     font-family: "Montserrat";
     color: var(--regular-text);
+    font-size: 13px;
 }
 
 .swap__fullmoney {
@@ -217,7 +226,7 @@
 
     font-family: "Montserrat";
     color: var(--regular-text);
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -231,11 +240,27 @@
     background: var(--control-bg-hover);
 }
 
-.swap__course {}
+.swap__course {
+    color: var(--regular-text);
+    text-align: center;
+    margin: 20px 0 0 0;
+}
 
 .swap__foot {}
 
 .swap__offer {
     display: none;
     visibility: hidden;
+}
+
+.swap__selcet-icon {
+    width: 24px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.swap__select-tag {
+    color: var(--disabled-text);
+    display: inline-block;
+    margin-left: 15px;
 }

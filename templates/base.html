@@ -15,6 +15,9 @@
     {% block css_top %}{% endblock %}
     <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
     <script src="{% static 'jquery.nice-select.min.js' %}"></script>
+    <script>
+        const isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+    </script>
     {% block js_top %}{% endblock %}
     <title>Tera | {{title}}</title>
 </head>
@@ -160,9 +163,8 @@
                                                             <a href="{{url}}">Trading</a>
                                                         </li>
                                                         {% url 'main:market_tools' as url %}
-                                                        <li
+                                                        <!-- <li
                                                             class="header__ul-item {% if url in request.path %}active-nav-item{% endif %} header__ul-item--mark">
-                                                            <!-- <a href="{{url}}">Market tools</a> -->
                                                             Market tools
                                                             <ul class="header__ul-sub-menu">
                                                                 {% url 'main:market_cap' as url %}
@@ -191,7 +193,7 @@
                                                                     <a href="{{url}}">Currency heat map</a>
                                                                 </li>
                                                             </ul>
-                                                        </li>
+                                                        </li> -->
                                                         {% url 'user_profile:invest' as url %}
                                                         <li
                                                             class="header__ul-item {% if request.path == url %}active-nav-item{% endif %}">

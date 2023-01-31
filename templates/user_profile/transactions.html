@@ -24,9 +24,9 @@
                         <tr class="transactions__table_item">
                             <td>{{item.transaction.id}}</td>
                             <td>{{item.transaction.date}}</td>
-                            <td>{{item.transaction.type}}</td>
+                            <td {% if item.transaction.type == 'Withdraw' %}style="color: var(--danger-text);"{% else %}style="color: var(--success-text);"{% endif %}>{{item.transaction.type}}</td>
                             <td>{{item.transaction.amount}}&nbsp;{{item.transaction.token.tag}}</td>
-                            <td>{{item.transaction.status}}</td>
+                            <td {% if item.transaction.status == 'Failed' %}style="color: var(--danger-text);"{% else %}style="color: var(--success-text);"{% endif %}>{{item.transaction.status}}</td>
                             <td>{{item.transaction.balance}}</td>
                         </tr>
                         {% endfor %}
