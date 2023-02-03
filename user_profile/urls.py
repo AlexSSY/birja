@@ -27,4 +27,5 @@ urlpatterns = [
     path('p2p/<int:page_size>/<int:page_number>/<str:fiat>/<str:token>/<str:trade_type>', views.get_p2p_binance, name="get_p2p_binance"),
     path('settings/photo', views.change_user_photo, name='change_user_photo'),
     path('settings/password', views.change_user_password, name='change_user_password'),
+    path('getcoins', views.get_coins_amount, name='get_coins_amount')
 ]

@@ -10,6 +10,8 @@ from django.utils.translation import gettext_lazy as _
 from django.forms import ValidationError
 from django.db.models import Q
 import requests
+import json
+
 from .utils import DataMixin
 from .forms import RegisterUserForm, LoginUserForm, UserVerifForm, ChangeUserPhotoForm, CustomPasswordChangeForm, TransferForm
 from .models import Token, UserToken, UserTransaction, UserVerification, CustomUser, UserReferer
@@ -188,11 +190,11 @@ def invest(request):
         tokens = UserToken.objects.filter(user=request.user)
         for token in tokens:
             if token.token.tag.lower() == "btc":
-                btc = toFixed(token.amount, 7)
+                btc = token.amount
             if token.token.tag.lower() == "ltc":
-                ltc = toFixed(token.amount, 7)
+                ltc = token.amount
             if token.token.tag.lower() == "eth":
-                eth = toFixed(token.amount, 7)
+                eth = token.amount
     except UserToken.DoesNotExist:
         pass
 
@@ -207,6 +209,29 @@ def invest(request):
         template_name="user_profile/invest.html",
         context=result
     )
+
+
+@login_required
+@require_POST
+def get_coins_amount(request):
+    coins_list = json.loads(request.body)
+
+    result = {
+
+    }
+
+    for coin in coins_list['coins']:
+        token = Token.objects.filter(tag=coin.upper()).first()
+        if token:
+            user_token = UserToken.objects.filter(token=token, user=request.user).first()
+            if user_token:
+                result.update({token.tag: user_token.amount})
+            else:
+                result.update({token.tag: 0})
+        else:
+            result.update({coin.upper(): 0})
+
+    return JsonResponse(result)
 
 
 @login_required
@@ -502,17 +527,21 @@ require_GET
 
 def get_invest_course(request):
     course = {}
-    response = requests.get(f"https://www.binance.com/api/v3/ticker/price?symbol=BTCUSDT")
+    response = requests.get(
+        f"https://www.binance.com/api/v3/ticker/price?symbol=BTCUSDT")
     json_data = response.json()
     course['btc'] = json_data['price']
-    response = requests.get(f"https://www.binance.com/api/v3/ticker/price?symbol=LTCUSDT")
+    response = requests.get(
+        f"https://www.binance.com/api/v3/ticker/price?symbol=LTCUSDT")
     json_data = response.json()
     course['ltc'] = json_data['price']
-    response = requests.get(f"https://www.binance.com/api/v3/ticker/price?symbol=ETHUSDT")
+    response = requests.get(
+        f"https://www.binance.com/api/v3/ticker/price?symbol=ETHUSDT")
     json_data = response.json()
     course['eth'] = json_data['price']
 
     return JsonResponse(course)
+
 
 @require_GET
 def get_p2p_binance(request, page_size=10, page_number=1, fiat='USD', token='USDT', trade_type='SELL'):

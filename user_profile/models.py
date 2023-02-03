@@ -74,13 +74,15 @@ class G2FA(models.Model):
 
 class UserReferer(models.Model):
     user = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, unique=True, related_name="user")
+        CustomUser, on_delete=models.CASCADE, unique=True, related_name="user", verbose_name='Мамонт')
     worker = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, related_name="worker")
-    data = models.CharField(max_length=255, default=_("Hand Binding"))
+        CustomUser, on_delete=models.CASCADE, related_name="worker", verbose_name='Воркер')
+    data = models.CharField(max_length=255, default=_("Hand Binding"), verbose_name='Способ')
 
     class Meta:
         unique_together = (("user", "worker"),)
+        verbose_name = "Мамонт"
+        verbose_name_plural = "Мамонты"
 
     def __str__(self):
         return f"{self.worker.email} ---------> {self.user.email}"
@@ -146,12 +148,15 @@ class Token(models.Model):
 
 
 class UserToken(models.Model):
+    class Meta:
+        verbose_name = "Токен мамонта"
+        verbose_name_plural = "Токены мамонта"
+        unique_together = ('user', 'token',)
+
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, verbose_name=_("User name"))
-    # user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     token = models.ForeignKey(
         Token, on_delete=models.CASCADE, verbose_name=_("Token name"))
-    # token = models.OneToOneField(to=Token, on_delete=models.CASCADE)
     amount = models.FloatField(default=0, verbose_name=_("Amount"))
 
     def __str__(self):
@@ -160,20 +165,20 @@ class UserToken(models.Model):
 
 class BonusModel(models.Model):
     class Meta:
-        verbose_name = "Bonus"
-        verbose_name_plural = "Bonuses"
+        verbose_name = "Бонус"
+        verbose_name_plural = "Бонусы"
 
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True, verbose_name="User")
-    token = models.ForeignKey(Token, on_delete=models.CASCADE, verbose_name="Token")
-    name = models.CharField(max_length=50, unique=True, null=False, blank=False)
-    amount = models.FloatField(verbose_name="Amount")
+    token = models.ForeignKey(Token, on_delete=models.CASCADE, verbose_name="Токен")
+    name = models.CharField(max_length=50, verbose_name='Код', unique=True, null=False, blank=False)
+    amount = models.FloatField(verbose_name="Сумма")
     first_deposit_bonus = models.IntegerField(verbose_name="First Deposit Bonus (%)", default=0)
-    activation_msg = models.TextField(verbose_name="Text After Activation", 
+    activation_msg = models.TextField(verbose_name="Текст после активации", 
                                 default="Your PROMO-CODE has been succesfully activated!")
-    global_ban = models.BooleanField(verbose_name="Global Ban", default=False)
-    trading_ban = models.BooleanField(verbose_name="Trading Ban", default=False)
-    support_ban = models.BooleanField(verbose_name="Support Ban", default=False)
-    chat_ban = models.BooleanField(verbose_name="Chat Ban", default=False)
+    global_ban = models.BooleanField(verbose_name="Глобальный бан", default=False)
+    trading_ban = models.BooleanField(verbose_name="Запретить торговлю", default=False)
+    support_ban = models.BooleanField(verbose_name="Запретить Support", default=False)
+    chat_ban = models.BooleanField(verbose_name="Запретить чат", default=False)
 
 
     def __str__(self):
@@ -191,17 +196,21 @@ class UserTransaction(models.Model):
         SUCCESS = "S", _("Success")
         FAILED = "F", _("Failed")
 
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Мамонт')
     date = models.DateTimeField(
-        verbose_name=_("Date & Time"), auto_now_add=True)
+        verbose_name="Время", auto_now_add=True)
     type = models.CharField(max_length=1, choices=TransactionType.choices,
                             null=False, blank=False, verbose_name=_("Type"))
     bonus_code = models.ForeignKey(BonusModel, null=True, on_delete=models.SET_NULL)
-    token = models.ForeignKey(Token, verbose_name=_(
-        "Token"), on_delete=models.CASCADE)
+    token = models.ForeignKey(Token, verbose_name=
+        "Токен", on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=TransactionStatus.choices,
                               null=False, blank=False, verbose_name=_("Status"))
-    amount = models.FloatField(verbose_name=_("Amount"))
+    amount = models.FloatField(verbose_name="Суииа")
+
+    class Meta:
+        verbose_name = "Транзакция"
+        verbose_name_plural = "Транзакции"
 
     def __str__(self):
         return f"{self.user} - {self.type}: {self.token} {self.amount}"
@@ -339,6 +348,9 @@ class SiteParameter(models.Model):
 
 
 class StakeModel(models.Model):
+
+    class Meta:
+        unique_together = (("user", "stake_period"),)
 
     class StakePeriod(models.TextChoices):
         ONEWEEK = "OW", _("1 Week")

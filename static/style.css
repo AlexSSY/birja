@@ -1593,6 +1593,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 5px;
+	position: relative;
 }
 
 @media (max-width: 992px) {
@@ -1600,6 +1601,29 @@ body {
 		margin-bottom: 20px;
 	}
 }
+
+.window__loading {
+	position: absolute;
+	display: none;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	background: #00000054;
+}
+
+.window__loading-img {
+	width: 48px;
+	height: 40px;
+}
+
+.window__loading--show {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 
 .window__header {
 	padding: 15px;
@@ -1989,7 +2013,7 @@ body {
 }
 
 .stake__button-loading {
-
+	
 }
 
 .stake__amount_crypto {
@@ -3328,12 +3352,12 @@ body {
 }
 
 .alert-bg {
-	position: absolute;
+	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100vw;
 	height: 100vh;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.3);
 	z-index: 1000;
 }
 
@@ -3342,14 +3366,18 @@ body {
 }
 
 .alert {
-	position: absolute;
+	position: fixed;
+	display: flex;
+	align-items: center;
 	z-index: 1001;
-	width: 400px;
-	height: 280px;
+	min-width: 400px;
+	min-height: 80px;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	background: var(--element-bg);
+	background: var(--success-bg);
+	padding: 10px 30px 10px 40px;
+	border-radius: 5px;
 }
 
 .alert--hidden {
@@ -3357,39 +3385,24 @@ body {
 }
 
 .alert__image {
-	position: absolute;
-	background-image: url("./images/alert.png");
-	background-size: contain;
-	background-repeat: no-repeat;
-	z-index: 1002;
-	width: 128px;
-	height: 128px;
-	left: 0;
-	top: 50%;
-	transform: translate(-50%, -50%);
+	width: 32;
+	height: 32;
 }
 
-.alert__header {}
+.alert__header {
+	color: var(--success-text);
+	font-family: 'Montserrat';
+}
 
 .alert__title {
 	font-family: "Montserrat";
 	color: var(--regular-text);
+	margin-bottom: 4px;
 }
 
-.alert__close {
-	font-family: "Montserrat";
-	color: var(--regular-text);
-	position: absolute;
-	top: 0;
-	right: 0;
-	cursor: pointer;
-	background: var(--danger-text);
-	padding: 5px;
-	border-radius: 50%;
-	width: 16px;
-	height: 16px;
-	text-align: center;
-	transform: translate(50%, -50%);
+.alert__body {
+	padding: 0 0 0 30px;
+	flex: 1 1 auto;
 }
 
 .alert__message {}
@@ -3397,17 +3410,18 @@ body {
 .alert__text {
 	font-family: "Montserrat";
 	color: var(--regular-text);
+	font-size: 13px;
+    line-height: 1.2;
 }
 
 .alert__button {
-	border: var(--border);
-	background: var(--control-bg);
+	border: none;
 	cursor: pointer;
-	padding: 10px 20px;
-	border-radius: 5px;
 	color: var(--regular-text);
+	height: 32px;
+	background: transparent;
 }
 
 .alert__button:hover {
-	background: var(--control-bg-hover);
+	color: #131212!important;
 }

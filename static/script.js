@@ -111,9 +111,9 @@ $("#profile_link").on("click", function (event) {
 
 $("select").niceSelect();
 
-$(".select").on("click", function () {
-    $(this).toggleClass("active");
-});
+// $(".select").on("click", function () {
+//     $(this).toggleClass("active");
+// });
 
 function select(stake_id, select_item, class_name) {
     const stake_element = $("#" + stake_id);
@@ -170,6 +170,7 @@ function update_balance() {
                 $(`#eq_${data.balances[i][0]}`).text(`${result}`);
                 $(`#amount_${data.balances[i][0]}`).text(`${amount.toFixed(8)}`);
                 $(`#price_${data.balances[i][0]}`).val(course);
+                $(`#total_${data.balances[i][0]}`).val(amount);
             }
         })
         .catch(error => {

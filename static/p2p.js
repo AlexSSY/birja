@@ -118,7 +118,7 @@ function get_p2p_binance(page_size = 10) {
         });
 }
 
-import { createApp } from 'vue';
+import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 
 // Vue.filter('toCurrency', function (value) {
 //     if (typeof value !== "number") {

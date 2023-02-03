@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from django.urls import reverse_lazy
 from pathlib import Path
 from django.forms.renderers import TemplatesSetting
 
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'user_profile.middleware.RestrictStaffToAdminMiddleware',
 ]
 
 ROOT_URLCONF = 'birja.urls'
@@ -88,7 +90,42 @@ REST_FRAMEWORK = {
     ),
 }
 
-from django.urls import reverse_lazy
+JAZZMIN_SETTINGS = {
+    "site_title": "Panel",
+    "site_header": "Tera",
+    "site_brand": "Tera Trade",
+    "site_logo": "images/logo.png",
+    "login_logo": "images/logo.png",
+    "icons": {
+        "auth.Group": "fas fa-users",
+        "support.SupportMessage": "fas fa-headset",
+
+        "user_profile.BonusModel": "fas fa-gift",
+        "user_profile.Fiat": "fas fa-comment-dollar",
+        "user_profile.G2FA": "fas fa-key",
+        "user_profile.P2P": "fas fa-handshake",
+        "user_profile.SiteParameter": "fas fa-wrench",
+        "user_profile.Token": "fab fa-bitcoin",
+        "user_profile.UserReferer": "fas fa-user-friends",
+        "user_profile.UserToken": "fas fa-coins",
+        "user_profile.UserTransaction": "fas fa-exchange-alt",
+        "user_profile.UserVerification": "fas fa-id-card",
+        "user_profile.CustomUser": "fas fa-user",
+    },
+    "custom_links": {
+        "user_profile": [{
+            "name": "Привязка мамонта",
+            "url": "panel:user_profile_bind",
+            "icon": "fas fa-link",
+            # "permissions": ["books.view_book"]
+        }]
+    },
+    "usermenu_links": [
+        {"name": "Google", "url": "https://google.com/", "new_window": True},
+        {"model": "user_profile.BonusModel"}
+    ],
+}
+
 
 LOGIN_REDIRECT_URL = reverse_lazy("main:index")
 LOGOUT_REDIRECT_URL = reverse_lazy("user_profile:login")

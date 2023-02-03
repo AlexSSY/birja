@@ -15,6 +15,7 @@
     {% block css_top %}{% endblock %}
     <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
     <script src="{% static 'jquery.nice-select.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
     </script>
@@ -23,18 +24,6 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %} ultrascroll">
-    <div class="alert-bg alert-bg--hidden"></div>
-    <div class="alert alert--hidden">
-        <div class="alert__image"></div>
-        <div class="alert__header">
-            <p class="alert__title">Title</p>
-        </div>
-        <div class="alert__close">X</div>
-        <div class="alert__message">
-            <p class="alert__text"></p>
-        </div>
-        <button class="alert__button">OK</button>
-    </div>
     <div class="wrapper">
         <div class="content">
             <header class="header {% block header_class %}{% endblock %}">
@@ -382,6 +371,7 @@
             </div>
         </footer>
     </div>
+    <script src="{% static 'alert.js' %}"></script>
     <script src="{% static 'script.js' %}"></script>
     <script>
         var g_ThemeSwitchQueue = [];
