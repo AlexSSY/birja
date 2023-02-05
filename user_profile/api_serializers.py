@@ -1,7 +1,7 @@
 from rest_framework.serializers import *
 from django.db.models import Q
 
-from .models import StakeModel, UserToken, Token
+from .models import StakeModel, CustomUser
 
 
 class StakeModelSerializer(ModelSerializer):
@@ -16,18 +16,12 @@ class StakeModelSerializer(ModelSerializer):
     token_tag = CharField()
     amount = FloatField()
 
-    def validate_amount(self, value):
-        return value
 
-    def update(self, instance, validated_data):
-        # user = instance.user
-        # token = Token.objects.filter(tag=instance.token_tag).first()
-        # if token:
-        #     user_token = UserToken.objects.filter(Q(user=user) & Q(token=token)).first()
-        #     if user_token:
-        #         pass
-        #     else:
-        #         return None
-        # else:
-        #     return None
-        return super().update(instance, validated_data)
+class CustomUserSerializer(ModelSerializer):
+
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'email']
+
+    id = ReadOnlyField()
+    email = ReadOnlyField()

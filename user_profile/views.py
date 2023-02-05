@@ -408,6 +408,8 @@ def wallet(request):
 
             success = True
 
+            return render(request, "user_profile/wallet.html", {"data": result, 'message': bonus.activation_msg, "form": form, "success": success})
+
     else:
         form = BonusActivationForm()
 

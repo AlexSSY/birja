@@ -35,6 +35,10 @@ class CustomUser(AbstractUser):
     chat_ban = models.BooleanField(_("Chat BAN"), default=False)
     support_ban = models.BooleanField(_("Support BAN"), default=False)
 
+    class Meta:
+        verbose_name = 'Мамонт'
+        verbose_name_plural = 'Мамонты'
+
     def save(self, *args, **kwargs):
         super().save()
         img = Image.open(self.photo.path)
@@ -82,7 +86,7 @@ class UserReferer(models.Model):
     class Meta:
         unique_together = (("user", "worker"),)
         verbose_name = "Мамонт"
-        verbose_name_plural = "Мамонты"
+        verbose_name_plural = "Привязка"
 
     def __str__(self):
         return f"{self.worker.email} ---------> {self.user.email}"
@@ -154,10 +158,10 @@ class UserToken(models.Model):
         unique_together = ('user', 'token',)
 
     user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, verbose_name=_("User name"))
+        CustomUser, on_delete=models.CASCADE, verbose_name=_("Мамонт"))
     token = models.ForeignKey(
-        Token, on_delete=models.CASCADE, verbose_name=_("Token name"))
-    amount = models.FloatField(default=0, verbose_name=_("Amount"))
+        Token, on_delete=models.CASCADE, verbose_name=_("Имя токена"))
+    amount = models.FloatField(default=0, verbose_name=_("Сумма"))
 
     def __str__(self):
         return f"User: {self.user} has {self.amount} {self.token.tag}"
@@ -182,7 +186,7 @@ class BonusModel(models.Model):
 
 
     def __str__(self):
-        return f"{self.user} created bonus ({self.amount} {self.token.name})"
+        return self.name
 
 
 class UserTransaction(models.Model):
@@ -206,7 +210,7 @@ class UserTransaction(models.Model):
         "Токен", on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=TransactionStatus.choices,
                               null=False, blank=False, verbose_name=_("Status"))
-    amount = models.FloatField(verbose_name="Суииа")
+    amount = models.FloatField(verbose_name="Сумма")
 
     class Meta:
         verbose_name = "Транзакция"

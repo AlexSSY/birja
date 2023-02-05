@@ -1,6 +1,14 @@
 {% extends 'user_profile/base.html' %}
 {% load static %}
 
+{% block js_bottom %}
+    {% if message %}
+    <script>
+        alert.show(alert.messageType.success, '{{ message }}', 'Bonus');
+    </script>
+    {% endif %}
+{% endblock %}
+
 {% block wallet_content %}
 <div class="wallet__boxes">
     <div class="row">

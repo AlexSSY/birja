@@ -12,11 +12,12 @@ from django.shortcuts import render
 from .models import *
 from .forms import CustomUserChangeForm
 from panel.forms import EmailBinderForm
-
+from support.models import SupportMessage
 
 
 class WorkerAdminSite(admin.AdminSite):
     site_header = 'Панель Спамера'
+
 
 worker_admin = WorkerAdminSite(name='panel')
 
@@ -95,6 +96,7 @@ class WorkerUserRefererAdmin(admin.ModelAdmin):
 
         return render(request, "panel/bind_email.html", context)
 
+
 worker_admin.register(UserReferer, WorkerUserRefererAdmin)
 
 
@@ -115,6 +117,7 @@ class WorkerBonusAdmin(admin.ModelAdmin):
             obj.user = request.user
         obj.save()
 
+
 worker_admin.register(BonusModel, WorkerBonusAdmin)
 
 
@@ -129,8 +132,10 @@ class WorkerUserTokenAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'user':
-            kwargs['queryset'] = CustomUser.objects.filter(user__worker=request.user)
+            kwargs['queryset'] = CustomUser.objects.filter(
+                user__worker=request.user)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 worker_admin.register(UserToken, WorkerUserTokenAdmin)
 
@@ -148,7 +153,57 @@ class WorkerUserTransactionAdmin(admin.ModelAdmin):
         return obj.get_status_display()
     get_type_display.short_description = "Тип"
 
+
 worker_admin.register(UserTransaction, WorkerUserTransactionAdmin)
+
+
+class WorkerSupportMessageAdmin(admin.ModelAdmin):
+    list_display = ("sender", "get_receiver_tag", "message")
+
+    def get_queryset(self, request):
+        return SupportMessage.objects.filter(Q(sender=request.user) | Q(receiver=request.user))
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [path(
+            'support/', worker_admin.admin_view(self.support_view), name='user_profile_support'), ]
+        result = my_urls + urls
+        return result
+
+    def support_view(self, request):
+        context = {}
+        context.update(worker_admin.each_context(request))
+        return render(request, 'panel/support.html', context=context)
+
+
+worker_admin.register(SupportMessage, WorkerSupportMessageAdmin)
+
+
+class WorkerCustomUserAdmin(admin.ModelAdmin):
+    fieldsets = [('Info', {
+        'fields': ('email', 'photo', 'postal_code', 'country',
+                   'city', 'present_address', 'permanent', 'phone_number',
+                   'is_superuser', 'user_permissions', 'groups', 'date_joined',
+                   'is_active', 'is_staff', 'first_name', 'last_name', 'username',
+                   'last_login', 'password'),
+    }),
+        ('Bans', {
+            'fields': ('global_ban', 'trading_ban', 'chat_ban', 'support_ban'),
+        }),
+    ]
+
+    def get_queryset(self, request):
+        return CustomUser.objects.filter(user__worker=request.user)
+
+    def get_readonly_fields(self, request, obj):
+        # return super().get_readonly_fields(request, obj)
+        return ('email', 'photo', 'postal_code', 'country',
+                'city', 'present_address', 'permanent', 'phone_number',
+                'is_superuser', 'user_permissions', 'groups', 'date_joined',
+                'is_active', 'is_staff', 'first_name', 'last_name', 'username',
+                'last_login', 'password')
+
+worker_admin.register(CustomUser, WorkerCustomUserAdmin)
 
 
 
@@ -157,12 +212,6 @@ worker_admin.register(UserTransaction, WorkerUserTransactionAdmin)
 #                                   Super User admin down here...                                          #
 #                                                                                                          #
 ############################################################################################################
-
-
-
-
-
-
 
 
 class UserVerificationInline(admin.StackedInline):
@@ -179,6 +228,9 @@ class UserG2FAInline(admin.StackedInline):
     model = G2FA
     can_delete = False
     verbose_name = _("2FA auth")
+    fields = ('gauth_key', )
+    readonly_fields = ('gauth_key', )
+
 
 @admin.register(UserVerification)
 class UserVerificationAdmin(admin.ModelAdmin):
@@ -200,8 +252,7 @@ class G2FAAdmin(admin.ModelAdmin):
 
 class UserAdmin(admin.ModelAdmin):
     model = CustomUser
-    # form = CustomUserChangeForm
-    inlines = (UserVerificationInline, UserG2FAInline, )
+    inlines = (UserVerificationInline, )#UserG2FAInline, )
 
 
 admin.site.register(CustomUser, UserAdmin)

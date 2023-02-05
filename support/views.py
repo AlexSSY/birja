@@ -1,6 +1,7 @@
+import json
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseBadRequest
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -67,11 +68,47 @@ def send_message(request):
 
 
 @login_required
+@require_POST
+def send_message_json(request):
+    data = json.loads(request.body)
+    receiver = data['receiver']
+
+    worker = request.user
+
+    user_referer = UserReferer.objects.filter(
+        Q(worker_id=worker.id) & Q(user_id=receiver)).first()
+
+    if user_referer is None:
+        return JsonResponse({
+            'success': False,
+            'message': 'This worker not have that user',
+        })
+
+    message_text = data['message']
+
+    message = SupportMessage()
+    message.message = message_text
+    message.sender = get_user_model().objects.get(id=user_referer.worker.id)
+    message.receiver = get_user_model().objects.get(id=user_referer.user.id)
+    message.save()
+
+    return JsonResponse({
+        'success': True,
+        'message': {
+            "time": naturaltime(message.time),
+            "message": message.message,
+            "type": 'send',
+        },
+    })
+
+
+@login_required
 def get_message_list_user(request):
     result = None
 
     try:
-        result = SupportMessage.objects.filter(Q(sender_id=request.user.id) | Q(receiver_id=request.user.id)).order_by("time")
+        result = SupportMessage.objects.filter(Q(sender_id=request.user.id) | Q(
+            receiver_id=request.user.id)).order_by("time")
     except:
         pass
 
@@ -107,7 +144,8 @@ def get_message_list(request, user_id):
         return HttpResponseBadRequest("user is not your referal")
 
     try:
-        result = SupportMessage.objects.filter(Q(sender_id=user.id) | Q(receiver_id=user.id)).order_by("time")
+        result = SupportMessage.objects.filter(
+            Q(sender_id=user.id) | Q(receiver_id=user.id)).order_by("time")
     except:
         pass
 
@@ -123,6 +161,7 @@ def get_message_list(request, user_id):
 
         data["messages"].append(
             {
+                "id": msg.id,
                 "time": naturaltime(msg.time),
                 "message": msg.message,
                 "type": type,

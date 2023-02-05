@@ -1,16 +1,16 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import SearchFilter
 from rest_framework.exceptions import ValidationError, APIException
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
-from .api_serializers import StakeModelSerializer
+from .api_serializers import StakeModelSerializer, CustomUserSerializer
 from .api_permissions import IsAmountEnoughPermission
 from .models import StakeModel
-from .api_filters import IsOwnerFilterBackend
+from .api_filters import IsOwnerFilterBackend, IsWorkerFilterBackend
 
-from .models import Token, UserToken
+from .models import Token, UserToken, CustomUser
 
 
 class StakeModelAPIView(ModelViewSet):
@@ -78,3 +78,10 @@ class StakeModelAPIView(ModelViewSet):
             user_token.save()
 
         instance.delete()
+
+
+class CustomUserReadOnlyView(ReadOnlyModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated]
+    filter_backends = [IsWorkerFilterBackend]

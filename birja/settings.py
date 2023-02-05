@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'user_profile.middleware.RestrictStaffToAdminMiddleware',
+    'user_profile.middleware.BansMiddleware',
 ]
 
 ROOT_URLCONF = 'birja.urls'
@@ -106,7 +107,7 @@ JAZZMIN_SETTINGS = {
         "user_profile.P2P": "fas fa-handshake",
         "user_profile.SiteParameter": "fas fa-wrench",
         "user_profile.Token": "fab fa-bitcoin",
-        "user_profile.UserReferer": "fas fa-user-friends",
+        "user_profile.UserReferer": "fa fa-link",
         "user_profile.UserToken": "fas fa-coins",
         "user_profile.UserTransaction": "fas fa-exchange-alt",
         "user_profile.UserVerification": "fas fa-id-card",
@@ -114,9 +115,9 @@ JAZZMIN_SETTINGS = {
     },
     "custom_links": {
         "user_profile": [{
-            "name": "Привязка мамонта",
-            "url": "panel:user_profile_bind",
-            "icon": "fas fa-link",
+            "name": "Саппорт",
+            "url": "panel:user_profile_support",
+            "icon": "fas fa-comments",
             # "permissions": ["books.view_book"]
         }]
     },
