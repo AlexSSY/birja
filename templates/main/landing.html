@@ -1,11 +1,318 @@
+{% load static %}
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tera Trade - Home</title>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'monserrat.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'landing.css' %}">
 </head>
+
 <body>
-    
+    <section class="section">
+        <div class="section__background"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="offer">
+                        <h2 class="offer__header">The world’s most
+                            secure trading platform</h2>
+                        <p class="offer__decription">Join the fastest growing global cryptocurrency exchange
+                            with the lowest fees around.</p>
+                        <div class="offer__controls">
+                            <button class="offer__button">Join Us</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider">
+                        <div class="slider__body">
+                            <div class="slider__button-prev"></div>
+                            <div class="slider__items">
+                                <div class="slider-item">
+                                    <div class="slider-item__header">
+                                        <div class="slider-item__crypto">
+                                            <img class="slider-item__icon" src="">
+                                            <p class="slider-item__name">Bitcoin</p>
+                                        </div>
+                                        <button class="slider-item__buy">Buy</button>
+                                    </div>
+                                    <div class="slider-item__price">
+                                        12334.33$
+                                    </div>
+                                    <img class="slider-item__graph" src="">
+                                </div>
+                            </div>
+                            <div class="slider__button-next"></div>
+                        </div>
+                        <div class="slider__footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cointable">
+                        <div class="coins-table">
+                            <div class="coins-table__row">
+                                <div class="coins-table__col">Name</div>
+                                <div class="coins-table__col">Ticker</div>
+                                <div class="coins-table__col">Price</div>
+                                <div class="coins-table__col">Dynamics</div>
+                                <div class="coins-table__col">Market</div>
+                            </div>
+                            <div class="coins-table__row">
+                                <div class="coins-table__col"><img class="coins-table__icon" src="">Bitcoin</div>
+                                <div class="coins-table__col">BTC</div>
+                                <div class="coins-table__col">24888.47</div>
+                                <div class="coins-table__col">0.55%</div>
+                                <div class="coins-table__col"><img class="coins-table__market" src=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section section--dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h2">The complete trading essentials, unified in a single platform</h2>
+                    <div class="separator"></div>
+                    <div class="cards">
+                        <div class="cards__col">
+                            <div class="card__item">
+                                <img class="card__icon" src="{% static 'images/integrated-order.png' %}">
+                                <div class="card__body">
+                                    <div class="card__header">Integrated orders for spot and margin</div>
+                                    <div class="card__description">Set take profit, stop loss, limit orders, and more
+                                        advanced order
+                                        types for spot and margin in one unified order interface with up to 5x leverage.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__item">
+                                <img class="card__icon" src="{% static 'images/integrated-order.png' %}">
+                                <div class="card__body">
+                                    <div class="card__header">Integrated orders for spot and margin</div>
+                                    <div class="card__description">Set take profit, stop loss, limit orders, and more
+                                        advanced order
+                                        types for spot and margin in one unified order interface with up to 5x leverage.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__item">
+                                <img class="card__icon" src="{% static 'images/integrated-order.png' %}">
+                                <div class="card__body">
+                                    <div class="card__header">Integrated orders for spot and margin</div>
+                                    <div class="card__description">Set take profit, stop loss, limit orders, and more
+                                        advanced order
+                                        types for spot and margin in one unified order interface with up to 5x leverage.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cards__col">
+                            <div class="card__item">
+                                <img class="card__icon" src="{% static 'images/integrated-order.png' %}">
+                                <div class="card__body">
+                                    <div class="card__header">Integrated orders for spot and margin</div>
+                                    <div class="card__description">Set take profit, stop loss, limit orders, and more
+                                        advanced order
+                                        types for spot and margin in one unified order interface with up to 5x leverage.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__item">
+                                <img class="card__icon" src="{% static 'images/integrated-order.png' %}">
+                                <div class="card__body">
+                                    <div class="card__header">Integrated orders for spot and margin</div>
+                                    <div class="card__description">Set take profit, stop loss, limit orders, and more
+                                        advanced order
+                                        types for spot and margin in one unified order interface with up to 5x leverage.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__item">
+                                <img class="card__icon" src="{% static 'images/integrated-order.png' %}">
+                                <div class="card__body">
+                                    <div class="card__header">Integrated orders for spot and margin</div>
+                                    <div class="card__description">Set take profit, stop loss, limit orders, and more
+                                        advanced order
+                                        types for spot and margin in one unified order interface with up to 5x leverage.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h2">For experienced traders</h2>
+                    <p class="p">Trade like a pro on Bitlerdo</p>
+                </div>
+                <div class="col-4">
+                    <h4 class="h4">Powerful</h4>
+                    <h2 class="h2-bautiful">API</h2>
+                    <p class="p">Customize your private functionality and get more options</p>
+                </div>
+                <div class="col-4">
+                    <h4 class="h4">Powerful</h4>
+                    <h2 class="h2-bautiful">API</h2>
+                    <p class="p">Customize your private functionality and get more options</p>
+                </div>
+                <div class="col-4">
+                    <h4 class="h4">Powerful</h4>
+                    <h2 class="h2-bautiful">API</h2>
+                    <p class="p">Customize your private functionality and get more options</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div class="offer">
+                        <h2 class="offer__header">Investment
+                            calculator</h2>
+                        <p class="offer__decription">Calculate how much
+                            you can earn with us</p>
+                        <div class="offer__controls">
+                            <button class="offer__button">Invest now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="invest-calc">
+                        <p class="p">Deposit:</p>
+                        <input class="invest-calc__amount" type="text" name="" id="">
+                        <div class="ui-slider">
+                            <div class="ui-slider__track">
+                                <div class="ui-slider__bar"></div>
+                            </div>
+                            <div class="ui-slider__button"></div>
+                        </div>
+                        <div class="invest-calc__period">
+                            <p class="p">Select the investment period</p>
+                            <div class="invest-calc__flex-row">
+                                <div class="invest-calc__button">1 week</div>
+                                <div class="invest-calc__button">2 weeks</div>
+                                <div class="invest-calc__button">1 month</div>
+                                <div class="invest-calc__button">2 months</div>
+                            </div>
+                        </div>
+                        <div class="invest-calc__flex-row">
+                            <div class="invest-calc__col">
+                                <small class="invest-calc__small">Your profit</small>
+                                <p class="invest-clc__price">+ 216 $</p>
+                            </div>
+                            <div class="invest-calc__col">
+                                <small class="invest-calc__small">Your profit</small>
+                                <p class="invest-clc__price">+ 216 $</p>
+                            </div>
+                            <div class="invest-calc__col">
+                                <small class="invest-calc__small">Your profit</small>
+                                <p class="invest-clc__price">+ 216 $</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <img class="img-medium">
+                    <h2 class="h2-beautiful">40+</h2>
+                    <p class="p-big">Coins</p>
+                    <p class="p">We offer a wide range of relevant coins on the market, which are curated with care by
+                        our experts.</p>
+                </div>
+                <div class="col-4">
+                    <img class="img-medium">
+                    <h2 class="h2-beautiful">€1.000.000+</h2>
+                    <p class="p-big">Daily market volume</p>
+                    <p class="p">Our state-of-the-art systems are built to securely process high volumes each day.</p>
+                </div>
+                <div class="col-4">
+                    <img class="img-medium">
+                    <h2 class="h2-beautiful">Best broker</h2>
+                    <p class="p-big">Trusted across Europe</p>
+                    <p class="p">We have been voted 'Best Crypto Broker' 2019 & 2020 and on our way to become the number
+                        1 in Europe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="marquee">
+                        <ul class="marquee__conent">
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                            <li class="marquee__item"><img src="" alt="" class="marquee__img"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="offer">
+                        <h2 class="offer__header">Trade anytime, anywhere</h2>
+                        <p class="offer__decription">Boost your trading impact and reaction time in over 40+ cryptocurrencies via instant access to your portfolio.</p>
+                        <div class="offer__controls">
+                            <button class="offer__button">Start trading</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
