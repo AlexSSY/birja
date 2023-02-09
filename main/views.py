@@ -13,11 +13,19 @@ from user_profile.forms import SwapForm
 
 
 def index(request):
-    # context = {
-    #     "title": _("Index"),
-    # }
-    # return render(request, "main/landing.html", context)
-    return redirect("main:trading", symbol_source="btc", symbol_dest="usdt")
+    context = {
+        "title": _("Index"),
+    }
+
+    tokens = Token.objects.all()
+
+    for token in tokens:
+        context.update({
+            token.tag: token,
+        })
+
+    return render(request, "main/landing.html", context)
+    #return redirect("main:trading", symbol_source="btc", symbol_dest="usdt")
 
 
 def trading(request, symbol_source: str, symbol_dest: str):
