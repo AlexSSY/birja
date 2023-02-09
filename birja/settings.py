@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-c1e=n@1rvti-dn59$sob*k_!*1mbmk@!48md59@7o64y)&9y7$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.137.1", 'localhost']
+ALLOWED_HOSTS = ["192.168.137.1", 'localhost', 'teratrade.pro']
 
 
 # Application definition
