@@ -28,6 +28,10 @@ def index(request):
     #return redirect("main:trading", symbol_source="btc", symbol_dest="usdt")
 
 
+def nft(request):
+    return render(request, 'main/nft.html')
+
+
 def trading(request, symbol_source: str, symbol_dest: str):
     tokens = Token.objects.all()
 

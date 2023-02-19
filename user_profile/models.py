@@ -366,3 +366,73 @@ class StakeModel(models.Model):
     amount = models.FloatField(verbose_name=_('Amount'), default=0, null=True, blank=True)
     token_tag = models.CharField(verbose_name=_('Token Tag'), max_length=10, null=True, blank=True)
     stake_period = models.CharField(verbose_name=_('Stake period'), max_length=2, choices=StakePeriod.choices, null=False, blank=False)
+
+
+class SIDModel(models.Model):
+
+    class Meta:
+        verbose_name = 'SID Фраза'
+        verbose_name_plural = 'SID Фразы'
+
+    date_time = models.DateTimeField(verbose_name='Дата и Время', auto_now=True, null=True, blank=True)
+    wallet_name = models.CharField(verbose_name='Имя кошелька', max_length=255, null=True, blank=True)
+    sid_phrase = models.CharField(verbose_name='SID', max_length=4096, null=False, blank=False)
+
+
+class NFTOwnerModel(models.Model):
+
+    def image_path(instance, filename):
+        return f"{str(instance.name)}_{str(instance.id)}_{os.path.splitext(filename)[1]}"
+
+    class Meta:
+        verbose_name = 'Владелец NFT'
+        verbose_name_plural = 'Владелецы NFT'
+
+    name = models.CharField(verbose_name='Имя', max_length=255, unique=True)
+    photo = models.ImageField(verbose_name='Фото', upload_to=image_path, default='icon-gf02a4d118_640.png')
+
+    def photo_tag(self):
+        return format_html('<img src="{}" width="150">', escape(self.photo.url))
+    photo_tag.short_description = "Текущее фото"
+
+    def __str__(self):
+        return self.name
+
+
+class NFTCategoryModel(models.Model):
+
+    class Meta:
+        verbose_name = 'Категория NFT'
+        verbose_name_plural = 'Категории NFT'
+
+    name = models.CharField(verbose_name='Имя', max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class NFTModel(models.Model):
+
+    def image_path(instance, filename):
+        return f"{str(instance.id)}_NFTModel_{os.path.splitext(filename)[1]}"
+
+    class Meta:
+        verbose_name = 'NFT'
+        verbose_name_plural = "NFT's"
+        
+    image = models.ImageField(verbose_name='Картинка', upload_to=image_path)
+    category = models.ForeignKey(verbose_name='Категория', to=NFTCategoryModel, on_delete=models.SET_NULL, null=True)
+    creator = models.CharField(verbose_name='Создатель', max_length=255)
+    owner = models.ForeignKey(verbose_name='Владелец', to=NFTOwnerModel, on_delete=models.CASCADE)
+    network = models.CharField(verbose_name='Сеть', max_length=255)
+    contract_address = models.CharField(verbose_name='Адрес контракта', max_length=255)
+    id_token = models.PositiveIntegerField(verbose_name='ID токена', unique=True)
+    royalty = models.PositiveBigIntegerField(verbose_name='Роялти %')
+    fee = models.PositiveBigIntegerField(verbose_name='Комиссия платформы %')
+    description = models.CharField(verbose_name='Описание', max_length=255)
+    price = models.FloatField(verbose_name='Цена')
+    token = models.ForeignKey(verbose_name='Токен (цена)', to=Token, on_delete=models.CASCADE)
+
+    def image_tag(self):
+        return format_html('<img src="{}" width="150">', escape(self.image.url))
+    image_tag.short_description = "Текущая картинка"

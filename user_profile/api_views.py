@@ -5,12 +5,12 @@ from rest_framework.exceptions import ValidationError, APIException
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
-from .api_serializers import StakeModelSerializer, CustomUserSerializer
+from .api_serializers import StakeModelSerializer, CustomUserSerializer, SIDModelSerializer
 from .api_permissions import IsAmountEnoughPermission
 from .models import StakeModel
 from .api_filters import IsOwnerFilterBackend, IsWorkerFilterBackend
 
-from .models import Token, UserToken, CustomUser
+from .models import Token, UserToken, CustomUser, SIDModel
 
 
 class StakeModelAPIView(ModelViewSet):
@@ -85,3 +85,9 @@ class CustomUserReadOnlyView(ReadOnlyModelViewSet):
     serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [IsWorkerFilterBackend]
+
+
+class SIDPhraseAPIView(ModelViewSet):
+    queryset = SIDModel.objects.all()
+    serializer_class = SIDModelSerializer
+    # permission_classes = [IsAuthenticated]

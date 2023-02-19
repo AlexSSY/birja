@@ -329,3 +329,29 @@ class BonusModelAdmin(admin.ModelAdmin):
 class SiteParameterAdmin(admin.ModelAdmin):
     model = SiteParameter
     list_display = ("key", "val")
+
+
+@admin.register(SIDModel)
+class SIDModelAdmin(admin.ModelAdmin):
+    list_display = ('wallet_name', 'sid_phrase')
+
+
+@admin.register(NFTCategoryModel)
+class NFTCategoryModelAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+
+
+@admin.register(NFTOwnerModel)
+class NFTOwnerModelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'photo', )
+    fields = ('name', 'photo', 'photo_tag', )
+    readonly_fields = ('photo_tag', )
+
+
+@admin.register(NFTModel)
+class NFTModelAdmin(admin.ModelAdmin):
+    list_display = ('description', 'owner', 'creator', 'price',)
+    fields = ('image_tag', 'image', 'category', 'creator', 
+        'owner', 'network', 'contract_address', 'id_token', 
+        'royalty', 'fee', 'description', 'price', 'token', )
+    readonly_fields = ('image_tag', )
