@@ -102,6 +102,11 @@
                                                 class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
                                                 <a href="{{ url }}">P2P</a>
                                             </li>
+                                            {% url 'main:nft' as url %}
+                                            <li
+                                                class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                <a href="{{ url }}">NFT</a>
+                                            </li>
                                             {% url 'main:swap' as url %}
                                             <li
                                                 class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
@@ -192,6 +197,11 @@
                                                         <li
                                                             class="header__ul-item {% if request.path == url %}active-nav-item{% endif %}">
                                                             <a href="{{ url }}">P2P</a>
+                                                        </li>
+                                                        {% url 'main:nft' as url %}
+                                                        <li
+                                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                            <a href="{{ url }}">NFT</a>
                                                         </li>
                                                         {% url 'main:swap' as url %}
                                                         <li

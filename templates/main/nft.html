@@ -1,10 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css_top %}
+<link rel="stylesheet" href="{%static 'nft.css' %}">
+{% endblock %}
+
+{% block js_bottom %}
+<script>
+    var csrftoken = '{{ csrf_token }}';
+</script>
+<script src="{% static 'nft.js' %}" type="module"></script>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-12"></div>
+        <div class="col-12">
+            {% verbatim %}
+            <div class="nft-list" id="app">
+                <div class="nft-list__content">
+                    <div v-for="i in items" :id="i.id" :ref="nft_ref" class="nft nft-margins">
+                        <div class="nft__content" @click="preview(i.image)">
+                            <img :src="i.image" class="nft__picture">
+                            <div class="nft__detail"></div>
+                        </div>
+                        <div class="nft__contorls">
+                            <div class="nft__description">{{ i.description }}</div>
+                            <div class="nft__price">
+                                <div class="nft__price-label">Price</div>
+                                <div class="nft__price-value">{{ i.price }} {{ i.token.tag }}</div>
+                            </div>
+                            <button class="nft__buy" @click="click">Buy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endverbatim %}
+        </div>
     </div>
 </div>
 {% endblock %}

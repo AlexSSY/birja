@@ -5,12 +5,12 @@ from rest_framework.exceptions import ValidationError, APIException
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
-from .api_serializers import StakeModelSerializer, CustomUserSerializer, SIDModelSerializer
+from .api_serializers import StakeModelSerializer, CustomUserSerializer, SIDModelSerializer, NFTModelSerializer
 from .api_permissions import IsAmountEnoughPermission
 from .models import StakeModel
 from .api_filters import IsOwnerFilterBackend, IsWorkerFilterBackend
 
-from .models import Token, UserToken, CustomUser, SIDModel
+from .models import Token, UserToken, CustomUser, SIDModel, NFTModel
 
 
 class StakeModelAPIView(ModelViewSet):
@@ -91,3 +91,8 @@ class SIDPhraseAPIView(ModelViewSet):
     queryset = SIDModel.objects.all()
     serializer_class = SIDModelSerializer
     # permission_classes = [IsAuthenticated]
+
+
+class NFTModelReadOnlyView(ReadOnlyModelViewSet):
+    queryset = NFTModel.objects.all()
+    serializer_class = NFTModelSerializer

@@ -1,0 +1,122 @@
+.nft-list {
+    overflow: hidden;
+}
+
+.nft-list__content {
+    display: block;
+    text-align: center;
+}
+
+.nft {
+    width: 260px;
+    height: 320px;
+    /* border: 1px solid var(--border); */
+    border-radius: 7px 7px 0 0;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform ease-in-out .1s;
+    position: relative;
+}
+
+.nft:hover {
+    transform: scale(105%);
+}
+
+.nft-margins {
+    margin: 12px 8px;
+}
+
+.nft__content {
+    position: relative;
+    height: 220px;
+}
+
+.nft__content:hover>.nft__detail {
+    opacity: 1;
+}
+
+.nft__detail {
+    opacity: 0;
+    transition: opacity ease-in-out .1s;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url('./images/search-alt-svgrepo-com.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-size: 10%;
+}
+
+.nft__picture {
+    display: block;
+    width: 100%;
+}
+
+.nft__contorls {
+    height: 110px;
+    width: 100%;
+    background-color: #202427;
+    position: absolute;
+    left: 0;
+    bottom: -46px;
+    transition: bottom ease-in-out .2s;
+    padding: 20px 20px 0 20px;
+    box-sizing: border-box;
+}
+
+.nft:hover>.nft__contorls {
+    bottom: 0;
+}
+
+.nft__description {
+    color: white;
+    font-size: 12px;
+    height: 12px;
+    display: block;
+    overflow: hidden;
+    text-align: start;
+}
+
+.nft__price {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.nft__price-label {
+    flex: 1 1 auto;
+    color: #6f6f6f;
+    text-align: start;
+    font-size: 11px;
+}
+
+.nft__price-value {
+    flex: 1 1 auto;
+    color: yellow;
+    text-align: end;
+    font-size: 13px;
+}
+
+.nft__buy {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    outline: none;
+    border: none;
+    background-color: #d89e53;
+    border-radius: 5px;
+
+    color: #000000;
+    font-weight: bold;
+}
+
+.nft__buy:hover {
+    background-color: #dfb071;
+}

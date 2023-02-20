@@ -7,7 +7,7 @@ from django.forms import ValidationError
 from django.db.models import Q
 import requests
 
-from user_profile.models import Token, P2P, Fiat, SiteParameter, UserToken, UserTransaction
+from user_profile.models import Token, P2P, Fiat, SiteParameter, UserToken, UserTransaction, NFTModel
 from .forms import ChatForm
 from user_profile.forms import SwapForm
 

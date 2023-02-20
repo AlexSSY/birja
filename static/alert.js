@@ -130,3 +130,69 @@ alert_yesno = {
             this.rootElement.remove();
     }
 }
+
+nftpreview = {
+    getTemplate: function (img) {
+        return `
+                <style>
+                    .preview-bg {
+                        position: fixed;
+                        left: 0;
+                        top: 0;
+                        width: 100vw;
+                        height: 100vh;
+                        background: rgba(0, 0, 0, 0.3);
+                        z-index: 1000;
+                    }
+                    .preview {
+                        position: fixed;
+                        left: 50%;
+                        top: 50%;
+                        padding: 33px 22px 22px 22px;
+                        transform: translate(-50%, -50%);
+                        background: var(--element-bg);
+                        z-index: 1001;
+                        border-radius: 10px;
+                        border: 1px solid var(--border);
+                    }
+                    .preview__close {
+                        background-color: red;
+                        background-image: url("http://${window.location.host}/static/images/close.svg");
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 22px 22px;
+                        cursor: pointer;
+                        width: 28px;
+                        height: 28px;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        z-index: 1002;
+                        transform: translate(50%, -50%);
+                        color: white;
+                        border-radius: 50%;
+                    }
+                    .preview__close:hover {
+                        background-color: yellow;
+                    }
+                </style>
+                <div class="preview-bg"></div>
+                <div class="preview">
+                    <img class="preview__img" src="${img}">
+                    <div class="preview__close"></div>
+                </div>
+                `;
+    },
+    show: function (img) {
+        this.root = $(this.getTemplate(img));
+        $('body').append(this.root);
+
+        $(this.root).find('.preview__close').on('click', () => {
+            this.hide();
+        });
+    },
+    hide: function () {
+        if (this.root)
+            this.root.remove();
+    },
+};
