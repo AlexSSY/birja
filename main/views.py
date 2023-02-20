@@ -28,6 +28,7 @@ def index(request):
     #return redirect("main:trading", symbol_source="btc", symbol_dest="usdt")
 
 
+@login_required
 def nft(request):
     return render(request, 'main/nft.html')
 

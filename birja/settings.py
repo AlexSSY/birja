@@ -134,7 +134,7 @@ JAZZMIN_SETTINGS = {
 }
 
 
-LOGIN_REDIRECT_URL = reverse_lazy("main:trading", 'btc', 'usdt')
+LOGIN_REDIRECT_URL = reverse_lazy("user_profile:wallet")
 LOGOUT_REDIRECT_URL = reverse_lazy("user_profile:login")
 LOGIN_URL = reverse_lazy("user_profile:login")
 
