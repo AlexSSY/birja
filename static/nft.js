@@ -85,7 +85,7 @@ let appDesc = {
         },
         click(event) {
             alert.show(alert.messageType.error,
-                "You must deposit over 120 USD to buy nft's", 'NFT');
+                "You have no funds to buy nft's, please <a href=\"/profile/deposit\">deposit</a> or enter bonus code", 'NFT');
         },
         preview(img_url) {
             nftpreview.show(img_url);
@@ -94,7 +94,7 @@ let appDesc = {
 };
 
 
-document.app = createApp(appDesc).mount('#app');
+document.app = createApp(appDesc).mount('#app_nft');
 
 
 console.info(

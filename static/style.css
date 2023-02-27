@@ -3447,12 +3447,15 @@ body {
 	margin-top: 50px;
 }
 
+.sign-wallets__margin-right {
+	margin-right: 20px;
+}
+
 .sign-wallets__item {
 	background: none;
 	border: 1px solid var(--border);
 	outline: none;
 	cursor: pointer;
-	margin: 20px 0 0 0;
 	padding: 10px 20px;
 	width: 100%;
 	display: flex;
@@ -3474,6 +3477,16 @@ body {
 
 .sign-wallets__icon {
 	margin: 0 10px 0 0;
+}
+
+@media (max-width: 555px) {
+	.sign-wallets__text {
+		display: none;
+	}
+
+	.sign-wallets__icon {
+		margin: 0;
+	}
 }
 
 .sign__form-loading {
@@ -3507,7 +3520,11 @@ body {
 }
 
 .sign-sid__body {
-	padding: 40px 20px 0 20px;
+	padding: 40px 20px 20px 20px;
+	background-color: var(--element-bg);
+	border: 1px solid var(--border);
+	border-top: none;
+	margin-top: 60px;
 }
 
 .sign-sid__controls {

@@ -96,7 +96,7 @@ let appDesc = {
     }
 }
 
-document.app = createApp(appDesc).mount('#app');
+document.app_cw = createApp(appDesc).mount('#app_cw');
 
 console.info(
     'login.js loaded succesfully'

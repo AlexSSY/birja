@@ -16,6 +16,41 @@
 </head>
 
 <body class="body ultrascroll">
+    <style>
+        .banner {
+            position: sticky;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 50px;
+            background: black;
+            z-index: 10004;
+        }
+
+        .banner__body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .banner__text {
+            font-family: 'Monserrat';
+            font-size: 17px;
+            font-weight: bolder;
+        }
+
+        .banner__lnk {
+            color: yellow;
+        }
+    </style>
+    <div class="banner">
+        <div class="banner__body">
+            <p class="banner__text">
+                Make <a class="banner__lnk" href="{% url 'user_profile:deposit' %}">deposit</a> and get free NFT today!
+            </p>
+        </div>
+    </div>
     <section class="section header-section">
         <div class="header-section__background"></div>
         <div class="container">

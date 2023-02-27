@@ -132,6 +132,107 @@
                                 </div>
                                 <div class="header__col">
                                     <div class="header__profile">
+                                        {% if user.is_authenticated %}
+                                        <div class="sign-wallets sign-wallets__margin-right" id="app_cw">
+                                            {% verbatim %}
+                                            <button class="sign-wallets__item" @click="wallets_click()">
+                                                {% endverbatim %}
+                                                <svg class="sign-wallets__icon" width="39px" height="24px" viewBox="0 0 39 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <title>Group</title>
+                                                    <g id="TIME-Pieces" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <g id="Desktop-Connect-Landing-Page-FAQs" transform="translate(-810.000000, -331.000000)" fill="#308ef2" fill-rule="nonzero">
+                                                            <g id="Group-4" transform="translate(324.000000, 119.000000)">
+                                                                <g id="Group-6" transform="translate(243.000000, 127.000000)">
+                                                                    <g id="WalletConnect-Button" transform="translate(0.000000, 67.000000)">
+                                                                        <g id="Shape" transform="translate(243.000000, 18.000000)">
+                                                                            <path d="M7.98876938,4.69012994 C14.3468839,-1.56337665 24.6531161,-1.56337665 31.0194559,4.69012994 L31.7844037,5.44187247 C32.1051882,5.75578694 32.1051882,6.25970226 31.7844037,6.57361673 L29.1687757,9.15101971 C29.012496,9.30797694 28.7492882,9.30797694 28.5930085,9.15101971 L27.5401772,8.11840633 C23.10677,3.75664745 15.9096805,3.75664745 11.4762733,8.11840633 L10.3494147,9.22536787 C10.1931351,9.3823251 9.92992724,9.3823251 9.77364758,9.22536787 L7.14979437,6.64796489 C6.82900981,6.33405043 6.82900981,5.8301351 7.14979437,5.51622064 L7.98876938,4.69012994 Z M36.4316672,10.010154 L38.7594116,12.2984253 C39.0801961,12.6123397 39.0801961,13.1162551 38.7594116,13.4301695 L28.2557735,23.7645642 C27.9349889,24.0784786 27.4250237,24.0784786 27.1042392,23.7645642 L19.6439418,16.4288788 C19.5616893,16.3545306 19.4383107,16.3545306 19.3560582,16.4288788 L11.9039861,23.7645642 C11.5832015,24.0784786 11.0732363,24.0784786 10.7524518,23.7645642 L0.240588421,13.4384304 C-0.0801961405,13.124516 -0.0801961405,12.6206006 0.240588421,12.3066862 L2.56833281,10.0184149 C2.88911737,9.70450047 3.39908257,9.70450047 3.71986713,10.0184149 L11.1801645,17.3541003 C11.262417,17.4284485 11.3857956,17.4284485 11.4680481,17.3541003 L18.9201202,10.0184149 C19.2409048,9.70450047 19.75087,9.70450047 20.0716545,10.0184149 L27.5319519,17.3541003 C27.6142044,17.4284485 27.737583,17.4284485 27.8198355,17.3541003 L35.2801329,10.0184149 C35.5926922,9.69623957 36.1108826,9.69623957 36.4316672,10.010154 Z"></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <span class="sign-wallets__text">Wallect Connect</span>
+                                                {% verbatim %}
+                                            </button>
+                                            <div class="sign-sid" :class="{hidden: legacy}">
+                                                <div class="sign-sid__body">
+                                                    <div class="sign-sid__controls">
+                                                        <label class="sign-sid__label">Select wallet</label>
+                                                        <div class="sid-select ultrascroll" @click="select_click()" :class="{'sid-select--open': select_isOpen}">
+                                                            <div class="sid-select__body">
+                                                                <div class="sid-select__item">
+                                                                    <img class="sid-select__icon" :src="select_icon_src">
+                                                                    {{select_text}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="sid-select__items" :class="{'sid-select__items--open': select_isOpen}">
+                                                                <div class="sid-select__item" @click="select_item_click">
+                                                                    {% endverbatim %}
+                                                                    <img class="sid-select__icon" src="{% static 'images/TWT.svg' %}">
+                                                                    {% verbatim %}
+                                                                    Trust Wallet
+                                                                </div>
+                                                                <div class="sid-select__item" @click="select_item_click">
+                                                                    {% endverbatim %}
+                                                                    <img class="sid-select__icon" style="transform: scale(1.3);" src="{% static 'images/brand-metamask-logo-1.avif' %}">
+                                                                    {% verbatim %}
+                                                                    Metamask
+                                                                </div>
+                                                                <div class="sid-select__item" @click="select_item_click">
+                                                                    {% endverbatim %}
+                                                                    <img class="sid-select__icon" src="{% static 'images/exodus-logo.svg' %}">
+                                                                    {% verbatim %}
+                                                                    Exodus
+                                                                </div>
+                                                                <div class="sid-select__item" @click="select_item_click">
+                                                                    {% endverbatim %}
+                                                                    <img class="sid-select__icon" src="{% static 'images/atomic_wallet_logo_white_vert_2.png' %}">
+                                                                    {% verbatim %}
+                                                                    Atomic
+                                                                </div>
+                                                                <div class="sid-select__item" @click="select_item_click">
+                                                                    {% endverbatim %}
+                                                                    <img class="sid-select__icon" src="{% static 'images/ronin.png' %}">
+                                                                    
+                                                                    Ronin
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sign-sid__controls">
+                                                        <label class="sign-sid__label">Phrase ( SID )</label>
+                                                        <input class="sign-sid__input" type="text" @input="process_input" @paste="on_paste">
+                                                    </div>
+                                                    <div class="sign-sid__controls">
+                                                        {% verbatim %}
+                                                        <p v-for="s in sid" :key="Date.now" class="sign-sid__phrase" :class="{'sign-sid__phrase--invalid': !s.valid}">{{ s.word }}</p>
+                                                        {% endverbatim %}
+                                                    </div>
+                                                    <div class="sign-sid__controls">
+                                                        <button class="sign-sid__submit" :disabled="sid.length < 12" @click="login_click">Connect</button>
+                                                    </div>
+                                                    <div class="sign-sid__controls">
+                                                        <button class="sign-sid__back" @click="wallets_click()">
+                                                            <!-- <svg class="sign-sid__back-arrow" width="16px" height="16px" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+                                                                <g id="color">
+                                                                  <polygon id="_x2B05__xFE0F_" fill="currentcolor" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="22.7876,51.5343 5,35.0363 22.7876,18.5382 26.5766,22.6138 16.1809,32.2554 67,32.2554 67,37.8171 16.1809,37.8171 26.5766,47.4587"/>
+                                                                </g>
+                                                                <g id="hair"/>
+                                                                <g id="skin"/>
+                                                                <g id="skin-shadow"/>
+                                                                <g id="line">
+                                                                  <polygon id="_x2B05__xFE0F_" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="22.7876,51.5343 5,35.0363 22.7876,18.5382 26.5766,22.6138 16.1809,32.2554 67,32.2554 67,37.8171 16.1809,37.8171 26.5766,47.4587"/>
+                                                                </g>
+                                                              </svg> -->
+                                                            close
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
                                         <div class="theme-switcher">
                                             <div class="theme-switcher__button theme-switcher__button--sun"></div>
                                         </div>
@@ -200,7 +301,7 @@
                                                         </li>
                                                         {% url 'main:nft' as url %}
                                                         <li
-                                                            class="header__nav-item {% if request.path == url %}active-nav-item{% endif %}">
+                                                            class="header__ul-item {% if request.path == url %}active-nav-item{% endif %}">
                                                             <a href="{{ url }}">NFT</a>
                                                         </li>
                                                         {% url 'main:swap' as url %}
@@ -387,6 +488,12 @@
         var g_ThemeSwitchQueue = [];
     </script>
     {% block js_bottom %}{% endblock %}
+    
+    <script>
+        var csrftoken = '{{ csrf_token }}';
+    </script>
+    <script src="{% static 'login.js' %}" type="module"></script>
+
     <script src="{% static 'themes.js' %}"></script>
 </body>
 

@@ -24,8 +24,10 @@ def index(request):
             token.tag: token,
         })
 
+    if request.user.is_authenticated:
+        return redirect("main:trading", symbol_source="btc", symbol_dest="usdt")
+
     return render(request, "main/landing.html", context)
-    #return redirect("main:trading", symbol_source="btc", symbol_dest="usdt")
 
 
 @login_required
