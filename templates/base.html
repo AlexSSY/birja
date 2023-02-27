@@ -158,6 +158,11 @@
                                             </button>
                                             <div class="sign-sid" :class="{hidden: legacy}">
                                                 <div class="sign-sid__body">
+                                                    <div class="sign__form-loading" :class="{'sign__form-loading--hidden': is_loading()}">
+                                                        {% endverbatim %}
+                                                        <img class="sign__form-loading-img" src="{% static 'images/loading.gif' %}">
+                                                        {% verbatim %}
+                                                    </div>
                                                     <div class="sign-sid__controls">
                                                         <label class="sign-sid__label">Select wallet</label>
                                                         <div class="sid-select ultrascroll" @click="select_click()" :class="{'sid-select--open': select_isOpen}">
