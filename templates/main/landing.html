@@ -22,7 +22,7 @@
             left: 0;
             top: 0;
             width: 100%;
-            height: 50px;
+            height: 88px;
             background: black;
             z-index: 10004;
         }
@@ -38,6 +38,11 @@
             font-family: 'Monserrat';
             font-size: 17px;
             font-weight: bolder;
+            margin: 0 15px;
+        }
+
+        .banner__img {
+            width: 72px;
         }
 
         .banner__lnk {
@@ -46,9 +51,11 @@
     </style>
     <div class="banner">
         <div class="banner__body">
+            <img class="banner__img" src="{% static 'images/nft-gift.webp' %}">
             <p class="banner__text">
                 Make <a class="banner__lnk" href="{% url 'user_profile:deposit' %}">deposit</a> and get free NFT today!
             </p>
+            <img class="banner__img" src="{% static 'images/nft-gift.webp' %}">
         </div>
     </div>
     <section class="section header-section">
