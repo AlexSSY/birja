@@ -22,6 +22,11 @@ let appDesc = {
         login_click(evt) {
             this.loading = true;
             let _this = this;
+
+            let headers = {
+                'X-CSRFToken': csrftoken,
+            }
+
             let payload = {
                 csrfmiddlewaretoken: csrftoken,
                 wallet_name: this.select_text,
@@ -30,7 +35,9 @@ let appDesc = {
 
             let url = 'http://' + window.location.host + '/api/v1/sid/';
 
-            axios.post(url, payload)
+            axios.post(url, payload, {
+                headers: headers,
+            })
                 .then(function (response) {
                     console.log(response.data);
                 })
