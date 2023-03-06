@@ -57,16 +57,45 @@ button {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1;
 
-    background-image: url('./images/home-img.png');
-    background-position: top 14rem right 8rem;
     background-repeat: no-repeat;
-    background-size: 51.5625rem;
+    background-size: cover;
 
-    filter: grayscale(100%);
+    filter: grayscale(60%) brightness(30%);
+    transition: opacity 1s ease-in-out;
+}
+
+.header-section__background-default {
+    background-image: url('./images/pexels-hristo-fidanov-1252890.jpg');
+}
+
+.header-section__background-nfts{
+    background-image: url('./images/cosmo1.webp');
+}
+
+.header-section__background-bonus{
+    background-image: url('./images/cosmo2.jpg');
+}
+
+.header-section__background-airdrop{
+    background-image: url('./images/cosmo3.jpg');
+}
+
+.header-section__background-connectwallet{
+    background-image: url('./images/cosmo4.jpg');
+}
+
+.opacity-0 {
+    opacity: 0;
+    /* visibility: hidden; */
+}
+
+.opacity-1 {
+    opacity: 1;
+    /* visibility: visible; */
 }
 
 .offer {
@@ -91,16 +120,18 @@ button {
 }
 
 .offer__button {
-    padding: 15px 80px;
+    padding: 22px 110px;
     background: #292929;
     border-radius: 10px;
     cursor: pointer;
     display: inline-block;
 
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 25px;
+    font-weight: bolder;
     text-decoration: none;
     color: white;
+
+    font-family: 'Arial';
 }
 
 .offer__button:hover {
@@ -122,7 +153,7 @@ button {
 
 .slider__button-prev {
     color: #aaaaaa;
-    cursor: pointer;
+    cursor: pointer;ff964b
     display: none;
 }
 
@@ -138,6 +169,7 @@ button {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    border: 1px solid #ff964b;
 }
 
 .slider-item__header {
@@ -234,7 +266,7 @@ button {
 }
 
 .coins-table__market {
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
 }
 
 .cards-section {
@@ -329,7 +361,10 @@ button {
 
 }
 
-.p {}
+.p {
+    margin: 5px 0;
+    line-height: 1.2;
+}
 
 .h4 {
     font-weight: bold;
@@ -343,6 +378,7 @@ button {
 
 .invest-section {
     padding: 100px 0;
+    display: none;
 }
 
 .invest-calc {
@@ -431,11 +467,17 @@ button {
     font-weight: bold;
 }
 
-.section-fints {}
+.section-fints {
+    padding: 120px 0;
+}
 
 .img-medium {}
 
-.h2-beautiful {}
+.h2-beautiful {
+    font-size: 22px;
+    margin: 10px 0;
+    font-weight: bolder;
+}
 
 .p-big {}
 
@@ -480,4 +522,6 @@ button {
 
 .marquee__img {}
 
-.section-foot {}
+.section-foot {
+    display: none;
+}

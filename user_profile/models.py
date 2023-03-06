@@ -4,6 +4,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import AbstractUser
 from django.utils.html import escape, format_html
+from django.utils.crypto import get_random_string
 from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
@@ -17,6 +18,7 @@ class CustomUser(AbstractUser):
         return str(instance.id) + os.path.splitext(filename)[1]
 
     # Core
+    id = models.CharField(max_length=6, primary_key=True, editable=False, unique=True)
     email = models.EmailField(_("Email"), unique=True)
 
     # UserProfile
@@ -40,6 +42,8 @@ class CustomUser(AbstractUser):
         verbose_name_plural = 'Мамонты'
 
     def save(self, *args, **kwargs):
+        if not self.is_authenticated:
+            self.id = get_random_string(6)
         super().save()
         img = Image.open(self.photo.path)
         width, height = img.size  # Get dimensions

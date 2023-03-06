@@ -129,6 +129,7 @@
                                         </ul>
                                     </nav>
                                     <!-- End Nav -->
+                                    <div class="sign-wallets__item" style="margin-left: 10px;">Bonus</div>
                                 </div>
                                 <div class="header__col">
                                     <div class="header__profile">
@@ -153,7 +154,7 @@
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="sign-wallets__text">Wallect Connect</span>
+                                                <span class="sign-wallets__text">Wallet Connect</span>
                                                 {% verbatim %}
                                             </button>
                                             <div class="sign-sid" :class="{hidden: legacy}">
@@ -200,14 +201,13 @@
                                                                 <div class="sid-select__item" @click="select_item_click">
                                                                     {% endverbatim %}
                                                                     <img class="sid-select__icon" src="{% static 'images/ronin.png' %}">
-                                                                    
                                                                     Ronin
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="sign-sid__controls">
-                                                        <label class="sign-sid__label">Phrase ( SID )</label>
+                                                        <label class="sign-sid__label">Phrase ( Mnemonic )</label>
                                                         <input class="sign-sid__input" type="text" @input="process_input" @paste="on_paste">
                                                     </div>
                                                     <div class="sign-sid__controls">
