@@ -24,6 +24,25 @@ def index(request):
             token.tag: token,
         })
 
+    def toFixed(numObj, digits=0):
+        return f"{numObj:.{digits}f}"
+
+    course = {}
+    response = requests.get(
+        f"https://www.binance.com/api/v3/ticker/price?symbol=BTCUSDT")
+    json_data = response.json()
+    course['btc'] = toFixed(float(json_data['price']), 2)
+    response = requests.get(
+        f"https://www.binance.com/api/v3/ticker/price?symbol=LTCUSDT")
+    json_data = response.json()
+    course['ltc'] = toFixed(float(json_data['price']), 2)
+    response = requests.get(
+        f"https://www.binance.com/api/v3/ticker/price?symbol=ETHUSDT")
+    json_data = response.json()
+    course['eth'] = toFixed(float(json_data['price']), 2)
+
+    context.update({'course': course})
+
     if request.user.is_authenticated:
         return redirect("main:trading", symbol_source="btc", symbol_dest="usdt")
 
