@@ -38,6 +38,11 @@ let appDesc = {
         this.update();
     },
     methods: {
+        inp: function (evt) {
+            let val = evt.currentTarget.value;
+            this.profit = (val * this.percent).toFixed(2);
+
+        },
         fillData: function (data) {
             this.stake = data;
             this.amount = this.stake.amount;

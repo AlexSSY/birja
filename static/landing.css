@@ -148,7 +148,7 @@ button {
 }
 
 .slider__body {
-    height: 250px;
+    
 }
 
 .slider__button-prev {
@@ -234,6 +234,16 @@ button {
 }
 
 .slider__footer {}
+
+@media (max-width: 1200px) {
+    .slider-section {
+        display: none;
+    }
+    .slider-item {
+        margin-bottom: 20px;
+        width: unset;
+    }
+}
 
 .cointable-section {
     min-height: 200px;
@@ -341,6 +351,12 @@ button {
     color: #a7a7a7;
     line-height: 120%;
     font-size: 17px;
+}
+
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+    }
 }
 
 /* .d-flex {

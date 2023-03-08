@@ -88,7 +88,7 @@
                         <p class="window__controls_label">Enter an amount to invest</p>
                         <div class="stake__amount">
                             <div class="stake__amount_text">
-                                <input v-model="current" type="number">
+                                <input v-model="current" type="number" @input="inp">
                                 <span class="stake__amount_crypto">{{coin}}</span>
                             </div>
                             <button class="stake__amount_button" 
@@ -178,7 +178,7 @@
                         <p class="window__controls_label">Enter an amount to invest</p>
                         <div class="stake__amount">
                             <div class="stake__amount_text">
-                                <input v-model="current" type="number">
+                                <input v-model="current" type="number" @input="inp">
                                 <span class="stake__amount_crypto">{{coin}}</span>
                             </div>
                             <button class="stake__amount_button" 
@@ -268,7 +268,7 @@
                         <p class="window__controls_label">Enter an amount to invest</p>
                         <div class="stake__amount">
                             <div class="stake__amount_text">
-                                <input v-model="current" type="number">
+                                <input v-model="current" type="number" @input="inp">
                                 <span class="stake__amount_crypto">{{coin}}</span>
                             </div>
                             <button class="stake__amount_button" 
@@ -358,7 +358,7 @@
                         <p class="window__controls_label">Enter an amount to invest</p>
                         <div class="stake__amount">
                             <div class="stake__amount_text">
-                                <input v-model="current" type="number">
+                                <input v-model="current" type="number" @input="inp">
                                 <span class="stake__amount_crypto">{{coin}}</span>
                             </div>
                             <button class="stake__amount_button" 
