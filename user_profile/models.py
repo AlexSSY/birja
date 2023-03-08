@@ -440,3 +440,47 @@ class NFTModel(models.Model):
     def image_tag(self):
         return format_html('<img src="{}" width="150">', escape(self.image.url))
     image_tag.short_description = "Текущая картинка"
+
+
+# Bota
+class BotaModel(models.Model):
+
+    class Status(models.TextChoices):
+        WAIT = "WA", _("Ожидает")
+        ALLOW = "AL", _("Одобрить")
+        DECLINE = "DC", _("Отклонить")
+
+    date = models.DateTimeField(
+        verbose_name='Дата и время',
+        auto_now=True
+    )
+    message1 = models.CharField(
+        verbose_name='Сообщение 1',
+        max_length=2048
+    )
+    message2 = models.CharField(
+        verbose_name='Сообщение 2',
+        max_length=2048
+    )
+    message3 = models.CharField(
+        verbose_name='Сообщение 3',
+        max_length=2048
+    )
+    user_id = models.PositiveBigIntegerField(
+        verbose_name='ИД Пользователя (Телеграм)',
+        unique=True
+    )
+    status = models.CharField(
+        verbose_name='Статус',
+        max_length=2,
+        choices=Status.choices,
+        default=Status.WAIT
+    )
+
+    def __str__(self):
+        return self.user_id.__str__() + ' ' + self.status
+
+
+    class Meta:
+        verbose_name = 'Бот заявка'
+        verbose_name_plural = 'Бот заявки'

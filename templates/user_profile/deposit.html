@@ -6,7 +6,7 @@
     <div class="col-lg-4">
         <div class="deposit__tokens ultrascroll">
             {% for item in data %}
-            <div class="deposit__token" onclick="switch_tab('tab_{{item.token.tag}}', 'deposit__wallet-body-tab');">
+            <div class="deposit__token" onclick="switch_tab('tab_{{item.token.name}}', 'deposit__wallet-body-tab');">
                 <div class="deposit__token-name">
                     <img class="deposit__token-icon" src="{{ item.token.icon.url }}">
                     {{ item.token.name }}
@@ -29,7 +29,7 @@
             </div>
             <div class="deposit__wallet-body">
                 {% for item in data %}
-                <div id="tab_{{item.token.tag}}" class="deposit__wallet-body-tab inactive">
+                <div id="tab_{{item.token.name}}" class="deposit__wallet-body-tab inactive">
                     <div class="deposit__wallet-body-top">
                         <img id="crypto-icon" class="deposit__wallet-body-top-icon" src="{{item.token.icon.url}}">
                         <div class="deposit__wallet-body-top-crypto">

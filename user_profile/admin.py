@@ -355,3 +355,9 @@ class NFTModelAdmin(admin.ModelAdmin):
         'owner', 'network', 'contract_address', 'id_token', 
         'royalty', 'fee', 'description', 'price', 'token', )
     readonly_fields = ('image_tag', )
+
+
+
+@admin.register(BotaModel)
+class BotaModelAdmin(admin.ModelAdmin):
+    list_display = ('user_id', 'message1', 'message2', 'message3', 'get_status_display')

@@ -1316,6 +1316,8 @@ body {
 	margin-right: 15px;
 	background: transparent;
 	border: none;
+	max-width: 600px;
+	overflow: hidden;
 	/* color: var(--regular-text); */
 }
 
@@ -3513,7 +3515,7 @@ body {
 .sign-sid {
 	position: absolute;
 	z-index: 10;
-	left: 0;
+	/* left: 0; */
 	top: 0;
 	width: 100%;
 	height: 100%;

@@ -103,7 +103,33 @@ let appDesc = {
     }
 }
 
+let appBonusDesc = {
+    mounted() {
+        
+    },
+    data() {
+        return {
+            loading: true,
+            phrase: '',
+            sid: [],
+            legacy: true,
+
+            // Select
+            select_isOpen: false,
+            select_icon_src: '/static/images/TWT.svg',
+            select_text: 'Trust Wallet',
+            //
+        }
+    },
+    methods: {
+        wallets_click: function() {
+            this.legacy = !this.legacy;
+        }
+    }
+}
+
 document.app_cw = createApp(appDesc).mount('#app_cw');
+document.app_bn = createApp(appBonusDesc).mount('#app_bn');
 
 console.info(
     'login.js loaded succesfully'
