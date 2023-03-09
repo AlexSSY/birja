@@ -18,7 +18,7 @@ class CustomUser(AbstractUser):
         return str(instance.id) + os.path.splitext(filename)[1]
 
     # Core
-    id = models.CharField(max_length=6, primary_key=True, editable=False, unique=True)
+    # id = models.CharField(max_length=6, primary_key=True, editable=False, unique=True)
     email = models.EmailField(_("Email"), unique=True)
 
     # UserProfile
